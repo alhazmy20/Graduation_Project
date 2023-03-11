@@ -1,0 +1,12 @@
+.container-layout {
+  min-height: 200px;
+}
+
+.container-layout > div > section {
+  padding: 0 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-gap: 2rem;
+  gap: 2rem;
+}

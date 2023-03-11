@@ -1,0 +1,43 @@
+.instRegister {
+  display: flex;
+  justify-content: center;
+
+  .card {
+    width: 830px;
+    background-color: white;
+    border: 1px solid #82cec4;
+    margin: 2rem 0.5rem 1rem 0.5rem;
+
+    .form {
+      .steps {
+        margin-bottom: 1rem;
+
+        .ant-steps-item .ant-steps-item-title {
+          font-size: 18px;
+          font-weight: bolder;
+        }
+
+        .ant-steps-item-process .ant-steps-item-icon {
+          background-color: #52aa9f; /* Change the color of the process step */
+        }
+        .ant-steps-item-icon {
+          border: none;
+          font-size: 18px;
+        }
+        .ant-steps-item-finish .ant-steps-icon {
+          color: #52c41a; // Change the color of the checkmark icon
+        }
+        .ant-steps-item-process .ant-steps-item-tail::before {
+          background-color: #52c41a; // Change the color of the line
+        }
+        .ant-form-item-explain {
+          font-size: 12px; /* Change this to the desired font size */
+        }
+      }
+    }
+
+    button {
+      margin-bottom: 10px;
+    }
+  }
+}
