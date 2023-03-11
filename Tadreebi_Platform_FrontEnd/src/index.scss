@@ -10,9 +10,16 @@ $white: hsl(0, 0%, 100%);
 $font-sm: 0.875rem; // 14px
 $font-med: 1.125rem; // 18px
 $font-lg: 1.25rem;
-$font-xlg: 3.25rem;
+$font-xlg: 2.25rem;
+
+$font-inter-regular: "Inter", sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  margin: 0;
-  background-color: #fafcff;
+  background-color: $white;
+  height: 100vh;
 }
