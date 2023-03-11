@@ -1,6 +1,18 @@
-@import "variables";
+//COLORES
+$Green: #249283;
+$limeGreen: #cdf8e8;
+$grayishBlue: #d9d9d9;
+$lightGreen: #4a98ae;
+$veryLightGray: hsl(0, 0%, 98%);
+$white: hsl(0, 0%, 100%);
+
+//FONT-SIZE
+$font-sm: 0.875rem; // 14px
+$font-med: 1.125rem; // 18px
+$font-lg: 1.25rem;
+$font-xlg: 3.25rem;
 
 body {
   margin: 0;
-  background-color: #FAFCFF;
+  background-color: #fafcff;
 }
