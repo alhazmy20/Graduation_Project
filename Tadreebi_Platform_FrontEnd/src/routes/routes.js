@@ -8,6 +8,7 @@ import Home from "../pages/general/Home/Home";
 import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
+import News from "../pages/student/News";
 
 //Institution Routes
 const institutionRoutes = (
@@ -36,6 +37,7 @@ export const routes = createBrowserRouter(
     <Route>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home></Home>} />
+        <Route path="news" element={<News/>}/>
         {studentRoutes}
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />

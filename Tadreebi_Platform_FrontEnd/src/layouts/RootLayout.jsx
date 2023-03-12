@@ -8,8 +8,8 @@ export default function RootLayout() {
   return (
     <div className="root-layout">
       <Navbar />
-      <StartUp></StartUp>
       <Container>
+
         <Outlet />
       </Container>
       <Footer />
