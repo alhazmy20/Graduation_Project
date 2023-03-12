@@ -4,6 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
+import Home from "../pages/general/Home/Home";
 import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
@@ -34,7 +35,7 @@ export const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<RootLayout />}>
-        <Route index element={<h1>Home  Page</h1>} />
+        <Route index element={<Home></Home>} />
         {studentRoutes}
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />
