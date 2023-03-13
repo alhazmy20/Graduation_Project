@@ -55,6 +55,7 @@ margin-bottom: 1rem;
                 }
                 .metaTitle{
                     font-size: 1.25rem;
+                    white-space: normal;
                     @include breakpoint-down(small) {
                         font-size: 0.80rem;
 

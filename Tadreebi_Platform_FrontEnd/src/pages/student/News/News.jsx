@@ -1,5 +1,5 @@
-import { Space } from 'antd'
-import { Avatar, Button, Card, Col, Image, List, Row } from "antd";
+import React from 'react'
+import {Button, Card, Image, List} from "antd";
 import Title from "antd/es/typography/Title";
 import instPng from "../../../assets/images/image14.png";
 import { DoubleLeftOutlined } from "@ant-design/icons";
