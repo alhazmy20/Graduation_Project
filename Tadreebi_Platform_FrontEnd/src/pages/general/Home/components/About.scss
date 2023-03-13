@@ -6,15 +6,16 @@
   .title {
     position: relative;
     text-align: center;
-    font-size: $font-lg;
+    font-size: 25px;
   }
+
   .title::after {
     content: "";
     position: absolute;
     height: 3px;
-    bottom: -4px;
+    bottom: -10px;
     background: $Green;
-    width: 50px;
+    width: 55px;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -25,27 +26,22 @@
     gap: 15px;
     margin-top: 60px;
 
+    @include breakpoint-down(small) {
+      flex-direction: column;
+    }
+
     //content
     .aboutContent {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 100px;
 
-      .platfrompar {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-
-        h5 {
-          color: $lightGreen;
-          font-family: $font-inter-regular;
-          font-size: $font-med;
-        }
-        p {
-          font-weight: 500;
-        }
+      @include breakpoint-down(small) {
+        text-align: center;
       }
 
+      .platfrompar,
       .platfromvio {
         display: flex;
         flex-direction: column;
@@ -56,6 +52,7 @@
           font-family: $font-inter-regular;
           font-size: $font-med;
         }
+
         p {
           font-weight: 500;
         }
@@ -64,8 +61,18 @@
 
     //img
     .imgDuontone {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       img {
-        width: 500px;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+
+        @include breakpoint-down(small) {
+          max-width: 40rem;
+        }
       }
     }
   }
