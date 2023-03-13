@@ -1,9 +1,9 @@
-import React from "react";
+import { Space } from 'antd'
 import { Avatar, Button, Card, Col, Image, List, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import instPng from "../../../assets/image14.png";
 import { DoubleLeftOutlined } from "@ant-design/icons";
-import "./NewsCard.scss"
+import "./News.scss"
 const { Meta } = Card;
 
 const data = Array.from({
@@ -15,19 +15,18 @@ const data = Array.from({
   description: "منذ 3 أيام",
 }));
 
-const NewsCard = () => {
+const News = () => {
   return (
     <List
     className="listContainer"
       itemLayout="vertical"
       size="middle"
-      bordered
       pagination={{
         onChange: (page) => {
           console.log(page);
         },
         position: "bottom",
-        align: "start",
+        align: "center",
         pageSize: 6,
       }}
       dataSource={data}
@@ -72,7 +71,7 @@ const NewsCard = () => {
         </List.Item>
       )}
     ></List>
-  );
-};
+  )
+}
 
-export default NewsCard;
+export default News

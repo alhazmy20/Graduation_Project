@@ -8,7 +8,7 @@ import Home from "../pages/general/Home/Home";
 import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
-import News from "../pages/student/News";
+import News from "../pages/student/News/News";
 
 //Institution Routes
 const institutionRoutes = (
