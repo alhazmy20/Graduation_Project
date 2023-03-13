@@ -1,38 +1,28 @@
 import React from "react";
-import { Form } from "antd";
+import { Form, Input } from "antd";
 
 const FormInput = (props) => {
-  const { label, name, message, pattern, type, ...inputProps } = props;
-
-  const rules = [
-    {
-      required: true,
-      message: message,
-      pattern: pattern, // include pattern if it exists
-      type: type?.toString(),
-    },
-    name === "managerPhone" && {
-      validator: (_, value) => {
-        if (!value || value.length !== 10) {
-          return Promise.reject(
-            new Error("رقم الهاتف يجب أن يتكون من 10 أرقام")
-          );
-        }
-        return Promise.resolve();
-      },
-    },
-  ];
-
+  const { inputType, placeholder, label, ...others } = props;
   return (
-    <Form.Item
-      {...inputProps}
-      label={label}
-      labelCol={{ span: 24 }}
-      name={name}
-      rules={rules}
-    >
-      {props.children}
-    </Form.Item>
+    <>
+      <label
+        style={{
+          color: "#808080",
+          display: "block",
+          marginBottom: "5px",
+          fontWeight: "500",
+        }}
+      >
+        {label}
+      </label>
+      <Form.Item {...others}>
+        {inputType === "password" ? (
+          <Input.Password placeholder={placeholder} />
+        ) : (
+          <Input placeholder={placeholder} />
+        )}
+      </Form.Item>
+    </>
   );
 };
 

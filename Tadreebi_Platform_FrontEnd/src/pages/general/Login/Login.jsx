@@ -1,11 +1,12 @@
 import "./Login.scss";
 import { Button, Col, Form, Input, notification, Row } from "antd";
 import axios from "axios";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Container from "../../../layouts/Container/Container";
+import RegisterModal from '../RegisterModal/RegisterModal';
 
 const Login = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const history = [];
 
   const onFinish = async (values) => {
@@ -72,7 +73,11 @@ const Login = () => {
               دخول
             </Button>
             <span>
-              ليس لديك حساب؟ <Link>حساب جديد</Link>
+              ليس لديك حساب؟
+              <Button type="link" style={{ padding: "0" }} onClick={() => setIsModalOpen(true)}>
+                حساب جديد
+              </Button>
+              <RegisterModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} />
             </span>
           </Form>
         </Col>

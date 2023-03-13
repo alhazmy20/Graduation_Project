@@ -9,6 +9,8 @@ import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
 import News from "../pages/student/News";
+import StudentSignup from "../pages/student/StudentSignup/StudentSignup";
+
 
 //Institution Routes
 const institutionRoutes = (
@@ -46,6 +48,7 @@ export const routes = createBrowserRouter(
       {adminRoutes}
 
       <Route path="institution/signup" element={<InstSignup />} />
+      <Route path="student/signup" element={<StudentSignup />} />
       <Route path="login" element={<Login />} />
       <Route path="admin/login" element={<h1>Login for admin</h1>} />
     </Route>
