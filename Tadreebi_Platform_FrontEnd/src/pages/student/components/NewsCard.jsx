@@ -3,6 +3,7 @@ import { Avatar, Button, Card, Col, Image, List, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import instPng from "../../../assets/image14.png";
 import { DoubleLeftOutlined } from "@ant-design/icons";
+import "./NewsCard.scss"
 const { Meta } = Card;
 
 const data = Array.from({
@@ -17,6 +18,7 @@ const data = Array.from({
 const NewsCard = () => {
   return (
     <List
+    className="listContainer"
       itemLayout="vertical"
       size="middle"
       bordered
@@ -30,42 +32,27 @@ const NewsCard = () => {
       }}
       dataSource={data}
       renderItem={(item) => (
-        <List.Item>
+        <List.Item
+        className="listItemContainer"
+        >
           <Card
             size="small"
-            className="NewsCard"
-            style={{
-              backgroundColor: "#FFFFFF",
-              boxShadow: "0px 4px 20px rgba(168, 168, 168, 0.9)",
-              borderRadius: "10px",
-              display: "flex",
-              flexDirection: "column",
-            }}
+            className="newsCard"
           >
             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
+              className="metaContainer"
             >
               <Meta
-                style={{
-                  width: "fit-content",
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                }}
+                className="metaDetails"
                 avatar={
-                  <Image preview={false} width="11.5rem" src={item.avatar} />
+                  <Image preview={false} className="avatarMeta" src={item.avatar} />
                 }
-                className="Meta"
                 title={
-                  <Title style={{ fontSize: "1.25rem" }}>{item.title}</Title>
+                  <Title className="metaTitle">{item.title}</Title>
                 }
                 description={
                   <Title
-                    style={{ color: "#8D8D8D", fontSize: "1rem" }}
-                    level={5}
+                    className="metaDescription"
                   >
                     {item.description}
                   </Title>
@@ -74,12 +61,7 @@ const NewsCard = () => {
               <Button
                 size="middle"
                 type="primary"
-                style={{
-                  backgroundColor: "#249283",
-                  marginTop: "auto",
-                  marginBottom: "auto",
-                  marginLeft: "1rem",
-                }}
+                className="newsDetailsBtn"
                 shape="round"
               >
                 أظهار التفاصيل

@@ -1,0 +1,43 @@
+.listContainer{
+display: flex;
+flex-direction: column;
+    .listItemContainer{
+        display: flex;
+        width: 100%;
+      .newsCard{
+         display: flex;
+         background-color: #FFFFFF;
+         box-shadow: 0px 4px 20px rgba(168,168,168,0.9);
+         border-radius: 10px;
+         width: 100%;
+         flex-direction: column;
+         .metaContainer{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .metaDetails{
+                margin-top: auto;
+                margin-bottom: auto;
+                .avatarMeta{
+                    width: 11.5rem;
+                }
+                .metaTitle{
+                    font-size: 1.25rem;
+                }
+                .metaDescription{
+                    color: #8d8d8d;
+                    font-size: 1rem;
+                }
+            }
+            .newsDetailsBtn{
+                background-color: #249283;
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-left: 1rem;
+            }
+         }
+      }
+    }
+
+
+}
