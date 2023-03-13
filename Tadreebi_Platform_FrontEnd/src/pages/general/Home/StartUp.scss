@@ -4,7 +4,14 @@
   display: flex;
   gap: 50px;
   align-items: center;
-  
+  padding: 20px;
+
+  //for mobile
+  @include breakpoint-down(small) {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
 
   .startUpimg {
     width: 50%;
@@ -18,7 +25,6 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 100px;
     align-items: center;
 
     div {
@@ -26,6 +32,11 @@
         font-size: $font-lg;
         margin-bottom: 20px;
         color: $white;
+
+        //for mobile
+        @include breakpoint-down(small) {
+          font-size: $font-sm;
+        }
       }
 
       button {
@@ -39,6 +50,12 @@
         color: black;
         background-color: $grayishBlue;
         border: none;
+
+        //for mobile
+        @include breakpoint-down(small) {
+          font-size: $font-sm;
+          color: black;
+        }
       }
     }
   }

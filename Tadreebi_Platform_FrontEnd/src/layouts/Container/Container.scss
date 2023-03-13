@@ -1,3 +1,5 @@
+@import "../../index.scss";
+
 .container-layout {
   min-height: 200px;
 }
@@ -9,4 +11,9 @@
   justify-content: space-between;
   grid-gap: 2rem;
   gap: 2rem;
+
+  @include breakpoint-down(small) {
+    padding: 0;
+    
+  }
 }
