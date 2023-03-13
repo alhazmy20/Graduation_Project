@@ -1,9 +1,16 @@
+@import "../../../index.scss";
+
+
 .listContainer{
 display: flex;
 flex-direction: column;
+width: 100%;
+@include breakpoint-down(small) {
+    width: 90%;
+    margin: auto;
+  }
     .listItemContainer{
         display: flex;
-        width: 100%;
       .newsCard{
          display: flex;
          background-color: #FFFFFF;
@@ -15,25 +22,67 @@ flex-direction: column;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            @include breakpoint-down(small) {
+                flex-direction: column;
+              }
+              @include breakpoint-down(medium) {
+                flex-direction: column;
+              }
+              @include breakpoint-down(large) {
+                flex-direction: column;
+              }
             .metaDetails{
                 margin-top: auto;
                 margin-bottom: auto;
+                @include breakpoint-down(small) {
+                    flex-direction: column;
+                    text-align: center;
+                  }
+                  .ant-card-meta-avatar{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0;
+                  }
                 .avatarMeta{
-                    width: 11.5rem;
+                    width: 100%;
+                    @include breakpoint-down(small) {
+                        width: 100%;
+                      }
                 }
                 .metaTitle{
                     font-size: 1.25rem;
+                    @include breakpoint-down(small) {
+                        font-size: 0.80rem;
+
+                      }
+                      @include breakpoint-down(medium) {
+                        font-size: 1rem;
+
+                      }
+                      @include breakpoint-down(large) {
+                        font-size: 1.1rem;
+
+                      }
                 }
                 .metaDescription{
                     color: #8d8d8d;
                     font-size: 1rem;
+                    @include breakpoint-down(small) {
+                        font-size: 0.70rem;
+                      }
+                      @include breakpoint-down(medium) {
+                        font-size: 0.9rem;
+                      }
                 }
             }
             .newsDetailsBtn{
                 background-color: #249283;
                 margin-top: auto;
                 margin-bottom: auto;
-                margin-left: 1rem;
+                @include breakpoint-down(small) {
+                    margin: 0;
+                  }
             }
          }
       }
