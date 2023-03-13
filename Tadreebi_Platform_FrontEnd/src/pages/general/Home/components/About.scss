@@ -1,0 +1,72 @@
+@import "../../../../index.scss";
+
+.AboutMain {
+  margin-top: 20px;
+
+  .title {
+    position: relative;
+    text-align: center;
+    font-size: $font-lg;
+  }
+  .title::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    bottom: -4px;
+    background: $Green;
+    width: 50px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+  }
+
+  .aboutContainer {
+    display: flex;
+    gap: 15px;
+    margin-top: 60px;
+
+    //content
+    .aboutContent {
+      display: flex;
+      flex-direction: column;
+      gap: 100px;
+
+      .platfrompar {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        h5 {
+          color: $lightGreen;
+          font-family: $font-inter-regular;
+          font-size: $font-med;
+        }
+        p {
+          font-weight: 500;
+        }
+      }
+
+      .platfromvio {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        h5 {
+          color: $lightGreen;
+          font-family: $font-inter-regular;
+          font-size: $font-med;
+        }
+        p {
+          font-weight: 500;
+        }
+      }
+    }
+
+    //img
+    .imgDuontone {
+      img {
+        width: 500px;
+      }
+    }
+  }
+}

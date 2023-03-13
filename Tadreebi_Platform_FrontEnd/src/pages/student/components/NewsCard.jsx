@@ -6,35 +6,32 @@ import { DoubleLeftOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
 const data = Array.from({
-    length: 25,
-  }).map((_, i) => ({
-    title: `تعلن سدايا عن موعد بدء التقديم على التدريب التعاوني للترم
+  length: 25,
+}).map((_, i) => ({
+  title: `تعلن سدايا عن موعد بدء التقديم على التدريب التعاوني للترم
      الثاني`,
-    avatar: instPng,
-    description:
-      'منذ 3 أيام',
-  }));
+  avatar: instPng,
+  description: "منذ 3 أيام",
+}));
 
 const NewsCard = () => {
   return (
-
     <List
-    itemLayout="vertical"
-    size="middle"
-    bordered
-
-    pagination={{
+      itemLayout="vertical"
+      size="middle"
+      bordered
+      pagination={{
         onChange: (page) => {
-            console.log(page);
+          console.log(page);
         },
         position: "bottom",
         align: "start",
         pageSize: 6,
-    }}
-    dataSource={data}
-    renderItem={(item) => (
+      }}
+      dataSource={data}
+      renderItem={(item) => (
         <List.Item>
-<Card
+          <Card
             size="small"
             className="NewsCard"
             style={{
@@ -58,15 +55,18 @@ const NewsCard = () => {
                   marginTop: "auto",
                   marginBottom: "auto",
                 }}
-                avatar={<Image preview={false} width="11.5rem" src={item.avatar} />}
+                avatar={
+                  <Image preview={false} width="11.5rem" src={item.avatar} />
+                }
                 className="Meta"
                 title={
-                  <Title style={{fontSize: "1.25rem"}}>
-                    {item.title}
-                  </Title>
+                  <Title style={{ fontSize: "1.25rem" }}>{item.title}</Title>
                 }
                 description={
-                  <Title style={{ color: "#8D8D8D", fontSize: "1rem"}} level={5}>
+                  <Title
+                    style={{ color: "#8D8D8D", fontSize: "1rem" }}
+                    level={5}
+                  >
                     {item.description}
                   </Title>
                 }
@@ -78,7 +78,7 @@ const NewsCard = () => {
                   backgroundColor: "#249283",
                   marginTop: "auto",
                   marginBottom: "auto",
-                  marginLeft: "1rem"
+                  marginLeft: "1rem",
                 }}
                 shape="round"
               >
@@ -88,9 +88,8 @@ const NewsCard = () => {
             </div>
           </Card>
         </List.Item>
-    )}
-    >
-    </List>
+      )}
+    ></List>
   );
 };
 
