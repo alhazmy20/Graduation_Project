@@ -5,12 +5,15 @@
 display: flex;
 flex-direction: column;
 width: 100%;
+margin-top: 2rem;
+margin-bottom: 1rem;
 @include breakpoint-down(small) {
     width: 90%;
     margin: auto;
   }
     .listItemContainer{
         display: flex;
+        border: 0;
       .newsCard{
          display: flex;
          background-color: #FFFFFF;
