@@ -8,7 +8,7 @@ import Home from "../pages/general/Home/Home";
 import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
-import News from "../pages/student/News/News";
+import News from "../pages/student/News";
 
 //Institution Routes
 const institutionRoutes = (
@@ -46,6 +46,7 @@ export const routes = createBrowserRouter(
       {adminRoutes}
 
       <Route path="institution/signup" element={<InstSignup />} />
+      <Route path="student/signup" element={<StudentSignup />} />
       <Route path="login" element={<Login />} />
       <Route path="admin/login" element={<h1>Login for admin</h1>} />
     </Route>

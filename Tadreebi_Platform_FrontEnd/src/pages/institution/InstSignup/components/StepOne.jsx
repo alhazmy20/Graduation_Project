@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Select, notification, Row, Col } from "antd";
+import { Select, notification, Row, Col } from "antd";
 import axios from "axios";
 import { SECTORS, REGIONS } from "../../../../data/InstitutionData.js";
+import FormInput from "../../../../components/form/FormInput.jsx";
+import FormSelect from "../../../../components/form/FormSelect.jsx";
 
 const StepOne = (props) => {
   const [majors, setMajors] = useState();
@@ -32,7 +34,7 @@ const StepOne = (props) => {
     <div>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12}>
-          <Form.Item
+          <FormInput
             label="إسم المنشأة"
             labelCol={{ span: 24 }}
             name="institutionName"
@@ -42,69 +44,62 @@ const StepOne = (props) => {
                 message: "الرجاء إدخال اسم المنشأة",
               },
             ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
+          />
+          <FormSelect
             name="institutionSector"
             label="القطاع"
             labelCol={{ span: 24 }}
             rules={[{ required: true, message: "الرجاء اختيار القطاع" }]}
           >
-            <Select allowClear showSearch>
-              {SECTORS.map((sector) => (
-                <Select.Option key={sector.id} value={sector.name}>
-                  {sector.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
+            {SECTORS.map((sector) => (
+              <Select.Option key={sector.id} value={sector.name}>
+                {sector.name}
+              </Select.Option>
+            ))}
+          </FormSelect>
+
+          <FormSelect
             name="institutionField"
             label="مجال العمل"
             labelCol={{ span: 24 }}
             rules={[{ required: true, message: "الرجاء اختيار مجال العمل" }]}
           >
-            <Select allowClear showSearch>
-              {majors?.map((elm) => (
-                <Select.Option key={elm._id} value={elm.specialistName}>
-                  {elm.specialistName}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
+            {majors?.map((elm) => (
+              <Select.Option key={elm._id} value={elm.specialistName}>
+                {elm.specialistName}
+              </Select.Option>
+            ))}
+          </FormSelect>
+
+          <FormSelect
             name="region"
             label="المنطقة"
             labelCol={{ span: 24 }}
             rules={[{ required: true, message: "الرجاء اختيار المنطقة" }]}
           >
-            <Select allowClear showSearch>
-              {REGIONS.map((sector) => (
-                <Select.Option key={sector.id} value={sector.name}>
-                  {sector.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
+            {REGIONS.map((region) => (
+              <Select.Option key={region.id} value={region.name}>
+                {region.name}
+              </Select.Option>
+            ))}
+          </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
-          <Form.Item
+          <FormSelect
             name="city"
             label="المدينة"
             labelCol={{ span: 24 }}
             rules={[{ required: true, message: "الرجاء اختيار المدينة" }]}
           >
-            <Select allowClear showSearch>
-              {cities?.map((elm) => (
-                <Select.Option key={elm._id} value={elm.cityName}>
-                  {elm.cityName}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
+            {" "}
+            {cities?.map((elm) => (
+              <Select.Option key={elm._id} value={elm.cityName}>
+                {elm.cityName}
+              </Select.Option>
+            ))}
+          </FormSelect>
 
-          <Form.Item
+          <FormInput
             label="البريد الإلكتروني"
             labelCol={{ span: 24 }}
             name="email"
@@ -112,10 +107,10 @@ const StepOne = (props) => {
               { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
               { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
             ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
+          />
+
+          <FormInput
+            inputType="password"
             label="كلمة السر"
             labelCol={{ span: 24 }}
             name="password"
@@ -126,10 +121,9 @@ const StepOne = (props) => {
                 pattern: "^(?=.*[A-Z])(?=.*\\d).{8,}$",
               },
             ]}
-          >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
+          />
+          <FormInput
+            inputType="password"
             label="تأكيد كلمة السر"
             labelCol={{ span: 24 }}
             name="confirmPassword"
@@ -147,9 +141,7 @@ const StepOne = (props) => {
                 },
               }),
             ]}
-          >
-            <Input.Password />
-          </Form.Item>
+          />
         </Col>
       </Row>
     </div>

@@ -1,0 +1,68 @@
+.student-signup {
+  display: flex;
+  justify-content: center;
+
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    width: 850px;
+    background-color: white;
+    border: 1px solid #82cec4;
+    border-radius: 8px;
+    margin: 2rem 0.5rem 1rem 0.5rem;
+
+    .form-container {
+      width: 100%;
+
+      h2 {
+        text-align: center;
+      }
+
+      form {
+        .label {
+          color: #808080;
+          font-weight: 500;
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        .btn-wrapper {
+          display: flex;
+          justify-content: center;
+
+          button {
+            width: 120px;
+            margin-bottom: 15px;
+            background-color: #008374;
+          }
+        }
+      }
+
+      span {
+        a {
+          text-decoration: none;
+          color: #4a98ae;
+          font-weight: 600;
+        }
+      }
+    }
+
+    img {
+      width: 400px;
+      object-fit: cover;
+
+      @media (max-width: 900px) {
+        width: 375px;
+      }
+      @media (max-width: 700px) {
+        width: 290px;
+      }
+      @media (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+}

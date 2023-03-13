@@ -1,58 +1,62 @@
 import React from "react";
-import { Input } from "antd";
 import FormInput from "../../../../components/form/FormInput";
 
-const StepTwo = (props) => {
-  const INPUTS_DATA = [
-    {
-      id: 1,
-      label: "الإسم الأول",
-      name: "fName",
-      message: "الرجاء إدخال الإسم الأول ",
-    },
-    {
-      id: 2,
-      label: "الإسم الأخير",
-      name: "lName",
-      message: "الرجاء إدخال الإسم الأخير ",
-    },
-    {
-      id: 3,
-      label: "المسمى الوظيفي",
-      name: "managerPosition",
-      message: "الرجاء إدخال المسمى الوظيفي",
-    },
-    {
-      id: 4,
-      label: "البريد الإلكتروني",
-      name: "managerEmail",
-      message: "الرجاء إدخال بريد الكتروني صالح",
-      pattern:
-        "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/;",
-      type: "email",
-    },
-    {
-      id: 5,
-      label: "رقم الجوال",
-      name: "managerPhone",
-      message: null,
-      type: "number",
-      placeholder: "05XXXXXXXX",
-    },
-  ];
-
+const StepTwo = () => {
   return (
     <div>
-      {INPUTS_DATA.map((field) => (
-        <FormInput
-          key={field.id}
-          label={field.label}
-          name={field.name}
-          message={field.message}
-        >
-          <Input type={field.type} placeholder={field.placeholder} />
-        </FormInput>
-      ))}
+      <FormInput
+        label="الإسم الأول"
+        labelCol={{ span: 24 }}
+        name="fName"
+        rules={[
+          {
+            required: true,
+            message: "الرجاء إدخال الإسم الأول ",
+          },
+        ]}
+      />
+      <FormInput
+        label="الإسم الأخير"
+        labelCol={{ span: 24 }}
+        name="lName"
+        rules={[
+          {
+            required: true,
+            message: "الرجاء إدخال الإسم الأخير ",
+          },
+        ]}
+      />
+      <FormInput
+        label="المسمى الوظيفي"
+        labelCol={{ span: 24 }}
+        name="managerPosition"
+        rules={[
+          {
+            required: true,
+            message: "الرجاء إدخال المسمى الوظيفي",
+          },
+        ]}
+      />
+      <FormInput
+        label="البريد الإلكتروني"
+        labelCol={{ span: 24 }}
+        name="managerEmail"
+        rules={[
+          { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
+          { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
+        ]}
+      />
+      <FormInput
+        label="رقم الجوال"
+        labelCol={{ span: 24 }}
+        name="managerPhone"
+        type="number"
+        placeholder="05XXXXXXXX"
+        rules={[
+          { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
+          { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
+        ]}
+      />
     </div>
   );
 };
