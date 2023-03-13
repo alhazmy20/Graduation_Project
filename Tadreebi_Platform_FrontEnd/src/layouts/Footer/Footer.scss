@@ -1,0 +1,27 @@
+@import "../../index.scss";
+.footer {
+  background-color: $Green;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 100px 30px 100px;
+  color: $white;
+
+  @include breakpoint-down(small) {
+    flex-direction: column-reverse;
+  }
+
+  .social {
+    display: flex;
+    gap: 10px;
+
+    img {
+      width: 30px;
+    }
+
+    @include breakpoint-down(small) {
+      padding: 50px;
+    }
+  }
+}

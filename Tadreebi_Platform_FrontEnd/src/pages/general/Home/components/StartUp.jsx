@@ -1,6 +1,6 @@
 import React from "react";
 import "../components/StartUp.scss";
-import backgroundImage from "../../../../assets/homebk.png";
+import backgroundImage from "../../../../assets/images/homebk.png";
 
 const StartUp = () => {
   return (

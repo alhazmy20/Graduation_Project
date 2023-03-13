@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../Navbar/Navbar.scss";
-import menu from "../../assets/menu.png";
+import menu from "../../assets/images/menu.png";
 import { Drawer } from "antd";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+ 
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -31,7 +32,7 @@ const Navbar = () => {
           <Link className="link" to="/?">
             <h6 className="mobile_link">فرص التدريب</h6>
           </Link>
-          <Link className="link" to="/?">
+          <Link className="link" to="/news">
             <h6 className="mobile_link">اخبار التدريب</h6>
           </Link>
           <Link className="link" to="/?">
@@ -50,10 +51,10 @@ const Navbar = () => {
           <Link className="link" to="/?">
             <h6>فرص التدريب</h6>
           </Link>
-          <Link className="link" to="/?">
+          <Link className="link" to="/news">
             <h6>اخبار التدريب</h6>
           </Link>
-          <Link className="link" to="/?">
+          <Link className="link" to="/#about" reloadDocument>
             <h6>نبذة عنا</h6>
           </Link>
           <Link className="link" to="/?">

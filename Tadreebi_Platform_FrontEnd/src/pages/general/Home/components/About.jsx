@@ -1,9 +1,9 @@
 import React from "react";
-import duontone from "../../../../assets/duotone.png";
+import duontone from "../../../../assets/images/duotone.png";
 import "./About.scss";
 const About = () => {
   return (
-    <div className="AboutMain">
+    <div className="AboutMain" id="about">
       <div className="title">نبذة عنا</div>
 
       <div className="aboutContainer">

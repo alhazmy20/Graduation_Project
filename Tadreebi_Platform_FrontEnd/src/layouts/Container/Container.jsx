@@ -3,9 +3,12 @@ import { Row, Col } from "antd";
 import "./Container.scss";
 
 const Container = (props) => {
-
   return (
-    <Row justify="center" align="top" className={`${props.className} container-layout`}>
+    <Row
+      justify="center"
+      align="top"
+      className={`${props.className} container-layout`}
+    >
       <Col lg={20} sm={24} xs={24}>
         <section>{props.children}</section>
       </Col>
