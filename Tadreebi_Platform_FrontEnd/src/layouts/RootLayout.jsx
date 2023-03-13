@@ -9,6 +9,7 @@ export default function RootLayout() {
     <div className="root-layout">
       <Navbar />
       <Container>
+
         <Outlet />
       </Container>
       <Footer />
