@@ -1,7 +1,8 @@
 @import "../../index.scss";
 
 .container-layout {
-  min-height: 200px;
+  // min-height: 200px;
+  min-height: 100vh;
 }
 
 .container-layout > div > section {
