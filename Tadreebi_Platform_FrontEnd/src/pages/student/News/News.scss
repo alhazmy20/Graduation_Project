@@ -1,16 +1,56 @@
 @import "../../../index.scss";
 
-
 .listContainer{
 display: flex;
 flex-direction: column;
 width: 100%;
-margin-top: 2rem;
+margin-top: 1rem;
 margin-bottom: 1rem;
 @include breakpoint-down(small) {
     width: 90%;
     margin: auto;
   }
+
+  .ant-list-pagination{
+    display: flex;
+    justify-content: center;
+  }
+  .ant-pagination{
+    color: black;
+    @include breakpoint-down(medium){
+      width: 100%;
+    }
+    .ant-pagination-item{
+      a{
+        color: black;
+        opacity: 90%;
+      }
+    }
+    .ant-pagination-item-active{
+      border: 1px solid $Green;
+      a{
+        color: $Green;
+      }
+    }
+    .ant-pagination-prev{
+      a{
+        color: $Green;
+      }
+    }
+    .ant-pagination-disabled{
+      a{
+        color: $Green;
+        opacity: 50%;
+      }
+    }
+
+    .ant-pagination-next{
+      a{
+        color: $Green;
+      }
+    }
+  }
+
     .listItemContainer{
         display: flex;
         border: 0;
@@ -25,12 +65,6 @@ margin-bottom: 1rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            @include breakpoint-down(small) {
-                flex-direction: column;
-              }
-              @include breakpoint-down(medium) {
-                flex-direction: column;
-              }
               @include breakpoint-down(large) {
                 flex-direction: column;
               }
@@ -56,37 +90,23 @@ margin-bottom: 1rem;
                 .metaTitle{
                     font-size: 1.25rem;
                     white-space: normal;
-                    @include breakpoint-down(small) {
-                        font-size: 0.80rem;
-
-                      }
-                      @include breakpoint-down(medium) {
-                        font-size: 1rem;
-
-                      }
                       @include breakpoint-down(large) {
                         font-size: 1.1rem;
-
                       }
                 }
                 .metaDescription{
                     color: #8d8d8d;
                     font-size: 1rem;
-                    @include breakpoint-down(small) {
-                        font-size: 0.70rem;
-                      }
+                    white-space: normal;
                       @include breakpoint-down(medium) {
                         font-size: 0.9rem;
                       }
                 }
             }
             .newsDetailsBtn{
-                background-color: #249283;
+                background-color: $Green;
                 margin-top: auto;
                 margin-bottom: auto;
-                @include breakpoint-down(small) {
-                    margin: 0;
-                  }
             }
          }
       }

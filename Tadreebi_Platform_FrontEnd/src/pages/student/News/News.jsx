@@ -15,6 +15,16 @@ const data = Array.from({
   description: "منذ 3 أيام",
 }));
 
+const itemRender = (_, type, originalElement) => {
+  if (type === 'prev') {
+    return <a>السابق</a>;
+  }
+  if (type === 'next') {
+    return <a>التالي</a>;
+  }
+  return originalElement;
+};
+
 const News = () => {
   return (
      <List
@@ -25,7 +35,9 @@ const News = () => {
         onChange: (page) => {
           console.log(page);
         },
+        responsive: true,
         position: "bottom",
+        itemRender: itemRender,
         align: "center",
         pageSize: 6,
       }}
