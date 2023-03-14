@@ -5,7 +5,8 @@ import instPng from "../../../assets/images/image14.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
-import { generatePath,useNavigate } from 'react-router-dom';
+import { itemRender } from "../../../components/ui/Pagination"
+import { useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
 const data = Array.from({
@@ -17,17 +18,6 @@ const data = Array.from({
   avatar: instPng,
   description: "منذ 3 أيام",
 }));
-
-const itemRender = (_, type, originalElement) => {
-  if (type === 'prev') {
-    return <a>السابق</a>;
-  }
-  if (type === 'next') {
-    return <a>التالي</a>;
-  }
-  return originalElement;
-};
-
 
 
 const News = () => {
