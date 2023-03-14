@@ -8,7 +8,7 @@ import Home from "../pages/general/Home/Home";
 import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
-import News from "../pages/student/News/News";
+import News from "../pages/general/News/News";
 import StudentSignup from "../pages/student/StudentSignup/StudentSignup";
 import TrainingOpportunities from "../pages/general/TrainingOpportunities/TrainingOpportunities";
 import Applications from "../pages/student/Applications/AppTable"

@@ -2,7 +2,8 @@ import React from 'react'
 import {Button, Card, Image, List} from "antd";
 import Title from "antd/es/typography/Title";
 import instPng from "../../../assets/images/image14.png";
-import { DoubleLeftOutlined } from "@ant-design/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
 const { Meta } = Card;
 
@@ -25,6 +26,8 @@ const itemRender = (_, type, originalElement) => {
   return originalElement;
 };
 
+
+
 const News = () => {
   return (
      <List
@@ -39,7 +42,7 @@ const News = () => {
         position: "bottom",
         itemRender: itemRender,
         align: "center",
-        pageSize: 6,
+        pageSize: 7,
       }}
       dataSource={data}
       renderItem={(item) => (
@@ -76,7 +79,7 @@ const News = () => {
                 shape="round"
               >
                 أظهار التفاصيل
-                <DoubleLeftOutlined />
+                <FontAwesomeIcon icon={faArrowLeft} />
               </Button>
             </div>
           </Card>
