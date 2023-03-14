@@ -10,6 +10,7 @@ import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
 import News from "../pages/student/News/News";
 import StudentSignup from "../pages/student/StudentSignup/StudentSignup"
+import Applications from "../pages/student/Applications/AppTable"
 
 //Institution Routes
 const institutionRoutes = (
@@ -39,6 +40,7 @@ export const routes = createBrowserRouter(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home></Home>} />
         <Route path="news" element={<News/>}/>
+        <Route path="applications" element={<Applications/>}/>
         {studentRoutes}
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />
