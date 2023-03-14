@@ -1,9 +1,8 @@
 @import '../../../index.scss';
 
 .training-opportunities {
-  @include breakpoint-down(small) {
-    padding: 0 3rem;
-  }
+  margin-bottom: 1rem;
+
   .filter-container {
     background-color: white;
     display: flex;
@@ -16,21 +15,20 @@
     border: 1px solid rgb(218, 218, 218);
     border-radius: 5px;
 
-
     form {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-     
+
       .form-item {
         margin: 0;
         width: 230px;
         @media (max-width: 930px) {
-            width: 180px;
+          width: 180px;
         }
 
         @media (max-width: 720px) {
-            width: 100%;
+          width: 100%;
         }
 
         label {
@@ -46,7 +44,7 @@
     }
   }
 
-  main{
+  main {
     // display: flex;
     // justify-content: space-around; /* Change to space-evenly */
     // flex-wrap: wrap;
@@ -54,5 +52,3 @@
     margin-top: 1.5rem;
   }
 }
-
-

@@ -1,63 +1,68 @@
-.post-card {
-  height: 100%;
-  .ant-card-head{
-      border: none;
-  }
-.card-title {
-  font-size: 20px;
-  text-align: center;
-  color: #008374;
-  white-space: normal;
-}
+@import "../../../index.scss";
 
-.majors {
-  display: flex;
-  justify-content:start;
-  flex-wrap: wrap;
-  gap: 5px;
+.post-list {
 
-  .major {
-    display: block;
-    background-color: #f7f7f7;
-    padding: 5px;
-    font-size: 10px;
-    border-radius: 8px;
-  }
-}
+  .post-card {
+    min-height: 370px;
 
-.details-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 
-  .detail {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    font-size: 13px;
+    .card-title {
+      font-size: 22px;
+      font-weight: bolder;
+      text-align: center;
+      color: #008374;
+      white-space: normal;
+    }
 
-    .icon,
-    .label {
-      color: #4a98ae;
-      font-weight: 600;
+    .majors {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 5px;
+
+      .major {
+        display: block;
+        background-color: #f7f7f7;
+        padding: 5px;
+        font-size: 10px;
+        border-radius: 8px;
+      }
+    }
+
+    .details-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .detail {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        font-size: 13px;
+
+        .icon,
+        .label {
+          color: #4a98ae;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .more-detail-btn {
+      width: 120px;
+      height: 30px;
+      background-color: #008374;
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+
+      &:hover {
+        background-color: #52aa9f;
+      }
+    }
+    @media (max-width: 750px) {
+      width: 100%;
     }
   }
-}
-
-.more-detail-btn {
-  width: 120px;
-  height: 30px;
-  background-color: #008374;
-  color: white;
-  font-size: 13px;
-  font-weight: 500;
-  text-align: center;
-
-  &:hover {
-    background-color: #52aa9f;
-  }
-}
-@media (max-width: 750px) {
-  width: 100%;
-}
 }
