@@ -16,3 +16,39 @@ body {
   background-color: $white;
   min-height: 100%;
 }
+
+.ant-pagination{
+    color: black;
+    @include breakpoint-down(medium){
+      width: 100%;
+    }
+    .ant-pagination-item{
+      a{
+        color: black;
+        opacity: 90%;
+      }
+    }
+    .ant-pagination-item-active{
+      border: 1px solid $Green;
+      a{
+        color: $Green;
+      }
+    }
+    .ant-pagination-prev{
+      a{
+        color: $Green;
+      }
+    }
+    .ant-pagination-disabled{
+      a{
+        color: $Green;
+        opacity: 50%;
+      }
+    }
+
+    .ant-pagination-next{
+      a{
+        color: $Green;
+      }
+    }
+  }
