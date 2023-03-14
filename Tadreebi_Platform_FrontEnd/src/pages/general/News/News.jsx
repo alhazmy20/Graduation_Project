@@ -5,12 +5,13 @@ import instPng from "../../../assets/images/image14.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
-import { useNavigate } from 'react-router-dom';
+import { generatePath,useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
 const data = Array.from({
   length: 25,
 }).map((_, i) => ({
+  id: i,
   title: `تعلن سدايا عن موعد بدء التقديم على التدريب التعاوني للترم
      الثاني`,
   avatar: instPng,
@@ -79,7 +80,7 @@ const News = () => {
                 type="primary"
                 className="newsDetailsBtn"
                 shape="round"
-                onClick={() => navigate("/news-details")}
+                onClick={() => {navigate("/news-details/"+ item.id)}}
               >
                 أظهار التفاصيل
                 <FontAwesomeIcon icon={faArrowLeft} />
