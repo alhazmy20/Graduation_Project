@@ -1,0 +1,23 @@
+@import "../../../../index.scss";
+
+.NewestPostMain {
+  margin-top: 20px;
+}
+
+.title {
+  position: relative;
+  text-align: center;
+  font-size: 25px;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  bottom: -10px;
+  background: $Green;
+  width: 55px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}

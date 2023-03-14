@@ -5,7 +5,7 @@ import Navbar from "./Navbar/Navbar";
 
 export default function RootLayout() {
   return (
-    <div className="root-layout" style={{minHeight:"100vh"}}>
+    <div className="root-layout" style={{ minHeight: "100vh" }}>
       <Navbar />
       <Container>
         <Outlet />
