@@ -9,7 +9,8 @@ import Login from "../pages/general/Login/Login";
 import NotFound from "../pages/general/NotFound/NotFound";
 import InstSignup from "../pages/institution/InstSignup/InstSignup";
 import News from "../pages/student/News/News";
-import StudentSignup from "../pages/student/StudentSignup/StudentSignup"
+import StudentSignup from "../pages/student/StudentSignup/StudentSignup";
+import TrainingOpportunities from "../pages/general/TrainingOpportunities/TrainingOpportunities";
 
 //Institution Routes
 const institutionRoutes = (
@@ -38,7 +39,11 @@ export const routes = createBrowserRouter(
     <Route>
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home></Home>} />
-        <Route path="news" element={<News/>}/>
+        <Route
+          path="training-opportunities"
+          element={<TrainingOpportunities />}
+        />
+        <Route path="news" element={<News />} />
         {studentRoutes}
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />
