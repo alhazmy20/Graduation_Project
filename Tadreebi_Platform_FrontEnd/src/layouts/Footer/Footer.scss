@@ -1,6 +1,8 @@
 @import "../../index.scss";
 .footer {
   background-color: $Green;
+  position: sticky;
+  top: 100%;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;

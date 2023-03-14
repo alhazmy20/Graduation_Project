@@ -1,3 +1,18 @@
 @import "./scss/Variables.scss";
 @import "./scss/Mixins.scss";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// html {
+//   background-color: red;
+//   height: 100%;
+// }
+
+body {
+  background-color: $white;
+  min-height: 100%;
+}
