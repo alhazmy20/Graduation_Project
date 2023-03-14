@@ -11,6 +11,7 @@ import InstSignup from "../pages/institution/InstSignup/InstSignup";
 import News from "../pages/student/News/News";
 import StudentSignup from "../pages/student/StudentSignup/StudentSignup";
 import TrainingOpportunities from "../pages/general/TrainingOpportunities/TrainingOpportunities";
+import Applications from "../pages/student/Applications/AppTable"
 
 //Institution Routes
 const institutionRoutes = (
@@ -44,6 +45,7 @@ export const routes = createBrowserRouter(
           element={<TrainingOpportunities />}
         />
         <Route path="news" element={<News />} />
+        <Route path="applications" element={<Applications/>}/>
         {studentRoutes}
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />
