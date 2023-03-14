@@ -12,7 +12,7 @@ import News from "../pages/general/News/News";
 import StudentSignup from "../pages/student/StudentSignup/StudentSignup";
 import TrainingOpportunities from "../pages/general/TrainingOpportunities/TrainingOpportunities";
 import Applications from "../pages/student/Applications/AppTable"
-
+import NewsDetails from "../pages/general/News/NewsDetails/NewsDetails"
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">
@@ -45,6 +45,7 @@ export const routes = createBrowserRouter(
           element={<TrainingOpportunities />}
         />
         <Route path="news" element={<News />} />
+        <Route path="news-details" element={<NewsDetails />} />
         <Route path="applications" element={<Applications/>}/>
         {studentRoutes}
         {institutionRoutes}

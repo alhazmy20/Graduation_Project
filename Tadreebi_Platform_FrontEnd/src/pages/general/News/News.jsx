@@ -5,6 +5,7 @@ import instPng from "../../../assets/images/image14.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
+import { useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
 const data = Array.from({
@@ -29,6 +30,7 @@ const itemRender = (_, type, originalElement) => {
 
 
 const News = () => {
+  const navigate = useNavigate();
   return (
      <List
     className="listContainer"
@@ -77,6 +79,7 @@ const News = () => {
                 type="primary"
                 className="newsDetailsBtn"
                 shape="round"
+                onClick={() => navigate("/news-details")}
               >
                 أظهار التفاصيل
                 <FontAwesomeIcon icon={faArrowLeft} />
