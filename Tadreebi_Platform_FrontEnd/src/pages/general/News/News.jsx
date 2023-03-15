@@ -9,19 +9,23 @@ import { itemRender } from "../../../components/ui/Pagination"
 import { useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
-const data = Array.from({
-  length: 25,
-}).map((_, i) => ({
-  id: i,
-  title: `تعلن سدايا عن موعد بدء التقديم على التدريب التعاوني للترم
-     الثاني`,
-  avatar: instPng,
-  description: "منذ 3 أيام",
-}));
-
 
 const News = () => {
   const navigate = useNavigate();
+
+  const data = Array.from({
+    length: 25,
+  }).map((_, i) => ({
+    id: i,
+    title: `تعلن سدايا عن موعد بدء التقديم على التدريب التعاوني للترم
+       الثاني`,
+    avatar: instPng,
+    date: "منذ 3 أيام",
+    description: '',
+  }));
+
+  
+
   return (
      <List
     className="listContainer"
@@ -38,7 +42,7 @@ const News = () => {
         pageSize: 7,
       }}
       dataSource={data}
-      renderItem={(item) => (
+      renderItem={(news) => (
         <List.Item
         className="listItemContainer"
         >
@@ -52,16 +56,16 @@ const News = () => {
               <Meta
                 className="metaDetails"
                 avatar={
-                  <Image preview={false} className="avatarMeta" src={item.avatar} />
+                  <Image preview={false} className="avatarMeta" src={news.avatar} />
                 }
                 title={
-                  <Title className="metaTitle">{item.title}</Title>
+                  <Title className="metaTitle">{news.title}</Title>
                 }
                 description={
                   <Title
-                    className="metaDescription"
+                    className="metaDate"
                   >
-                    {item.description}
+                    {news.date}
                   </Title>
                 }
               />
@@ -70,7 +74,15 @@ const News = () => {
                 type="primary"
                 className="newsDetailsBtn"
                 shape="round"
-                onClick={() => {navigate("/news-details/"+ item.id)}}
+                onClick={() => {navigate("/news-details/"+ news.id,{
+                  state: {
+                    id: news.id,
+                    title: news.title,
+                    avatar: news.avatar,
+                    description: news.description,
+                    date: news.date,
+                  }
+                });}}
               >
                 أظهار التفاصيل
                 <FontAwesomeIcon icon={faArrowLeft} />

@@ -16,8 +16,9 @@ body {
 
 .ant-pagination{
     color: black;
-    @include breakpoint-down(medium){
+    @include breakpoint-down(small){
       width: 100%;
+      margin-bottom: 1rem;
     }
     .ant-pagination-item{
       a{
@@ -35,6 +36,10 @@ body {
       a{
         color: $Green;
       }
+      @include breakpoint-down(small) {
+        padding-left: 0.5rem;
+      }
+    
     }
     .ant-pagination-disabled{
       a{
@@ -46,6 +51,9 @@ body {
     .ant-pagination-next{
       a{
         color: $Green;
+      }
+      @include breakpoint-down(small) {
+        padding-right: 0.5rem;
       }
     }
   }
