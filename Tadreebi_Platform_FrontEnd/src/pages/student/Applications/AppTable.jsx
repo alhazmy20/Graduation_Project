@@ -63,6 +63,15 @@ const AppTable = () => {
       title: "حالة الطلب",
       dataIndex: "appstat",
       align: "center",
+      render: (text) => {
+        let style = {};
+        if (text === "نشط" || text === "تم القبول") {
+          style.color = "#008374B2";
+        } else if (text === "مرفوض") {
+          style.color = "red";
+        }
+        return <span style={style}>{text}</span>;
+      },
     },
   ];
 
