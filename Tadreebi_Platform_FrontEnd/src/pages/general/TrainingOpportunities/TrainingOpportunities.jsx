@@ -1,9 +1,9 @@
 import { Button, Form, Select } from "antd";
-// import axios from "axios";
 import React, { useState } from "react";
-import PostCard from "../../../components/ui/PostCard/PostCard.jsx";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
+import { data } from "../../../data/TestData.js";
+import PostList from "./components/PostList.jsx";
 
 const TrainingOpportunities = () => {
   const [cities, setCities] = useState();
@@ -92,7 +92,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        <PostCard />
+        <PostList data={data} />
       </main>
     </div>
   );
