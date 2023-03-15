@@ -5,9 +5,11 @@ import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 
 const PostList = (props) => {
   const { data } = props;
+
   return (
     <List
       className="post-list"
+      
       grid={{
         gutter: 16,
         xs: 1,

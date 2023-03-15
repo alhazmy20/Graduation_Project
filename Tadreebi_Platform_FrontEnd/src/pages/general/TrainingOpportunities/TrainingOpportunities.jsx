@@ -92,7 +92,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        <PostList data={data} />
+        <PostList data={data}  />
       </main>
     </div>
   );
