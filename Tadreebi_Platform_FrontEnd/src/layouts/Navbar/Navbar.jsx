@@ -90,7 +90,7 @@ const Navbar = (props) => {
       </div>
 
       <span className="headerMenu">
-        <AppMenu  />
+        <AppMenu />
       </span>
 
       <Drawer
@@ -159,14 +159,10 @@ const AppMenu = ({ isInline = false }) => {
         >
           إنشاء حساب
         </Button>
-        <Button
-          className="loginNavBar"
-          type="link"
-          onClick={() => setIsModalOpen(true)}
-        >
+        <Link className="loginNavBar" to="/login">
           تسجيل الدخول
-        </Button>
-        <RegisterModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen}  />
+        </Link>
+        <RegisterModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} />
       </div>
     </div>
   );

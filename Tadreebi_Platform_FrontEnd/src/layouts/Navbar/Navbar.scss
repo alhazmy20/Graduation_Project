@@ -174,9 +174,10 @@
     font-style: normal;
     font-weight: 700;
     color: $white;
+    font-size: $font-sm;
     font-family: $font-inter-regular;
     cursor: pointer;
-    // padding: 10px 20px 10px 20px;
+
     border-radius: 10px;
   }
 
@@ -187,7 +188,9 @@
     // margin-left: 10px;
   }
   .loginNavBar {
+    text-decoration: none;
     background-color: $Green;
+    padding: 5px 20px 5px 20px;
     border: 1px solid white;
   }
 }
