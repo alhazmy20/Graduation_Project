@@ -1,37 +1,33 @@
-import { Button, Form, notification, Select } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import PostCard from "../../../components/ui/PostCard/PostCard.jsx";
-import { REGIONS } from "../../../data/InstitutionData.js";
+import { Button, Form, Select } from "antd";
+import React, { useState } from "react";
+import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
+import { data } from "../../../data/TestData.js";
+import PostList from "./components/PostList.jsx";
 
 const TrainingOpportunities = () => {
   const [cities, setCities] = useState();
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedMajor, setSelectedMajor] = useState("");
 
   const [form] = Form.useForm();
 
   const handleClearFilter = () => {
+    console.log(selectedRegion, selectedCity, selectedMajor);
     form.resetFields();
   };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const [cities] = await Promise.all([
-          axios.get("https://www.ptway.net/api/getcity?type=city"),
-        ]);
-
-        setCities(JSON.parse(cities.data.cities));
-      } catch (error) {
-        console.log("Opps, we got an error", error);
-
-        notification.error({
-          message: "لقد حدث خطأ",
-          description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
-        });
-      }
-    })();
-  }, []);
+  const handleRegionChange = (value) => {
+    setSelectedRegion(value);
+    form.setFieldsValue({ city: "كل المدن" }); // set the value of the city field to "كل المدن"
+  };
+  const handleCityChange = (value) => {
+    setSelectedCity(value);
+  };
+  const handleMajorChange = (value) => {
+    selectedMajor(value);
+  };
 
   return (
     <div className="training-opportunities">
@@ -39,10 +35,14 @@ const TrainingOpportunities = () => {
         <h3>تصفية على حسب:</h3>
         <Form form={form}>
           <Form.Item name="region" className="form-item">
-            <Select defaultValue="كل المناطق" showSearch>
+            <Select
+              defaultValue="كل المناطق"
+              showSearch
+              onChange={handleRegionChange}
+            >
               <Select.Option key="*" value="كل المناطق" />
-              {REGIONS.map((region) => (
-                <Select.Option key={region.id} value={region.name}>
+              {RegionData.map((region) => (
+                <Select.Option key={region.id} value={region.region}>
                   {region.name}
                 </Select.Option>
               ))}
@@ -50,19 +50,30 @@ const TrainingOpportunities = () => {
           </Form.Item>
 
           <Form.Item className="form-item" name="city">
-            <Select defaultValue="كل المدن" showSearch>
+            <Select
+              defaultValue="كل المدن"
+              showSearch
+              onChange={handleCityChange}
+            >
               <Select.Option key="*" value="كل المدن" />
-              {cities?.map((city) => (
-                <Select.Option key={city._id} value={city.cityName}>
-                  {city.cityName}
-                </Select.Option>
-              ))}
+              {RegionData.filter((r) => r.region === selectedRegion).map(
+                (region) =>
+                  region.cities.map((city) => (
+                    <Select.Option key={city.id} value={city.city}>
+                      {city.city}
+                    </Select.Option>
+                  ))
+              )}
             </Select>
           </Form.Item>
 
           <Form.Item className="form-item" name="major">
             {/*NOTE: Edit this*/}
-            <Select defaultValue="كل التخصصات" showSearch>
+            <Select
+              defaultValue="كل التخصصات"
+              showSearch
+              onChange={handleMajorChange}
+            >
               <Select.Option key="*" value="كل التخصصات" />
               {cities?.map((city) => (
                 <Select.Option key={city._id} value={city.cityName}>
@@ -81,7 +92,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        <PostCard />
+        <PostList data={data} />
       </main>
     </div>
   );

@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import "../Navbar/Navbar.scss";
 // import menu from "../../assets/images/menu.png";
 import { Button, Drawer, Menu } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import RegisterModal from "../../pages/general/RegisterModal/RegisterModal";
 
 const Navbar = (props) => {
   const [open, setOpen] = useState(false);
 
-  const showDrawer = () => {
-    setOpen(true);
-  };
+  // const showDrawer = () => {
+  //   setOpen(true);
+  // };
 
-  const onClose = () => {
-    setOpen(false);
-  };
+  // const onClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     // <nav className="navbar">
