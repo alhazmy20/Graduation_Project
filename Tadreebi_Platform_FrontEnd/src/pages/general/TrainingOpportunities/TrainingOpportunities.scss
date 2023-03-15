@@ -2,6 +2,9 @@
 
 .training-opportunities {
   margin-bottom: 1rem;
+  @include breakpoint-down(small) {
+    padding: 0 3rem;
+  }
 
   .filter-container {
     background-color: white;
