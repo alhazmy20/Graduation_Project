@@ -74,7 +74,7 @@ const News = () => {
                 type="primary"
                 className="newsDetailsBtn"
                 shape="round"
-                onClick={() => {navigate("/news-details/"+ news.id,{
+                onClick={() => {navigate("/news/"+ news.id,{
                   state: {
                     id: news.id,
                     title: news.title,
