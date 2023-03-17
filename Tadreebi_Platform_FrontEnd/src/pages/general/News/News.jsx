@@ -6,23 +6,16 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
+import GetAllNews from '../../../data/API';
 import { itemRender } from "../../../components/ui/Pagination"
 import { useNavigate } from 'react-router-dom';
+
 const { Meta } = Card;
 
 
 const News = () => {
   const navigate = useNavigate();
-
-  const [news,setNews] = useState([]);
-  
-  const url = "http://localhost:8000/news"
-  useEffect(() => {
-    axios.get(url)
-    .then((response) => {
-      setNews(response.data);
-    })
-  }, [])
+  const {data} = GetAllNews("http://localhost:8000/news");
 
   return (
      <List
@@ -39,7 +32,7 @@ const News = () => {
         align: "center",
         pageSize: 7,
       }}
-      dataSource={news}
+      dataSource={data}
       renderItem={(news) => (
         <List.Item
         className="listItemContainer"
