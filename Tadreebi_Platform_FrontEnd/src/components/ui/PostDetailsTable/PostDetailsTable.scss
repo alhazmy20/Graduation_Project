@@ -1,0 +1,35 @@
+@import "../../../index.scss";
+
+.post-detail-table {
+  border-top: 2px solid $steelTeal;
+  border-radius: 15px;
+  td {
+    width: 50%;
+    border: 1px solid #f7f7f7;
+    padding: 1rem;
+    .label,
+    .icon {
+      font-weight: 500;
+      color: $steelTeal;
+    }
+    .label {
+      margin: 0 3px;
+    }
+
+    .majors {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .major{
+        display: block;
+        background-color: #f7f7f7;
+        padding: 5px;
+        font-size: 11px;
+        border-radius: 8px;
+        margin-top: 5px;
+      }
+    }
+
+  }
+}

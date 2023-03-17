@@ -1,0 +1,41 @@
+@import "../../../index.scss";
+
+.training-opportunity {
+  text-align: right;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding: 1rem;
+
+  h1 {
+    font-size: 28px;
+    font-weight: bolder;
+  }
+
+  a {
+    font-size: 17px;
+    font-weight: bolder;
+    color: #555;
+  }
+
+  p {
+    margin-top: 1rem;
+    font-size: 17px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    padding-bottom: 1em;
+    color: #333;
+    text-align: justify;
+    font-weight: 400;
+  }
+
+  button {
+    background-color: $Green;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 500;
+
+
+  }
+}

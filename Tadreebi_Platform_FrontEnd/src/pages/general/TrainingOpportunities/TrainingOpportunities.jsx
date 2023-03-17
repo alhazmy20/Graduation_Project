@@ -32,7 +32,7 @@ const TrainingOpportunities = () => {
   return (
     <div className="training-opportunities">
       <header className="filter-container">
-        <h3>تصفية على حسب:</h3>
+        <h5>تصفية على حسب:</h5>
         <Form form={form}>
           <Form.Item name="region" className="form-item">
             <Select

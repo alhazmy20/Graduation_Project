@@ -5,6 +5,11 @@
   @include breakpoint-down(small) {
     padding: 0 3rem;
   }
+  .ant-list-pagination{
+    display: flex;
+    justify-content: center;
+    direction: ltr;
+  }
 
   .filter-container {
     background-color: white;
