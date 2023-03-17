@@ -53,8 +53,17 @@ const StepTwo = () => {
         type="number"
         placeholder="05XXXXXXXX"
         rules={[
-          { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
-          { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
+          { required: true, message: "الرجاء ادخال رقم الجوال " },
+          {
+            validator: (_, value) => {
+              if (!value || value.length !== 10) {
+                return Promise.reject(
+                  new Error("رقم الهاتف يجب أن يتكون من 10 أرقام")
+                );
+              }
+              return Promise.resolve();
+            },
+          },
         ]}
       />
     </div>

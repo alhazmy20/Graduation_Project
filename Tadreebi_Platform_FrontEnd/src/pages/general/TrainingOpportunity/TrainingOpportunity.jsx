@@ -1,4 +1,4 @@
-import { Button, Image, Space } from "antd";
+import { Button, DatePicker, Image, Space } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import linkedin from "../../../assets/images/image14.png";
@@ -9,6 +9,9 @@ import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 
 const TrainingOpportunity = () => {
   const { title, description, ...data } = PostDetailsData[0];
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
   return (
     <div className="training-opportunity">
       <h1>{title}</h1>
@@ -31,6 +34,7 @@ const TrainingOpportunity = () => {
       <p>{description}</p>
       <PostDetailsTable data={data} />
       <Button type="primary">تقديم</Button>
+      <DatePicker onChange={onChange} />
     </div>
   );
 };

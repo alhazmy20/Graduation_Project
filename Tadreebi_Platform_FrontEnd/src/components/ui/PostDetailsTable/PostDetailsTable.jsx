@@ -76,7 +76,7 @@ const PostDetailsTable = (props) => {
             <span className="label">التخصصات المطلوبة:</span>
             <div className='majors'>
               {data.majors.map((m) => (
-                <span className="major">{m.major}</span>
+                <span key={m.major} className="major">{m.major}</span>
               ))}
             </div>
           </td>
