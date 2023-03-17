@@ -99,6 +99,7 @@ const AppTable = () => {
           responsive: true,
           itemRender: itemRender,
           pageSize: pageSize,
+          position: ['bottomLeft'],
         }}
       />
     </div>

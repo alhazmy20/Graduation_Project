@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
 @import "../../../index.scss";
 
-.tex {
-  color:#008374B2;
-  font-size:larger;
-  margin-bottom: 1rem;
-  font-weight:500;
-}
+
 
 .AppTable {
   padding: 10rem;
-}
 
+  .tex {
+    color:#008374B2;
+    font-size:larger;
+    margin-bottom: 1rem;
+    font-weight:500;
+  }
+
+  
 thead[class*="ant-table-thead"] th{
   background-color:#008374B2 !important;
   text-align: center;
@@ -25,7 +27,4 @@ thead[class*="ant-table-thead"] th{
  border-width: 1px;
 }
 
-.ant-pagination {
-  display: flex;
-  flex-direction: row-reverse;
 }

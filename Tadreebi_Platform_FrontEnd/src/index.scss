@@ -1,5 +1,6 @@
 @import "./scss/Variables.scss";
 @import "./scss/Mixins.scss";
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 *,
 *::before,
@@ -15,14 +16,10 @@ html {
 }
 
 body {
-  background-color: $white;
+  background-color: $background;
   min-height: 100%;
   min-width: 100%;
-  text-align: right;
-}
-
-.ant-list-pagination{
-  direction: ltr;
+  overflow: overflow;
 }
 
 .ant-pagination {

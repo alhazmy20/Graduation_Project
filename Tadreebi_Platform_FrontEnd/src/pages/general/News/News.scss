@@ -8,7 +8,7 @@ margin-top: 1rem;
 margin-bottom: 1rem;
 @include breakpoint-down(small) {
     width: 90%;
-    margin: auto;
+    margin: 1rem auto;
   }
 
   .ant-list-pagination{
