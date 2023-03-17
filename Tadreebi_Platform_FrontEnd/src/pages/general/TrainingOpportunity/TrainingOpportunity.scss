@@ -1,6 +1,7 @@
 @import "../../../index.scss";
 
 .training-opportunity {
+  @import 'bootstrap/dist/css/bootstrap.min.css';
   text-align: right;
   flex-direction: column;
   margin-top: 1rem;

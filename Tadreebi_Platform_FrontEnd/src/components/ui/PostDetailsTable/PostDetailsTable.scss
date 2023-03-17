@@ -1,8 +1,10 @@
 @import "../../../index.scss";
 
 .post-detail-table {
+  width: 100%;
   border-top: 2px solid $steelTeal;
-  border-radius: 15px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
   td {
     width: 50%;
     border: 1px solid #f7f7f7;
