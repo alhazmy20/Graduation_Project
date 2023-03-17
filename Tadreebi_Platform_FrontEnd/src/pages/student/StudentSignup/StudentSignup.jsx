@@ -31,7 +31,7 @@ const StudentSignup = () => {
     <div className="student-signup">
       <div className="card">
         <div className="form-container">
-          <h2>إنشاء حساب جديد</h2>
+          <h4>إنشاء حساب جديد</h4>
           <Form
             name="basic"
             className="form-wrapper"
