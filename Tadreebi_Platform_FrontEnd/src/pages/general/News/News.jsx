@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Button, Card, Image, List} from "antd";
 import Title from "antd/es/typography/Title";
 import instPng from "../../../assets/images/image14.png";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
@@ -65,15 +64,8 @@ const News = () => {
                 type="primary"
                 className="newsDetailsBtn"
                 shape="round"
-                onClick={() => {navigate("/news/"+ news.id,{
-                  state: {
-                    id: news.id,
-                    title: news.title,
-                    avatar: news.avatar,
-                    description: news.description,
-                    date: news.date,
-                  }
-                });}}
+                key={news.id}
+                onClick={() => {navigate(`/news/${news.id}`);}}
               >
                 أظهار التفاصيل
                 <FontAwesomeIcon icon={faArrowLeft} />
