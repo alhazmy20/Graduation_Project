@@ -1,24 +1,32 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
+import React , {useEffect}from 'react'
+import {useLocation, useNavigate } from 'react-router-dom'
 import { Card,Image } from 'antd';
 import Title from 'antd/es/typography/Title';
+import './NewsDetails.scss'
 
 const { Meta } = Card;
 
 const NewsDetails = () => {
  const location = useLocation();
+ const navigate = useNavigate();
+ const locationState = location.state
+
+useEffect(() => {
+  if(locationState == null){
+    navigate('/news');
+  }
+})
   return (
     <Card
-    bodyStyle={{width: '100%',textAlign: 'center'}}
-    style={{width: '100%',height:'100%',justifyContent: "center",display: "flex",flexDirection: "column", flexGrow: '1', alignItems:"center", marginTop: '1rem'}}
-    cover={ <Image preview={false} style={{marginTop: '1rem'}} src={location.state.avatar} width="auto" />}
+    className='newsDetailsCard'
+    cover={ <Image className='newsDetailsImage' preview={false} src={location.state?.avatar}/>}
   >
     <Meta 
     title={
-      <Title style={{whiteSpace: 'normal'}}level={2}>{location.state.title}</Title>
+      <Title className='newsDetailsTitle'>{location.state?.title}</Title>
     } description={
-      <Title level={5}>{location.state.date}</Title>
-    } />
+      <Title className='newsDetailsDescription'>{location.state?.description}</Title>
+    }></Meta>
   </Card>
   )
 }
