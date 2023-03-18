@@ -1,6 +1,7 @@
 import React from "react";
 import "../components/StartUp.scss";
 import backgroundImage from "../../../../assets/images/homebk.png";
+import { Link } from "react-router-dom";
 
 const StartUp = () => {
   return (
@@ -12,7 +13,7 @@ const StartUp = () => {
       <div className="startupContnent">
         <div>
           <p>طريقك للبحث عن مهنتك مع تدريبي... </p>
-          <button>ابدأ هنا</button>
+          <Link to="/login">ابدأ هنا</Link>
         </div>
       </div>
     </div>
