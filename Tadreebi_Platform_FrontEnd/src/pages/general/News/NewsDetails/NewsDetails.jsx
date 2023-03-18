@@ -4,6 +4,7 @@ import { Card,Image } from 'antd';
 import Title from 'antd/es/typography/Title';
 import './NewsDetails.scss'
 import { GetNewsId } from '../../../../data/API';
+import NotFound from '../../NotFound/NotFound';
 
 const { Meta } = Card;
 
@@ -13,24 +14,24 @@ const NewsDetails = ({match}) => {
 
  const {data,error ,loading} = GetNewsId(`http://localhost:8000/news/${id}`);
 
- useEffect(() => {
-  if(error){
-    navigate("/news");
-  }
- })
- 
   return (
-    <Card
-    className='newsDetailsCard'
-    cover={ <Image className='newsDetailsImage' preview={false} src={data?.avatar}/>}
-  >
-    <Meta 
-    title={
-      <Title className='newsDetailsTitle'>{data?.title}</Title>
-    } description={
-      <Title className='newsDetailsDescription'>{data?.description}</Title>
-    }></Meta>
-  </Card>
+<>
+      { error ?
+          <NotFound/> :
+          <Card
+         className='newsDetailsCard'
+         cover={ <Image className='newsDetailsImage' preview={false} src={data?.avatar}/>}
+       >
+         <Meta 
+         title={
+           <Title className='newsDetailsTitle'>{data?.title}</Title>
+         } description={
+           <Title className='newsDetailsDescription'>{data?.description}</Title>
+         }></Meta>
+       </Card>
+      }
+</>
+
   )
 }
 
