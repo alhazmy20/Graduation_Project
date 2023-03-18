@@ -41,6 +41,9 @@ body {
   .ant-pagination-prev {
     a {
       color: $Green;
+      @include breakpoint-down(small){
+        margin-left: 0.5rem;
+      }
     }
   }
   .ant-pagination-disabled {
@@ -53,6 +56,9 @@ body {
   .ant-pagination-next {
     a {
       color: $Green;
+      @include breakpoint-down(small){
+        margin-right: 0.5rem;
+      }
     }
   }
 

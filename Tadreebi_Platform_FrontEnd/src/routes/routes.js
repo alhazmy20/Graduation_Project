@@ -35,6 +35,7 @@ const institutionRoutes = (
 const studentRoutes = (
   <Route path="student">
     <Route path="profile" element={<StudentProfile />} />
+    <Route path="applications" element={<Applications />} />
   </Route>
 );
 
@@ -55,10 +56,8 @@ export const routes = createBrowserRouter(
           path="training-opportunities/1"
           element={<TrainingOpportunity />}
         />
-
         <Route path="news" element={<News />} />
         <Route path="news/:id" element={<NewsDetails />} />
-        <Route path="applications" element={<Applications />} />
         {studentRoutes}
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />
