@@ -1,78 +1,100 @@
-import { Table } from "antd";
+import { ConfigProvider, Table } from "antd";
 import "./AppTable.scss";
 import { itemRender } from "../../../components/ui/Pagination"
 import { useState } from "react";
+import { Button } from "antd";
 
 const AppTable = () => {
   
   const dataSource = [
     {
       key: "1",
-      appstat: "نشط",
-      instname: "xxxxx",
-      appname: "تدريب تعاوني - تطوير تطبيقات الويب",
-      appdate: "18/01/2023",
+      instname: "بإنتظار موافقة الطالب",
+      opp: "xxxxx",
+      date: "تدريب تعاوني - تطوير تطبيقات الويب",
+      status: "بإنتظار موافقة الطالب",
+      accept: "-",
     },
     {
       key: "2",
-      appstat: "مرفوض",
-      instname: "تدريب تعاوني - تدريب صيفي",
-      appname: "xxxx",
-      appdate: "2023",
+      instname: "بإنتظار موافقة الطالب",
+      opp: "xxxxx",
+      date: "تدريب تعاوني - تطوير تطبيقات الويب",
+      status: "مرفوض",
+      accept: "-",
     },
     {
       key: "3",
-      appstat: "تم القبول",
-      instname: "xxxxx",
-      appname: "xxxxxx",
-      appdate: "2023",
+      instname: "بإنتظار موافقة الطالب",
+      opp: "xxxxx",
+      date: "تدريب تعاوني - تطوير تطبيقات الويب",
+      status: "بإنتظار موافقة المنشأة",
+      accept: "-",
     },
     {
       key: "4",
-      appstat: "تم القبول",
-      instname: "xxxxx",
-      appname: "xxxxxx",
-      appdate: "2023",
+      instname: "بإنتظار موافقة الطالب",
+      opp: "xxxxx",
+      date: "تدريب تعاوني - تطوير تطبيقات الويب",
+      status: "مرفوض",
+      accept: "-",
     },
     {
       key: "5",
-      appstat: "تم القبول",
-      instname: "xxxxx",
-      appname: "xxxxxx",
-      appdate: "2023",
+      instname: "بإنتظار موافقة الطالب",
+      opp: "xxxxx",
+      date: "تدريب تعاوني - تطوير تطبيقات الويب",
+      status: "بإنتظار موافقة الطالب",
+      accept: "-",
     },
   ];
   
   const columns = [
     {
-      title: "تاريخ الطلب",
-      dataIndex: "appdate",
-      align: "center",
-    },
-    {
-      title: "اسم الطلب",
-      dataIndex: "appname",
-      align: "center",
-    },
-    {
-      title: "اسم الشركة",
+      title: "اسم المؤسسة",
       dataIndex: "instname",
       align: "center",
     },
     {
-      title: "حالة الطلب",
-      dataIndex: "appstat",
+      title: "الفرصة التدريبية",
+      dataIndex: "opp",
+      align: "center",
+    },
+    {
+      title: "تاريخ التقديم",
+      dataIndex: "date",
+      align: "center",
+    },
+    {
+      title: "الحالة",
+      dataIndex: "status",
       align: "center",
       render: (text) => {
         let style = {};
-        if (text === "نشط" || text === "تم القبول") {
-          style.color = "#008374B2";
+        if (text === "بإنتظار موافقة الطالب" || text === "بإنتظار موافقة المنشأة") {
+          style.color = "#F9C068";
         } else if (text === "مرفوض") {
           style.color = "red";
         }
         return <span style={style}>{text}</span>;
       },
     },
+    {
+      title:"الإجراء",
+      dataIndex: "accept",
+      align: "center",
+      render: (text,row) => {
+        let buttons = {};
+        let style = {};
+        if (row.status === "بإنتظار موافقة الطالب") {
+          buttons = <span>{<Button>قبول</Button>}{<Button>رفض</Button>}</span>
+        }
+       else if (row.status === "بإنتظار موافقة المنشأة" || row.status === "مرفوض") {
+          buttons = <span>-</span>
+        }
+        return buttons;
+      }
+    }
   ];
 
   const [pageSize, setPageSize] = useState(3);
@@ -84,6 +106,12 @@ const AppTable = () => {
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
+
+  //const ss = () => {
+   // if (dataSource.status == "بإنتظار موافقة الطالب") {
+   //   <Button>رفض</Button>
+   // }
+  //}
   
   return (
     <div className="AppTable">
