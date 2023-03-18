@@ -1,30 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
 @import "../../../index.scss";
-
-
 
 .AppTable {
   padding: 10rem;
 
   .tex {
-    color:#008374B2;
-    font-size:larger;
+    color: #008374b2;
+    font-size: larger;
     margin-bottom: 1rem;
-    font-weight:500;
+    font-weight: 500;
   }
 
-  
-thead[class*="ant-table-thead"] th{
-  background-color:#008374B2 !important;
-  text-align: center;
-  color:white !important;
-  font-size: 1rem;
-  
-}
+  thead[class*="ant-table-thead"] th {
+    background-color: #008374b2 !important;
+    text-align: center;
+    color: white !important;
+    font-size: 1rem;
+  }
 
-.ant-table {
- border-style: inset;
- border-width: 1px;
-}
-
+  .ant-table {
+    border-style: inset;
+    border-width: 1px;
+  }
+  .acc {
+    background-color: green;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .reject {
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+  }
 }

@@ -87,7 +87,7 @@ const AppTable = () => {
         let buttons = {};
         let style = {};
         if (row.status === "بإنتظار موافقة الطالب") {
-          buttons = <span>{<Button>قبول</Button>}{<Button>رفض</Button>}</span>
+          buttons = <span className="but">{<Button className="acc">قبول</Button>}{<Button className="reject">رفض</Button>}</span>
         }
        else if (row.status === "بإنتظار موافقة المنشأة" || row.status === "مرفوض") {
           buttons = <span>-</span>
@@ -106,15 +106,10 @@ const AppTable = () => {
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
-
-  //const ss = () => {
-   // if (dataSource.status == "بإنتظار موافقة الطالب") {
-   //   <Button>رفض</Button>
-   // }
-  //}
   
   return (
     <div className="AppTable">
+
       <p className="tex">
         عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length} سجل
       </p>
