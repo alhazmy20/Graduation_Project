@@ -2,6 +2,8 @@ import React from "react";
 import RegisterationMenu from "./RegisterationMenu";
 import { useNavigate } from "react-router-dom";
 import { Menu, Anchor } from "antd";
+import UserInfo from "./UserInfo";
+
 const AppMenu = ({ isInline = false }) => {
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const AppMenu = ({ isInline = false }) => {
     },
 
     {
-      label: "نبذة عنا",
+      label: <a href="#about">نبذة عنا</a>,
       key: "/#about",
     },
 
@@ -43,7 +45,8 @@ const AppMenu = ({ isInline = false }) => {
         mode={isInline ? "inline" : "horizontal"}
         items={itemsMenu}
       ></Menu>
-      <RegisterationMenu />
+
+      <UserInfo />
     </div>
   );
 };
