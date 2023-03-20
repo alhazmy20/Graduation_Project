@@ -41,21 +41,18 @@
 
 .ss {
   // width: 100%;
-   border-top: 1px solid #008374b2;
-   border-bottom: 1px solid #008374b2;
-   border-radius: 5px;
-   margin-bottom: 1rem;
-   
-     padding: 1rem;
-     .label {
-       margin: 0 3px;
-       font-weight: 500;
-     }
+  border-top: 1px solid #008374b2;
+  border-bottom: 1px solid #008374b2;
+  border-radius: 5px;
+  margin-bottom: 1rem;
 
-     .button-filter {
-       border: 0px;
-       background-color: #FAFCFF;
-       font-weight: 500;
-       font-size: 1rem;
-     }
+  padding: 1rem;
+
+  .button-filter {
+    margin: 0 3px;
+    border: 0px;
+    background-color: #fafcff;
+    font-weight: 500;
+    font-size: 1rem;
+  }
 }

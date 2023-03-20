@@ -140,31 +140,31 @@ const AppTable = () => {
       <h1 className="header">طلبات التقديم</h1>
       <div className="ss">
         <Button
-          className="label button-filter"
+          className="button-filter"
           onClick={() => handleStatusFilterChange("")}
         >
           الكل
         </Button>
         <Button
-          className="label button-filter"
+          className="button-filter"
           onClick={() => handleStatusFilterChange("بإنتظار موافقة المنشأة")}
         >
           بإنتظار موافقة المنشأة
         </Button>
         <Button
-          className="label button-filter"
+          className="button-filter"
           onClick={() => handleStatusFilterChange("بإنتظار موافقة الطالب")}
         >
           بإنتظار موافقة الطالب
         </Button>
         <Button
-          className="label button-filter"
+          className="button-filter"
           onClick={() => handleStatusFilterChange("مقبول")}
         >
           مقبول
         </Button>
         <Button
-          className="label button-filter"
+          className="button-filter"
           onClick={() => handleStatusFilterChange("مرفوض")}
         >
           مرفوض
