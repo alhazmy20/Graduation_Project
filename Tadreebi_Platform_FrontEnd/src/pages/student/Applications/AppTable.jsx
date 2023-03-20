@@ -3,13 +3,12 @@ import "./AppTable.scss";
 import { itemRender } from "../../../components/ui/Pagination";
 import { useState } from "react";
 import { Button } from "antd";
-import SmallTable from "./components/SmallTable";
 
 const AppTable = () => {
   const dataSource = [
     {
       key: "1",
-      instname: "بإنتظار موافقة الطالب",
+      instname: "xxxxx",
       opp: "xxxxx",
       date: "تدريب تعاوني - تطوير تطبيقات الويب",
       status: "بإنتظار موافقة الطالب",
@@ -17,7 +16,7 @@ const AppTable = () => {
     },
     {
       key: "2",
-      instname: "بإنتظار موافقة الطالب",
+      instname: "xxxx",
       opp: "xxxxx",
       date: "تدريب تعاوني - تطوير تطبيقات الويب",
       status: "مرفوض",
@@ -25,7 +24,7 @@ const AppTable = () => {
     },
     {
       key: "3",
-      instname: "بإنتظار موافقة الطالب",
+      instname: "xxxx",
       opp: "xxxxx",
       date: "تدريب تعاوني - تطوير تطبيقات الويب",
       status: "بإنتظار موافقة المنشأة",
@@ -33,7 +32,7 @@ const AppTable = () => {
     },
     {
       key: "4",
-      instname: "بإنتظار موافقة الطالب",
+      instname: "xxxx",
       opp: "xxxxx",
       date: "تدريب تعاوني - تطوير تطبيقات الويب",
       status: "مرفوض",
@@ -41,10 +40,18 @@ const AppTable = () => {
     },
     {
       key: "5",
-      instname: "بإنتظار موافقة الطالب",
+      instname: "xxxx",
       opp: "xxxxx",
       date: "تدريب تعاوني - تطوير تطبيقات الويب",
       status: "بإنتظار موافقة الطالب",
+      accept: "-",
+    },
+    {
+      key: "6",
+      instname: "xxxx",
+      opp: "xxxxx",
+      date: "تدريب تعاوني - تطوير تطبيقات الويب",
+      status: "مقبول",
       accept: "-",
     },
   ];
@@ -78,6 +85,8 @@ const AppTable = () => {
           style.color = "#F9C068";
         } else if (text === "مرفوض") {
           style.color = "red";
+        } else if (text === "مقبول") {
+          style.color = "#008374b2";
         }
         return <span style={style}>{text}</span>;
       },
@@ -98,7 +107,8 @@ const AppTable = () => {
           );
         } else if (
           row.status === "بإنتظار موافقة المنشأة" ||
-          row.status === "مرفوض"
+          row.status === "مرفوض" ||
+          row.status === "مقبول"
         ) {
           buttons = <span>-</span>;
         }
@@ -106,6 +116,14 @@ const AppTable = () => {
       },
     },
   ];
+
+  const [statusFilter, setStatusFilter] = useState(null);
+  const handleStatusFilterChange = (status) => {
+    setStatusFilter(status);
+  };
+  const filteredDataSource = statusFilter
+    ? dataSource.filter((application) => application.status === statusFilter)
+    : dataSource;
 
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -120,14 +138,45 @@ const AppTable = () => {
   return (
     <div className="AppTable">
       <h1 className="header">طلبات التقديم</h1>
-      <SmallTable></SmallTable>
+      <div className="ss">
+        <Button
+          className="label button-filter"
+          onClick={() => handleStatusFilterChange("")}
+        >
+          الكل
+        </Button>
+        <Button
+          className="label button-filter"
+          onClick={() => handleStatusFilterChange("بإنتظار موافقة المنشأة")}
+        >
+          بإنتظار موافقة المنشأة
+        </Button>
+        <Button
+          className="label button-filter"
+          onClick={() => handleStatusFilterChange("بإنتظار موافقة الطالب")}
+        >
+          بإنتظار موافقة الطالب
+        </Button>
+        <Button
+          className="label button-filter"
+          onClick={() => handleStatusFilterChange("مقبول")}
+        >
+          مقبول
+        </Button>
+        <Button
+          className="label button-filter"
+          onClick={() => handleStatusFilterChange("مرفوض")}
+        >
+          مرفوض
+        </Button>
+      </div>
       <p className="tex">
         عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
         سجل
       </p>
       <Table
         classname="tab"
-        dataSource={dataSource}
+        dataSource={filteredDataSource}
         columns={columns}
         pagination={{
           onChange: handlePaginationChange,
