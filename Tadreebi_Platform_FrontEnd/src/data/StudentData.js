@@ -5,9 +5,16 @@ export const UNIVERSITIES = [
   },
 ];
 
-
 export const MAJORS = [
-    {
-        id:''
-    }
-]
+  {
+    id: "",
+  },
+];
+
+export const USER = [
+  {
+    role: "student",
+    email: "a@gmail.com",
+    password: "a@dddd4484848482",
+  },
+];

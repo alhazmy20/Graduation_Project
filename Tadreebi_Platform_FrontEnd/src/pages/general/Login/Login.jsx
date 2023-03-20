@@ -1,34 +1,35 @@
 import "./Login.scss";
 import { Button, Col, Form, Input, notification, Row } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Container from "../../../layouts/Container/Container";
-import RegisterModal from '../RegisterModal/RegisterModal';
-
+import RegisterModal from "../RegisterModal/RegisterModal";
+import { AuthContext } from "../../../auth/useContext";
+import { useNavigate } from "react-router-dom";
+import { data } from "../../../data/StudentData.js";
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const history = [];
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
 
-  const onFinish = async (values) => {
-    const { email, password } = values;
+  const [err, setError] = useState(null);
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  console.log(inputs);
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
     try {
-      const { data } = await axios.post("/adminLogin", { email, password });
-
-      if (data.token) {
-        localStorage.setItem("authToken", data.token);
-        history.push("/admin/home");
-
-        return;
-      }
-
-      notification.error({
-        message: "خطأ في البيانات",
-        description: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-      });
-      console.log(data);
-    } catch (error) {
-      console.log("Opps, we got an error", error);
+      await login(inputs);
+      navigate("/");
+    } catch (err) {
+      setError(err.response.data);
     }
   };
 
@@ -43,7 +44,7 @@ const Login = () => {
           <Form
             name="basic"
             initialValues={{ remember: true }}
-            onFinish={onFinish}
+            onFinish={handleSubmit}
             onFinishFailed={onFinishFailed}
             className="form-wrapper"
             style={{ height: "fit-content" }}
@@ -56,7 +57,7 @@ const Login = () => {
                 { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
               ]}
             >
-              <Input />
+              <Input name="email" onChange={handleChange} />
             </Form.Item>
             <label className="label">كلمة المرور</label>
             <Form.Item
@@ -66,7 +67,7 @@ const Login = () => {
                 { message: "يجب أن يكون 8 احرف على الأقل", pattern: "^.{8,}$" },
               ]}
             >
-              <Input.Password />
+              <Input.Password name="password" onChange={handleChange} />
             </Form.Item>
 
             <Button type="primary" htmlType="submit" className="login-button">
@@ -74,10 +75,17 @@ const Login = () => {
             </Button>
             <span>
               ليس لديك حساب؟
-              <Button type="link" style={{ padding: "0" }} onClick={() => setIsModalOpen(true)}>
+              <Button
+                type="link"
+                style={{ padding: "0" }}
+                onClick={() => setIsModalOpen(true)}
+              >
                 حساب جديد
               </Button>
-              <RegisterModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} />
+              <RegisterModal
+                modalOpen={isModalOpen}
+                setModalOpen={setIsModalOpen}
+              />
             </span>
           </Form>
         </Col>
