@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./StudentSignup.scss";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Select } from "antd";
 import { Link } from "react-router-dom";
 import { UNIVERSITIES } from "../../../data/StudentData.js";
 import mobile_login_amico from "../../../assets/images/mobile_login_amico.png";

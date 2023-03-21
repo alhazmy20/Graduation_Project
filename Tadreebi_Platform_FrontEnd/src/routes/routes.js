@@ -4,17 +4,20 @@ import {
   Route,
 } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
-import Home from "../pages/general/Home/Home";
-import Login from "../pages/general/Login/Login";
-import NotFound from "../pages/general/NotFound/NotFound";
-import InstSignup from "../pages/institution/InstSignup/InstSignup";
-import News from "../pages/general/News/News";
-import StudentSignup from "../pages/student/StudentSignup/StudentSignup";
-import TrainingOpportunities from "../pages/general/TrainingOpportunities/TrainingOpportunities";
-import Applications from "../pages/student/Applications/AppTable";
-import NewsDetails from "../pages/general/News/NewsDetails/NewsDetails";
-import TrainingOpportunity from "../pages/general/TrainingOpportunity/TrainingOpportunity";
-import StudentProfile from "../pages/student/StudentProfile/StudentProfile";
+import {
+  Home,
+  Applications,
+  InstSignup,
+  Login,
+  News,
+  NotFound,
+  StudentProfile,
+  StudentSignup,
+  TrainingOpportunities,
+  TrainingOpportunity,
+  NewsDetails,
+} from "../pages/index";
+
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">

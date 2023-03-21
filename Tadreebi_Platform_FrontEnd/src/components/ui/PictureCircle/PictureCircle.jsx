@@ -1,7 +1,7 @@
 import React from "react";
 import "./PictureCircle.scss";
 import { PlusOutlined } from "@ant-design/icons";
-import { message, Modal, Upload } from "antd";
+import {  Modal, Upload } from "antd";
 import { useState } from "react";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-const PictureCircle = () => {
+const PictureCircle = (props) => {
   const defaultFile = {
     uid: "-1",
     name: "default.png",
@@ -48,21 +48,23 @@ const PictureCircle = () => {
       <div
         style={{
           marginTop: 8,
+          fontWeight: "500",
         }}
       >
-        Upload
+        إضافة
       </div>
     </div>
   );
 
   return (
-    <div className="picture-circle">
+    <div className={`${props.className} picture-circle`}>
       <Upload
         action="http://localhost:4000/process_insert"
         listType="picture-circle"
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
+        accept=".jpeg, .png, .jpg"
       >
         {fileList.length === 1 ? null : uploadButton}
       </Upload>
