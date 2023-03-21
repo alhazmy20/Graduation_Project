@@ -9,7 +9,7 @@ export const AuthContexProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.post("/auth/login", inputs);
+    const res = await axios.post("/login", inputs);
     setCurrentUser(res.data);
     console.log(res.data);
   };
@@ -18,8 +18,6 @@ export const AuthContexProvider = ({ children }) => {
     await axios.post("/auth/logout");
     setCurrentUser(null);
   };
-
-    
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));

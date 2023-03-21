@@ -6,32 +6,60 @@ import Container from "../../../layouts/Container/Container";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { AuthContext } from "../../../auth/useContext";
 import { useNavigate } from "react-router-dom";
-import { data } from "../../../data/StudentData.js";
+import { UserRole } from "../../../data/API.js";
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
 
-  const [err, setError] = useState(null);
+  const [err, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  console.log(inputs);
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
     try {
-      await login(inputs);
-      navigate("/");
+      const userRole = await UserRole("/api/user/role", inputs.email);
+
+      if (userRole === "student") {
+        await login(inputs);
+        navigate("/TrainingOpportunities");
+      } else if (userRole === "institution") {
+        await login(inputs);
+        navigate("/institution/");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
-      setError(err.response.data);
+      setError(err);
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   const test = {
+  //     email: "a@giml.com",
+  //     password: "aosejnfoiejaomcojasoiejfj",
+  //   };
+
+  //   try {
+  //     // console.log(inputs);
+  //     // await login(inputs);
+  //     if (
+  //       test.email === "a@giml.com" &&
+  //       test.password === "aosejnfoiejaomcojasoiejfj"
+  //     ) {
+  //       navigate("/");
+  //     }
+  //   } catch (err) {
+  //     setError(err);
+  //   }
+  // };
 
   const onFinishFailed = (error) => {
     console.log("error", error);
