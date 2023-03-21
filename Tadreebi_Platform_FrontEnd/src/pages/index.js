@@ -13,7 +13,7 @@ import VerifyAccount from "./general/VerifyAccount/VerifyAccount";
 import InstSignup from "./institution/InstSignup/InstSignup";
 
 // Imports from student folder
-import Applications from "./student/Applications/AppTable";
+import Applications from "./student/Applications/Application";
 import StudentProfile from "./student/StudentProfile/StudentProfile";
 import StudentSignup from "./student/StudentSignup/StudentSignup";
 
