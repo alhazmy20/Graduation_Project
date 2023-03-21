@@ -1,5 +1,5 @@
-import { ConfigProvider, Table } from "antd";
-import "./AppTable.scss";
+import {Table } from "antd";
+import "./Application.scss";
 import { itemRender } from "../../../components/ui/Pagination";
 import { useState } from "react";
 import { Button } from "antd";
@@ -100,9 +100,9 @@ const AppTable = () => {
         let style = {};
         if (row.status === "بإنتظار موافقة الطالب") {
           buttons = (
-            <span>
-              {<Button className="acc">قبول</Button>}
-              {<Button className="reject">رفض</Button>}
+            <span className="btnContainer">
+              {<Button className="acceptBtn">قبول</Button>}
+              {<Button className="rejectBtn">رفض</Button>}
             </span>
           );
         } else if (
@@ -136,9 +136,9 @@ const AppTable = () => {
   };
 
   return (
-    <div className="AppTable">
-      <h1 className="header">طلبات التقديم</h1>
-      <div className="ss">
+    <div className="tableContainer">
+      <h1 className="Header">طلبات التقديم</h1>
+      <div className="filterTable">
         <Button
           className="button-filter"
           onClick={() => handleStatusFilterChange("")}
@@ -170,12 +170,12 @@ const AppTable = () => {
           مرفوض
         </Button>
       </div>
-      <p className="tex">
+      <p className="rangeText">
         عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
         سجل
       </p>
       <Table
-        classname="tab"
+        classname="Table"
         dataSource={filteredDataSource}
         columns={columns}
         pagination={{
