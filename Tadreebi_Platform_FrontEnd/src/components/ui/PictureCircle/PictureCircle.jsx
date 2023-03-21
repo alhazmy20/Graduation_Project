@@ -1,7 +1,7 @@
 import React from "react";
 import "./PictureCircle.scss";
 import { PlusOutlined } from "@ant-design/icons";
-import { Modal, Upload } from "antd";
+import { message, Modal, Upload } from "antd";
 import { useState } from "react";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -16,14 +16,14 @@ const PictureCircle = () => {
     uid: "-1",
     name: "default.png",
     status: "done",
-    url: 'https://www9.0zz0.com/2023/03/20/12/248010883.jpg'
+    url: "https://www14.0zz0.com/2023/03/21/05/888604514.png",
   };
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([defaultFile]);
   const handleCancel = () => setPreviewOpen(false);
-  
+
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -34,7 +34,14 @@ const PictureCircle = () => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  const handleChange = ({ fileList: newFileList}) => {setFileList(newFileList); };;
+
+  const handleChange = ({ fileList: newFileList }) => {
+    if (newFileList.length > 0 && newFileList[0].status === "uploading") {
+      newFileList[0].status = "done";
+    }
+    setFileList(newFileList);
+  };
+
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -48,7 +55,6 @@ const PictureCircle = () => {
     </div>
   );
 
-
   return (
     <div className="picture-circle">
       <Upload
@@ -57,7 +63,6 @@ const PictureCircle = () => {
         fileList={fileList}
         onPreview={handlePreview}
         onChange={handleChange}
-        def
       >
         {fileList.length === 1 ? null : uploadButton}
       </Upload>
@@ -68,7 +73,7 @@ const PictureCircle = () => {
         onCancel={handleCancel}
       >
         <img
-          alt="example"
+          alt="صورة العرض"
           style={{
             width: "100%",
           }}

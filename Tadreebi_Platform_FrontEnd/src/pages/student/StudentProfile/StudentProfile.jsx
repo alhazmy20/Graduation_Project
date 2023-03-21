@@ -1,4 +1,4 @@
-import { Button, Card, Col, Form, Row, Space } from "antd";
+import { Button, Card, Col, Form, message, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import FormInput from "../../../components/form/FormInput";
 import InputFile from "../../../components/form/InputFile";
@@ -28,7 +28,7 @@ const StudentProfile = () => {
       ...prevState,
       ...allValues,
     }));
-    setDisabledButton((Object.values(allValues).every((value) => !value)))
+    setDisabledButton(Object.values(allValues).every((value) => !value));
   };
 
   const onFinish = async (values) => {
@@ -47,20 +47,13 @@ const StudentProfile = () => {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    console.log(data);
   };
 
-  useEffect(
-    (e) => {
-      console.log(data);
-    },
-    [data]
-  );
 
   return (
     <div className="student-profile">
       <div className="profileImage">
-        <PictureCircle />
+        <PictureCircle  />
         <span className="name">يزيد العلوي</span>
       </div>
       <Card className="card">
@@ -89,10 +82,7 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="nationalId"
               />
-              <InputFile
-                label="السيرة الذاتية"
-                name="cv"
-              />
+              <InputFile label="السيرة الذاتية" name="cv" />
             </Col>
             <Col xs={24} sm={12}>
               <FormInput
@@ -118,21 +108,20 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="university"
               />
-              <Space>
-                <FormInput
-                  label="المعدل التراكمي"
-                  labelCol={{ span: 24 }}
-                  name="gpa"
-                  // remove the style property
-                />
-                <FormInput
-                  label="من"
-                  labelCol={{ span: 24 }}
-                  name="gpaType"
-                  // add the style property to make it take 50% of the width
-                  style={{ width: "50%" }}
-                />
-              </Space>
+               <div style={{display:'flex', gap:'10px'}}>
+               <FormInput
+               label="المعدل التراكمي"
+               labelCol={{ span: 24 }}
+               name="gpa"
+               style={{flex:'1'}}
+             />
+             <FormInput
+               label="من"
+               labelCol={{ span: 24 }}
+               name="gpaType"
+               style={{flex:'1'}}
+             />
+               </div>
               <InputFile name="internshipLetter" label="خطاب التدريب" />
             </Col>
             <Col xs={24} sm={12}>
@@ -141,7 +130,12 @@ const StudentProfile = () => {
               <InputFile name="collegeTranscript" label="السجل الأكاديمي" />
             </Col>
           </Row>
-          <Button type="primary" htmlType="submit" className="save-button" disabled={disabledButton}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="save-button"
+            disabled={disabledButton}
+          >
             حفظ
           </Button>
         </Form>

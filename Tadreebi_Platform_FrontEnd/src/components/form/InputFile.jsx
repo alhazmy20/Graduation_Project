@@ -1,5 +1,5 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message, Upload } from "antd";
+import { Button, Form, Upload } from "antd";
 import { useState } from "react";
 
 const InputFile = (props) => {
