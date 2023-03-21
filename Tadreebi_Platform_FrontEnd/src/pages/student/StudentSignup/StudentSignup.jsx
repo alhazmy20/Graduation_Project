@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "./StudentSignup.scss";
 import { Button, Form, Select } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UNIVERSITIES } from "../../../data/StudentData.js";
 import mobile_login_amico from "../../../assets/images/mobile_login_amico.png";
 import FormInput from "../../../components/form/FormInput";
 import FormSelect from "../../../components/form/FormSelect";
 
 const StudentSignup = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,6 +27,7 @@ const StudentSignup = () => {
 
   const onFinish = (values) => {
     console.log(formData);
+    navigate('/verify-account')
   };
 
   return (

@@ -3,9 +3,11 @@ import StepOne from "./components/StepOne";
 import StepTwo from "./components/StepTwo";
 import "./InstSignup.scss";
 import { Steps, Card, Form, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const InstSignup = () => {
+
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -43,6 +45,7 @@ const InstSignup = () => {
 
   const onFinish = (values) => {
     console.log(formData);
+    navigate('/verify-account')
   };
 
   const isStepDisabled = (stepNumber) => {

@@ -1,0 +1,56 @@
+@import "../../../index.scss";
+
+.verify-account {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+  height: 100vh; /* set the height of the parent element to full viewport height */
+
+  .card {
+    width: 900px;
+    height: fit-content;
+    margin: 1rem;
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      text-align: center;
+
+      .message {
+        font-weight: 500px;
+        font-size: 25px;
+      }
+
+      .line {
+        margin: auto;
+        display: block;
+        background-color: #dfdfdfab;
+        width: 70%;
+        height: 1px;
+      }
+
+      .content {
+        font-size: 18px;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        padding-bottom: 1em;
+        color: #333;
+      }
+
+      .link-to-home {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+
+        .icon,
+        .link {
+          color: $steelTeal;
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

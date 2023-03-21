@@ -16,6 +16,7 @@ import {
   TrainingOpportunities,
   TrainingOpportunity,
   NewsDetails,
+  VerifyAccount,
 } from "../pages/index";
 
 //Institution Routes
@@ -70,6 +71,7 @@ export const routes = createBrowserRouter(
 
       <Route path="institution/signup" element={<InstSignup />} />
       <Route path="student/signup" element={<StudentSignup />} />
+      <Route path="verify-account" element={<VerifyAccount />} />
       <Route path="login" element={<Login />} />
       <Route path="admin/login" element={<h1>Login for admin</h1>} />
     </Route>
