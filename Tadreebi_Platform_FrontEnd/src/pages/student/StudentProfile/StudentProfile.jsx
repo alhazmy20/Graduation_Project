@@ -95,7 +95,11 @@ const StudentProfile = () => {
                 //NOTE Edit this
                 value='1107474545'
               />
-              <InputFile label="السيرة الذاتية" name="cv" />
+              <FormInput
+              label="رقم الجوال"
+              labelCol={{ span: 24 }}
+              name="phone"
+            />
             </Col>
             <Col xs={24} sm={12}>
               <FormInput
@@ -107,11 +111,7 @@ const StudentProfile = () => {
                 value='ذكر'
               />
 
-              <FormInput
-                label="رقم الجوال"
-                labelCol={{ span: 24 }}
-                name="phone"
-              />
+              <InputFile label="السيرة الذاتية" name="cv" />
               <InputFile name="nationalIdentity" label="الهوية الوطنية" />
             </Col>
           </Row>
@@ -123,6 +123,7 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="university"
               />
+              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" />
               <Space >
                 <FormInput
                   label="المعدل التراكمي"
@@ -138,10 +139,9 @@ const StudentProfile = () => {
                   value='5'
                 />
               </Space>
-              <InputFile name="internshipLetter" label="خطاب التدريب" />
             </Col>
             <Col xs={24} sm={12}>
-              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" />
+            <InputFile name="internshipLetter" label="خطاب التدريب" />
 
               <InputFile name="collegeTranscript" label="السجل الأكاديمي" />
             </Col>

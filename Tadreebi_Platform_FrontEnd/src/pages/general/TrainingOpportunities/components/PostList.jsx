@@ -1,7 +1,7 @@
 import React from "react";
 import { List } from "antd";
-import { itemRender } from "./Pagination.js";
-import PostCard from "./PostCard/PostCard.jsx";
+import { itemRender } from "../../../../components/ui/Pagination.js";
+import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 
 const PostList = (props) => {
   const { data } = props;

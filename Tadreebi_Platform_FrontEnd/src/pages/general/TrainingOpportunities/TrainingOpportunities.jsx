@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
 import { data } from "../../../data/TestData.js";
-import PostList from "../../../components/ui/PostList.jsx";
+import PostList from "./components/PostList.jsx";
 
 const TrainingOpportunities = () => {
   const [cities, setCities] = useState();
