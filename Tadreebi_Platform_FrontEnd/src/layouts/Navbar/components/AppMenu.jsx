@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import RegisterationMenu from "./RegisterationMenu";
 import { useNavigate } from "react-router-dom";
-import { Menu, Anchor } from "antd";
+import { Menu } from "antd";
 import UserInfo from "./UserInfo";
+import { AuthContext } from "../../../auth/useContext.js";
 
 const AppMenu = ({ isInline = false }) => {
+  const { currentUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const itemsMenu = [
@@ -46,7 +49,7 @@ const AppMenu = ({ isInline = false }) => {
         items={itemsMenu}
       ></Menu>
 
-      <UserInfo />
+      {currentUser ? <UserInfo /> : <RegisterationMenu />}
     </div>
   );
 };

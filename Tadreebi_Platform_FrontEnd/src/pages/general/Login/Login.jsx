@@ -1,6 +1,5 @@
 import "./Login.scss";
-import { Button, Col, Form, Input, notification, Row } from "antd";
-import axios from "axios";
+import { Button, Col, Form, Input, Row } from "antd";
 import React, { useContext, useState } from "react";
 import Container from "../../../layouts/Container/Container";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -23,43 +22,44 @@ const Login = () => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      const userRole = await UserRole("/api/user/role", inputs.email);
-
-      if (userRole === "student") {
-        await login(inputs);
-        navigate("/TrainingOpportunities");
-      } else if (userRole === "institution") {
-        await login(inputs);
-        navigate("/institution/");
-      } else {
-        navigate("/");
-      }
-    } catch (err) {
-      setError(err);
-    }
-  };
-
   // const handleSubmit = async (e) => {
-  //   const test = {
-  //     email: "a@giml.com",
-  //     password: "aosejnfoiejaomcojasoiejfj",
-  //   };
-
   //   try {
-  //     // console.log(inputs);
-  //     // await login(inputs);
-  //     if (
-  //       test.email === "a@giml.com" &&
-  //       test.password === "aosejnfoiejaomcojasoiejfj"
-  //     ) {
+  //     const userRole = await UserRole("/api/user/role", inputs.email);
+
+  //     if (userRole === "student") {
+  //       await login(inputs);
+  //       navigate("/TrainingOpportunities");
+  //     } else if (userRole === "institution") {
+  //       await login(inputs);
+  //       navigate("/institution/");
+  //     } else {
   //       navigate("/");
   //     }
   //   } catch (err) {
   //     setError(err);
   //   }
   // };
+
+  const handleSubmit = async (e) => {
+    const test = {
+      username: "AAAAAA",
+      email: "a@giml.com",
+      password: "aosejnfoiejaomcojasoiejfj",
+    };
+
+    try {
+      // console.log(inputs);
+      await login(test);
+      if (
+        test.email === "a@giml.com" &&
+        test.password === "aosejnfoiejaomcojasoiejfj"
+      ) {
+        navigate("/");
+      }
+    } catch (err) {
+      setError(err);
+    }
+  };
 
   const onFinishFailed = (error) => {
     console.log("error", error);
