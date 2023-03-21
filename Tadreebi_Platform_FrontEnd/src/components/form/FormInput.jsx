@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input } from "antd";
 
 const FormInput = (props) => {
-  const { inputType, placeholder, label, ...others } = props;
+  const { inputType, placeholder, label, onChange,value, ...others } = props;
   return (
     <>
       <label
@@ -19,8 +19,9 @@ const FormInput = (props) => {
         {inputType === "password" ? (
           <Input.Password placeholder={placeholder} />
         ) : (
-          <Input placeholder={placeholder} />
+          <Input placeholder={placeholder} type={inputType} onChange={onChange} defaultValue={value} />
         )}
+        
       </Form.Item>
     </>
   );

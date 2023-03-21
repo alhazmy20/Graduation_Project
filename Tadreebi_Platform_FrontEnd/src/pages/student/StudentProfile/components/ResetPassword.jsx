@@ -28,7 +28,7 @@ const ResetPassword = () => {
       message: "يجب أن لا يقل عن 8 أحرف، حرف كبير و حرف صغير و رقم",
       pattern: "^(?=.*[A-Z])(?=.*\\d).{8,}$",
     },
-  ]
+  ];
 
   return (
     <div className="reset-password">
@@ -43,15 +43,15 @@ const ResetPassword = () => {
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={12}>
               <FormInput
-                label="كلمة السر الحالية"
-                inputType="password"
-                name="currentPassword"
-                rules={rules}
-              />
-              <FormInput
                 label="كلمة السر الجديدة"
                 inputType="password"
                 name="newPassword"
+                rules={rules}
+              />
+              <FormInput
+                label="كلمة السر الحالية"
+                inputType="password"
+                name="currentPassword"
                 rules={rules}
               />
             </Col>
