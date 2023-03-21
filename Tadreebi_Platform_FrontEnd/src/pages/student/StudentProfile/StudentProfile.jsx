@@ -8,6 +8,7 @@ import "./StudentProfile.scss";
 
 const StudentProfile = () => {
   const formData = new FormData();
+
   const [disabledButton, setDisabledButton] = useState(true);
   const [data, setData] = useState({
     fullName: "",
@@ -28,8 +29,15 @@ const StudentProfile = () => {
       ...prevState,
       ...allValues,
     }));
-    setDisabledButton(Object.values(allValues).every((value) => !value));
+    setDisabledButton((Object.values(allValues).every((value) => !value)))
   };
+
+  useEffect(
+    (e) => {
+      console.log(data);
+    },
+    [data]
+  );
 
   const onFinish = async (values) => {
     formData.append("FullName", values.fullName);
@@ -49,11 +57,10 @@ const StudentProfile = () => {
     }
   };
 
-
   return (
     <div className="student-profile">
       <div className="profileImage">
-        <PictureCircle  />
+        <PictureCircle />
         <span className="name">يزيد العلوي</span>
       </div>
       <Card className="card">
@@ -71,6 +78,9 @@ const StudentProfile = () => {
                 label="الإسم الرباعي"
                 labelCol={{ span: 24 }}
                 name="fullName"
+                disabled={true}
+                //NOTE Edit this
+                value='يزيد سعد نفاع العلوي'
               />
               <FormInput
                 label="البريد الإلكتروني"
@@ -81,6 +91,9 @@ const StudentProfile = () => {
                 label="رقم الهوية"
                 labelCol={{ span: 24 }}
                 name="nationalId"
+                disabled={true}
+                //NOTE Edit this
+                value='1107474545'
               />
               <InputFile label="السيرة الذاتية" name="cv" />
             </Col>
@@ -89,7 +102,9 @@ const StudentProfile = () => {
                 label="الجنس"
                 labelCol={{ span: 24 }}
                 name="gender"
-                value={data.gender}
+                disabled={true}
+                //NOTE Edit this
+                value='ذكر'
               />
 
               <FormInput
@@ -108,20 +123,21 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="university"
               />
-               <div style={{display:'flex', gap:'10px'}}>
-               <FormInput
-               label="المعدل التراكمي"
-               labelCol={{ span: 24 }}
-               name="gpa"
-               style={{flex:'1'}}
-             />
-             <FormInput
-               label="من"
-               labelCol={{ span: 24 }}
-               name="gpaType"
-               style={{flex:'1'}}
-             />
-               </div>
+              <Space >
+                <FormInput
+                  label="المعدل التراكمي"
+                  labelCol={{ span: 24 }}
+                  name="gpa"
+                />
+                <FormInput
+                  label="من"
+                  labelCol={{ span: 24 }}
+                  name="gpaType"
+                  disabled={true}
+                  //NOTE Edit this
+                  value='5'
+                />
+              </Space>
               <InputFile name="internshipLetter" label="خطاب التدريب" />
             </Col>
             <Col xs={24} sm={12}>
