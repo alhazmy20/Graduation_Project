@@ -1,5 +1,5 @@
-import React , {useEffect}from 'react'
-import {useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import {useParams } from 'react-router-dom'
 import { Card,Image } from 'antd';
 import Title from 'antd/es/typography/Title';
 import './NewsDetails.scss'
@@ -8,16 +8,15 @@ import NotFound from '../../NotFound/NotFound';
 
 const { Meta } = Card;
 
-const NewsDetails = ({match}) => {
+const NewsDetails = () => {
   const {id} = useParams();
- const navigate = useNavigate();
 
  const {data,error ,loading} = GetNewsId(`http://localhost:8000/news/${id}`);
-
+ 
+if(error){
+  return <NotFound/>
+} else
   return (
-<>
-      { error ?
-          <NotFound/> :
           <Card
          className='newsDetailsCard'
          cover={ <Image className='newsDetailsImage' preview={false} src={data?.avatar}/>}
@@ -29,9 +28,6 @@ const NewsDetails = ({match}) => {
            <Title className='newsDetailsDescription'>{data?.description}</Title>
          }></Meta>
        </Card>
-      }
-</>
-
   )
 }
 

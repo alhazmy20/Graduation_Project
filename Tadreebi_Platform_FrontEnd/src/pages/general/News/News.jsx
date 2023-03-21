@@ -1,7 +1,6 @@
 import React from 'react'
 import {Button, Card, Image, List} from "antd";
 import Title from "antd/es/typography/Title";
-import instPng from "../../../assets/images/image14.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss"
