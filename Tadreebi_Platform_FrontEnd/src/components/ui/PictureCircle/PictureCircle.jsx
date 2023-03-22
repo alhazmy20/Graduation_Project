@@ -1,7 +1,7 @@
 import React from "react";
 import "./PictureCircle.scss";
 import { PlusOutlined } from "@ant-design/icons";
-import {  Modal, Upload } from "antd";
+import {  message, Modal, Upload } from "antd";
 import { useState } from "react";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -35,12 +35,28 @@ const PictureCircle = (props) => {
     );
   };
 
-  const handleChange = ({ fileList: newFileList }) => {
-    if (newFileList.length > 0 && newFileList[0].status === "uploading") {
-      newFileList[0].status = "done";
+  // const handleChange = ({ fileList: newFileList }) => {
+  //   if (newFileList.length > 0 && newFileList[0].status === "uploading") {
+  //     newFileList[0].status = "done";
+  //   }
+  //   setFileList(newFileList);
+  // };
+
+  const [messageShown, setMessageShown] = useState(false);
+
+const handleChange = ({ fileList: newFileList }) => {
+  if (newFileList.length > 0 && newFileList[0].status === "uploading") {
+    newFileList[0].status = "done"
+    if (!messageShown) {
+      message.success('تم تحديث الصورة الشخصية بنجاح');
+      setMessageShown(true);
     }
-    setFileList(newFileList);
-  };
+  } else {
+    setMessageShown(false);
+  }
+  setFileList(newFileList);
+};
+
 
   const uploadButton = (
     <div>
