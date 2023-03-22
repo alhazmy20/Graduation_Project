@@ -5,7 +5,7 @@ import { Dropdown, Space } from "antd";
 import { AuthContext } from "../../../auth/useContext.js";
 
 const UserInfo = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
 
   const items = [
     {
@@ -18,7 +18,7 @@ const UserInfo = () => {
     },
     {
       key: "3",
-      label: <Link>تسجيل الخروج</Link>,
+      label: <Link onClick={logout}>تسجيل الخروج</Link>,
     },
   ];
   return (

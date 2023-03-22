@@ -1,9 +1,9 @@
 import React from "react";
 import "./NewestPost.scss";
 import { List } from "antd";
-import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 import { data } from "../../../../data/TestData.js";
+import { Link } from "react-router-dom";
 
 const NewestPost = () => {
   return (
@@ -21,23 +21,20 @@ const NewestPost = () => {
             xl: 3,
             xxl: 4,
           }}
-          pagination={{
-            onChange: (page) => {
-              console.log(page);
-            },
-            responsive: true,
-            position: "bottom",
-            itemRender: itemRender,
-            align: "center",
-            pageSize: 3,
-          }}
-          dataSource={data}
+          dataSource={data.filter((element, index) => {
+            return index < 3;
+          })}
           renderItem={(item) => (
             <List.Item style={{ padding: "30px" }}>
               <PostCard item={item} />
             </List.Item>
           )}
         />
+        <div>
+          <Link to="/training-opportunities" className="ReadMore">
+            عرض المزيد
+          </Link>
+        </div>
       </div>
     </div>
   );
