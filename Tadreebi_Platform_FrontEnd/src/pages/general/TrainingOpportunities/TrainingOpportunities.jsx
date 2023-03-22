@@ -2,14 +2,19 @@ import { Button, Form, Select } from "antd";
 import React, { useState } from "react";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
-import { data } from "../../../data/TestData.js";
+import {GetAllNews} from '../../../data/API';
 import PostList from "./components/PostList.jsx";
+import { useNavigate } from 'react-router-dom';
+
 
 const TrainingOpportunities = () => {
   const [cities, setCities] = useState();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMajor, setSelectedMajor] = useState("");
+
+  const navigate = useNavigate();
+  const {data} = GetAllNews("http://localhost:8000/posts");
 
   const [form] = Form.useForm();
 

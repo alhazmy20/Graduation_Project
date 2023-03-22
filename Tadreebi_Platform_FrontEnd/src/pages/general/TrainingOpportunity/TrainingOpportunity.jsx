@@ -1,20 +1,20 @@
-import { Button, DatePicker, Image, Space } from "antd";
+import { Button, Image, Space } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import linkedin from "../../../assets/images/image14.png";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import "./TrainingOpportunity.scss";
-import { PostDetailsData } from "../../../data/TestData.js"; //NOTE This is for testing purposes only. You should remove it after you retrieve the data from the API.
-import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
+import { GetNewsId } from '../../../data/API';
 
 const TrainingOpportunity = () => {
-  const { title, description, ...data } = PostDetailsData[0];
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
+
+  const {id} = useParams();
+  const {data,error ,loading} = GetNewsId(`http://localhost:8000/posts/${id}`);
+
+
   return (
     <div className="training-opportunity">
-      <h1>{title}</h1>
+      <h1>{data.title}</h1>
       <Space wrap size={5}>
         <div>
           <Image
@@ -31,10 +31,9 @@ const TrainingOpportunity = () => {
           <Link to="/">سدايا</Link>
         </div>
       </Space>
-      <p>{description}</p>
+      <p>{data.description}</p>
       <PostDetailsTable data={data} />
       <Button type="primary">تقديم</Button>
-      <DatePicker onChange={onChange} />
     </div>
   );
 };

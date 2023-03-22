@@ -56,7 +56,7 @@ export const routes = createBrowserRouter(
           element={<TrainingOpportunities />}
         />
         <Route
-          path="training-opportunities/1"
+          path="training-opportunities/:id"
           element={<TrainingOpportunity />}
         />
         <Route path="news" element={<News />} />

@@ -3,9 +3,13 @@ import { Button, Card, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCity } from "@fortawesome/free-solid-svg-icons";
 import "./PostCard.scss";
+import { useNavigate } from 'react-router-dom';
 
 const PostCard = (props) => {
+
   const { item } = props;
+  const navigate = useNavigate();
+
   return (
     <Card
       title={<h2 className="card-title">{item.title}</h2>}
@@ -41,7 +45,7 @@ const PostCard = (props) => {
             <span className="data">{item.title}</span>
           </div>
         </div>
-        <Button type="primary" className="more-detail-btn">
+        <Button type="primary" className="more-detail-btn" onClick={() => {navigate(`/training-opportunities/${item.id}`);}}>
           عرض التفاصيل
         </Button>
       </Space>
