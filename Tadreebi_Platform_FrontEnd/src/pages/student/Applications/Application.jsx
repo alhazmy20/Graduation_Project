@@ -1,10 +1,10 @@
-import {Table } from "antd";
+
 import "./Application.scss";
-import { itemRender } from "../../../components/ui/Pagination";
 import { useState } from "react";
 import { Button } from "antd";
+import Table from "../../../components/ui/Table/Table";
 
-const AppTable = () => {
+const Application = () => {
   const dataSource = [
     {
       key: "1",
@@ -105,13 +105,8 @@ const AppTable = () => {
               {<Button className="rejectBtn">رفض</Button>}
             </span>
           );
-        } else if (
-          row.status === "بإنتظار موافقة المنشأة" ||
-          row.status === "مرفوض" ||
-          row.status === "مقبول"
-        ) {
+        } else
           buttons = <span>-</span>;
-        }
         return buttons;
       },
     },
@@ -174,20 +169,9 @@ const AppTable = () => {
         عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
         سجل
       </p>
-      <Table
-        classname="Table"
-        dataSource={filteredDataSource}
-        columns={columns}
-        pagination={{
-          onChange: handlePaginationChange,
-          responsive: true,
-          itemRender: itemRender,
-          pageSize: pageSize,
-          position: ["bottomLeft"],
-        }}
-      />
+      <Table col={columns} data={filteredDataSource} filter={statusFilter} Size={pageSize} handleChange={handlePaginationChange}/>
     </div>
   );
 };
 
-export default AppTable;
+export default Application;

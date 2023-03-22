@@ -52,41 +52,6 @@
   }
 
 
-  .ant-table {
-    border: 0.847884px solid #CCCCCC;
-    .ant-table-container {
-      .ant-table-content {
-        table {
-          .ant-table-thead {
-            tr {
-              .ant-table-cell {
-                background-color: #008374 !important;
-                text-align: center;
-                opacity: 70%;
-                color: white !important;
-                font-size: 1rem;
-
-                @include breakpoint-down(small){
-                  padding: 0;
-                }
-              }
-            }
-          }
-
-          .ant-table-thead, .ant-table-tbody{
-            tr{
-              .ant-table-cell{
-                @include breakpoint-down(small){
-                  padding: 0;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
   .btnContainer{
     .acceptBtn {
       background-color: #01AD7E;

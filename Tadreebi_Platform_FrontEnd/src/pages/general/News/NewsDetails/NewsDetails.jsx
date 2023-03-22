@@ -11,8 +11,8 @@ const { Meta } = Card;
 const NewsDetails = () => {
   const {id} = useParams();
 
- const {data,error ,loading} = GetNewsId(`http://localhost:8000/news/${id}`);
- 
+ const {data,error} = GetNewsId(`http://localhost:8000/news/${id}`);
+
 if(error){
   return <NotFound/>
 } else

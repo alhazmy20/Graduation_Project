@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+@import "../../../index.scss";
+
+.ant-table {
+    border: 0.847884px solid #CCCCCC;
+    .ant-table-container {
+      .ant-table-content {
+        table {
+          .ant-table-thead {
+            tr {
+              .ant-table-cell {
+                background-color: #008374 !important;
+                text-align: center;
+                opacity: 70%;
+                color: white !important;
+                font-size: 1rem;
+
+                @include breakpoint-down(small){
+                  padding: 0;
+                }
+              }
+            }
+          }
+
+          .ant-table-thead, .ant-table-tbody{
+            tr{
+              .ant-table-cell{
+                @include breakpoint-down(small){
+                  padding: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
