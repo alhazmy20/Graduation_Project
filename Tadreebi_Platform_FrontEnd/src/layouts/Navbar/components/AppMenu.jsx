@@ -21,6 +21,10 @@ const AppMenu = ({ isInline = false }) => {
       label: "فرص التدريب",
       key: "فرص التدريب",
     },
+    {
+      label: "شركائنا",
+      key: "/InstitutionInfo",
+    },
 
     {
       label: "اخبار التدريب",

@@ -37,20 +37,24 @@ export function GetNewsId(url) {
   return { data, loading, error };
 }
 
-export const UserRole = (url , email) => {
-  const [userRole, setUserRole] = useState("");
+export const UserRole = (url) => {
+  const [userRole, setUserRole] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch user role data from API using Axios
+    setLoading(true);
     axios
-      .get(url+"/"+email)
+      .get(url)
       .then((response) => {
-        setUserRole(response.data.role);
+        setUserRole(response.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }, []);
-
-  return userRole;
+  }, [url]);
+  return { userRole, loading, error };
 };

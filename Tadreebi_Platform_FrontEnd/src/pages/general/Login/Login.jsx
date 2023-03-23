@@ -5,61 +5,51 @@ import Container from "../../../layouts/Container/Container";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { AuthContext } from "../../../auth/useContext";
 import { useNavigate } from "react-router-dom";
-import { UserRole } from "../../../data/API.js";
+import { UserRole, GetAllNews } from "../../../data/API.js";
+import { useParams } from "react-router-dom";
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
-
   const [err, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
-
+  const { email } = useParams();
+  const { userRole, error } = UserRole(`http://localhost:8000/users`);
+  console.log(userRole.map((data) => data.email));
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleSubmit = async (e) => {
+    // try {
+    //   if (userRole === "student") {
+    //     await login(inputs);
+    //     navigate("/TrainingOpportunities");
+    //   } else if (userRole === "institution") {
+    //     await login(inputs);
+    //     navigate("/institution/");
+    //   } else {
+    //     navigate("/");
+    //   }
+    // } catch (err) {
+    //   setError(err);
+    // }
+
+    navigate(`/login/${inputs.email}`);
+  };
+
   // const handleSubmit = async (e) => {
   //   try {
-  //     const userRole = await UserRole("/api/user/role", inputs.email);
-
-  //     if (userRole === "student") {
-  //       await login(inputs);
-  //       navigate("/TrainingOpportunities");
-  //     } else if (userRole === "institution") {
-  //       await login(inputs);
-  //       navigate("/institution/");
-  //     } else {
-  //       navigate("/");
-  //     }
+  //     console.log(inputs);
+  //     await login(inputs);
+  //     navigate("/");
   //   } catch (err) {
   //     setError(err);
   //   }
   // };
-
-  const handleSubmit = async (e) => {
-    const test = {
-      username: "AAAAAA",
-      email: "a@giml.com",
-      password: "aosejnfoiejaomcojasoiejfj",
-    };
-
-    try {
-      // console.log(inputs);
-      await login(test);
-      if (
-        test.email === "a@giml.com" &&
-        test.password === "aosejnfoiejaomcojasoiejfj"
-      ) {
-        navigate("/");
-      }
-    } catch (err) {
-      setError(err);
-    }
-  };
 
   const onFinishFailed = (error) => {
     console.log("error", error);
