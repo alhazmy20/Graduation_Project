@@ -4,10 +4,11 @@ import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 
 const PostList = (props) => {
-  const { data } = props;
+  const { data, loading } = props;
 
   return (
-    <List
+    <>
+  { loading && <List
       className="post-list"
       grid={{
         gutter: 16,
@@ -35,7 +36,8 @@ const PostList = (props) => {
           <PostCard item={item} />
         </List.Item>
       )}
-    />
+    />}
+    </>
   );
 };
 

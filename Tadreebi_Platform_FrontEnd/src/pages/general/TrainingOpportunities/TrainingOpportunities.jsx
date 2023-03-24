@@ -11,7 +11,7 @@ const TrainingOpportunities = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMajor, setSelectedMajor] = useState("");
-  const {data} = GetAllNews("http://localhost:8000/posts");
+  const {data, loading} = GetAllNews("http://localhost:8000/posts");
 
   const filteredData = useMemo(() => {
     if (selectedRegion === "كل المناطق") {
@@ -117,7 +117,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        <PostList data={filteredData} />
+        <PostList data={filteredData} loading={loading}/>
       </main>
     </div>
   );
