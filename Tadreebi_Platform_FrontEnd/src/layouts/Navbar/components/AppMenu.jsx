@@ -19,7 +19,7 @@ const AppMenu = ({ isInline = false }) => {
 
     {
       label: "فرص التدريب",
-      key: "فرص التدريب",
+      key: "/training-opportunities",
     },
 
     {

@@ -1,12 +1,16 @@
 import React from "react";
 import { Button, Card, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCity } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCity,
+  faTransgender,
+  faDollar,
+  faCalendar,
+} from "@fortawesome/free-solid-svg-icons";
 import "./PostCard.scss";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const PostCard = (props) => {
-
   const { item } = props;
   const navigate = useNavigate();
 
@@ -15,10 +19,12 @@ const PostCard = (props) => {
       title={<h2 className="card-title">{item.title}</h2>}
       className="post-card"
     >
-      <Space direction="vertical" size="large" style={{ display: "flex" }}>
+      <Space direction="vertical" size="large" className="space-tag">
         <div className="majors">
-          {item.majors.map((major) => (
-            <span key={major.id} className="major">
+          {item.majors?.map((major, index) => (
+            <span key={index} className="major">
+              {" "}
+              {/*NOTE Add the id to key like 'key={major.id} */}
               {major.major}
             </span>
           ))}
@@ -30,22 +36,28 @@ const PostCard = (props) => {
             <span className="data">{item.city}</span>
           </div>
           <div className="detail">
-            <FontAwesomeIcon className="icon" icon={faCity} />
+            <FontAwesomeIcon className="icon" icon={faTransgender} />
             <span className="label">الجنس:</span>
-            <span className="data">{item.title}</span>
+            <span className="data">{item.gender}</span>
           </div>
           <div className="detail">
-            <FontAwesomeIcon className="icon" icon={faCity} />
+            <FontAwesomeIcon className="icon" icon={faDollar} />
             <span className="label">مكافأة:</span>
-            <span className="data">{item.title}</span>
+            <span className="data">{item.reward}</span>
           </div>
           <div className="detail">
-            <FontAwesomeIcon className="icon" icon={faCity} />
+            <FontAwesomeIcon className="icon" icon={faCalendar} />
             <span className="label">تاريخ الإنتهاء:</span>
-            <span className="data">{item.title}</span>
+            <span className="data">{item.subEndDate}</span>
           </div>
         </div>
-        <Button type="primary" className="more-detail-btn" onClick={() => {navigate(`/training-opportunities/${item.id}`);}}>
+        <Button
+          type="primary"
+          className="more-detail-btn"
+          onClick={() => {
+            navigate(`/training-opportunities/${item.id}`);
+          }}
+        >
           عرض التفاصيل
         </Button>
       </Space>

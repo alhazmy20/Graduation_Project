@@ -27,6 +27,7 @@ const PostList = (props) => {
         itemRender: itemRender,
         align: "center",
         pageSize: 8,
+      
       }}
       dataSource={data}
       renderItem={(item) => (

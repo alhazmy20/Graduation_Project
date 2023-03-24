@@ -43,7 +43,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     const test = {
       username: "AAAAAA",
-      email: "a@giml.com",
+      email: "a@gmail.com",
       password: "aosejnfoiejaomcojasoiejfj",
     };
 

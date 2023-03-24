@@ -5,13 +5,16 @@ import linkedin from "../../../assets/images/image14.png";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import "./TrainingOpportunity.scss";
 import { GetNewsId } from '../../../data/API';
+import NotFound from '../NotFound/NotFound';
 
 const TrainingOpportunity = () => {
 
   const {id} = useParams();
   const {data,error ,loading} = GetNewsId(`http://localhost:8000/posts/${id}`);
 
-
+  if(error){
+    return <NotFound/>
+  } else{
   return (
     <div className="training-opportunity">
       <h1>{data.title}</h1>
@@ -37,5 +40,5 @@ const TrainingOpportunity = () => {
     </div>
   );
 };
-
+}
 export default TrainingOpportunity;
