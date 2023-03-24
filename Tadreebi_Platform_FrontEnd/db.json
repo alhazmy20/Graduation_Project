@@ -101,5 +101,84 @@
         }
       ]
     }
+  ],
+
+  "users": [
+    {
+      "id": 1,
+      "role": "student",
+      "email": "a@gmail.com",
+      "password": "123awe123awe"
+    },
+    {
+      "id": 2,
+      "role": "institution",
+      "email": "e@gmail.com",
+      "password": "444awe123awe"
+    },
+    {
+      "id": 3,
+      "role": "institution",
+      "email": "h@gmail.com",
+      "password": "6566awe123awe"
+    },
+    {
+      "id": 4,
+      "role": "student",
+      "email": "b@gmail.com",
+      "password": "1244848awe123awe"
+    }
+  ],
+  "info": [
+    {
+      "id": 1,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 2,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 3,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 4,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 5,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 6,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 7,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 8,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 9,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    },
+    {
+      "id": 10,
+      "title": "شركة الإلكترونيات المتقدمة",
+      "avatar": ""
+    }
   ]
 }

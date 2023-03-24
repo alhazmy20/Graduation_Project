@@ -4,6 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
+import InstitutionInfo from "../pages/general/institutionInfo/InstitutionInfo";
 import {
   Home,
   Applications,
@@ -61,6 +62,7 @@ export const routes = createBrowserRouter(
         />
         <Route path="news" element={<News />} />
         <Route path="news/:id" element={<NewsDetails />} />
+        <Route path="InstitutionInfo" element={<InstitutionInfo />} />
         {studentRoutes}
 
         {institutionRoutes}
