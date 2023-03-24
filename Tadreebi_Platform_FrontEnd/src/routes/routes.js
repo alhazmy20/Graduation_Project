@@ -19,13 +19,14 @@ import {
   NewsDetails,
   VerifyAccount,
 } from "../pages/index";
+import InstPosts from "../pages/institution/InstApplications/InstPosts";
 
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">
     <Route index element={<h1>Institution home page</h1>} />
     <Route path="add-post" element={<h1>Add post</h1>} />
-    <Route path="posts" element={<h1>Institution posts</h1>}>
+    <Route path="posts" element={<InstPosts />}>
       <Route
         path=":id"
         element={<h1>Specific post that was added by the institution.</h1>}
