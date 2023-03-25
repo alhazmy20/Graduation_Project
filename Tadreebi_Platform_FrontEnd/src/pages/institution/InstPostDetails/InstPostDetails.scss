@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+@import "../../../index.scss";
+
+.postDetailsContainer{
+    margin-top: 2rem;
+
+    .detailsContainer{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        @include breakpoint-down(small){
+            flex-direction: column;
+        }
+        
+        .post-detail-table{
+            height: 100%;
+        }
+    }
+}
