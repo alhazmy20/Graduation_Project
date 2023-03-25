@@ -1,21 +1,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
 @import "../../../index.scss";
 
-.postDetailsContainer{
+.postDetailsContainer {
     margin-top: 2rem;
 
-    .detailsContainer{
+    @include breakpoint-down(small){
+        margin: 1rem auto 1rem auto
+    }
+
+    .detailsContainer {
         display: flex;
         flex-direction: row;
         width: 100%;
         gap: 1rem;
         margin-bottom: 1rem;
-        @include breakpoint-down(small){
+
+        @include breakpoint-down(small) {
             flex-direction: column;
         }
-        
-        .post-detail-table{
-            height: 100%;
+
+        .detailsTable{
+            flex-grow: 1;
+        }
+
+        .contactContainer {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 1rem;
+            border-top: 2px solid $steelTeal;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            background-color: #fff;
+
+            .header {
+                color: $steelTeal;
+                text-align: center;
+            }
+
+            .supervisor {
+                margin-top: 1rem;
+            }
+
+            .supervisor,
+            .phone,
+            .mail {
+                margin-bottom: 2rem;
+            }
         }
     }
 }

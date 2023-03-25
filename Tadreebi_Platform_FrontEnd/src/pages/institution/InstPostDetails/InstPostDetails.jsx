@@ -14,27 +14,24 @@ const InstPostDetails = () => {
   return (
     <div className="postDetailsContainer">
         <div className='detailsContainer'>
-    <PostDetailsTable className="PostDetailsTable" data={data}/>
-     <Table responsive className='post-detail-table'>
-        <thead>
-            <tr style={{textAlign: 'center'}}>
-                <td>
-                    <strong>بيانات الاتصال للمنشأة</strong>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <span><strong>مسؤول الإتصال: </strong>ماهر الحربي</span>
-            </tr>
-            <tr>
-                <span><strong>رقم الجوال: </strong>+966545930921</span>
-            </tr>
-            <tr>
-                <span><strong>البريد الإلكتروني: </strong>Y-22-02@coop.gov.sa</span>
-            </tr>
-        </tbody>
-     </Table>
+            <div className='detailsTable'>
+                <PostDetailsTable data={data}/>
+                </div>
+     <div className='contactContainer'>
+        <strong className='header'><span>بيانات الاتصال للمنشأة</span></strong>
+        <div className='supervisor'>
+            <span><strong>مسؤول الاتصال: </strong></span>
+            <span>ماهر الحربي</span>
+        </div>
+        <div className='phone'>
+            <span><strong>رقم الجوال: </strong></span>
+            <span>+966545930921</span>
+        </div>
+        <div className='email'>
+            <span><strong>البريد الإلكتروني: </strong></span>
+            <span>Y-22-02@coop.gov.sa</span>
+        </div>
+     </div>
     </div>
     <TableUI/>
     </div>
