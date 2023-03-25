@@ -7,7 +7,10 @@ import {
   faPenToSquare,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 const InstPosts = () => {
+
+
     const dataSource = [
         {
           key: "1",
@@ -95,11 +98,11 @@ const InstPosts = () => {
           title: "الإجراء",
           dataIndex: "edit",
           align: "center",
-          render: () => {
+          render: (text, record) => {
             let buttons = {};
               buttons = (
                 <span>
-                  {<FontAwesomeIcon className="icon" icon={faPenToSquare} style={{color: "#008374b2"}} />}
+                  <Link to ={`/institution/posts/${record.key}`}>{<FontAwesomeIcon className="icon" icon={faPenToSquare} style={{color: "#008374b2"}} />}</Link>
                   {<FontAwesomeIcon icon={faTrash} style={{color: "red"}} />}
                 </span>
               );
@@ -107,7 +110,6 @@ const InstPosts = () => {
           },
         },
       ];
-
 
     const [pageSize, setPageSize] = useState(3);
     const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -121,7 +123,9 @@ const InstPosts = () => {
     return (  
     <div className="tableContainer">
     <h1 className="Header">البرامج التدريبية</h1>
+    <Link to ="/institution/add-post">
     <Button className="newBtn">إضافة برنامج تدريبي جديد</Button>
+    </Link>
     <p className="rangeText">
       عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
       سجل
