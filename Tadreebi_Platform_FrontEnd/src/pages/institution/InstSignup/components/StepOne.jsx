@@ -4,6 +4,10 @@ import axios from "axios";
 import { SECTORS, REGIONS } from "../../../../data/InstitutionData.js";
 import FormInput from "../../../../components/form/FormInput.jsx";
 import FormSelect from "../../../../components/form/FormSelect.jsx";
+import {
+  confirmPasswordRules,
+  passwordRules,
+} from "../../../../Validation/rules.js";
 
 const StepOne = (props) => {
   const [majors, setMajors] = useState();
@@ -38,18 +42,11 @@ const StepOne = (props) => {
             label="إسم المنشأة"
             labelCol={{ span: 24 }}
             name="institutionName"
-            rules={[
-              {
-                required: true,
-                message: "الرجاء إدخال اسم المنشأة",
-              },
-            ]}
           />
           <FormSelect
             name="institutionSector"
             label="القطاع"
             labelCol={{ span: 24 }}
-            rules={[{ required: true, message: "الرجاء اختيار القطاع" }]}
           >
             {SECTORS.map((sector) => (
               <Select.Option key={sector.id} value={sector.name}>
@@ -62,7 +59,6 @@ const StepOne = (props) => {
             name="institutionField"
             label="مجال العمل"
             labelCol={{ span: 24 }}
-            rules={[{ required: true, message: "الرجاء اختيار مجال العمل" }]}
           >
             {majors?.map((elm) => (
               <Select.Option key={elm._id} value={elm.specialistName}>
@@ -71,12 +67,7 @@ const StepOne = (props) => {
             ))}
           </FormSelect>
 
-          <FormSelect
-            name="region"
-            label="المنطقة"
-            labelCol={{ span: 24 }}
-            rules={[{ required: true, message: "الرجاء اختيار المنطقة" }]}
-          >
+          <FormSelect name="region" label="المنطقة" labelCol={{ span: 24 }}>
             {REGIONS.map((region) => (
               <Select.Option key={region.id} value={region.name}>
                 {region.name}
@@ -85,13 +76,7 @@ const StepOne = (props) => {
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
-          <FormSelect
-            name="city"
-            label="المدينة"
-            labelCol={{ span: 24 }}
-            rules={[{ required: true, message: "الرجاء اختيار المدينة" }]}
-          >
-            {" "}
+          <FormSelect name="city" label="المدينة" labelCol={{ span: 24 }}>
             {cities?.map((elm) => (
               <Select.Option key={elm._id} value={elm.cityName}>
                 {elm.cityName}
@@ -104,7 +89,6 @@ const StepOne = (props) => {
             labelCol={{ span: 24 }}
             name="email"
             rules={[
-              { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
               { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
             ]}
           />
@@ -114,33 +98,14 @@ const StepOne = (props) => {
             label="كلمة السر"
             labelCol={{ span: 24 }}
             name="password"
-            rules={[
-              { required: true, message: "الرجاء ادخال كلمة المرور" },
-              {
-                message: "يجب أن لا يقل عن 8 أحرف، حرف كبير و حرف صغير و رقم",
-                pattern: "^(?=.*[A-Z])(?=.*\\d).{8,}$",
-              },
-            ]}
+            rules={passwordRules}
           />
           <FormInput
             inputType="password"
             label="تأكيد كلمة السر"
             labelCol={{ span: 24 }}
             name="confirmPassword"
-            rules={[
-              {
-                required: true,
-                message: "الرجاء تأكيد كلمة السر",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error("كلمة السر غير متطابقة"));
-                },
-              }),
-            ]}
+            rules={confirmPasswordRules}
           />
         </Col>
       </Row>

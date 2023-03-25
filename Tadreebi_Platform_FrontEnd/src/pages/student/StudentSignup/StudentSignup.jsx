@@ -6,9 +6,9 @@ import { UNIVERSITIES } from "../../../data/StudentData.js";
 import mobile_login_amico from "../../../assets/images/mobile_login_amico.png";
 import FormInput from "../../../components/form/FormInput";
 import FormSelect from "../../../components/form/FormSelect";
+import { passwordRules, confirmPasswordRules} from '../../../Validation/rules.js'
 
 const StudentSignup = () => {
-
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -27,7 +27,7 @@ const StudentSignup = () => {
 
   const onFinish = (values) => {
     console.log(formData);
-    navigate('/verify-account')
+    navigate("/verify-account");
   };
 
   return (
@@ -45,7 +45,6 @@ const StudentSignup = () => {
               label="البريد الجامعي"
               name="email"
               rules={[
-                { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
                 { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
               ]}
             />
@@ -53,35 +52,18 @@ const StudentSignup = () => {
               label="كلمة السر"
               inputType="password"
               name="password"
-              rules={[
-                { required: true, message: "الرجاء ادخال كلمة السر" },
-                { message: "يجب أن يكون 8 احرف على الأقل", pattern: "^.{8,}$" },
-              ]}
+              rules={passwordRules}
             />
             <FormInput
               label="تأكيد كلمة السر"
               inputType="password"
               name="confirmPassword"
-              rules={[
-                {
-                  required: true,
-                  message: "الرجاء تأكيد كلمة السر",
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error("كلمة السر غير متطابقة"));
-                  },
-                }),
-              ]}
+              rules={confirmPasswordRules}
             />
 
             <FormSelect
               label="الجامعة"
               name="university"
-              rules={[{ required: true, message: "الرجاء اختيار الجامعة" }]}
             >
               {UNIVERSITIES.map((university) => (
                 <Select.Option key={university.id} value={university.name}>
@@ -93,7 +75,6 @@ const StudentSignup = () => {
             <FormSelect
               label="التخصص"
               name="major"
-              rules={[{ required: true, message: "الرجاء اختيار التخصص" }]}
             >
               {UNIVERSITIES.map((university) => (
                 <Select.Option key={university.id} value={university.name}>

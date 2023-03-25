@@ -1,9 +1,9 @@
 import { Button, Card, Col, Form, Row, Space } from "antd";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import FormInput from "../../../components/form/FormInput";
 import InputFile from "../../../components/form/InputFile";
 import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
-import ResetPassword from "./components/ResetPassword";
+import ResetPassword from "../../../components/ui/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
 
 const StudentProfile = () => {
@@ -11,13 +11,15 @@ const StudentProfile = () => {
 
   const [disabledButton, setDisabledButton] = useState(true);
   const [data, setData] = useState({
-    fullName: "",
-    gender: "",
-    email: "",
+    fullName: "يزيد سعد نفاع العلوي",
+    gender: "ذكر",
+    email: "TU4002681@taibahu.edu.sa",
     phone: "",
-    nationalId: "",
-    major: "",
+    nationalId: "1101234567",
+    universityName: "جامعة طيبة",
+    major: "نظم المعلومات الحاسوبية",
     gpa: "",
+    gpaType: "5",
     cv: "",
     nationalIdentity: "",
     internshipLetter: "",
@@ -29,15 +31,15 @@ const StudentProfile = () => {
       ...prevState,
       ...allValues,
     }));
-    setDisabledButton((Object.values(allValues).every((value) => !value)))
+    setDisabledButton(Object.values(allValues).every((value) => !value));
   };
 
-  useEffect(
-    (e) => {
-      console.log(data);
-    },
-    [data]
-  );
+  // useEffect(
+  //   (e) => {
+  //     console.log(data);
+  //   },
+  //   [data]
+  // );
 
   const onFinish = async (values) => {
     formData.append("FullName", values.fullName);
@@ -48,6 +50,7 @@ const StudentProfile = () => {
     formData.append("universityName", values.university);
     formData.append("major", values.major);
     formData.append("gpa", values.gpa);
+    formData.append("gpaType", values.gpaType);
     formData.append("collegeTranscript", values.collegeTranscript.file);
     formData.append("internshipLetter", values.internshipLetter.file);
     formData.append("nationalIdentity", values.nationalIdentity.file);
@@ -69,7 +72,7 @@ const StudentProfile = () => {
           onFinish={onFinish}
           className="form"
           encType="multipart/form-data"
-          defaultValue={data}
+          initialValues={data}
         >
           <h1>البيانات الأساسية</h1>
           <Row gutter={[16, 16]}>
@@ -80,7 +83,7 @@ const StudentProfile = () => {
                 name="fullName"
                 disabled={true}
                 //NOTE Edit this
-                value='يزيد سعد نفاع العلوي'
+                value="يزيد سعد نفاع العلوي"
               />
               <FormInput
                 label="البريد الإلكتروني"
@@ -93,13 +96,14 @@ const StudentProfile = () => {
                 name="nationalId"
                 disabled={true}
                 //NOTE Edit this
-                value='1107474545'
+                value="1107474545"
               />
               <FormInput
-              label="رقم الجوال"
-              labelCol={{ span: 24 }}
-              name="phone"
-            />
+                label="رقم الجوال"
+                labelCol={{ span: 24 }}
+                name="phone"
+                inputType='number'
+              />
             </Col>
             <Col xs={24} sm={12}>
               <FormInput
@@ -108,7 +112,7 @@ const StudentProfile = () => {
                 name="gender"
                 disabled={true}
                 //NOTE Edit this
-                value='ذكر'
+                value="ذكر"
               />
 
               <InputFile label="السيرة الذاتية" name="cv" />
@@ -121,10 +125,11 @@ const StudentProfile = () => {
               <FormInput
                 label="اسم الجامعة"
                 labelCol={{ span: 24 }}
-                name="university"
+                name="universityName"
+                disabled={true}
               />
-              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" />
-              <Space >
+              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" disabled={true}/>
+              <Space>
                 <FormInput
                   label="المعدل التراكمي"
                   labelCol={{ span: 24 }}
@@ -136,12 +141,12 @@ const StudentProfile = () => {
                   name="gpaType"
                   disabled={true}
                   //NOTE Edit this
-                  value='5'
+                  value="5"
                 />
               </Space>
             </Col>
             <Col xs={24} sm={12}>
-            <InputFile name="internshipLetter" label="خطاب التدريب" />
+              <InputFile name="internshipLetter" label="خطاب التدريب" />
 
               <InputFile name="collegeTranscript" label="السجل الأكاديمي" />
             </Col>

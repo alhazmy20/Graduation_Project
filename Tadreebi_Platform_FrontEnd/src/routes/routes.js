@@ -18,6 +18,7 @@ import {
   TrainingOpportunity,
   NewsDetails,
   VerifyAccount,
+  InstProfile,
 } from "../pages/index";
 import InstPosts from "../pages/institution/InstApplications/InstPosts";
 
@@ -32,7 +33,7 @@ const institutionRoutes = (
         element={<h1>Specific post that was added by the institution.</h1>}
       />
     </Route>
-    <Route path="profile" element={<h1>Institution profile</h1>} />
+    <Route path="profile" element={<InstProfile />} />
   </Route>
 );
 

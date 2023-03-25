@@ -44,18 +44,46 @@ const PictureCircle = (props) => {
 
   const [messageShown, setMessageShown] = useState(false);
 
+// const handleChange = ({ fileList: newFileList }) => {
+//   if (newFileList.length > 0 && newFileList[0].status === "uploading") {
+//     newFileList[0].status = "done"
+//     if (!messageShown) {
+//       message.success('تم تحديث الصورة الشخصية بنجاح');
+//       setMessageShown(true);
+//     }
+//   } else {
+//     setMessageShown(false);
+//   }
+//   setFileList(newFileList);
+// };
+
 const handleChange = ({ fileList: newFileList }) => {
   if (newFileList.length > 0 && newFileList[0].status === "uploading") {
-    newFileList[0].status = "done"
-    if (!messageShown) {
-      message.success('تم تحديث الصورة الشخصية بنجاح');
+    if (!messageShown && newFileList[0].status !== "error") {
+      message.success("تم تحديث الصورة الشخصية بنجاح");
+      setMessageShown(true);
+    }
+    if (newFileList[0].status === "error") {
+      message.error("حدث خطأ أثناء تحديث الصورة الشخصية");
       setMessageShown(true);
     }
   } else {
     setMessageShown(false);
   }
-  setFileList(newFileList);
+  const shouldRemove = fileList.length > newFileList.length;
+  if (shouldRemove) {
+    Modal.confirm({
+      title: "هل أنت متأكد من حذف الصورة؟",
+      okText: "نعم",
+      cancelText: "لا",
+      onOk: () => setFileList(newFileList),
+      onCancel: () => {},
+    });
+  } else {
+    setFileList(newFileList);
+  }
 };
+
 
 
   const uploadButton = (

@@ -1,0 +1,47 @@
+@import '../../../index.scss';
+
+.institution-profile {
+
+    .profileImage{
+      display: flex;
+      align-items: center;
+      
+      .name{
+        font-size: 25px;
+        font-weight: 500;
+      }
+    }
+    .save-button {
+      width: 120px;
+      margin-bottom: 15px;
+      background-color: #008374;
+      font-weight: 500;
+      margin-top: 10px;
+  
+      &:disabled{
+        background-color: rgb(190, 190, 190);
+      }
+    }
+  
+    .card {
+      border: 1px solid #82cec4;
+      border-radius: 8px;
+      margin: 1rem;
+      padding: 0;
+  
+      h1{
+          width: 100%;
+          border-bottom: 1px solid $Green;
+          padding-bottom: 10px;
+          margin: 0.5rem 0;
+      }
+  
+      form{
+          .upload-file{
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+          }
+      }
+    }
+  }

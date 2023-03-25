@@ -9,8 +9,12 @@ const FormInput = (props) => {
     onChange,
     value,
     disabled,
+    rules,
     ...others
   } = props;
+
+  const formRules = Array.isArray(rules) ? rules : [];
+
   return (
     <>
       <label
@@ -23,13 +27,16 @@ const FormInput = (props) => {
       >
         {label}
       </label>
-      <Form.Item {...others}>
+      <Form.Item
+      rules={[{ required: true, message: `الرجاء ادخال ${label}` }, ...formRules]}
+        {...others}
+      >
         {inputType === "password" ? (
           <Input.Password placeholder={placeholder} />
         ) : (
           <Input
             placeholder={placeholder}
-            type={inputType}
+            type={inputType }
             onChange={onChange}
             defaultValue={value}
             disabled={disabled}

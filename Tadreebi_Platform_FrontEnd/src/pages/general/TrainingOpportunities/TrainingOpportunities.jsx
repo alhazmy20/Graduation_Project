@@ -2,22 +2,21 @@ import { Button, Form, Select } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
-import {GetAllNews} from '../../../data/API';
+import { GetAllNews } from "../../../data/API";
 import PostList from "./components/PostList.jsx";
-
 
 const TrainingOpportunities = () => {
   const [cities, setCities] = useState();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMajor, setSelectedMajor] = useState("");
-  const {data, loading} = GetAllNews("http://localhost:8000/posts");
+  const { data } = GetAllNews("http://localhost:8000/posts");
 
   const filteredData = useMemo(() => {
     if (selectedRegion === "كل المناطق") {
       return data;
     } else {
-      const newData = data.filter(post => {
+      const newData = data.filter((post) => {
         if (selectedRegion && post.region !== selectedRegion) {
           return false;
         }
@@ -33,9 +32,8 @@ const TrainingOpportunities = () => {
     }
   }, [selectedRegion, selectedCity, selectedMajor, data]);
 
-  console.log('render');
-  
-  
+  console.log("render");
+
   const [form] = Form.useForm();
 
   const handleClearFilter = () => {
@@ -117,7 +115,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        <PostList data={filteredData} loading={loading}/>
+        <PostList data={filteredData} />
       </main>
     </div>
   );

@@ -11,6 +11,7 @@ import VerifyAccount from "./general/VerifyAccount/VerifyAccount";
 
 // Imports from institution folder
 import InstSignup from "./institution/InstSignup/InstSignup";
+import InstProfile from './institution/InstProfile/InstProfile';
 
 // Imports from student folder
 import Applications from "./student/Applications/Application";
@@ -34,4 +35,5 @@ export {
   StudentProfile,
   StudentSignup,
   VerifyAccount,
+  InstProfile
 };

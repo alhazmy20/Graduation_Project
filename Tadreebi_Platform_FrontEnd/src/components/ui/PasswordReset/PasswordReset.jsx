@@ -1,7 +1,8 @@
 import { Button, Card, Col, Form, Row } from "antd";
 import React, { useState } from "react";
-import FormInput from "../../../../components/form/FormInput";
-import "./ResetPassword.scss";
+import FormInput from "../../form/FormInput";
+import "./PasswordReset.scss";
+import {passwordRules, confirmPasswordRules} from '../../../Validation/rules.js'
 
 const ResetPassword = () => {
   const [form] = Form.useForm();
@@ -22,14 +23,6 @@ const ResetPassword = () => {
     console.log(formData);
   };
 
-  const rules = [
-    { required: true, message: "الرجاء ادخال كلمة السر" },
-    {
-      message: "يجب أن لا يقل عن 8 أحرف، حرف كبير و حرف صغير و رقم",
-      pattern: "^(?=.*[A-Z])(?=.*\\d).{8,}$",
-    },
-  ];
-
   return (
     <div className="reset-password">
       <Card className="card">
@@ -46,13 +39,13 @@ const ResetPassword = () => {
                 label="كلمة السر الجديدة"
                 inputType="password"
                 name="newPassword"
-                rules={rules}
+                rules={passwordRules}
               />
               <FormInput
                 label="كلمة السر الحالية"
                 inputType="password"
                 name="currentPassword"
-                rules={rules}
+                rules={passwordRules}
               />
             </Col>
             <Col xs={24} sm={12}>
@@ -60,26 +53,14 @@ const ResetPassword = () => {
                 label="تأكيد كلمة السر الجديدة"
                 inputType="password"
                 name="confirmNewPassword"
-                rules={[
-                  {
-                    required: true,
-                    message: "الرجاء تأكيد كلمة السر",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("newPassword") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(new Error("كلمة السر غير متطابقة"));
-                    },
-                  }),
-                ]}
+                rules={confirmPasswordRules}
               />
             </Col>
           </Row>
           <Button type="primary" htmlType="submit" className="save-button">
             حفظ
           </Button>
+          <span className="error-message">لقد حدث خطأ</span>
         </Form>
       </Card>
     </div>
