@@ -115,7 +115,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        <PostList data={filteredData} />
+        {data.length && <PostList data={filteredData} />}
       </main>
     </div>
   );

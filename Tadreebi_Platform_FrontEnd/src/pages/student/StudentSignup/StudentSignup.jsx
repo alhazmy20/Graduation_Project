@@ -13,7 +13,7 @@ const StudentSignup = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
     university: "",
     major: "",
   });
@@ -57,7 +57,7 @@ const StudentSignup = () => {
             <FormInput
               label="تأكيد كلمة السر"
               inputType="password"
-              name="confirmPassword"
+              name="password_confirmation"
               rules={confirmPasswordRules}
             />
 

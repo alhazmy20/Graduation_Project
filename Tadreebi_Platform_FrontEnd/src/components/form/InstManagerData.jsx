@@ -36,7 +36,7 @@ const InstManagerData = ({ formData, handleFormChange }) => {
             label="رقم الجوال"
             labelCol={{ span: 24 }}
             name="managerPhone"
-            type="number"
+            inputType="number"
             placeholder="05XXXXXXXX"
             rules={phoneRules}
           />

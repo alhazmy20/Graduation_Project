@@ -1,38 +1,43 @@
-import { Button, Card, Col, Form, Row, Space } from "antd";
-import React, {  useState } from "react";
+import { Button, Card, Col, Form, message, Row, Space } from "antd";
+import React, { useEffect, useState } from "react";
 import FormInput from "../../../components/form/FormInput";
 import InputFile from "../../../components/form/InputFile";
 import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
-import ResetPassword from "../../../components/ui/PasswordReset/PasswordReset";
+import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
-import {phoneRules} from '../../../Validation/rules.js'
+import { phoneRules } from "../../../Validation/rules.js";
+import { GetNewsId } from "../../../data/API";
 
 const StudentProfile = () => {
   const formData = new FormData();
+  const { data, error, loading } = GetNewsId(
+    `http://localhost:8000/students/1`
+  );
 
-  const [disabledButton, setDisabledButton] = useState(true);
-  const [data, setData] = useState({
-    fullName: "يزيد سعد نفاع العلوي",
-    gender: "ذكر",
-    email: "TU4002681@taibahu.edu.sa",
+  const [studentData, setStudentData] = useState({
+    fullName: "ddd",
+    gender: "",
+    email: "",
     phone: "",
-    nationalId: "1101234567",
-    universityName: "جامعة طيبة",
-    major: "نظم المعلومات الحاسوبية",
-    gpa: "",
-    gpaType: "5",
+    national_ID: "",
+    university: "",
+    major: "",
+    GPA: "",
+    GPA_Type: "",
     cv: "",
     nationalIdentity: "",
     internshipLetter: "",
     collegeTranscript: "",
   });
 
+  const [formInitialValues, setFormInitialValues] = useState(studentData);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add new state
+
   const handleFormChange = (changedValues, allValues) => {
-    setData((prevState) => ({
+    setStudentData((prevState) => ({
       ...prevState,
       ...allValues,
     }));
-    setDisabledButton(Object.values(allValues).every((value) => !value));
   };
 
   // useEffect(
@@ -47,11 +52,11 @@ const StudentProfile = () => {
     formData.append("gender", values.gender);
     formData.append("email", values.email);
     formData.append("phone", values.phone);
-    formData.append("nationalId", values.nationalId);
-    formData.append("universityName", values.university);
+    formData.append("national_ID", values.nationalId);
+    formData.append("university", values.university);
     formData.append("major", values.major);
-    formData.append("gpa", values.gpa);
-    formData.append("gpaType", values.gpaType);
+    formData.append("GPA", values.GPA);
+    formData.append("GPA_Type", values.GPA_Type);
     formData.append("collegeTranscript", values.collegeTranscript.file);
     formData.append("internshipLetter", values.internshipLetter.file);
     formData.append("nationalIdentity", values.nationalIdentity.file);
@@ -59,7 +64,17 @@ const StudentProfile = () => {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
+    setIsSubmitting(true); // Set isSubmitting to true before submitting the form
+    console.log(formData);
+    setTimeout(() => {
+      setIsSubmitting(false); // Set isSubmitting to false after submitting the form
+    }, 2000);
+    setFormInitialValues(formData);
+    message.success("تم تحديث البيانات بنجاح");
   };
+
+  let isButtonDisabled =
+    JSON.stringify(setStudentData) === JSON.stringify(formInitialValues);
 
   return (
     <div className="student-profile">
@@ -73,7 +88,7 @@ const StudentProfile = () => {
           onFinish={onFinish}
           className="form"
           encType="multipart/form-data"
-          initialValues={data}
+          initialValues={studentData}
         >
           <h1>البيانات الأساسية</h1>
           <Row gutter={[16, 16]}>
@@ -82,9 +97,6 @@ const StudentProfile = () => {
                 label="الإسم الرباعي"
                 labelCol={{ span: 24 }}
                 name="fullName"
-                disabled={true}
-                //NOTE Edit this
-                value="يزيد سعد نفاع العلوي"
               />
               <FormInput
                 label="البريد الإلكتروني"
@@ -94,29 +106,29 @@ const StudentProfile = () => {
               <FormInput
                 label="رقم الهوية"
                 labelCol={{ span: 24 }}
-                name="nationalId"
-                disabled={true}
+                name="national_ID"
               />
               <FormInput
                 label="رقم الجوال"
                 labelCol={{ span: 24 }}
                 name="phone"
-                inputType='number'
+                inputType="number"
                 rules={phoneRules}
               />
             </Col>
             <Col xs={24} sm={12}>
-              <FormInput
-                label="الجنس"
-                labelCol={{ span: 24 }}
-                name="gender"
-                disabled={true}
-                //NOTE Edit this
-                value="ذكر"
-              />
+              <FormInput label="الجنس" labelCol={{ span: 24 }} name="gender" />
 
-              <InputFile label="السيرة الذاتية" name="cv" />
-              <InputFile name="nationalIdentity" label="الهوية الوطنية" />
+              <InputFile
+                label="السيرة الذاتية"
+                name="cv"
+                fileName={studentData.cv}
+              />
+              <InputFile
+                name="nationalIdentity"
+                label="الهوية الوطنية"
+                fileName={studentData.nationalIdentity}
+              />
             </Col>
           </Row>
           <h1>البيانات الأكاديمية</h1>
@@ -125,39 +137,40 @@ const StudentProfile = () => {
               <FormInput
                 label="اسم الجامعة"
                 labelCol={{ span: 24 }}
-                name="universityName"
-                disabled={true}
+                name="university"
               />
-              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" disabled={true}/>
+              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" />
               <Space>
                 <FormInput
                   label="المعدل التراكمي"
                   labelCol={{ span: 24 }}
-                  name="gpa"
+                  name="GPA"
+                  inputType="number"
                 />
-                <FormInput
-                  label="من"
-                  labelCol={{ span: 24 }}
-                  name="gpaType"
-                  disabled={true}
-                  //NOTE Edit this
-                  value="5"
-                />
+                <FormInput label="من" labelCol={{ span: 24 }} name="GPA_Type" />
               </Space>
             </Col>
             <Col xs={24} sm={12}>
-              <InputFile name="internshipLetter" label="خطاب التدريب" />
+              <InputFile
+                name="internshipLetter"
+                label="خطاب التدريب"
+                fileName={studentData.internshipLetter}
+              />
 
-              <InputFile name="collegeTranscript" label="السجل الأكاديمي" />
+              <InputFile
+                name="collegeTranscript"
+                label="السجل الأكاديمي"
+                fileName={studentData.collegeTranscript}
+              />
             </Col>
           </Row>
           <Button
             type="primary"
             htmlType="submit"
             className="save-button"
-            disabled={disabledButton}
+            disabled={isButtonDisabled}
           >
-            حفظ
+            {isSubmitting ? "جاري الحفظ..." : "حفظ"}
           </Button>
         </Form>
       </Card>

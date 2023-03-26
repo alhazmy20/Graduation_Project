@@ -3,7 +3,7 @@ import { Button, Form, Upload } from "antd";
 import { useState } from "react";
 
 const InputFile = (props) => {
-  let { inputType, placeholder, label, fileName, onRemove, ...others } = props;
+  let { inputType, placeholder, label, fileName, ...others } = props;
   const handleBeforeUpload = (file) => {
     // Clear fileList and only add the current file
     props.onChange([file]);
@@ -25,22 +25,20 @@ const InputFile = (props) => {
       </label>
       <Form.Item
         {...others}
-        rules={[{ required: true, message: `الرجاء ارفاق ${label}` }]}
+        rules={!fileName && [{ required: true, message: `الرجاء ارفاق ${label}` }]}
       >
         <Upload
           showUploadList={true}
           beforeUpload={handleBeforeUpload}
-          uploadText="اختر ملفا"
-          onRemove={onRemove}
           multiple={false}
-          fileList={fileName ? [{ uid: "-1", name: fileName }] : []}
+          fileList={ []}
           accept=".pdf"
           onChange={(e) => {
             setFile(e.file.name);
           }}
         >
           <Button icon={<UploadOutlined />} style={{ minWidth: "200px", maxWidth:'fitContent' }}>
-            {file ? file : "ارفاق ملف"}
+            {file ? file : fileName ? fileName : 'ارفاق ملف'}
           </Button>
         </Upload>
       </Form.Item>

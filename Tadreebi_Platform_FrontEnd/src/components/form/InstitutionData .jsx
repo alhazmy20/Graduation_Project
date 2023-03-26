@@ -91,8 +91,17 @@ const InstitutionData = ({ withPassword }) => {
                 rules={confirmPasswordRules}
               />
             </Col>
+           
           </>
         )}
+        <Col xs={24} sm={12}>
+        <FormInput
+          label="رقم الهاتف"
+          labelCol={{ span: 24 }}
+          name="institutionPhone"
+          inputType="number"
+        />
+      </Col>
       </Row>
     </>
   );

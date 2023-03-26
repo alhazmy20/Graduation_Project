@@ -1,8 +1,11 @@
 import { Button, Card, Col, Form, Row } from "antd";
 import React, { useState } from "react";
-import FormInput from "../../form/FormInput";
+import FormInput from "../FormInput";
 import "./PasswordReset.scss";
-import {passwordRules, confirmPasswordRules} from '../../../Validation/rules.js'
+import {
+  passwordRules,
+  confirmPasswordRules,
+} from "../../../Validation/rules.js";
 
 const ResetPassword = () => {
   const [form] = Form.useForm();
@@ -34,14 +37,13 @@ const ResetPassword = () => {
         >
           <h1>تحديث كلمة السر</h1>
           <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12}>
-          <FormInput
-            label="كلمة السر الحالية"
-            inputType="password"
-            name="currentPassword"
-            rules={passwordRules}
-          />
-        </Col>
+            <Col xs={24} sm={12}>
+              <FormInput
+                label="كلمة السر الحالية"
+                inputType="password"
+                name="currentPassword"
+              />
+            </Col>
             <Col xs={24} sm={12}>
               <FormInput
                 label="كلمة السر الجديدة"
@@ -49,7 +51,7 @@ const ResetPassword = () => {
                 name="newPassword"
                 rules={passwordRules}
               />
-              </Col>
+            </Col>
             <Col xs={24} sm={12}>
               <FormInput
                 label="تأكيد كلمة السر الجديدة"

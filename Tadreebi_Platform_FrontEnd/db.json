@@ -180,5 +180,39 @@
       "title": "شركة الإلكترونيات المتقدمة",
       "avatar": ""
     }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "fullName": "يزيد سعد نفاع العلوي",
+      "gender": "ذكر",
+      "email": "tu4002681@taibahu.edu.sa",
+      "cv": "cv.pdf",
+      "national_ID": "1101234567",
+      "nationalIdentity": null,
+      "phone": "0545930922",
+      "university": "جامعة طيبة",
+      "major": "نظم المعلومات",
+      "GPA": 4.9,
+      "GPA_Type": 5,
+      "internshipLetter": null,
+      "collegeTranscript": null
+    },
+    {
+      "id": 2,
+      "fullName": "يزيد سعد نفاع العلوي",
+      "gender": "ذكر",
+      "email": "tu4002681@taibahu.edu.sa",
+      "cv": "cv.pdf",
+      "national_ID": "1101234567",
+      "nationalIdentity": null,
+      "phone": "0545930922",
+      "university": "جامعة طيبة",
+      "major": "نظم المعلومات",
+      "GPA": 4.9,
+      "GPA_Type": 5,
+      "internshipLetter": null,
+      "collegeTranscript": null
+    }
   ]
 }

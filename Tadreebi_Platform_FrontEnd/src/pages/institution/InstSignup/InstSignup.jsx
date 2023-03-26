@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import StepOne from "./components/StepOne";
-import StepTwo from "./components/StepTwo";
+// import StepOne from "./components/StepOne";
+// import StepTwo from "./components/StepTwo";
 import "./InstSignup.scss";
 import { Steps, Card, Form, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,12 +19,13 @@ const InstSignup = () => {
     region: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
     fName: "",
     lName: "",
     managerEmail: "",
     managerPosition: "",
     managerPhone: "",
+    institutionPhone: "",
   });
 
   const handleFormChange = (changedValues, allValues) => {
@@ -61,7 +62,7 @@ const InstSignup = () => {
   const steps = [
     {
       title: "معلومات المنشأة",
-      content: <InstitutionData withPassword={true}/>,
+      content: <InstitutionData withPassword={true} />,
     },
     {
       title: "معلومات المسؤول",
