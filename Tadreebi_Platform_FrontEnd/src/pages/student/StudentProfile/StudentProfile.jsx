@@ -5,6 +5,7 @@ import InputFile from "../../../components/form/InputFile";
 import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
 import ResetPassword from "../../../components/ui/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
+import {phoneRules} from '../../../Validation/rules.js'
 
 const StudentProfile = () => {
   const formData = new FormData();
@@ -95,14 +96,13 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="nationalId"
                 disabled={true}
-                //NOTE Edit this
-                value="1107474545"
               />
               <FormInput
                 label="رقم الجوال"
                 labelCol={{ span: 24 }}
                 name="phone"
                 inputType='number'
+                rules={phoneRules}
               />
             </Col>
             <Col xs={24} sm={12}>

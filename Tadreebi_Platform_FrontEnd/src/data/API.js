@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { notification } from 'antd';
 
 export function GetAllNews(url) {
   const [data, setData] = useState([]);
@@ -57,4 +58,32 @@ export const UserRole = (url) => {
       });
   }, [url]);
   return { userRole, loading, error };
+};
+
+export const useFetchMajorsAndCities = () => {
+  const [majors, setMajors] = useState();
+  const [cities, setCities] = useState();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [majors, cities] = await Promise.all([
+          axios.get("https://www.ptway.net/api/getspec?type=sMajor"),
+          axios.get("https://www.ptway.net/api/getcity?type=city"),
+        ]);
+
+        setMajors(JSON.parse(majors.data.Cs));
+        setCities(JSON.parse(cities.data.cities));
+      } catch (error) {
+        console.log("Opps, we got an error", error);
+
+        notification.error({
+          message: "لقد حدث خطأ",
+          description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
+        });
+      }
+    })();
+  }, []);
+
+  return { majors, cities };
 };

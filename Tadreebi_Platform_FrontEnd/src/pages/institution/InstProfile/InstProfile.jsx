@@ -1,132 +1,80 @@
-import { Button, Card, Col, Row, Form } from "antd";
-import React, {  useState } from "react";
-import FormInput from "../../../components/form/FormInput";
+import { Button, Card, Form, notification } from "antd";
+import React, { useEffect, useState } from "react";
 import ResetPassword from "../../../components/ui/PasswordReset/PasswordReset";
 import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
 import "./InstProfile.scss";
-import {phoneRules} from '../../../Validation/rules.js'
+import axios from "axios";
+import InstitutionData from "../../../components/form/InstitutionData ";
+import InstManagerData from "../../../components/form/InstManagerData";
 
 const InstProfile = () => {
-    
-    const [formData, setFormData] = useState({
-        institutionName: "ggg",
-        institutionField: "",
-        city: "",
-        institutionSector: "",
-        region: "",
-        email: "",
-        fName: "",
-        lName: "",
-        managerEmail: "",
-        managerPosition: "",
-        managerPhone: "",
-      });
-    
-      const handleFormChange = (changedValues, allValues) => {
-        setFormData((prevState) => ({
-          ...prevState,
-          ...allValues,
-        }));
-      };
+  const [majors, setMajors] = useState();
+  const [cities, setCities] = useState();
+
+  const [formData, setFormData] = useState({
+    institutionName: "شركة التقنيات الحديثة",
+    institutionField: "",
+    city: "",
+    institutionSector: "",
+    region: "منطقة المدينة المنورة",
+    email: "",
+    fName: "",
+    lName: "",
+    managerEmail: "",
+    managerPosition: "",
+    managerPhone: "",
+  });
+
+  const handleFormChange = (changedValues, allValues) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      ...allValues,
+    }));
+  };
 
   const onFinish = async (values) => {
-   console.log(formData);
+    console.log(formData);
   };
-  
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const [majors, cities] = await Promise.all([
+          axios.get("https://www.ptway.net/api/getspec?type=sMajor"),
+          axios.get("https://www.ptway.net/api/getcity?type=city"),
+        ]);
+
+        setMajors(JSON.parse(majors.data.Cs));
+        setCities(JSON.parse(cities.data.cities));
+      } catch (error) {
+        console.log("Opps, we got an error", error);
+
+        notification.error({
+          message: "لقد حدث خطأ",
+          description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
+        });
+      }
+    })();
+  }, []);
+
   return (
     <div className="institution-profile">
       <div className="profileImage">
         <PictureCircle />
-        <span className="name">يزيد العلوي</span>
+        <span className="name">شركة التقنيات الحديثة</span>
       </div>
       <Card className="card">
         <Form
-        onValuesChange={handleFormChange}
-        onFinish={onFinish}
+          onValuesChange={handleFormChange}
+          onFinish={onFinish}
           className="form"
           initialValues={formData}
         >
           <h1>بيانات المنشأة</h1>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={12}>
-              <FormInput
-                label="إسم المنشأة"
-                labelCol={{ span: 24 }}
-                name="institutionName"
-              />
-              <FormInput
-                label="المنطقة"
-                labelCol={{ span: 24 }}
-                name="region"
-              />
-              <FormInput
-                label="المدينة"
-                labelCol={{ span: 24 }}
-                name="city"
-
-              />
-            </Col>
-            <Col xs={24} sm={12}>
-              <FormInput
-                label="القطاع"
-                labelCol={{ span: 24 }}
-                name="institutionSector"
-
-              />
-              <FormInput
-                label="مجال العمل"
-                labelCol={{ span: 24 }}
-                name="institutionField"
-
-              />
-              <FormInput
-                label="البريد الإلكتروني"
-                labelCol={{ span: 24 }}
-                name="email"
-              />
-            </Col>
-          </Row>
+          <InstitutionData />
           <h1>بيانات المسؤول</h1>
-          <Row gutter={[16, 16]}>
-            <Col xs={24} sm={12}>
-              <FormInput
-                label="الإسم الأول"
-                labelCol={{ span: 24 }}
-                name="fName"
-              />
-              <FormInput
-                label="الإسم الأخير"
-                labelCol={{ span: 24 }}
-                name="lName"
-              />
-              <FormInput
-                label="المسمى الوظيفي"
-                labelCol={{ span: 24 }}
-                name="managerPosition"
-              />
-             
-            </Col>
-            <Col xs={24} sm={12}>
-            <FormInput
-            label="البريد الإلكتروني"
-            labelCol={{ span: 24 }}
-            name="managerEmail"
-          />
-          <FormInput
-          label="رقم الجوال"
-          labelCol={{ span: 24 }}
-          name="managerPhone"
-          type="number"
-          placeholder="05XXXXXXXX"
-          rules={phoneRules}
-        />
-            </Col>
-          </Row>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="save-button"
-          >
+          <InstManagerData />
+          <Button type="primary" htmlType="submit" className="save-button">
             حفظ
           </Button>
         </Form>

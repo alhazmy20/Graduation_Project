@@ -4,9 +4,10 @@ import StepTwo from "./components/StepTwo";
 import "./InstSignup.scss";
 import { Steps, Card, Form, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import InstitutionData from "../../../components/form/InstitutionData ";
+import InstManagerData from "../../../components/form/InstManagerData";
 
 const InstSignup = () => {
-
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [currentStep, setCurrentStep] = useState(0);
@@ -45,7 +46,7 @@ const InstSignup = () => {
 
   const onFinish = (values) => {
     console.log(formData);
-    navigate('/verify-account')
+    navigate("/verify-account");
   };
 
   const isStepDisabled = (stepNumber) => {
@@ -60,11 +61,11 @@ const InstSignup = () => {
   const steps = [
     {
       title: "معلومات المنشأة",
-      content: <StepOne />,
+      content: <InstitutionData withPassword={true}/>,
     },
     {
       title: "معلومات المسؤول",
-      content: <StepTwo />,
+      content: <InstManagerData />,
     },
   ];
 
@@ -122,7 +123,7 @@ const InstSignup = () => {
           </div>
         </Form>
         <span>
-          لديك حساب؟ <Link to='/login'>تسجيل الدخول</Link>
+          لديك حساب؟ <Link to="/login">تسجيل الدخول</Link>
         </span>
       </Card>
     </div>

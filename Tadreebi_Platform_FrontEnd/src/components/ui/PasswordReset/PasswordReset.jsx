@@ -34,6 +34,14 @@ const ResetPassword = () => {
         >
           <h1>تحديث كلمة السر</h1>
           <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12}>
+          <FormInput
+            label="كلمة السر الحالية"
+            inputType="password"
+            name="currentPassword"
+            rules={passwordRules}
+          />
+        </Col>
             <Col xs={24} sm={12}>
               <FormInput
                 label="كلمة السر الجديدة"
@@ -41,13 +49,7 @@ const ResetPassword = () => {
                 name="newPassword"
                 rules={passwordRules}
               />
-              <FormInput
-                label="كلمة السر الحالية"
-                inputType="password"
-                name="currentPassword"
-                rules={passwordRules}
-              />
-            </Col>
+              </Col>
             <Col xs={24} sm={12}>
               <FormInput
                 label="تأكيد كلمة السر الجديدة"
