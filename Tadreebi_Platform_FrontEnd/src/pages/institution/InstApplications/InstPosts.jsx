@@ -1,16 +1,16 @@
 import "./InstPosts.scss";
 import { useState } from "react";
 import { Button } from "antd";
+import { Link } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
+import InstModal from "./components/InstModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 const InstPosts = () => {
-
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
     const dataSource = [
         {
           key: "1",
@@ -103,7 +103,8 @@ const InstPosts = () => {
               buttons = (
                 <span>
                   <Link to ={`/institution/posts/${record.key}`}>{<FontAwesomeIcon className="icon" icon={faPenToSquare} style={{color: "#008374b2"}} />}</Link>
-                  {<FontAwesomeIcon icon={faTrash} style={{color: "red"}} />}
+                  <span onClick={() => setIsModalOpen(true)}>{<FontAwesomeIcon icon={faTrash} style={{color: "red"}} />}</span>
+                  <InstModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} />
                 </span>
               );
             return buttons;
