@@ -16,34 +16,6 @@
     margin-bottom: 1rem;
   }
 
-
-  .filterTable {
-    display: flex;
-    flex-direction: row;
-    border-top: 1px solid #008374b2;
-    border-bottom: 1px solid #008374b2;
-    margin-bottom: 1rem;
-    background-color: $white;
-    padding: 0.5rem;
-    flex-wrap: wrap;
-    
-    @include breakpoint-down(small){
-      flex-direction: column;
-      padding: 1rem;
-    }
-
-    .button-filter {
-      border: 0px;
-      background-color: #fafcff;
-      font-weight: 500;
-      font-size: 1rem;
-      margin: 0 5px;
-      @include breakpoint-down(medium){
-        margin: 0.25rem;
-      }
-    }
-  }
-
   .rangeText {
     color: #008374b2;
     font-size: larger;
@@ -51,20 +23,4 @@
     font-weight: 500;
   }
 
-
-  .btnContainer{
-    .acceptBtn {
-      background-color: #01AD7E;
-      color: white;
-      font-size: 15px;
-      font-weight: 500;
-    }
-  
-    .rejectBtn {
-      background-color: #F46A61;
-      color: white;
-      font-size: 15px;
-      font-weight: 500;
-    }
-  }
 }
