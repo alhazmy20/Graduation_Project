@@ -49,4 +49,42 @@
             }
         }
     }
+
+    .excelContainer{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1rem;
+        align-items: center;
+
+        @include breakpoint-down(small){
+            flex-direction: column;
+        }
+
+        .studentApplications{
+            padding-right: 0.5rem;
+            @include breakpoint-down(small){
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .excelBtn{
+            margin-right: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #008374;
+            color: #fff;
+
+            .excelSpan{
+                padding-right: 0.5rem;
+            }
+
+            @include breakpoint-down(small){
+                margin: 0;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
 }

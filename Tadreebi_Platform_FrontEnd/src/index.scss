@@ -20,8 +20,8 @@ body {
 .filterTable {
   display: flex;
   flex-direction: row;
-  border-top: 1px solid #008374b2;
-  border-bottom: 1px solid #008374b2;
+  border-top: 1px solid $steelTeal;
+  border-bottom: 1px solid $steelTeal;
   margin-bottom: 1rem;
   background-color: $white;
   padding: 0.5rem;

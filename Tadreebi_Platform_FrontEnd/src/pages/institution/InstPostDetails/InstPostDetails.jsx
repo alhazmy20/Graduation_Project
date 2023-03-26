@@ -4,8 +4,9 @@ import PostDetailsTable from '../../../components/ui/PostDetailsTable/PostDetail
 import TableUI from '../../../components/ui/Table/Table';
 import { GetNewsId } from '../../../data/API'
 import "./InstPostDetails.scss"
-import { Table } from "react-bootstrap";
 import { Button } from 'antd';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faFileCsv} from "@fortawesome/free-solid-svg-icons";
 
 
 const InstPostDetails = () => {
@@ -132,6 +133,10 @@ const InstPostDetails = () => {
             <span>Y-22-02@coop.gov.sa</span>
         </div>
      </div>
+    </div>
+    <div className='excelContainer'>
+        <span className='studentApplications'><strong>طلبات تقديم الطلاب</strong></span>
+        <Button className='excelBtn'><FontAwesomeIcon className="icon" icon={faFileCsv} />  <span className='excelSpan'><strong>Excel</strong></span></Button>
     </div>
     <div className="filterTable">
         <Button
