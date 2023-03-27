@@ -52,11 +52,19 @@ const InstPostForm = () => {
       [name]: value,
     }));
   };
+  //     {
+  //     label: major.category,
+  //     value: major.id,
+  //   }
 
-  const options = data.map((major) => ({
-    label: major.category,
-    value: major.id,
-  }));
+  const options = data
+    .map((major) => {
+      return major.majors.map((majorName) => ({
+        label: majorName.title,
+        value: majorName.title,
+      }));
+    })
+    .flat();
 
   const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -247,24 +255,25 @@ const InstPostForm = () => {
               </Row>
             </Col>
 
-            <Row style={{ width: "100%" }}>
-              <Space
-                style={{
-                  width: "100%",
-                }}
-                direction="vertical"
+            <Row className="RowDivElment" style={{ width: "100%" }}>
+              <label className="label">التخصص: </label>
+              <Form.Item
+                rules={[
+                  {
+                    required: true,
+                    message: "الرجاء الاختيار",
+                  },
+                ]}
+                style={{ flexGrow: "2", justifyContent: "center" }}
               >
                 <Select
                   mode="multiple"
                   allowClear
-                  style={{
-                    width: "100%",
-                  }}
-                  placeholder="Please select"
+                  placeholder="اختر التخصصات"
                   onChange={handleChange}
                   options={options}
                 />
-              </Space>
+              </Form.Item>
             </Row>
           </Row>
           <div className="addbuttonContainer">
