@@ -20,7 +20,8 @@ import {
   VerifyAccount,
   InstPostDetails,
   InstPosts,
-  InstProfile
+  InstProfile,
+  InstPostForm
 } from "../pages/index";
 
 
@@ -29,9 +30,11 @@ const institutionRoutes = (
   <Route path="/institution">
     <Route index element={<h1>Institution home page</h1>} />
     <Route path="add-post" element={<h1>Add post</h1>} />
-    <Route path="posts" element={<InstPosts />}/>
-    <Route path="posts/:id" element={<InstPostDetails/>}/>
+    <Route path="posts" element={<InstPosts />} />
+    <Route path="posts/:id" element={<InstPostDetails />} />
     <Route path="profile" element={<InstProfile />} />
+    <Route path="newPost" element={<InstPostForm />} />
+   
   </Route>
 );
 

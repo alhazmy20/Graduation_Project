@@ -1,0 +1,98 @@
+@import "../../../index.scss";
+
+.institution-NewPostCont {
+  margin-top: 20px;
+  .pagePostTitle {
+    display: flex;
+    align-items: center;
+
+    .name {
+      font-size: 25px;
+      font-weight: 500;
+    }
+  }
+
+  .addbuttonContainer {
+    text-align: center;
+
+    .add-button {
+      width: 120px;
+      margin-bottom: 15px;
+      background-color: #008374;
+      font-weight: 500;
+      margin-top: 10px;
+
+      &:disabled {
+        background-color: rgb(190, 190, 190);
+      }
+    }
+  }
+
+  .postfromConteiner {
+    margin: 1rem;
+    padding: 1rem;
+    width: 90%;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+  }
+}
+
+.contenttextareDir {
+}
+
+.quill > .ql-container {
+  height: 200px;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  font-size: 20px;
+  text-align: right;
+}
+
+.label {
+  width: 130px;
+  color: $Green;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .form-item {
+    margin: 0;
+    width: 230px;
+    @media (max-width: 930px) {
+      width: 180px;
+    }
+
+    @media (max-width: 720px) {
+      width: 100%;
+    }
+
+    label {
+      font-weight: 500;
+    }
+  }
+}
+h1,
+h2,
+h3 {
+  text-align: right;
+}
+
+.ant-form-item {
+  margin: 0px;
+}
+
+.RowDivElment {
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+p {
+  text-align: right;
+}
