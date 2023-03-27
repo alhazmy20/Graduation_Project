@@ -5,15 +5,12 @@ import "../InstPostForm.scss";
 const ReactTextArea = (props) => {
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3,false] }],
+      [{ header: [1, 2, 3, false] }],
       [{ align: [] }],
       ["bold", "italic", "underline", "strike"],
       [{ color: [] }, { background: [] }],
-      [{ list: "ordered" }, { list: "bullet" }],
       [{ script: "sub" }, { script: "super" }],
-      [{ indent: "-1" }, { indent: "+1" }],
       [{ direction: "rtl" }],
-      ["blockquote", "code-block"],
       ["link", "image", "video", "formula"],
       ["clean"],
     ],
@@ -28,13 +25,13 @@ const ReactTextArea = (props) => {
     "strike",
     "color",
     "background",
-    "list",
+
     "bullet",
     "script",
-    "indent",
+
     "direction",
     "blockquote",
-    "code-block",
+
     "link",
     "image",
     "video",

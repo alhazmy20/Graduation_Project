@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  Input,
-  Col,
-  Row,
-  Form,
-  Radio,
-  Select,
-  Space,
-  DatePicker,
-} from "antd";
-
+import { Button, Input, Col, Row, Form, Radio, Select, DatePicker } from "antd";
 import { RegionData } from "../../../data/TestData.js";
 import { data } from "../../../data/SaudiClassification";
 import ReactTextArea from "./components/ReactTextArea";
@@ -29,6 +17,7 @@ const InstPostForm = () => {
     city: "",
     endDatePost: "",
     gender: "",
+    majors: [],
   });
 
   const handleFormChange = (changedValues, allValues) => {
@@ -39,36 +28,47 @@ const InstPostForm = () => {
   };
 
   const onFinish = async (values) => {
+    //api code
     console.log(formPostData);
   };
 
   const handleEditorChange = (content) => {
     handleInputChange("desc", content);
   };
-
+  //v1
+  //   const handleInputChange = (name, value) => {
+  //     setFormPostData((prevState) => ({
+  //       ...prevState,
+  //       [name]: value,
+  //     }));
+  //   };
+  //v2
   const handleInputChange = (name, value) => {
-    setFormPostData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "majors") {
+      const majors = value.map((id) => ({
+        id: id,
+        title: options.find((option) => option.value === id)?.label || "",
+      }));
+      setFormPostData((prevState) => ({
+        ...prevState,
+        [name]: majors,
+      }));
+    } else {
+      setFormPostData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
-  //     {
-  //     label: major.category,
-  //     value: major.id,
-  //   }
-
+  //for select tage
   const options = data
     .map((major) => {
       return major.majors.map((majorName) => ({
         label: majorName.title,
-        value: majorName.title,
+        value: majorName.id,
       }));
     })
     .flat();
-
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
 
   return (
     <div className="institution-NewPostCont">
@@ -121,6 +121,12 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">المنطقة: </label>
                 <Form.Item
+                  rules={[
+                    {
+                      required: true,
+                      message: "الرجاء إختيار المنطقة",
+                    },
+                  ]}
                   name="region"
                   className="form-item"
                   style={{ flexGrow: "2", justifyContent: "center" }}
@@ -173,7 +179,7 @@ const InstPostForm = () => {
                   rules={[
                     {
                       required: true,
-                      message: "الرجاء الاختيار",
+                      message: "الرجاء  الاختيار",
                     },
                   ]}
                   style={{ flexGrow: "2", justifyContent: "center" }}
@@ -193,6 +199,12 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">المدينة: </label>
                 <Form.Item
+                  rules={[
+                    {
+                      required: true,
+                      message: "الرجاء إختيار المدينة",
+                    },
+                  ]}
                   className="form-item"
                   name="city"
                   style={{ flexGrow: "2", justifyContent: "center" }}
@@ -261,7 +273,7 @@ const InstPostForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: "الرجاء الاختيار",
+                    message: "الرجاء إختيار التخصصات",
                   },
                 ]}
                 style={{ flexGrow: "2", justifyContent: "center" }}
@@ -270,7 +282,7 @@ const InstPostForm = () => {
                   mode="multiple"
                   allowClear
                   placeholder="اختر التخصصات"
-                  onChange={handleChange}
+                  onChange={(e) => handleInputChange("majors", e)}
                   options={options}
                 />
               </Form.Item>
