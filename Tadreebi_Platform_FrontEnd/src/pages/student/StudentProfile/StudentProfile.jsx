@@ -1,4 +1,4 @@
-import { Button, Card, Col, Form, message, Row, Space } from "antd";
+import { Button, Card, Col, Form, notification, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import FormInput from "../../../components/form/FormInput";
 import InputFile from "../../../components/form/InputFile";
@@ -6,75 +6,64 @@ import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
 import { phoneRules } from "../../../Validation/rules.js";
-import { GetNewsId } from "../../../data/API";
+import axios from "axios";
+import Spinner from "../../../components/ui/Spinner/Spinner";
 
 const StudentProfile = () => {
-  const formData = new FormData();
-  const { data, error, loading } = GetNewsId(
-    `http://localhost:8000/students/1`
-  );
+  let formData = new FormData();
+  const [form] = Form.useForm();
+  const [studentData, setStudentData] = useState(null);
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
-  const [studentData, setStudentData] = useState({
-    fullName: "ddd",
-    gender: "",
-    email: "",
-    phone: "",
-    national_ID: "",
-    university: "",
-    major: "",
-    GPA: "",
-    GPA_Type: "",
-    cv: "",
-    nationalIdentity: "",
-    internshipLetter: "",
-    collegeTranscript: "",
-  });
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/students/1")
+      .then((response) => {
+        setStudentData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        notification.error({
+          message: "لقد حدث خطأ",
+          description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
+        });
+      });
+      
+  }, []);
 
-  const [formInitialValues, setFormInitialValues] = useState(studentData);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Add new state
-
-  const handleFormChange = (changedValues, allValues) => {
-    setStudentData((prevState) => ({
-      ...prevState,
-      ...allValues,
-    }));
-  };
-
-  // useEffect(
-  //   (e) => {
-  //     console.log(data);
-  //   },
-  //   [data]
-  // );
-
-  const onFinish = async (values) => {
+  const onFinish = (values) => {
+    // console.log(values);
     formData.append("FullName", values.fullName);
     formData.append("gender", values.gender);
     formData.append("email", values.email);
     formData.append("phone", values.phone);
-    formData.append("national_ID", values.nationalId);
+    formData.append("national_ID", values.national_ID);
     formData.append("university", values.university);
     formData.append("major", values.major);
     formData.append("GPA", values.GPA);
     formData.append("GPA_Type", values.GPA_Type);
-    formData.append("collegeTranscript", values.collegeTranscript.file);
-    formData.append("internshipLetter", values.internshipLetter.file);
-    formData.append("nationalIdentity", values.nationalIdentity.file);
-    formData.append("cv", values.cv.file);
+    formData.append("collegeTranscript", values.collegeTranscript?.file);
+    formData.append("internshipLetter", values.internshipLetter?.file);
+    formData.append("nationalIdentity", values.nationalIdentity?.file);
+    formData.append("cv", values.cv?.file);
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    setIsSubmitting(true); // Set isSubmitting to true before submitting the form
-    console.log(formData);
-    setTimeout(() => {
-      setIsSubmitting(false); // Set isSubmitting to false after submitting the form
-    }, 2000);
-    setFormInitialValues(formData);
-    message.success("تم تحديث البيانات بنجاح");
+
+    formData = new FormData();
   };
 
-  let isButtonDisabled =
-    JSON.stringify(setStudentData) === JSON.stringify(formInitialValues);
+  const onFormValuesChange = (changedValues, allValues) => {
+    setIsFormChanged(
+      Object.keys(changedValues).some(
+        (key) => allValues[key] !== studentData[key]
+      )
+    );
+  };
+
+  if (!studentData) {
+    return <Spinner />;
+  }
 
   return (
     <div className="student-profile">
@@ -84,8 +73,9 @@ const StudentProfile = () => {
       </div>
       <Card className="card">
         <Form
-          onValuesChange={handleFormChange}
+          form={form}
           onFinish={onFinish}
+          onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
           className="form"
           encType="multipart/form-data"
           initialValues={studentData}
@@ -107,6 +97,7 @@ const StudentProfile = () => {
                 label="رقم الهوية"
                 labelCol={{ span: 24 }}
                 name="national_ID"
+                inputType="number"
               />
               <FormInput
                 label="رقم الجوال"
@@ -168,9 +159,9 @@ const StudentProfile = () => {
             type="primary"
             htmlType="submit"
             className="save-button"
-            disabled={isButtonDisabled}
+            disabled={!isFormChanged} // Disable button if the form is not changed
           >
-            {isSubmitting ? "جاري الحفظ..." : "حفظ"}
+            حفظ
           </Button>
         </Form>
       </Card>

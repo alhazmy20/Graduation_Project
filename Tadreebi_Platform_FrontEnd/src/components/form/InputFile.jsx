@@ -25,7 +25,7 @@ const InputFile = (props) => {
       </label>
       <Form.Item
         {...others}
-        rules={!fileName && [{ required: true, message: `الرجاء ارفاق ${label}` }]}
+        // rules={!fileName && [{ required: true, message: `الرجاء ارفاق ${label}` }]}
       >
         <Upload
           showUploadList={true}
