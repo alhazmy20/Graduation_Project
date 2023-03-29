@@ -10,6 +10,7 @@ const FormInput = (props) => {
     value,
     disabled,
     rules,
+    max,
     ...others
   } = props;
 
@@ -28,7 +29,10 @@ const FormInput = (props) => {
         {label}
       </label>
       <Form.Item
-      rules={[{ required: true, message: `الرجاء ادخال ${label}` }, ...formRules]}
+        rules={[
+          { required: true, message: `الرجاء ادخال ${label}` },
+          ...formRules,
+        ]}
         {...others}
       >
         {inputType === "password" ? (
@@ -36,7 +40,7 @@ const FormInput = (props) => {
         ) : (
           <Input
             placeholder={placeholder}
-            type={inputType }
+            type={inputType}
             onChange={onChange}
             defaultValue={value}
             disabled={disabled}
