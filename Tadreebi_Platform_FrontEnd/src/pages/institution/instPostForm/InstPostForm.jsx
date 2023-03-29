@@ -8,15 +8,15 @@ import "../instPostForm/InstPostForm.scss";
 const InstPostForm = () => {
   const [formPostData, setFormPostData] = useState({
     title: "",
-    desc: "",
-    type: "",
-    region: "",
-    startData: "",
-    endDate: "",
+    content: "",
+    t_type: "",
     reward: "",
-    city: "",
-    endDatePost: "",
     gender: "",
+    region: "",
+    city: "",
+    t_startDate: "",
+    t_endDate: "",
+    endDatePost: "",
     majors: [],
   });
 
@@ -33,7 +33,7 @@ const InstPostForm = () => {
   };
 
   const handleEditorChange = (content) => {
-    handleInputChange("desc", content);
+    handleInputChange("content", content);
   };
   //v1
   //   const handleInputChange = (name, value) => {
@@ -46,8 +46,8 @@ const InstPostForm = () => {
   const handleInputChange = (name, value) => {
     if (name === "majors") {
       const majors = value.map((id) => ({
-        id: id,
-        title: options.find((option) => option.value === id)?.label || "",
+        SCC: id,
+        major: options.find((option) => option.value === id)?.label || "",
       }));
       setFormPostData((prevState) => ({
         ...prevState,
@@ -91,7 +91,7 @@ const InstPostForm = () => {
           </Col>
           <Col style={{ textAlign: "left" }}>
             <ReactTextArea
-              formdata={formPostData.desc}
+              formdata={formPostData.content}
               formfun={handleEditorChange}
             />
           </Col>
@@ -109,8 +109,10 @@ const InstPostForm = () => {
                   style={{ flexGrow: "2", justifyContent: "center" }}
                 >
                   <Radio.Group
-                    onChange={(e) => handleInputChange("type", e.target.value)}
-                    value={formPostData.type}
+                    onChange={(e) =>
+                      handleInputChange("t_type", e.target.value)
+                    }
+                    value={formPostData.t_type}
                   >
                     <Radio value={"حضوري"}>حضوري</Radio>
                     <Radio value={"عن بعد"}>عن بعد</Radio>
@@ -152,9 +154,9 @@ const InstPostForm = () => {
                 <DatePicker
                   placeholder="اختر تاريخ بدء التدريب"
                   style={{ flexGrow: "2" }}
-                  name="startData"
+                  name="t_startDate"
                   onChange={(date, dateString) =>
-                    handleInputChange("startData", dateString)
+                    handleInputChange("t_startDate", dateString)
                   }
                 />
               </Row>
@@ -164,9 +166,9 @@ const InstPostForm = () => {
                 <DatePicker
                   placeholder="اختر تاريخ انتهاء الإعلان"
                   style={{ flexGrow: "2" }}
-                  name="endDatePostendDatePost"
+                  name="p_endDate"
                   onChange={(date, dateString) =>
-                    handleInputChange("endDatePost", dateString)
+                    handleInputChange("p_endDate", dateString)
                   }
                 />
               </Row>
@@ -235,9 +237,9 @@ const InstPostForm = () => {
                 <DatePicker
                   placeholder="اختر تاريخ إنتهاء التدريب"
                   style={{ flexGrow: "2" }}
-                  name="endDate"
+                  name="t_endDate"
                   onChange={(date, dateString) =>
-                    handleInputChange("endDate", dateString)
+                    handleInputChange("t_endDate", dateString)
                   }
                 />
               </Row>
