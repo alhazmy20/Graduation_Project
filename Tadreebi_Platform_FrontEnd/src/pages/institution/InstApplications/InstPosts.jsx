@@ -102,8 +102,8 @@ const InstPosts = () => {
             let buttons = {};
               buttons = (
                 <span>
-                  <Link to ={`/institution/posts/${record.key}`}>{<FontAwesomeIcon className="icon" icon={faPenToSquare} style={{color: "#008374b2"}} />}</Link>
-                  <span onClick={() => setIsModalOpen(true)}>{<FontAwesomeIcon icon={faTrash} style={{color: "red"}} />}</span>
+                  <Link to ={`/institution/newPost/${record.key}`}>{<FontAwesomeIcon className="icon" icon={faPenToSquare} style={{color: "#008374b2"}} />}</Link>
+                  <span onClick={() => setIsModalOpen(true)}>{<FontAwesomeIcon icon={faTrash} style={{color: "red", cursor: "pointer"}} />}</span>
                   <InstModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} />
                 </span>
               );
@@ -124,7 +124,7 @@ const InstPosts = () => {
     return (  
     <div className="tableContainer">
     <h1 className="Header">البرامج التدريبية</h1>
-    <Link to ="/institution/add-post">
+    <Link to ="/institution/newPost">
     <Button className="newBtn">إضافة برنامج تدريبي جديد</Button>
     </Link>
     <p className="rangeText">
