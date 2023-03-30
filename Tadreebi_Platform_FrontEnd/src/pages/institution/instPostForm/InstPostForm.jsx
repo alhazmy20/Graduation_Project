@@ -7,7 +7,7 @@ import "../instPostForm/InstPostForm.scss";
 
 const InstPostForm = () => {
   const [formPostData, setFormPostData] = useState({
-    title: "",
+    title: "" || "",
     content: "",
     t_type: "",
     reward: "",

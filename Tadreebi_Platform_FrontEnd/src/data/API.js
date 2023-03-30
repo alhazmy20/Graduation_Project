@@ -11,6 +11,7 @@ export function GetAllNews(url) {
   useEffect(() => {
     axios.get(url).then((response) => {
       setData(response.data);
+      setLoading(true)
     });
   }, [url]);
   return { data, loading, error };

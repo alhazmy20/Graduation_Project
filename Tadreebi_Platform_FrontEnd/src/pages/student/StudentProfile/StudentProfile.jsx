@@ -28,7 +28,6 @@ const StudentProfile = () => {
           description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
         });
       });
-      
   }, []);
 
   const onFinish = (values) => {
@@ -88,17 +87,23 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="fullName"
               />
+            </Col>
+            <Col xs={24} sm={12}>
               <FormInput
                 label="البريد الإلكتروني"
                 labelCol={{ span: 24 }}
                 name="email"
               />
+            </Col>
+            <Col xs={24} sm={12}>
               <FormInput
                 label="رقم الهوية"
                 labelCol={{ span: 24 }}
                 name="national_ID"
                 inputType="number"
               />
+            </Col>
+            <Col xs={24} sm={12}>
               <FormInput
                 label="رقم الجوال"
                 labelCol={{ span: 24 }}
@@ -107,14 +112,19 @@ const StudentProfile = () => {
                 rules={phoneRules}
               />
             </Col>
+
             <Col xs={24} sm={12}>
               <FormInput label="الجنس" labelCol={{ span: 24 }} name="gender" />
+            </Col>
 
+            <Col xs={24} sm={12}>
               <InputFile
                 label="السيرة الذاتية"
                 name="cv"
                 fileName={studentData.cv}
               />
+            </Col>
+            <Col xs={24} sm={12}>
               <InputFile
                 name="nationalIdentity"
                 label="الهوية الوطنية"
@@ -130,7 +140,11 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="university"
               />
+            </Col>
+            <Col xs={24} sm={12}>
               <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" />
+            </Col>
+            <Col xs={24} sm={12}>
               <Space>
                 <FormInput
                   label="المعدل التراكمي"
@@ -141,13 +155,15 @@ const StudentProfile = () => {
                 <FormInput label="من" labelCol={{ span: 24 }} name="GPA_Type" />
               </Space>
             </Col>
+
             <Col xs={24} sm={12}>
               <InputFile
                 name="internshipLetter"
                 label="خطاب التدريب"
                 fileName={studentData.internshipLetter}
               />
-
+            </Col>
+            <Col xs={24} sm={12}>
               <InputFile
                 name="collegeTranscript"
                 label="السجل الأكاديمي"
