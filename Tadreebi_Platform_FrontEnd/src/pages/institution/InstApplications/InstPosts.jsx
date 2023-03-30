@@ -6,64 +6,22 @@ import Table from "../../../components/ui/Table/Table";
 import InstModal from "./components/InstModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { GetAllNews } from "../../../data/API";
 const InstPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const dataSource = [
-    {
-      key: "1",
-      name: "xxxxx",
-      city: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "نشط",
-      edit: "-",
-    },
-    {
-      key: "2",
-      name: "xxxx",
-      city: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "نشط",
-      edit: "-",
-    },
-    {
-      key: "3",
-      name: "xxxx",
-      city: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "مغلق",
-      edit: "-",
-    },
-    {
-      key: "4",
-      name: "xxxx",
-      city: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "نشط",
-      edit: "-",
-    },
-    {
-      key: "5",
-      name: "xxxx",
-      city: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "مغلق",
-      edit: "=",
-    },
-    {
-      key: "6",
-      name: "xxxx",
-      city: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "مغلق",
-      edit: "-",
-    },
-  ];
+  const { data, loading } = GetAllNews("http://localhost:8000/posts");
+  
 
   const columns = [
     {
       title: "عنوان الإعلان",
-      dataIndex: "name",
+      dataIndex: "title",
       align: "center",
+      render: (text,record) => {
+        return <span><Link to={`/institution/posts/${record.id}`}>
+        {text}
+        </Link></span>
+      }
     },
     {
       title: "المدينة",
@@ -72,7 +30,7 @@ const InstPosts = () => {
     },
     {
       title: "التاريخ",
-      dataIndex: "date",
+      dataIndex: "publishDate",
       align: "center",
     },
     {
@@ -127,7 +85,7 @@ const InstPosts = () => {
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, dataSource.length);
+    const end = Math.min(start + pageSize - 1, data.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -138,12 +96,12 @@ const InstPosts = () => {
         <Button className="newBtn">إضافة برنامج تدريبي جديد</Button>
       </Link>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {data.length}{" "}
         سجل
       </p>
       <Table
         col={columns}
-        data={dataSource}
+        data={data}
         Size={pageSize}
         handleChange={handlePaginationChange}
       />
