@@ -7,7 +7,7 @@ import "../instPostForm/InstPostForm.scss";
 
 const InstPostForm = () => {
   const [formPostData, setFormPostData] = useState({
-    title: "" || "",
+    title: "",
     content: "",
     t_type: "",
     reward: "",
@@ -16,7 +16,7 @@ const InstPostForm = () => {
     city: "",
     t_startDate: "",
     t_endDate: "",
-    endDatePost: "",
+    p_endDate: "",
     majors: [],
   });
 
@@ -192,8 +192,8 @@ const InstPostForm = () => {
                     }
                     value={formPostData.reward}
                   >
-                    <Radio value={"نعم"}>نعم</Radio>
-                    <Radio value={"لا"}>لا</Radio>
+                    <Radio value={1}>نعم</Radio>
+                    <Radio value={0}>لا</Radio>
                   </Radio.Group>
                 </Form.Item>
               </Row>
@@ -261,9 +261,9 @@ const InstPostForm = () => {
                     }
                     value={formPostData.gender}
                   >
-                    <Radio value={"ذكر"}>ذكر</Radio>
-                    <Radio value={"انثى"}>انثى</Radio>
-                    <Radio value={"كليهما"}>كليهما</Radio>
+                    <Radio value={0}>ذكر</Radio>
+                    <Radio value={1}>انثى</Radio>
+                    <Radio value={2}>كليهما</Radio>
                   </Radio.Group>
                 </Form.Item>
               </Row>
