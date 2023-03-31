@@ -2,9 +2,18 @@ import React from "react";
 import { List } from "antd";
 import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
+import Spinner from '../../../../components/ui/Spinner/Spinner.jsx';
+
 
 const PostList = (props) => {
-  const { data } = props;
+  const { data, loading } = props;
+  
+
+  // if(!loading){
+  //   return <Spinner/>
+  // }
+
+
 
   return (
     <List
@@ -27,7 +36,6 @@ const PostList = (props) => {
         itemRender: itemRender,
         align: "center",
         pageSize: 8,
-      
       }}
       dataSource={data}
       renderItem={(item) => (

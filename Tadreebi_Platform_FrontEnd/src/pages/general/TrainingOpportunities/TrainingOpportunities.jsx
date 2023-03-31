@@ -1,16 +1,34 @@
-import { Button, Form, Select } from "antd";
+import { Button, Form, notification, Select } from "antd";
 import React, { useEffect, useState, useMemo } from "react";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
 import { GetAllNews } from "../../../data/API";
 import PostList from "./components/PostList.jsx";
+import Spinner from '../../../components/ui/Spinner/Spinner.jsx';
 
 const TrainingOpportunities = () => {
   const [cities, setCities] = useState();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMajor, setSelectedMajor] = useState("");
-  const { data } = GetAllNews("http://localhost:8000/posts");
+  const { data, loading } = GetAllNews("http://localhost:8000/posts");
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8000/posts")
+  //     .then((response) => {
+  //       setData(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       notification.error({
+  //         message: "لقد حدث خطأ",
+  //         description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
+  //       });
+  //     });
+  //   }, []);
+    
 
   const filteredData = useMemo(() => {
     if (selectedRegion === "كل المناطق") {
@@ -32,7 +50,7 @@ const TrainingOpportunities = () => {
     }
   }, [selectedRegion, selectedCity, selectedMajor, data]);
 
-  console.log("render");
+  // console.log("render");
 
   const [form] = Form.useForm();
 
@@ -115,7 +133,7 @@ const TrainingOpportunities = () => {
         </Button>
       </header>
       <main>
-        {data.length && <PostList data={filteredData} />}
+       {!loading ? <Spinner/> : <PostList data={filteredData} /> }
       </main>
     </div>
   );

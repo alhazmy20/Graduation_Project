@@ -10,7 +10,7 @@ const InstitutionData = ({ withPassword }) => {
     const {cities, majors} = useFetchMajorsAndCities()
   return (
     <>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 2]}>
         <Col xs={24} sm={12}>
           <FormInput
             label="إسم المنشأة"

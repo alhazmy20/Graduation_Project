@@ -7,12 +7,14 @@ import "./InstPostDetails.scss"
 import { Button } from 'antd';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faFileCsv} from "@fortawesome/free-solid-svg-icons";
+import ConditionModal from './components/conditionModal';
 
 
 const InstPostDetails = () => {
     const {id} = useParams();
     const {data,error ,loading} = GetNewsId(`http://localhost:8000/posts/${id}`);
-
+    const [modalOpen, setModalOpen] = useState(false);
+    const [condition,setCondition] = useState("");
     const dataSource = [
         {
           key: "1",
@@ -93,8 +95,9 @@ const InstPostDetails = () => {
               if (row.status === "بإنتظار موافقة المنشأة") {
                 buttons = (
                   <span className="btnContainer">
-                    {<Button className="acceptBtn">قبول</Button>}
-                    {<Button className="rejectBtn">رفض</Button>}
+                    {<Button className="acceptBtn" onClick={() => {setModalOpen(true); setCondition("accept")}}>قبول</Button>}
+                    {<Button className="rejectBtn" onClick={() => {setModalOpen(true); setCondition("reject")}}>رفض</Button>}
+                    <ConditionModal modalOpen={modalOpen} setModalOpen={setModalOpen} condition={condition}/>
                   </span>
                 );
               } else
