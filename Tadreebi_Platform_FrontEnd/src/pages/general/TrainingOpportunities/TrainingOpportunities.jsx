@@ -1,63 +1,40 @@
-import { Button, Form, notification, Select } from "antd";
-import React, { useEffect, useState, useMemo } from "react";
+import { Button, Form, Select } from "antd";
+import React, { useState, useMemo } from "react";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
 import { GetAllNews } from "../../../data/API";
 import PostList from "./components/PostList.jsx";
-import Spinner from '../../../components/ui/Spinner/Spinner.jsx';
+import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
+import { data as saudiClassificationData } from "../../../data/SaudiClassification";
 
 const TrainingOpportunities = () => {
-  const [cities, setCities] = useState();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMajor, setSelectedMajor] = useState("");
   const { data, loading } = GetAllNews("http://localhost:8000/posts");
-  // const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8000/posts")
-  //     .then((response) => {
-  //       setData(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       notification.error({
-  //         message: "لقد حدث خطأ",
-  //         description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
-  //       });
+  // const filteredData = useMemo(() => {
+  //   if (selectedRegion === "كل المناطق") {
+  //     return data;
+  //   } else {
+  //     const newData = data.filter((post) => {
+  //       return (
+  //         (!selectedRegion || post.region === selectedRegion) &&
+  //         (!selectedCity || post.city === selectedCity)
+  //       );
   //     });
-  //   }, []);
-    
-
-  const filteredData = useMemo(() => {
-    if (selectedRegion === "كل المناطق") {
-      return data;
-    } else {
-      const newData = data.filter((post) => {
-        if (selectedRegion && post.region !== selectedRegion) {
-          return false;
-        }
-        if (selectedCity && post.city !== selectedCity) {
-          return false;
-        }
-        if (selectedMajor && post.major !== selectedMajor) {
-          return false;
-        }
-        return true;
-      });
-      return newData;
-    }
-  }, [selectedRegion, selectedCity, selectedMajor, data]);
-
-  // console.log("render");
+  //     return newData;
+  //   }
+  // }, [selectedRegion, selectedCity, data]);
 
   const [form] = Form.useForm();
 
-  const handleClearFilter = () => {
-    console.log(selectedRegion, selectedCity, selectedMajor);
-    form.resetFields();
-  };
+  const majorOptions = saudiClassificationData.flatMap((major) =>
+    major.majors.map((majorName) => ({
+      value: majorName.title,
+      label: majorName.title,
+    }))
+  );
 
   const handleRegionChange = (value) => {
     setSelectedRegion(value);
@@ -67,20 +44,28 @@ const TrainingOpportunities = () => {
     setSelectedCity(value);
   };
   const handleMajorChange = (value) => {
-    selectedMajor(value);
+    setSelectedMajor(value);
+  };
+
+  const onFinish = (values) => {
+    console.log(values);
   };
 
   return (
     <div className="training-opportunities">
       <header className="filter-container">
-        <h5>تصفية على حسب:</h5>
-        <Form form={form}>
+        <h4>تصفية على حسب:</h4>
+        <Form
+          form={form}
+          onFinish={onFinish}
+          initialValues={{
+            region: "كل المناطق",
+            city: "كل المدن",
+            major: "كل التخصصات",
+          }}
+        >
           <Form.Item name="region" className="form-item">
-            <Select
-              defaultValue="كل المناطق"
-              showSearch
-              onChange={handleRegionChange}
-            >
+            <Select showSearch onChange={handleRegionChange}>
               <Select.Option key="*" value="كل المناطق" />
               {RegionData.map((region) => (
                 <Select.Option key={region.id} value={region.region}>
@@ -91,50 +76,32 @@ const TrainingOpportunities = () => {
           </Form.Item>
 
           <Form.Item className="form-item" name="city">
-            <Select
-              defaultValue="كل المدن"
-              showSearch
-              onChange={handleCityChange}
-            >
+            <Select showSearch onChange={handleCityChange}>
               <Select.Option key="*" value="كل المدن" />
-              {RegionData.filter((r) => r.region === selectedRegion).map(
-                (region) =>
-                  region.cities.map((city) => (
-                    <Select.Option key={city.id} value={city.city}>
-                      {city.city}
-                    </Select.Option>
-                  ))
+              {RegionData.find((r) => r.region === selectedRegion)?.cities.map(
+                (city) => (
+                  <Select.Option key={city.id} value={city.city}>
+                    {city.city}
+                  </Select.Option>
+                )
               )}
             </Select>
           </Form.Item>
 
           <Form.Item className="form-item" name="major">
-            {/*NOTE: Edit this*/}
             <Select
-              defaultValue="كل التخصصات"
               showSearch
               onChange={handleMajorChange}
-            >
-              <Select.Option key="*" value="كل التخصصات" />
-              {cities?.map((city) => (
-                <Select.Option key={city._id} value={city.cityName}>
-                  {city.cityName}
-                </Select.Option>
-              ))}
-            </Select>
+              options={majorOptions}
+            />
           </Form.Item>
+
+          <Button type="primary" className="search-button" htmlType="submit">
+            بـحـث
+          </Button>
         </Form>
-        <Button
-          type="primary"
-          className="search-button"
-          onClick={handleClearFilter}
-        >
-          مسح عوامل التصفية
-        </Button>
       </header>
-      <main>
-       {!loading ? <Spinner/> : <PostList data={filteredData} /> }
-      </main>
+      <main>{!loading ? <Spinner /> : <PostList data={data} />}</main>
     </div>
   );
 };

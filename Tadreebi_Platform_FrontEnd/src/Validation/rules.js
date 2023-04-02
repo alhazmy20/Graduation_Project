@@ -31,12 +31,21 @@ export const confirmPasswordRules = [
 ];
 
 export const nationalIdRules = {
+  validator: (_, value) => {
+    if (!value || value.length !== 10 || isNaN(value)) {
+      return Promise.reject(new Error("رقم الهوية يجب أن يتكون من 10 أرقام"));
+    }
+    return Promise.resolve();
+  },
+};
+
+export const inputGpaRules = (max) => [
+  {
     validator: (_, value) => {
-      if (!value || value.length !== 10 || isNaN(value)) {
-        return Promise.reject(
-          new Error("رقم الهوية يجب أن يتكون من 10 أرقام")
-        );
+      if (value >= 0 && value <= max) {
+        return Promise.resolve();
       }
-      return Promise.resolve();
+      return Promise.reject(`الرجاء ادخال معدل بين 0 و ${max}`);
     },
-  };
+  },
+];

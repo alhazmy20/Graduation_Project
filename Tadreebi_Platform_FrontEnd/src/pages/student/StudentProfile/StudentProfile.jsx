@@ -2,12 +2,12 @@ import { Button, Card, Col, Form, notification, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import FormInput from "../../../components/form/FormInput";
 import InputFile from "../../../components/form/InputFile";
-import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
-import { phoneRules } from "../../../Validation/rules.js";
+import { inputGpaRules, phoneRules } from "../../../Validation/rules.js";
 import axios from "axios";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import ProfileImage from '../../../components/ui/ProfileImage/ProfileImage';
 
 const StudentProfile = () => {
   let formData = new FormData();
@@ -67,8 +67,8 @@ const StudentProfile = () => {
   return (
     <div className="student-profile">
       <div className="profileImage">
-        <PictureCircle />
-        <span className="name">يزيد العلوي</span>
+        <ProfileImage />
+        {/*<span className="name">يزيد العلوي</span>*/}
       </div>
       <Card className="card">
         <Form
@@ -80,12 +80,13 @@ const StudentProfile = () => {
           initialValues={studentData}
         >
           <h1>البيانات الأساسية</h1>
-          <Row gutter={[16, 16]}>
+          <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
               <FormInput
                 label="الإسم الرباعي"
                 labelCol={{ span: 24 }}
                 name="fullName"
+                disabled={true}
               />
             </Col>
             <Col xs={24} sm={12}>
@@ -93,6 +94,7 @@ const StudentProfile = () => {
                 label="البريد الإلكتروني"
                 labelCol={{ span: 24 }}
                 name="email"
+                disabled={true}
               />
             </Col>
             <Col xs={24} sm={12}>
@@ -101,6 +103,7 @@ const StudentProfile = () => {
                 labelCol={{ span: 24 }}
                 name="national_ID"
                 inputType="number"
+                disabled={true}
               />
             </Col>
             <Col xs={24} sm={12}>
@@ -114,7 +117,7 @@ const StudentProfile = () => {
             </Col>
 
             <Col xs={24} sm={12}>
-              <FormInput label="الجنس" labelCol={{ span: 24 }} name="gender" />
+              <FormInput label="الجنس" labelCol={{ span: 24 }} name="gender" disabled={true}/>
             </Col>
 
             <Col xs={24} sm={12}>
@@ -133,16 +136,17 @@ const StudentProfile = () => {
             </Col>
           </Row>
           <h1>البيانات الأكاديمية</h1>
-          <Row gutter={[16, 16]}>
+          <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
               <FormInput
                 label="اسم الجامعة"
                 labelCol={{ span: 24 }}
                 name="university"
+                disabled={true}
               />
             </Col>
             <Col xs={24} sm={12}>
-              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" />
+              <FormInput label="التخصص" labelCol={{ span: 24 }} name="major" disabled={true}/>
             </Col>
             <Col xs={24} sm={12}>
               <Space>
@@ -151,8 +155,9 @@ const StudentProfile = () => {
                   labelCol={{ span: 24 }}
                   name="GPA"
                   inputType="number"
+                  rules={inputGpaRules(studentData.GPA_Type)}
                 />
-                <FormInput label="من" labelCol={{ span: 24 }} name="GPA_Type" />
+                <FormInput label="من" labelCol={{ span: 24 }} name="GPA_Type" disabled={true}/>
               </Space>
             </Col>
 

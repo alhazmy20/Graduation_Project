@@ -3,10 +3,10 @@ import React from "react";
 import { phoneRules } from '../../Validation/rules';
 import FormInput from './FormInput';
 
-const InstManagerData = ({ formData, handleFormChange }) => {
+const InstManagerData = () => {
   return (
     <>
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col xs={24} sm={12}>
           <FormInput label="الإسم الأول" labelCol={{ span: 24 }} name="fName" />
           </Col>

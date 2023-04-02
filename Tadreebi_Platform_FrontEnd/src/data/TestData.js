@@ -1140,6 +1140,29 @@ export const RegionData = [
   },
 ];
 
+export const SECTORS = [
+  {
+    id: 1,
+    name: "قطاع خاص",
+  },
+  {
+    id: 2,
+    name: "قطاع حكومي",
+  },
+  {
+    id: 3,
+    name: "قطاع خيري",
+  },
+  {
+    id: 4,
+    name: "قطاع شبه حكومي",
+  },
+  {
+    id: 5,
+    name: "قطاع غير ربحي",
+  },
+];
+
 export const PostDetailsData = [
   {
     title: "تدريب تعاوني - تطوير تطبيقات الويب",

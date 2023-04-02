@@ -1,13 +1,19 @@
 import { Col, Row, Select } from "antd";
-import React from "react";
-import { REGIONS, SECTORS } from "../../data/InstitutionData";
+import React, { useState } from "react";
+// import { REGIONS, SECTORS } from "../../data/InstitutionData";
+import { RegionData, SECTORS } from "../../data/TestData";
 import { confirmPasswordRules, passwordRules } from "../../Validation/rules";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
-import {useFetchMajorsAndCities} from '../../data/API'
+import { useFetchMajorsAndCities } from "../../data/API";
 
 const InstitutionData = ({ withPassword }) => {
-    const {cities, majors} = useFetchMajorsAndCities()
+  const { majors } = useFetchMajorsAndCities();
+  const [selectedRegion, setSelectedRegion] = useState("");
+  
+  const handleRegionChange = (value) => {
+    setSelectedRegion(value);
+  };
   return (
     <>
       <Row gutter={[16, 2]}>
@@ -32,21 +38,23 @@ const InstitutionData = ({ withPassword }) => {
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
-          <FormSelect name="region" label="المنطقة" labelCol={{ span: 24 }}>
-            {REGIONS.map((region) => (
-              <Select.Option key={region.id} value={region.name}>
-                {region.name}
-              </Select.Option>
-            ))}
+          <FormSelect name="region" label="المنطقة" labelCol={{ span: 24 }} onChange={handleRegionChange}>
+          {RegionData.map((region) => (
+            <Select.Option key={region.id} value={region.region}>
+              {region.name}
+            </Select.Option>
+          ))}
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
           <FormSelect name="city" label="المدينة" labelCol={{ span: 24 }}>
-            {cities?.map((elm) => (
-              <Select.Option key={elm._id} value={elm.cityName}>
-                {elm.cityName}
+          {RegionData.find((r) => r.region === selectedRegion)?.cities.map(
+            (city) => (
+              <Select.Option key={city.id} value={city.city}>
+                {city.city}
               </Select.Option>
-            ))}
+            )
+          )}
           </FormSelect>
         </Col>
 
@@ -91,17 +99,16 @@ const InstitutionData = ({ withPassword }) => {
                 rules={confirmPasswordRules}
               />
             </Col>
-           
           </>
         )}
         <Col xs={24} sm={12}>
-        <FormInput
-          label="رقم الهاتف"
-          labelCol={{ span: 24 }}
-          name="institutionPhone"
-          inputType="number"
-        />
-      </Col>
+          <FormInput
+            label="رقم الهاتف"
+            labelCol={{ span: 24 }}
+            name="institutionPhone"
+            inputType="number"
+          />
+        </Col>
       </Row>
     </>
   );
