@@ -29,20 +29,13 @@ const InstPostForm = () => {
 
   const onFinish = async (values) => {
     //api code
-    console.log(formPostData);
+    console.log(values);
   };
 
   const handleEditorChange = (content) => {
     handleInputChange("content", content);
   };
-  //v1
-  //   const handleInputChange = (name, value) => {
-  //     setFormPostData((prevState) => ({
-  //       ...prevState,
-  //       [name]: value,
-  //     }));
-  //   };
-  //v2
+
   const handleInputChange = (name, value) => {
     if (name === "majors") {
       const majors = value.map((id) => ({
@@ -86,7 +79,7 @@ const InstPostForm = () => {
               name="title"
               rules={[{ required: true, message: "الرجاء ادخال العنوان" }]}
             >
-              <Input name="title" placeholder="عنوان فرصة التدريب ..." />
+              <Input placeholder="عنوان فرصة التدريب ..." />
             </Form.Item>
           </Col>
           <Col style={{ textAlign: "left" }}>
@@ -100,6 +93,7 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">نوع البرنامج التدريبي: </label>
                 <Form.Item
+                  name="t_type"
                   rules={[
                     {
                       required: true,
@@ -108,12 +102,7 @@ const InstPostForm = () => {
                   ]}
                   style={{ flexGrow: "2", justifyContent: "center" }}
                 >
-                  <Radio.Group
-                    onChange={(e) =>
-                      handleInputChange("t_type", e.target.value)
-                    }
-                    value={formPostData.t_type}
-                  >
+                  <Radio.Group>
                     <Radio value={"حضوري"}>حضوري</Radio>
                     <Radio value={"عن بعد"}>عن بعد</Radio>
                   </Radio.Group>
@@ -137,7 +126,6 @@ const InstPostForm = () => {
                     style={{ flexGrow: "2" }}
                     defaultValue="اختر المنطقة"
                     showSearch
-                    onChange={(value) => handleInputChange("region", value)}
                   >
                     <Select.Option key="*" value="كل المناطق" />
                     {RegionData.map((region) => (
@@ -150,27 +138,40 @@ const InstPostForm = () => {
               </Row>
               <Row className="RowDivElment">
                 <label className="label">تاريخ البدء: </label>
-
-                <DatePicker
-                  placeholder="اختر تاريخ بدء التدريب"
-                  style={{ flexGrow: "2" }}
+                <Form.Item
                   name="t_startDate"
-                  onChange={(date, dateString) =>
-                    handleInputChange("t_startDate", dateString)
-                  }
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: " ادخال تاريخ بدء التدريب",
+                    },
+                  ]}
+                  style={{ flexGrow: "2", justifyContent: "center" }}
+                >
+                  <DatePicker
+                    placeholder="اختر تاريخ بدء التدريب"
+                    style={{ width: "100%" }}
+                  />
+                </Form.Item>
               </Row>
               <Row className="RowDivElment">
                 <label className="label">تاريخ انتهاء الإعلان: </label>
-
-                <DatePicker
-                  placeholder="اختر تاريخ انتهاء الإعلان"
-                  style={{ flexGrow: "2" }}
+                <Form.Item
                   name="p_endDate"
-                  onChange={(date, dateString) =>
-                    handleInputChange("p_endDate", dateString)
-                  }
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: " ادخال تاريخ انتهاء الإعلان",
+                    },
+                  ]}
+                  style={{ flexGrow: "2", justifyContent: "center" }}
+                >
+                  <DatePicker
+                    placeholder="اختر تاريخ انتهاء الإعلان"
+                    style={{ width: "100%" }}
+                    format="YYYY-MM-DD"
+                  />
+                </Form.Item>
               </Row>
             </Col>
 
@@ -178,6 +179,7 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">مكافأة: </label>
                 <Form.Item
+                  name="reward"
                   rules={[
                     {
                       required: true,
@@ -215,7 +217,6 @@ const InstPostForm = () => {
                     style={{ flexGrow: "2" }}
                     defaultValue="اختر المدينة"
                     showSearch
-                    onChange={(value) => handleInputChange("city", value)}
                   >
                     <Select.Option key="*" value="كل المدن" />
                     {RegionData.filter(
@@ -233,20 +234,28 @@ const InstPostForm = () => {
 
               <Row className="RowDivElment">
                 <label className="label">تاريخ الإنتهاء: </label>
-
-                <DatePicker
-                  placeholder="اختر تاريخ إنتهاء التدريب"
-                  style={{ flexGrow: "2" }}
+                <Form.Item
                   name="t_endDate"
-                  onChange={(date, dateString) =>
-                    handleInputChange("t_endDate", dateString)
-                  }
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: " ادخال تاريخ انتهاء الإعلان",
+                    },
+                  ]}
+                  style={{ flexGrow: "2", justifyContent: "center" }}
+                >
+                  <DatePicker
+                    placeholder="اختر تاريخ إنتهاء التدريب"
+                    style={{ width: "100%" }}
+                    format="YYYY-MM-DD"
+                  />
+                </Form.Item>
               </Row>
 
               <Row className="RowDivElment">
                 <label className="label">الجنس: </label>
                 <Form.Item
+                  name="gender"
                   rules={[
                     {
                       required: true,
@@ -255,12 +264,7 @@ const InstPostForm = () => {
                   ]}
                   style={{ flexGrow: "2", justifyContent: "center" }}
                 >
-                  <Radio.Group
-                    onChange={(e) =>
-                      handleInputChange("gender", e.target.value)
-                    }
-                    value={formPostData.gender}
-                  >
+                  <Radio.Group>
                     <Radio value={0}>ذكر</Radio>
                     <Radio value={1}>انثى</Radio>
                     <Radio value={2}>كليهما</Radio>

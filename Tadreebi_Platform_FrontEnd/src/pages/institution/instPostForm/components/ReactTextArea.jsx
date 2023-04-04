@@ -37,6 +37,9 @@ const ReactTextArea = (props) => {
     "video",
     "formula",
   ];
+
+
+  
   return (
     <ReactQuill
       placeholder="تفاصيل فرصة التدريب ... "
@@ -44,6 +47,7 @@ const ReactTextArea = (props) => {
       onChange={props.formfun}
       modules={modules}
       formats={formats}
+      
     />
   );
 };
