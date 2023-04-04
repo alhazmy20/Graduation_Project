@@ -2,7 +2,7 @@ import { Form, Select } from "antd";
 import React from "react";
 
 const FormSelect = (props) => {
-  const { label, children, ...others } = props;
+  const { label, children,options,onChange, ...others } = props;
   return (
     <>
       <label
@@ -16,7 +16,7 @@ const FormSelect = (props) => {
         {label}
       </label>
       <Form.Item rules={[{ required: true, message: `الرجاء اختيار ${label}` }]} {...others}>
-        <Select allowClear showSearch>
+        <Select allowClear showSearch options={options} onChange={onChange}>
           {children}
         </Select>
       </Form.Item>

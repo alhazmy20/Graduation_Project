@@ -214,5 +214,23 @@
       "internshipLetter": null,
       "collegeTranscript": null
     }
-  ]
+  ],
+  "institutions": [
+    {
+      "id": 1,
+      "institutionName": "شركة التقنيات الحديثة",
+      "institutionSector": "قطاع خاص",
+      "region": "منطقة المدينة المنورة",
+      "city": "ينبع",
+      "institutionField": "إتصالات وتقنية المعلومات",
+      "email": "altiqniaat_alhaditha@example.com",
+      "fName": "يزيد",
+      "lName": "العلوي",
+      "managerPosition": "مسؤول التدريب",
+      "managerEmail": "yazeed.alalawi@example.com",
+      "managerPhone": "0545930922",
+      "institutionPhone":"0545930922"
+    }
+]
+
 }

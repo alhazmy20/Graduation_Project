@@ -4,7 +4,7 @@ import "./Spinner.scss";
 
 const Spinner = () => {
   return (
-    <div class="spin-container">
+    <div className="spin-container">
       <Spin size="large" />
     </div>
   );

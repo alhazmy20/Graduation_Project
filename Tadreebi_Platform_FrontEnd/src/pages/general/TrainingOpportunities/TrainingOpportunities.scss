@@ -40,10 +40,17 @@
       }
     }
 
-    .search-button {
+    .clear-button {
       background-color: #f7f7f7;
       color: #555;
       font-weight: 600;
+    }
+
+    .search-button{
+      background-color: $Green;
+      width: 100px;
+      font-weight: 600;
+      margin: auto;
     }
   }
 

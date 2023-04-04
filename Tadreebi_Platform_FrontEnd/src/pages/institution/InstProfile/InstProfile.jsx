@@ -1,60 +1,68 @@
-import { Button, Card, Form, message } from "antd";
-import React, { useState } from "react";
+import { Button, Card, Form, message, notification } from "antd";
+import React, { useEffect, useState } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
-import PictureCircle from "../../../components/ui/PictureCircle/PictureCircle";
 import "./InstProfile.scss";
 import InstitutionData from "../../../components/form/InstitutionData ";
 import InstManagerData from "../../../components/form/InstManagerData";
+import axios from "axios";
+import Spinner from "../../../components/ui/Spinner/Spinner";
+import ProfileImage from '../../../components/ui/ProfileImage/ProfileImage'
 
 const InstProfile = () => {
-  const [formData, setFormData] = useState({
-    institutionName: "شركة التقنيات الحديثة",
-    institutionField: "",
-    city: "",
-    institutionSector: "قطاع حكومي",
-    region: "منطقة المدينة المنورة",
-    email: "",
-    fName: "",
-    lName: "",
-    managerEmail: "",
-    managerPosition: "",
-    managerPhone: "",
-  });
-  const [formInitialValues, setFormInitialValues] = useState(formData);
+  const [form] = Form.useForm();
+
+  const [formData, setFormData] = useState(null);
+  const [isFormChanged, setIsFormChanged] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false); // Add new state
 
-  const handleFormChange = (changedValues, allValues) => {
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/institutions/1")
+      .then((response) => {
+        setFormData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        notification.error({
+          message: "لقد حدث خطأ",
+          description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
+        });
+      });
+  }, []);
+
+  const onFinish = async (values) => {
+    console.log(formData);
+    // message.success("تم تحديث البيانات بنجاح");
+  };
+
+  const onFormValuesChange = (changedValues, allValues) => {
     setFormData((prevState) => ({
       ...prevState,
       ...allValues,
+      "managerPhone": parseFloat(changedValues.managerPhone)
     }));
+    setIsFormChanged(
+      Object.keys(changedValues).some((key) => allValues[key] !== formData[key]) )
+    
   };
 
-  const onFinish = async (values) => {
-    setIsSubmitting(true); // Set isSubmitting to true before submitting the form
-    console.log(formData);
-    setTimeout(() => {
-      setIsSubmitting(false); // Set isSubmitting to false after submitting the form
-    }, 2000);
-    setFormInitialValues(formData);
-    message.success("تم تحديث البيانات بنجاح");
-  };
-
-  let isButtonDisabled =
-    JSON.stringify(formData) === JSON.stringify(formInitialValues);
+  if (!formData) {
+    return <Spinner />;
+  }
 
   return (
     <div className="institution-profile">
       <div className="profileImage">
-        <PictureCircle />
-        <span className="name">شركة التقنيات الحديثة</span>
+        <ProfileImage/>
+        {/*<span className="name">شركة التقنيات الحديثة</span>*/}
       </div>
       <Card className="card">
         <Form
-          onValuesChange={handleFormChange}
+          form={form}
           onFinish={onFinish}
           className="form"
           initialValues={formData}
+          onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
         >
           <h1>بيانات المنشأة</h1>
           <InstitutionData />
@@ -64,7 +72,7 @@ const InstProfile = () => {
             type="primary"
             htmlType="submit"
             className="save-button"
-            disabled={isButtonDisabled}
+            disabled={!isFormChanged} // Disable button if the form is not changed
           >
             {isSubmitting ? "جاري الحفظ..." : "حفظ"}
           </Button>

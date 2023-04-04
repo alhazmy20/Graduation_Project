@@ -32,7 +32,7 @@ const InputFile = (props) => {
           beforeUpload={handleBeforeUpload}
           multiple={false}
           fileList={ []}
-          accept=".pdf"
+          accept=".pdf"//NOTE only pdf file
           onChange={(e) => {
             setFile(e.file.name);
           }}

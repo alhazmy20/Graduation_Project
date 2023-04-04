@@ -1,0 +1,59 @@
+@import "../../../index.scss";
+
+.profile-image {
+  margin: 1rem;
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .circle {
+      position: relative;
+      background-color: #eef4fa;
+      width: fit-content;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+
+      img {
+        //   width: 80px;
+        //   height: 80px;
+        //   border-radius: 50%;
+        object-fit: contain;
+        //   padding: 5px;
+      }
+
+      .ant-image-mask {
+        border-radius: 50%;
+      }
+      .ant-image-preview-operations {
+        display: none;
+      }
+
+      .icon {
+        position: absolute;
+        bottom: -0px;
+        left: -2px;
+        background-color: #eef4fa;
+        color: $steelTeal;
+        padding: 5px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 12px;
+
+        &:hover {
+          background-color: $steelTeal;
+          color: #fff;
+        }
+      }
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+}
