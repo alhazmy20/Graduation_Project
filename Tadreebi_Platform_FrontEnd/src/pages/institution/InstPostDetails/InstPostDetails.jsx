@@ -8,6 +8,7 @@ import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import ConditionModal from "./components/conditionModal";
+import StudentModal from "./components/StudentModal";
 
 const InstPostDetails = () => {
   const { id } = useParams();
@@ -16,10 +17,11 @@ const InstPostDetails = () => {
   );
   const [modalOpen, setModalOpen] = useState(false);
   const [condition, setCondition] = useState("");
+  const [detailsOpen, setDetailsOpen] = useState(false)
   const dataSource = [
     {
       key: "1",
-      stuName: "فلان فلان الفلاني",
+      stuName: <span>{<Button type='text' onClick={() => {setDetailsOpen(true)}}>فلان فلان الفلاني</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>,
       university: "جامعة طيبة",
       gpa: "5/4.9",
       specialization: "نظم معلومات",

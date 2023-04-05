@@ -7,17 +7,24 @@ import "./News.scss";
 import { GetAllNews } from "../../../data/API";
 import { itemRender } from "../../../components/ui/Pagination";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../../components/ui/Spinner/Spinner";
 
 const { Meta } = Card;
 
 const News = () => {
   const navigate = useNavigate();
-  const { data } = GetAllNews("http://localhost:8000/news");
+  const { data,loading } = GetAllNews("http://localhost:8000/news");
+
+  if(!loading){
+    return <Spinner/>
+  }
+
   return (
     <List
       className="listContainer"
       itemLayout="vertical"
       size="middle"
+      locale={{emptyText: (<span style={{color: 'black'}}>لا توجد بيانات</span>)}}
       pagination={{
         onChange: (page) => {
           console.log(page);

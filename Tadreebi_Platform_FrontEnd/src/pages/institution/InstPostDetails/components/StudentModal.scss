@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+@import "../../../../index.scss";
+
+
+
+.StudentModalContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .AvatarName{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .Row{
+        display: flex;
+        margin: 0 auto;
+        gap: 25px;
+        strong{
+            color: $Green;
+        }
+        .ColOne{
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .ColTwo{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
