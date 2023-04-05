@@ -3,17 +3,15 @@ import { List } from "antd";
 import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 import Spinner from '../../../../components/ui/Spinner/Spinner.jsx';
-
+import NoData from '../../../../components/ui/NoData/NoData.jsx';
 
 const PostList = (props) => {
   const { data, loading } = props;
   
 
-  // if(!loading){
-  //   return <Spinner/>
-  // }
-
-
+  if(!loading){
+    return <Spinner/>
+  }
 
   return (
     <List
@@ -37,6 +35,7 @@ const PostList = (props) => {
         align: "center",
         pageSize: 8,
       }}
+      locale= {{emptyText: <NoData text={'لا توجد فرص تدريب حاليا'}/>}}
       dataSource={data}
       renderItem={(item) => (
         <List.Item>

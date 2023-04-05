@@ -29,11 +29,8 @@ const TrainingOpportunities = () => {
 
   const [form] = Form.useForm();
 
-  const majorOptions = saudiClassificationData.flatMap((major) =>
-    major.majors.map((majorName) => ({
-      value: majorName.title,
-      label: majorName.title,
-    }))
+  const majorOptions = saudiClassificationData.flatMap(({ majors }) =>
+    majors.map(({ id, title: label }) => ({ label, value: label }))
   );
 
   const handleRegionChange = (value) => {
@@ -101,7 +98,9 @@ const TrainingOpportunities = () => {
           </Button>
         </Form>
       </header>
-      <main>{!loading ? <Spinner /> : <PostList data={data} />}</main>
+      <main>
+        <PostList data={data} loading={loading} />
+      </main>
     </div>
   );
 };

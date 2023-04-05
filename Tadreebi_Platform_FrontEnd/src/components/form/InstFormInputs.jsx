@@ -1,13 +1,12 @@
 import { Col, Row, Select } from "antd";
 import React, { useState } from "react";
-// import { REGIONS, SECTORS } from "../../data/InstitutionData";
 import { RegionData, SECTORS } from "../../data/TestData";
 import { confirmPasswordRules, passwordRules } from "../../Validation/rules";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useFetchMajorsAndCities } from "../../data/API";
 
-const InstitutionData = ({ withPassword }) => {
+const InstFormInputs = ({ withPassword }) => {
   const { majors } = useFetchMajorsAndCities();
   const [selectedRegion, setSelectedRegion] = useState("");
   
@@ -114,4 +113,4 @@ const InstitutionData = ({ withPassword }) => {
   );
 };
 
-export default InstitutionData;
+export default InstFormInputs;

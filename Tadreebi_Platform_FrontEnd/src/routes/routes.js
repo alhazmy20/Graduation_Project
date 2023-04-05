@@ -21,9 +21,9 @@ import {
   InstPostDetails,
   InstPosts,
   InstProfile,
-  InstPostForm
+  InstPostForm,
+  AdminLayout,
 } from "../pages/index";
-
 
 //Institution Routes
 const institutionRoutes = (
@@ -34,8 +34,6 @@ const institutionRoutes = (
     <Route path="profile" element={<InstProfile />} />
     <Route path="newPost" element={<InstPostForm />} />
     <Route path="newPost/:id" element={<InstPostForm />} />
-
-   
   </Route>
 );
 
@@ -48,7 +46,11 @@ const studentRoutes = (
 );
 
 //Admin Routes
-const adminRoutes = <Route path="admin"></Route>;
+const adminRoutes = (
+  <Route path="admin" element={<AdminLayout />}>
+    <Route index element={<h1>الصفحة الرئيسية</h1>} />
+  </Route>
+);
 
 //This is an entire route for our app.
 export const routes = createBrowserRouter(

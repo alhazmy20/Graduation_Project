@@ -1,0 +1,20 @@
+@import '../../../index.scss';
+.no-data{
+    img{
+        width: 150px;
+    }
+    h1{
+        font-size: 20px;
+        color: #8d8d8d;
+    }
+
+    @include breakpoint-down(small) {
+        img{
+            width: 100px;
+        }
+
+        h1{
+            font-size: 16px;
+        }
+      }
+}

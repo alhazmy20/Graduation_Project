@@ -7,21 +7,38 @@ import {
   faXmark,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
-import {  Dropdown, Image, Modal } from "antd";
+import { Dropdown, Image, Modal } from "antd";
+import axios from "axios";
 
 const ProfileImage = () => {
   const [imageSrc, setImageSrc] = useState(null);
   const [deleted, setDeleted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = () => {
       setImageSrc(reader.result);
       setDeleted(true);
-      // Send the image to the API here
-      console.log(file);
+
+      // Create a new FormData object
+    //   const formData = new FormData();
+    //   formData.append("image", file);
+
+      // Send the image to the API using Axios
+    //   axios
+    //     .post("https://example.com/upload-image", formData, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log(response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
     };
     reader.readAsDataURL(file);
   };
@@ -94,6 +111,7 @@ const ProfileImage = () => {
             width={75}
             height={75}
             style={{ fontSize: "18px", borderRadius: "50%" }}
+            loading="lazy"
           />
           <Dropdown menu={{ items }} placement="bottom" className="menu">
             <FontAwesomeIcon className="icon" icon={faPen} />
@@ -118,7 +136,7 @@ const ProfileImage = () => {
             <p>سيتم حذف الصورة نهائياً. هل أنت متأكد؟</p>
           </Modal>
         </div>
-        <span className='name'>يزيد العلوي</span>
+        <span className="name">يزيد العلوي</span>
       </div>
     </div>
   );

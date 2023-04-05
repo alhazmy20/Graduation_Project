@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import "./InstSignup.scss";
 import { Steps, Card, Form, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import InstitutionData from "../../../components/form/InstitutionData ";
-import InstManagerData from "../../../components/form/InstManagerData";
+import InstFormInputs from "../../../components/form/InstFormInputs";
+import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
 
 const InstSignup = () => {
   const navigate = useNavigate();
@@ -62,11 +62,11 @@ const InstSignup = () => {
   const steps = [
     {
       title: "معلومات المنشأة",
-      content: <InstitutionData withPassword={true} />,
+      content: <InstFormInputs withPassword={true} />,
     },
     {
       title: "معلومات المسؤول",
-      content: <InstManagerData />,
+      content: <InstManagerFormInputs />,
     },
   ];
 

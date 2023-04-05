@@ -3,7 +3,7 @@ import React from "react";
 import { phoneRules } from '../../Validation/rules';
 import FormInput from './FormInput';
 
-const InstManagerData = () => {
+const InstManagerFormInputs = () => {
   return (
     <>
       <Row gutter={[16, 0]}>
@@ -46,4 +46,4 @@ const InstManagerData = () => {
   );
 };
 
-export default InstManagerData;
+export default InstManagerFormInputs;

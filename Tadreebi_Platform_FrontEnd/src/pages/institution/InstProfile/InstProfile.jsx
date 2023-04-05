@@ -2,11 +2,11 @@ import { Button, Card, Form, message, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./InstProfile.scss";
-import InstitutionData from "../../../components/form/InstitutionData ";
-import InstManagerData from "../../../components/form/InstManagerData";
+import InstFormInputs from "../../../components/form/InstFormInputs";
+import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
 import axios from "axios";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import ProfileImage from '../../../components/ui/ProfileImage/ProfileImage'
+import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 
 const InstProfile = () => {
   const [form] = Form.useForm();
@@ -39,11 +39,11 @@ const InstProfile = () => {
     setFormData((prevState) => ({
       ...prevState,
       ...allValues,
-      "managerPhone": parseFloat(changedValues.managerPhone)
+      managerPhone: parseFloat(changedValues.managerPhone),
     }));
     setIsFormChanged(
-      Object.keys(changedValues).some((key) => allValues[key] !== formData[key]) )
-    
+      Object.keys(changedValues).some((key) => allValues[key] !== formData[key])
+    );
   };
 
   if (!formData) {
@@ -53,7 +53,7 @@ const InstProfile = () => {
   return (
     <div className="institution-profile">
       <div className="profileImage">
-        <ProfileImage/>
+        <ProfileImage />
         {/*<span className="name">شركة التقنيات الحديثة</span>*/}
       </div>
       <Card className="card">
@@ -65,9 +65,9 @@ const InstProfile = () => {
           onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
         >
           <h1>بيانات المنشأة</h1>
-          <InstitutionData />
+          <InstFormInputs />
           <h1>بيانات المسؤول</h1>
-          <InstManagerData />
+          <InstManagerFormInputs />
           <Button
             type="primary"
             htmlType="submit"

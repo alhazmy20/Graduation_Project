@@ -9,7 +9,7 @@ const Container = (props) => {
       align="top"
       className={`${props.className} container-layout`}
     >
-      <Col lg={20} sm={24} xs={24}>
+      <Col lg={props.colLg} sm={24} xs={24}>
         <section>{props.children}</section>
       </Col>
     </Row>

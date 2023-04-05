@@ -7,7 +7,7 @@ export default function RootLayout() {
   return (
     <div className="root-layout" style={{ minHeight: "100vh" }}>
       <Navbar />
-      <Container>
+      <Container colLg={20}>
         <Outlet />
       </Container>
       <Footer />
