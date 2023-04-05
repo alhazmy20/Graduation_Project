@@ -29,7 +29,7 @@ const InstPostForm = () => {
 
   const onFinish = async (values) => {
     //api code
-    console.log(values);
+    console.log(formPostData);
   };
 
   const handleEditorChange = (content) => {
@@ -139,7 +139,6 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">تاريخ البدء: </label>
                 <Form.Item
-                  name="t_startDate"
                   rules={[
                     {
                       required: true,
@@ -151,13 +150,16 @@ const InstPostForm = () => {
                   <DatePicker
                     placeholder="اختر تاريخ بدء التدريب"
                     style={{ width: "100%" }}
+                    name="t_startDate"
+                    onChange={(date, dateString) =>
+                      handleInputChange("t_startDate", dateString)
+                    }
                   />
                 </Form.Item>
               </Row>
               <Row className="RowDivElment">
                 <label className="label">تاريخ انتهاء الإعلان: </label>
                 <Form.Item
-                  name="p_endDate"
                   rules={[
                     {
                       required: true,
@@ -169,7 +171,9 @@ const InstPostForm = () => {
                   <DatePicker
                     placeholder="اختر تاريخ انتهاء الإعلان"
                     style={{ width: "100%" }}
-                    format="YYYY-MM-DD"
+                    onChange={(date, dateString) =>
+                      handleInputChange("p_endDate", dateString)
+                    }
                   />
                 </Form.Item>
               </Row>
@@ -235,7 +239,7 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">تاريخ الإنتهاء: </label>
                 <Form.Item
-                  name="t_endDate"
+                 
                   rules={[
                     {
                       required: true,
@@ -247,7 +251,9 @@ const InstPostForm = () => {
                   <DatePicker
                     placeholder="اختر تاريخ إنتهاء التدريب"
                     style={{ width: "100%" }}
-                    format="YYYY-MM-DD"
+                    onChange={(date, dateString) =>
+                      handleInputChange("t_endDate", dateString)
+                    }
                   />
                 </Form.Item>
               </Row>

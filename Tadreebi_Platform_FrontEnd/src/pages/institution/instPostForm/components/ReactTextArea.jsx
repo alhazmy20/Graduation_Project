@@ -25,21 +25,16 @@ const ReactTextArea = (props) => {
     "strike",
     "color",
     "background",
-
     "bullet",
     "script",
-
     "direction",
     "blockquote",
-
     "link",
     "image",
     "video",
     "formula",
   ];
 
-
-  
   return (
     <ReactQuill
       placeholder="تفاصيل فرصة التدريب ... "
@@ -47,7 +42,6 @@ const ReactTextArea = (props) => {
       onChange={props.formfun}
       modules={modules}
       formats={formats}
-      
     />
   );
 };
