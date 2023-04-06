@@ -8,6 +8,9 @@
     .Sidebar {
         border-left: 1px solid #4FD1C5;
 
+        .ps-sidebar-container{
+            background-color: white;
+        }
         .platformContainer {
             display: flex;
             justify-content: center;
@@ -48,6 +51,16 @@
         .MenuItem {
             text-align: center;
              width: 100%;
+             padding: 0 1rem;
+             .ps-menu-button{
+                border-radius: 11.25px;
+             }
+             .ps-menu-icon{
+                background-color: #f6f6f6;
+                color: #4FD1C5;
+                border-radius: 9px;
+                margin: 0;
+             }
             .SubMenu {
                 text-align: right;
             }

@@ -14,10 +14,8 @@ const AdminSidebar = () => {
           <span className='Name'>عبدالمحسن الحازمي</span>
           <hr className='hLine'/>
         </div>
-  <Menu>
-    <MenuItem className='MenuItem' icon={<div style={{backgroundColor:'#F6F6F6'}}>
-      <FontAwesomeIcon  icon={faHome} />
-    </div>}>الرئيسية</MenuItem>
+  <Menu renderExpandIcon={({open}) => <span>{open ? '-' : '+'}</span>}>
+    <MenuItem className='MenuItem' icon={<FontAwesomeIcon  icon={faHome} />}>الرئيسية</MenuItem>
     <SubMenu className='MenuItem' label="ادارة المستخدمين" icon={<FontAwesomeIcon  icon={faPerson} />}>
       <MenuItem className='SubMenu'> ادارة المؤسسات </MenuItem>
       <MenuItem className='SubMenu'> ادارة الطلاب </MenuItem>
