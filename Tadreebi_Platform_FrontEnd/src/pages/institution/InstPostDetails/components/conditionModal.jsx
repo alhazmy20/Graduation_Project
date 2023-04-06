@@ -6,6 +6,7 @@ const ConditionModal = ({ modalOpen, setModalOpen, condition }) => {
   return (
     <Modal
       title="تنبيه:"
+      className="modalContainer"
       open={modalOpen}
       onOk={() => setModalOpen(false)}
       onCancel={() => setModalOpen(false)}
