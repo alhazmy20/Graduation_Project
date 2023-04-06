@@ -3,52 +3,54 @@
 
 
 
-.ant-modal-header {
-    display: flex;
-    justify-content: center;
 
-    .ant-modal-title {
-        color: #F46A61;
-
-        @include breakpoint-up(xlarge) {
-            font-size: 1.25rem;
-        }
-    }
-}
-
-
-.modalDetailsContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .modalDetails {
-        @include breakpoint-up(xlarge) {
-            font-size: 1.25rem;
-        }
-    }
-
-    .btnsContainer {
-        .Accept {
-            background-color: $Green;
-            color: $white;
-            margin-left: 5px;
-
-            strong {
-                padding: 1.25rem 1.25rem;
-            }
-        }
-
-        .Reject {
-            background-color: #F46A61;
-            color: $white;
-            margin-right: 5px;
-
-            strong {
-                padding: 1.25rem 1.25rem;
+.modalContainer{
+    .ant-modal-header {
+        display: flex;
+        justify-content: center;
+    
+        .ant-modal-title {
+            color: #F46A61;
+    
+            @include breakpoint-up(xlarge) {
+                font-size: 1.25rem;
             }
         }
     }
+    
 
+    .modalDetailsContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+        .modalDetails {
+            @include breakpoint-up(xlarge) {
+                font-size: 1.25rem;
+            }
+        }
+    
+        .btnsContainer {
+            .Accept {
+                background-color: $Green;
+                color: $white;
+                margin-left: 5px;
+    
+                strong {
+                    padding: 1.25rem 1.25rem;
+                }
+            }
+    
+            .Reject {
+                background-color: #F46A61;
+                color: $white;
+                margin-right: 5px;
+    
+                strong {
+                    padding: 1.25rem 1.25rem;
+                }
+            }
+        }
+    }
 }
