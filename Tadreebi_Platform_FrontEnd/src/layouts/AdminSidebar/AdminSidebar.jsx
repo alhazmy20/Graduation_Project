@@ -1,5 +1,6 @@
 import React from 'react'
 import './AdminSidebar.scss'
+import { Link } from 'react-router-dom';
 import { Sidebar,SubMenu, Menu, MenuItem, useProSidebar } from 'react-pro-sidebar';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faPerson,faClipboard,faInfoCircle,faSignOut } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +19,7 @@ const AdminSidebar = () => {
     <MenuItem className='MenuItem' icon={<FontAwesomeIcon  icon={faHome} />}>الرئيسية</MenuItem>
     <SubMenu className='MenuItem' label="ادارة المستخدمين" icon={<FontAwesomeIcon  icon={faPerson} />}>
       <MenuItem className='SubMenu'> ادارة المؤسسات </MenuItem>
-      <MenuItem className='SubMenu'> ادارة الطلاب </MenuItem>
+      <Link to={`/admin/studentstable`}><MenuItem className='SubMenu'> ادارة الطلاب </MenuItem></Link>
       <MenuItem className='SubMenu'> ادارة المشرفين </MenuItem>
     </SubMenu>
     <SubMenu className='MenuItem' label="ادارة المحتوى" icon={<FontAwesomeIcon  icon={faClipboard} />}>
