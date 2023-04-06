@@ -192,12 +192,7 @@ const InstPostForm = () => {
                   ]}
                   style={{ flexGrow: "2", justifyContent: "center" }}
                 >
-                  <Radio.Group
-                    onChange={(e) =>
-                      handleInputChange("reward", e.target.value)
-                    }
-                    value={formPostData.reward}
-                  >
+                  <Radio.Group>
                     <Radio value={1}>نعم</Radio>
                     <Radio value={0}>لا</Radio>
                   </Radio.Group>
@@ -239,7 +234,6 @@ const InstPostForm = () => {
               <Row className="RowDivElment">
                 <label className="label">تاريخ الإنتهاء: </label>
                 <Form.Item
-                 
                   rules={[
                     {
                       required: true,
