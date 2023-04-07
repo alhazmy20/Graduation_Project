@@ -1,10 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+@import "../../../../index.scss";
+
 .instModal {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 2rem;
 
   .delButton {
-    background-color: red;
+    background-color: #F46A61;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 2rem;
+  }
+  .cancelButton {
+    background-color: $Green;
     color: white;
     font-weight: 600;
     font-size: 1rem;

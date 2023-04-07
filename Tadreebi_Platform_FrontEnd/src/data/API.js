@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { notification } from 'antd';
+import { notification } from "antd";
 
 export function GetAllNews(url) {
   const [data, setData] = useState([]);
@@ -11,7 +11,7 @@ export function GetAllNews(url) {
   useEffect(() => {
     axios.get(url).then((response) => {
       setData(response.data);
-      setLoading(true)
+      setLoading(true);
     });
   }, [url]);
   return { data, loading, error };
@@ -88,3 +88,24 @@ export const useFetchMajorsAndCities = () => {
 
   return { majors, cities };
 };
+
+export function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return { data, loading, error };
+}

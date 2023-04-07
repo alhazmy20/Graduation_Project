@@ -14,6 +14,7 @@ const InstModal = ({ modalOpen, setModalOpen }) => {
     >
       <div className="instModal">
             <Button className="delButton">حذف</Button>
+            <Button className="cancelButton">الغاء</Button>
       </div>
     </Modal>
   );

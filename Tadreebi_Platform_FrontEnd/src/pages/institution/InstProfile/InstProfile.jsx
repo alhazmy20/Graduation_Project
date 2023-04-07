@@ -7,33 +7,28 @@ import InstManagerFormInputs from "../../../components/form/InstManagerFormInput
 import axios from "axios";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
+import FormCard from '../../../components/ui/FormCard/FormCard';
+import { useFetch } from '../../../data/API';
 
-const InstProfile = () => {
+const InstProfile = ({isAdmin}) => {
   const [form] = Form.useForm();
 
   const [formData, setFormData] = useState(null);
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Add new state
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/institutions/1")
-      .then((response) => {
-        setFormData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        notification.error({
-          message: "لقد حدث خطأ",
-          description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
-        });
-      });
-  }, []);
+  const { data, loading, error } = useFetch("http://localhost:8000/institutions/1");
 
-  const onFinish = async (values) => {
-    console.log(formData);
-    // message.success("تم تحديث البيانات بنجاح");
-  };
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error({
+      message: "لقد حدث خطأ",
+      description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
+    });
+  }
 
   const onFormValuesChange = (changedValues, allValues) => {
     setFormData((prevState) => ({
@@ -42,30 +37,33 @@ const InstProfile = () => {
       managerPhone: parseFloat(changedValues.managerPhone),
     }));
     setIsFormChanged(
-      Object.keys(changedValues).some((key) => allValues[key] !== formData[key])
+      Object.keys(changedValues).some((key) => allValues[key] !== data[key])
     );
   };
 
-  if (!formData) {
-    return <Spinner />;
-  }
+  const onFinish = async (values) => {
+    console.log(values);
+    setIsSubmitting(true)
+   
+    // message.success("تم تحديث البيانات بنجاح");
+  };
+
 
   return (
     <div className="institution-profile">
       <div className="profileImage">
-        <ProfileImage />
-        {/*<span className="name">شركة التقنيات الحديثة</span>*/}
+        <ProfileImage name={data.institutionName} />
       </div>
-      <Card className="card">
+      <FormCard className="card">
         <Form
           form={form}
           onFinish={onFinish}
           className="form"
-          initialValues={formData}
+          initialValues={data}
           onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
         >
           <h1>بيانات المنشأة</h1>
-          <InstFormInputs />
+          <InstFormInputs region={data.region}/>
           <h1>بيانات المسؤول</h1>
           <InstManagerFormInputs />
           <Button
@@ -77,8 +75,8 @@ const InstProfile = () => {
             {isSubmitting ? "جاري الحفظ..." : "حفظ"}
           </Button>
         </Form>
-      </Card>
-      <ResetPassword />
+      </FormCard>
+      {!isAdmin && <ResetPassword />}
     </div>
   );
 };

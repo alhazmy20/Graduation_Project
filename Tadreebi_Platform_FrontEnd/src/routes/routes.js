@@ -25,6 +25,7 @@ import {
   AdminLayout,
   AdminHomePage,
 } from "../pages/index";
+import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
 
 //Institution Routes
 const institutionRoutes = (
@@ -50,7 +51,10 @@ const studentRoutes = (
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
     <Route index element={<AdminHomePage/>} />
+    <Route index element={<h1>الصفحة الرئيسية</h1>} />
+    <Route path="studentstable" element={<StudentsTable />} />
   </Route>
+  
 );
 
 //This is an entire route for our app.
