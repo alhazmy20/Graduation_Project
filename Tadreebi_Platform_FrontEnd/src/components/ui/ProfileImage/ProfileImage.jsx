@@ -10,8 +10,8 @@ import {
 import { Dropdown, Image, Modal } from "antd";
 import axios from "axios";
 
-const ProfileImage = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+const ProfileImage = ({name, personalPicture_url}) => {
+  const [imageSrc, setImageSrc] = useState(personalPicture_url);
   const [deleted, setDeleted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -21,6 +21,7 @@ const ProfileImage = () => {
     reader.onload = () => {
       setImageSrc(reader.result);
       setDeleted(true);
+      console.log(file);
 
       // Create a new FormData object
     //   const formData = new FormData();
@@ -78,7 +79,7 @@ const ProfileImage = () => {
         </label>
       ),
     },
-    deleted && {
+    (deleted || imageSrc) && {
       key: "2",
       label: (
         <span
@@ -136,7 +137,7 @@ const ProfileImage = () => {
             <p>سيتم حذف الصورة نهائياً. هل أنت متأكد؟</p>
           </Modal>
         </div>
-        <span className="name">يزيد العلوي</span>
+        <span className="name">{name}</span>
       </div>
     </div>
   );

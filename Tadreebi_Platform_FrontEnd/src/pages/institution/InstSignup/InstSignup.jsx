@@ -2,10 +2,11 @@ import React, { useState } from "react";
 // import StepOne from "./components/StepOne";
 // import StepTwo from "./components/StepTwo";
 import "./InstSignup.scss";
-import { Steps, Card, Form, Button } from "antd";
+import { Steps, Form, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import InstFormInputs from "../../../components/form/InstFormInputs";
 import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
+import FormCard from '../../../components/ui/FormCard/FormCard';
 
 const InstSignup = () => {
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ const InstSignup = () => {
 
   return (
     <div className="instRegister">
-      <Card className="card">
+      <FormCard className="card">
         <Form
           form={form}
           onValuesChange={handleFormChange}
@@ -126,7 +127,7 @@ const InstSignup = () => {
         <span>
           لديك حساب؟ <Link to="/login">تسجيل الدخول</Link>
         </span>
-      </Card>
+      </FormCard>
     </div>
   );
 };

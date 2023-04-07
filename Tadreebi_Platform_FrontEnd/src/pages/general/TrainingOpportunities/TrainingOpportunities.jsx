@@ -45,6 +45,12 @@ const TrainingOpportunities = () => {
   };
 
   const onFinish = (values) => {
+    const { region, city, major } = values;
+
+    values.region = region === "كل المناطق" ? "" : region;
+    values.city = city === "كل المدن" ? "" : city;
+    values.major = major === "كل التخصصات" ? "" : major;
+
     console.log(values);
   };
 

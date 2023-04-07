@@ -6,10 +6,10 @@ import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useFetchMajorsAndCities } from "../../data/API";
 
-const InstFormInputs = ({ withPassword }) => {
+const InstFormInputs = ({ withPassword, region }) => {
   const { majors } = useFetchMajorsAndCities();
   const [selectedRegion, setSelectedRegion] = useState("");
-  
+
   const handleRegionChange = (value) => {
     setSelectedRegion(value);
   };
@@ -37,23 +37,28 @@ const InstFormInputs = ({ withPassword }) => {
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
-          <FormSelect name="region" label="المنطقة" labelCol={{ span: 24 }} onChange={handleRegionChange}>
-          {RegionData.map((region) => (
-            <Select.Option key={region.id} value={region.region}>
-              {region.name}
-            </Select.Option>
-          ))}
+          <FormSelect
+            name="region"
+            label="المنطقة"
+            labelCol={{ span: 24 }}
+            onChange={handleRegionChange}
+          >
+            {RegionData.map((region) => (
+              <Select.Option key={region.id} value={region.region}>
+                {region.name}
+              </Select.Option>
+            ))}
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
           <FormSelect name="city" label="المدينة" labelCol={{ span: 24 }}>
-          {RegionData.find((r) => r.region === selectedRegion)?.cities.map(
-            (city) => (
-              <Select.Option key={city.id} value={city.city}>
-                {city.city}
-              </Select.Option>
-            )
-          )}
+            {RegionData.find((r) => r.region === (selectedRegion || region))?.cities.map(
+              (city) => (
+                <Select.Option key={city.id} value={city.city}>
+                  {city.city}
+                </Select.Option>
+              )
+            )}
           </FormSelect>
         </Col>
 

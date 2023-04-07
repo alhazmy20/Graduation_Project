@@ -14,8 +14,9 @@ const RegisterModal = ({ modalOpen, setModalOpen }) => {
       onOk={() => setModalOpen(false)}
       onCancel={() => setModalOpen(false)}
       footer={[]}
+      className="reg-modal"
     >
-      <div className="reg-modal">
+      <div >
         <Link to="/student/signup">
           <div className="icon-container">
             <FontAwesomeIcon className="user-icon" icon={faUser} />
