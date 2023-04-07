@@ -1193,3 +1193,44 @@ export const PostDetailsData = [
     ],
   },
 ];
+
+
+export const TableDetailData = [
+  {
+    key: 1,
+    name: "جامعة طيبة",
+    institution: 34,
+    student: 33,
+  },
+  {
+    key: 2,
+    name: "جامعة طيبة",
+    institution: 34,
+    student: 33,
+  },
+  {
+    key: 3,
+    name: "جامعة طيبة",
+    institution: 34,
+    student: 33,
+  },
+  {
+    key: 1,
+    name: "جامعة طيبة",
+    institution: 34,
+    student: 33,
+  },
+  {
+    key: 2,
+    name: "جامعة طيبة",
+    institution: 34,
+    student: 33,
+  },
+  {
+    key: 3,
+    name: "جامعة طيبة",
+    institution: 34,
+    student: 33,
+  },
+ 
+];

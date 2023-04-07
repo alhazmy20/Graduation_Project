@@ -23,6 +23,7 @@ import {
   InstProfile,
   InstPostForm,
   AdminLayout,
+  AdminHomePage,
 } from "../pages/index";
 
 //Institution Routes
@@ -48,7 +49,7 @@ const studentRoutes = (
 //Admin Routes
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
-    <Route index element={<h1>الصفحة الرئيسية</h1>} />
+    <Route index element={<AdminHomePage/>} />
   </Route>
 );
 

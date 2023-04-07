@@ -19,8 +19,8 @@ import InstPostForm from "./institution/instPostForm/InstPostForm";
 import Applications from "./student/Applications/Application";
 import StudentProfile from "./student/StudentProfile/StudentProfile";
 import StudentSignup from "./student/StudentSignup/StudentSignup";
-import AdminLayout from '../layouts/AdminLayout';
-
+import AdminLayout from "../layouts/AdminLayout";
+import AdminHomePage from "../pages/Admin/HomePage/Home";
 //Imports from admin folder
 
 //Export all pages
@@ -42,5 +42,6 @@ export {
   InstPosts,
   InstPostDetails,
   InstPostForm,
-  AdminLayout
+  AdminLayout,
+  AdminHomePage,
 };
