@@ -1,13 +1,41 @@
-.StudentsModal {
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+@import "../../../../index.scss";
+
+.mod {
+  text-align: center;
+
+  .ant-modal-title {
+    color: #f46a61;
+  }
+
+  .delText {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .smallDelText {
+    font-weight: 400;
+    font-size: 1rem;
+    color: #f46a61;
+  }
+
+  .StudentsModal {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin-top: 2rem;
-  
+
     .delButton {
-      background-color: red;
+      background-color: #F46A61;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-left: 2rem;
+    }
+    .cancelButton {
+      background-color: $Green;
       color: white;
       font-weight: 600;
       font-size: 1rem;
     }
   }
-  
+}

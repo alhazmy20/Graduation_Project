@@ -10,7 +10,12 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { GetAllNews } from "../../../data/API";
 const StudentsTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null);
   const { data, loading } = GetAllNews("http://localhost:8000/students");
+  const handleDelete = (student) => {
+    setSelectedStudent(student);
+    setIsModalOpen(true);
+  };
   const dataSource = [
     {
       key: "1",
@@ -40,11 +45,6 @@ const StudentsTable = () => {
       title: "اسم الطالب",
       dataIndex: "name",
       align: "center",
-      render: (text,record) => {
-        return <span><Link to={`/institution/posts/${record.id}`}>
-        {text}
-        </Link></span>
-      }
     },
     {
       title: "الجامعة",
@@ -78,7 +78,7 @@ const StudentsTable = () => {
         let buttons = {};
         buttons = (
           <span>
-            <Link to={`/institution/newPost/${record.key}`}>
+            <Link>
               {
                 <FontAwesomeIcon
                   className="icon"
@@ -87,7 +87,7 @@ const StudentsTable = () => {
                 />
               }
             </Link>
-            <span onClick={() => setIsModalOpen(true)}>
+            <span onClick={() => handleDelete(`${record.name}`)}>
               {
                 <FontAwesomeIcon
                   icon={faTrash}
@@ -95,7 +95,13 @@ const StudentsTable = () => {
                 />
               }
             </span>
-            <StudentsModal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} />
+            {selectedStudent && (
+              <StudentsModal
+                modalOpen={isModalOpen}
+                setModalOpen={setIsModalOpen}
+                name={selectedStudent}
+              />
+            )}
           </span>
         );
         return buttons;
@@ -111,7 +117,6 @@ const StudentsTable = () => {
     ? dataSource.filter((application) => application.status === statusFilter)
     : dataSource;
 
-
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
@@ -126,12 +131,10 @@ const StudentsTable = () => {
       <div className="excelContainer">
         <Button className="excelBtn">
           <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
-          <span className="excelSpan">
             <strong>Excel</strong>
-          </span>
         </Button>
       </div>
-        <div className="filterTable">
+      <div className="filterTable">
         <Button
           className="button-filter"
           onClick={() => handleStatusFilterChange("")}
@@ -152,7 +155,7 @@ const StudentsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {data.length}{" "}
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
         سجل
       </p>
       <Table
