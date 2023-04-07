@@ -5,19 +5,21 @@
     display: flex;
     font-family: $font-inter-regular;
     font-weight: 700;
+
     .Sidebar {
         border-left: 1px solid #4FD1C5;
 
-        .ps-sidebar-container{
+        .ps-sidebar-container {
             background-color: white;
         }
+
         .platformContainer {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             margin-bottom: 2rem;
-            
+
 
             .Platform {
                 display: flex;
@@ -51,20 +53,46 @@
 
         .MenuItem {
             text-align: center;
-             width: 100%;
-             padding: 0 1rem;
-             color: #2D3748;
-             .ps-menu-button{
+            width: 90%;
+            right: 10px;
+            color: #2D3748;
+            margin: 5px 0;
+            text-decoration: none !important;
+
+            .ps-menu-button {
                 border-radius: 11.25px;
-             }
-             .ps-menu-icon{
+            }
+
+            .ps-menu-icon {
                 background-color: #f6f6f6;
                 color: #4FD1C5;
                 border-radius: 9px;
                 margin: 0;
-             }
+            }
+
             .SubMenu {
                 text-align: right;
+                color: #2D3748;
+                margin-bottom: 5px;
+            }
+        }
+
+        .activeMenu {
+            .ps-menu-button {
+                background-color: #f6f6f6;
+                color: #2D3748;
+            }
+
+            .ps-menu-icon {
+                background-color: #4FD1C5;
+                color: $white;
+            }
+        }
+
+        .notActive {
+
+            .ps-menu-button {
+                color: #A0AEC0;
             }
         }
     }
