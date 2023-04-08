@@ -1,16 +1,24 @@
 import React from "react";
-import { List } from "antd";
+import { List, notification } from "antd";
 import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
-import Spinner from '../../../../components/ui/Spinner/Spinner.jsx';
-import NoData from '../../../../components/ui/NoData/NoData.jsx';
+import Spinner from "../../../../components/ui/Spinner/Spinner.jsx";
+import NoData from "../../../../components/ui/NoData/NoData.jsx";
+import { useFetch } from "../../../../data/API.js";
 
-const PostList = (props) => {
-  const { data, loading } = props;
-  
+const PostList = () => {
+  const { data, loading, error } = useFetch("http://localhost:8000/posts");
 
-  if(!loading){
-    return <Spinner/>
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error(error);
+  }
+
+  if (!data) {
+    return <NoData text="لا توجد فرص تدريب حاليا" />;
   }
 
   return (
@@ -35,7 +43,7 @@ const PostList = (props) => {
         align: "center",
         pageSize: 8,
       }}
-      locale= {{emptyText: <NoData text={'لا توجد فرص تدريب حاليا'}/>}}
+      locale={{ emptyText: <NoData text={"لا توجد فرص تدريب حاليا"} /> }}
       dataSource={data}
       renderItem={(item) => (
         <List.Item>

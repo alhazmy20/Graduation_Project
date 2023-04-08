@@ -9,9 +9,16 @@ import { useFetch } from "../../../data/API";
 import FormInput from "../../../components/form/FormInput";
 import { inputGpaRules, phoneRules } from "../../../Validation/rules";
 import InputFile from "../../../components/form/InputFile";
+import { useParams } from "react-router";
 
 const StudentProfile = ({ isAdmin }) => {
-  const { data, loading, error } = useFetch("http://localhost:8000/students/1");
+  // const { data, loading, error } = useFetch("http://localhost:8000/students/1");
+  const {id} = useParams();
+  const { data, loading, error } = useFetch(
+    isAdmin
+      ? `http://localhost:8000/student/${id}`
+      : `http://localhost:8000/student`
+  );
 
   let formData = new FormData();
   const [form] = Form.useForm();
@@ -54,23 +61,24 @@ const StudentProfile = ({ isAdmin }) => {
   }
 
   if (error) {
-    return notification.error({
-      message: "لقد حدث خطأ",
-      description: "لقد حدث خطأ ما، الرجاء المحاولة مرة أخرى",
-    });
+    return notification.error(error);
   }
 
-  const { fullName, personalPicture_url } = data;
-  const nameParts = fullName.split(" ");
+  const { data: studentData    } = data;
+  const { studentFiles: files   } = studentData;
+
+  const nameParts = studentData.fullName.split(" ");
   const firstName = nameParts[0];
   const lastName = nameParts[nameParts.length - 1];
+
+  
 
   return (
     <div className="student-profile">
       <div className="profileImage">
         <ProfileImage
           name={`${firstName} ${lastName}`}
-          personalPicture_url={personalPicture_url}
+          personalPicture_url={files.personalPicture_url}
         />
       </div>
       <FormCard className="card">
@@ -80,7 +88,7 @@ const StudentProfile = ({ isAdmin }) => {
           onValuesChange={onFormValuesChange}
           className="form"
           encType="multipart/form-data"
-          initialValues={data}
+          initialValues={studentData}
         >
           <h1>البيانات الأساسية</h1>
           <Row gutter={[16, 0]}>
@@ -129,13 +137,13 @@ const StudentProfile = ({ isAdmin }) => {
             </Col>
 
             <Col xs={24} sm={12}>
-              <InputFile label="السيرة الذاتية" name="cv" fileName={data.cv} />
+              <InputFile label="السيرة الذاتية" name="cv" fileName={files.CV_filename} />
             </Col>
             <Col xs={24} sm={12}>
               <InputFile
                 name="nationalIdentity"
                 label="الهوية الوطنية"
-                fileName={data.nationalIdentity}
+                fileName={files.nationalID_filename}
               />
             </Col>
           </Row>
@@ -179,14 +187,14 @@ const StudentProfile = ({ isAdmin }) => {
               <InputFile
                 name="internshipLetter"
                 label="خطاب التدريب"
-                fileName={data.internshipLetter}
+                fileName={files.internshipLetter_filename}
               />
             </Col>
             <Col xs={24} sm={12}>
               <InputFile
                 name="collegeTranscript"
                 label="السجل الأكاديمي"
-                fileName={data.collegeTranscript}
+                fileName={files.transcript_filename}
               />
             </Col>
           </Row>
