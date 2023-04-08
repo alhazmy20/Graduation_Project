@@ -1194,7 +1194,6 @@ export const PostDetailsData = [
   },
 ];
 
-
 export const TableDetailData = [
   {
     key: 1,
@@ -1215,22 +1214,21 @@ export const TableDetailData = [
     student: 33,
   },
   {
-    key: 1,
+    key: 41,
     name: "جامعة طيبة",
     institution: 34,
     student: 33,
   },
   {
-    key: 2,
+    key: 5,
     name: "جامعة طيبة",
     institution: 34,
     student: 33,
   },
   {
-    key: 3,
+    key: 6,
     name: "جامعة طيبة",
     institution: 34,
     student: 33,
   },
- 
 ];

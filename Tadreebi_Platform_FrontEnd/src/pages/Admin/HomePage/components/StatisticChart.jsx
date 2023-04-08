@@ -1,9 +1,38 @@
 import React, { useState } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
-import { Select } from "antd";
+import { Select, notification } from "antd";
 import "./StatisticChart.scss";
+import Spinner from "../../../../components/ui/Spinner/Spinner";
+import { useFetch } from "../../../../data/API";
 const StatisticChart = () => {
+  const { data, loading, error } = useFetch(
+    "http://localhost:8000/getAllStudentsData"
+  );
+  const currentYear = new Date().getFullYear();
+  const [years, setYears] = useState(() => {
+    const yearsArr = [];
+    for (let year = currentYear; year >= 2023; year--) {
+      yearsArr.push(year);
+    }
+    return yearsArr;
+  });
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error(error);
+  }
+
+
+const chartData = data.map(({ university, totalApplicant }) => ({
+  name: university,
+  value: totalApplicant,
+}));
+
+  
   const option = {
     title: {
       text: "احصائيات بناء على الجامعات",
@@ -22,13 +51,7 @@ const StatisticChart = () => {
         name: "Access From",
         type: "pie",
         radius: "50%",
-        data: [
-          { value: 1048, name: "Search Engine" },
-          { value: 735, name: "Direct" },
-          { value: 580, name: "Email" },
-          { value: 484, name: "Union Ads" },
-          { value: 300, name: "Video Ads" },
-        ],
+        data: chartData,
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -39,15 +62,6 @@ const StatisticChart = () => {
       },
     ],
   };
-
-  const currentYear = new Date().getFullYear();
-  const [years, setYears] = useState(() => {
-    const yearsArr = [];
-    for (let year = currentYear; year >= 2010; year--) {
-      yearsArr.push(year);
-    }
-    return yearsArr;
-  });
 
   return (
     <div className="ChartConteinerfilter">
