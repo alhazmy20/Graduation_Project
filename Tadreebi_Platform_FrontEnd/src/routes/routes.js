@@ -43,6 +43,7 @@ const institutionRoutes = (
 const studentRoutes = (
   <Route path="student">
     <Route path="profile" element={<StudentProfile />} />
+    <Route path="profile/:id" element={<StudentProfile />} />
     <Route path="applications" element={<Applications />} />
   </Route>
 );
