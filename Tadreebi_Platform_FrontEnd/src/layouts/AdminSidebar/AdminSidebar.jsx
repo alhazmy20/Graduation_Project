@@ -46,8 +46,8 @@ const AdminSidebar = () => {
           </NavLink>
           <NavLink
             className={() =>
-              window.location.pathname === "/admin/studentstable" ||
-              window.location.pathname === "/admin/manage-institution" ||
+              window.location.pathname === "/admin/manage-students" ||
+              window.location.pathname === "/admin/manage-institutions" ||
               window.location.pathname === "/admin/manage-admin"
                 ? "MenuItem"
                 : "MenuItem notActive"
@@ -55,8 +55,8 @@ const AdminSidebar = () => {
           >
             <SubMenu
               defaultOpen={
-                window.location.pathname === "/admin/studentstable" ||
-                window.location.pathname === "/admin/manage-institution" ||
+                window.location.pathname === "/admin/manage-students" ||
+                window.location.pathname === "/admin/manage-institutions" ||
                 window.location.pathname === "/admin/manage-admin"
                   ? true
                   : false
@@ -70,7 +70,7 @@ const AdminSidebar = () => {
                   className={({ isActive }) =>
                     isActive ? "SubMenu activeMenu" : "SubMenu notActive"
                   }
-                  to={"/admin/manage-institution"}
+                  to={"/admin/manage-institutions"}
                   end
                 >
                   <MenuItem> ادارة المؤسسات </MenuItem>
@@ -79,7 +79,7 @@ const AdminSidebar = () => {
                   className={({ isActive }) =>
                     isActive ? "SubMenu activeMenu" : "SubMenu notActive"
                   }
-                  to={`/admin/studentstable`}
+                  to={`/admin/manage-students`}
                   end
                 >
                   <MenuItem> ادارة الطلاب </MenuItem>

@@ -1,17 +1,17 @@
-import "./StudentsTable.scss";
+import "./InstitutionsTable.scss";
 import { useState } from "react";
 import { Button, notification } from "antd";
 import { Link } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import StudentsModal from "./components/StudentsModal.jsx";
+import InstitutionsModal from "./components/InstitutionsModal.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-const StudentsTable = () => {
-  const { data, loading, error } = useFetch("http://localhost:8000/students");
+const InstitutionsTable = () => {
+  const { data, loading, error } = useFetch("http://localhost:8000/institutions");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
@@ -28,19 +28,19 @@ const StudentsTable = () => {
   }
 
   if (!data) {
-    return <NoData text="لا يوجد طلاب حاليا"/>
+    return <NoData text="لا توجد مؤسسات حاليا"/>
   }
   
   
   const columns = [
     {
-      title: "اسم الطالب",
-      dataIndex: "fullName",
+      title: "اسم المؤسسة",
+      dataIndex: "institutionName",
       align: "center",
     },
     {
       title: "الجامعة",
-      dataIndex: "university",
+      dataIndex: "city",
       align: "center",
     },
     {
@@ -70,16 +70,7 @@ const StudentsTable = () => {
         let buttons = {};
         buttons = (
           <span>
-            <Link to={`/admin/manage-students/${record.id}`}>
-              {
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faPenToSquare}
-                  style={{ color: "#008374b2" }}
-                />
-              }
-            </Link>
-            <span onClick={() => handleDelete(`${record.fullName}`)}>
+            <span onClick={() => handleDelete(`${record.institutionName}`)}>
               {
                 <FontAwesomeIcon
                   icon={faTrash}
@@ -88,7 +79,7 @@ const StudentsTable = () => {
               }
             </span>
             {selectedStudent && (
-              <StudentsModal
+              <InstitutionsModal
                 modalOpen={isModalOpen}
                 setModalOpen={setIsModalOpen}
                 name={selectedStudent}
@@ -161,4 +152,4 @@ const StudentsTable = () => {
   );
 };
 
-export default StudentsTable;
+export default InstitutionsTable;

@@ -26,6 +26,7 @@ import {
   AdminHomePage,
 } from "../pages/index";
 import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
+import InstitutionsTable from "../pages/Admin/InstitutionsTable/InstitutionsTable";
 
 //Institution Routes
 const institutionRoutes = (
@@ -43,7 +44,6 @@ const institutionRoutes = (
 const studentRoutes = (
   <Route path="student">
     <Route path="profile" element={<StudentProfile />} />
-    <Route path="profile/:id" element={<StudentProfile />} />
     <Route path="applications" element={<Applications />} />
   </Route>
 );
@@ -52,10 +52,10 @@ const studentRoutes = (
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
     <Route index element={<AdminHomePage />} />
-
     <Route index element={<h1>الصفحة الرئيسية</h1>} />
-    <Route path="studentstable" element={<StudentsTable />} />
-    <Route path="manage-stuedents/:id" element={<StudentProfile isAdmin={true}/>} />
+    <Route path="manage-institutions" element={<InstitutionsTable />} />
+    <Route path="manage-students" element={<StudentsTable />} />
+    <Route path="manage-students/:id" element={<StudentProfile isAdmin={true}/>} />
   </Route>
 );
 
