@@ -196,7 +196,8 @@
       "GPA": 4.9,
       "GPA_Type": 5,
       "internshipLetter": null,
-      "collegeTranscript": null
+      "collegeTranscript": null,
+      "personalPicture_url": "https://www8.0zz0.com/2023/04/06/21/286435483.png"
     },
     {
       "id": 2,
@@ -229,8 +230,7 @@
       "managerPosition": "مسؤول التدريب",
       "managerEmail": "yazeed.alalawi@example.com",
       "managerPhone": "0545930922",
-      "institutionPhone":"0545930922"
+      "institutionPhone": "0545930922"
     }
-]
-
+  ]
 }

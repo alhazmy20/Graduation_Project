@@ -50,11 +50,11 @@ const studentRoutes = (
 //Admin Routes
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
-    <Route index element={<AdminHomePage/>} />
+    <Route index element={<AdminHomePage />} />
+
     <Route index element={<h1>الصفحة الرئيسية</h1>} />
     <Route path="studentstable" element={<StudentsTable />} />
   </Route>
-  
 );
 
 //This is an entire route for our app.
