@@ -43,6 +43,7 @@ const institutionRoutes = (
 const studentRoutes = (
   <Route path="student">
     <Route path="profile" element={<StudentProfile />} />
+    <Route path="profile/:id" element={<StudentProfile />} />
     <Route path="applications" element={<Applications />} />
   </Route>
 );
@@ -54,6 +55,7 @@ const adminRoutes = (
 
     <Route index element={<h1>الصفحة الرئيسية</h1>} />
     <Route path="studentstable" element={<StudentsTable />} />
+    <Route path="manage-stuedents/:id" element={<StudentProfile isAdmin={true}/>} />
   </Route>
 );
 

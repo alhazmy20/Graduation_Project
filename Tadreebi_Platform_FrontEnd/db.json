@@ -188,6 +188,8 @@
       "gender": "ذكر",
       "email": "tu4002681@taibahu.edu.sa",
       "cv": "cv.pdf",
+      "status": "نشط",
+      "created_at": "2023-04-02",
       "national_ID": "1101234567",
       "nationalIdentity": null,
       "phone": "0545930922",
@@ -205,6 +207,8 @@
       "gender": "ذكر",
       "email": "tu4002681@taibahu.edu.sa",
       "cv": "cv.pdf",
+      "status": "غير نشط",
+      "created_at": "2023-04-02",
       "national_ID": "1101234567",
       "nationalIdentity": null,
       "phone": "0545930922",
@@ -214,6 +218,32 @@
       "GPA_Type": 5,
       "internshipLetter": null,
       "collegeTranscript": null
+    },
+    {
+      "id": 3,
+      "fullName": "Abdulmohsen Mansour Shalyah Alhazmy",
+      "phone": "0589900002",
+      "gender": "أنثى",
+      "national_ID": 1100000001,
+      "university": "جامعة طيبة",
+      "major": "information Systems",
+      "GPA": 5,
+      "GPA_Type": 5,
+      "status": "نشط",
+      "created_at": "2023-04-02"
+    },
+    {
+      "id": 4,
+      "fullName": "علي عبدالله سعد الحربي",
+      "phone": "0501231230",
+      "gender": "ذكر",
+      "national_ID": 1100000000,
+      "university": "جامعة طيبة",
+      "major": "نظم معلومات",
+      "GPA": 5,
+      "GPA_Type": 5,
+      "status": "غير نشط",
+      "created_at": "2023-04-06"
     }
   ],
   "institutions": [
@@ -232,5 +262,35 @@
       "managerPhone": "0545930922",
       "institutionPhone": "0545930922"
     }
-  ]
+  ],
+
+  "student": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "id": 5,
+      "fullName": "يزيد سعد نفاع العلوي",
+      "phone": "0589900002",
+      "email": "tu4002681@taibahu.edu.sa",
+      "gender": "ذكر",
+      "national_ID": 1100000001,
+      "university": "جامعة طيبة",
+      "major": "نظم المعلومات",
+      "GPA": 5,
+      "GPA_Type": 5,
+      "status": "نشط",
+      "created_at": "2023-04-02",
+      "studentFiles": {
+        "transcript_filename": null,
+        "transcript_url": null,
+        "CV_filename": "myCV.pdf",
+        "CV_url": null,
+        "internshipLetter_filename": null,
+        "internshipLetter_url": null,
+        "nationalID_filename": null,
+        "nationalID_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/642b94abc3597_MacBook%20Pro%2014_%20-%2020.png",
+        "personalPicture_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/642b94abc3597_MacBook%20Pro%2014_%20-%2020.png"
+      }
+    }
+  }
 }

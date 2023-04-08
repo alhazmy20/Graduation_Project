@@ -3,57 +3,39 @@ import { useState } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
+import Spinner from "../../../components/ui/Spinner/Spinner";
 import StudentsModal from "./components/StudentsModal.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { GetAllNews } from "../../../data/API";
+import { useFetch } from "../../../data/API";
 const StudentsTable = () => {
+  const { data } = GetAllNews("http://localhost:8000/students");
+  //const { data, loading, error } = useFetch("http://localhost:8000/students");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const { data, loading } = GetAllNews("http://localhost:8000/students");
+
   const handleDelete = (student) => {
     setSelectedStudent(student);
     setIsModalOpen(true);
   };
-  const dataSource = [
-    {
-      key: "1",
-      name: "فلان فلان الفلاني",
-      uni: "جامعة طيبة",
-      date: "01/01/2023",
-      status: "غير نشط",
-    },
-    {
-      key: "2",
-      name: "فلان فلان الفلاني",
-      uni: "جامعة الملك فهد للبترول و المعادن",
-      date: "01/01/2023",
-      status: "نشط",
-    },
-    {
-      key: "3",
-      name: "فلان فلان الفلاني",
-      uni: "جامعة الملك سعود",
-      date: "01/01/2023",
-      status: "نشط",
-    },
-  ];
 
   const columns = [
     {
       title: "اسم الطالب",
-      dataIndex: "name",
+      dataIndex: "fullName",
       align: "center",
     },
     {
       title: "الجامعة",
-      dataIndex: "uni",
+      dataIndex: "university",
       align: "center",
     },
     {
       title: "تاريخ الإنضمام",
-      dataIndex: "date",
+      dataIndex: "created_at",
       align: "center",
     },
     {
@@ -78,7 +60,7 @@ const StudentsTable = () => {
         let buttons = {};
         buttons = (
           <span>
-            <Link>
+            <Link to={`/student/profile/${record.id}`}>
               {
                 <FontAwesomeIcon
                   className="icon"
@@ -87,7 +69,7 @@ const StudentsTable = () => {
                 />
               }
             </Link>
-            <span onClick={() => handleDelete(`${record.name}`)}>
+            <span onClick={() => handleDelete(`${record.fullName}`)}>
               {
                 <FontAwesomeIcon
                   icon={faTrash}
@@ -114,8 +96,8 @@ const StudentsTable = () => {
     setStatusFilter(status);
   };
   const filteredDataSource = statusFilter
-    ? dataSource.filter((application) => application.status === statusFilter)
-    : dataSource;
+    ? data.filter((application) => application.status === statusFilter)
+    : data;
 
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -131,7 +113,7 @@ const StudentsTable = () => {
       <div className="excelContainer">
         <Button className="excelBtn">
           <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
-            <strong>Excel</strong>
+          <strong>Excel</strong>
         </Button>
       </div>
       <div className="filterTable">
@@ -155,8 +137,7 @@ const StudentsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
-        سجل
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {data.length} سجل
       </p>
       <Table
         col={columns}

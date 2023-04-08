@@ -1,31 +1,15 @@
 import { Button, Form, Select } from "antd";
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { RegionData } from "../../../data/TestData.js";
 import "./TrainingOpportunities.scss";
-import { GetAllNews } from "../../../data/API";
 import PostList from "./components/PostList.jsx";
-import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
 import { data as saudiClassificationData } from "../../../data/SaudiClassification";
 
 const TrainingOpportunities = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedMajor, setSelectedMajor] = useState("");
-  const { data, loading } = GetAllNews("http://localhost:8000/posts");
 
-  // const filteredData = useMemo(() => {
-  //   if (selectedRegion === "كل المناطق") {
-  //     return data;
-  //   } else {
-  //     const newData = data.filter((post) => {
-  //       return (
-  //         (!selectedRegion || post.region === selectedRegion) &&
-  //         (!selectedCity || post.city === selectedCity)
-  //       );
-  //     });
-  //     return newData;
-  //   }
-  // }, [selectedRegion, selectedCity, data]);
 
   const [form] = Form.useForm();
 
@@ -105,7 +89,7 @@ const TrainingOpportunities = () => {
         </Form>
       </header>
       <main>
-        <PostList data={data} loading={loading} />
+        <PostList />
       </main>
     </div>
   );
