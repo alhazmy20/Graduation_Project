@@ -14,9 +14,11 @@ import { useParams } from "react-router";
 const StudentProfile = ({ isAdmin }) => {
   // const { data, loading, error } = useFetch("http://localhost:8000/students/1");
   const {id} = useParams();
+
+  console.log(id);
   const { data, loading, error } = useFetch(
     isAdmin
-      ? `http://localhost:8000/student/${id}`
+      ? `http://localhost:8000/student`
       : `http://localhost:8000/student`
   );
 
@@ -71,7 +73,6 @@ const StudentProfile = ({ isAdmin }) => {
   const firstName = nameParts[0];
   const lastName = nameParts[nameParts.length - 1];
 
-  
 
   return (
     <div className="student-profile">

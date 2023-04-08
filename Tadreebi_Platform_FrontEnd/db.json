@@ -23,84 +23,7 @@
     }
   ],
   "posts": [
-    {
-      "id": 1,
-      "title": "تدريب تعاوني - تطوير تطبيقات الويب",
-      "description": "نهدف من خلال هذا البرنامج ” التدريب التعاوني – COOP “ إلى تمكين مهارات الطالبات و للتعرف على بيئة العمل في الواقع والتدريب والتطوير من إمكانيات الطالبة لكسب الخبرة العملية من خلال الحصيلة الأكاديمية التي من خلالها يمكن انشاء بيئة أكثر تطور وتقدم. سيقوم المتدربون لدينا ببناء واجهات المستخدم بإستخدام مكتبة React.js و سيتعلمون كيفية التعامل مع المكونات و الخصائص و غير ذلك.",
-      "reward": "لا يوجد",
-      "gender": "الكل",
-      "publishDate": "17/03/2023",
-      "programType": "17/03/2023",
-      "startDate": "17/03/2023",
-      "endDate": "17/03/2023",
-      "region": "منطقة الرياض",
-      "city": "الرياض",
-      "subEndDate": "17/03/2023",
-      "majors": [
-        {
-          "major": "نظم المعلومات"
-        },
-        {
-          "major": "علوم الحاسب"
-        },
-        {
-          "major": "هندسة البرمجيات"
-        },
-        {
-          "major": "تقنية المعلومات"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "title": "مطور مواقع",
-      "description": "نهدف من خلال هذا البرنامج ” التدريب التعاوني – COOP “ إلى تمكين مهارات الطالبات و للتعرف على بيئة العمل في الواقع والتدريب والتطوير من إمكانيات الطالبة لكسب الخبرة العملية من خلال الحصيلة الأكاديمية التي من خلالها يمكن انشاء بيئة أكثر تطور وتقدم. سيقوم المتدربون لدينا ببناء واجهات المستخدم بإستخدام مكتبة React.js و سيتعلمون كيفية التعامل مع المكونات و الخصائص و غير ذلك.",
-      "reward": "لا يوجد",
-      "gender": "الكل",
-      "publishDate": "17/03/2023",
-      "programType": "17/03/2023",
-      "startDate": "17/03/2023",
-      "endDate": "17/03/2023",
-      "region": "منطقة الرياض",
-      "city": "الرياض",
-      "subEndDate": "17/03/2023",
-      "majors": [
-        {
-          "major": "نظم المعلومات"
-        },
-        {
-          "major": "علوم الحاسب"
-        },
-        {
-          "major": "هندسة البرمجيات"
-        },
-        {
-          "major": "تقنية المعلومات"
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "title": "محلل بيانات",
-      "description": "نهدف من خلال هذا البرنامج ” التدريب التعاوني – COOP “ إلى تمكين مهارات الطالبات و للتعرف على بيئة العمل في الواقع والتدريب والتطوير من إمكانيات الطالبة لكسب الخبرة العملية من خلال الحصيلة الأكاديمية التي من خلالها يمكن انشاء بيئة أكثر تطور وتقدم. سيقوم المتدربون لدينا ببناء واجهات المستخدم بإستخدام مكتبة React.js و سيتعلمون كيفية التعامل مع المكونات و الخصائص و غير ذلك.",
-      "reward": "لا يوجد",
-      "gender": "الكل",
-      "publishDate": "17/03/2023",
-      "programType": "17/03/2023",
-      "startDate": "17/03/2023",
-      "endDate": "17/03/2023",
-      "region": "منطقة المدينة المنورة",
-      "city": "ينبع",
-      "subEndDate": "17/03/2023",
-      "majors": [
-        {
-          "major": "نظم المعلومات"
-        },
-        {
-          "major": "علوم الحاسب"
-        }
-      ]
-    }
+    
   ],
 
   "users": [
@@ -181,71 +104,70 @@
       "avatar": ""
     }
   ],
-  "students": [
+  "students": 
     {
-      "id": 1,
-      "fullName": "يزيد سعد نفاع العلوي",
-      "gender": "ذكر",
-      "email": "tu4002681@taibahu.edu.sa",
-      "cv": "cv.pdf",
-      "status": "نشط",
-      "created_at": "2023-04-02",
-      "national_ID": "1101234567",
-      "nationalIdentity": null,
-      "phone": "0545930922",
-      "university": "جامعة طيبة",
-      "major": "نظم المعلومات",
-      "GPA": 4.9,
-      "GPA_Type": 5,
-      "internshipLetter": null,
-      "collegeTranscript": null,
-      "personalPicture_url": "https://www8.0zz0.com/2023/04/06/21/286435483.png"
-    },
-    {
-      "id": 2,
-      "fullName": "يزيد سعد نفاع العلوي",
-      "gender": "ذكر",
-      "email": "tu4002681@taibahu.edu.sa",
-      "cv": "cv.pdf",
-      "status": "غير نشط",
-      "created_at": "2023-04-02",
-      "national_ID": "1101234567",
-      "nationalIdentity": null,
-      "phone": "0545930922",
-      "university": "جامعة طيبة",
-      "major": "نظم المعلومات",
-      "GPA": 4.9,
-      "GPA_Type": 5,
-      "internshipLetter": null,
-      "collegeTranscript": null
-    },
-    {
-      "id": 3,
-      "fullName": "Abdulmohsen Mansour Shalyah Alhazmy",
-      "phone": "0589900002",
-      "gender": "أنثى",
-      "national_ID": 1100000001,
-      "university": "جامعة طيبة",
-      "major": "information Systems",
-      "GPA": 5,
-      "GPA_Type": 5,
-      "status": "نشط",
-      "created_at": "2023-04-02"
-    },
-    {
-      "id": 4,
-      "fullName": "علي عبدالله سعد الحربي",
-      "phone": "0501231230",
-      "gender": "ذكر",
-      "national_ID": 1100000000,
-      "university": "جامعة طيبة",
-      "major": "نظم معلومات",
-      "GPA": 5,
-      "GPA_Type": 5,
-      "status": "غير نشط",
-      "created_at": "2023-04-06"
+      "status": "تم تنفيذ الطلب بنجاح",
+      "message": null,
+      "data": {
+        "current_page": 1,
+        "data": [
+          {
+            "id": 1,
+            "fullName": "Abdulmohsen Mansour Shalyah Alhazmy",
+            "phone": "0589900002",
+            "gender": "أنثى",
+            "national_ID": 1100000001,
+            "university": "جامعة طيبة",
+            "major": "information Systems",
+            "GPA": 5,
+            "GPA_Type": 5,
+            "status": "نشط",
+            "created_at": "2023-04-02"
+          },
+          {
+            "id": 2,
+            "fullName": "علي عبدالله سعد الحربي",
+            "phone": "0501231230",
+            "gender": "ذكر",
+            "national_ID": 1100000000,
+            "university": "جامعة طيبة",
+            "major": "نظم معلومات",
+            "GPA": 5,
+            "GPA_Type": 5,
+            "status": "غير نشط",
+            "created_at": "2023-04-06"
+          }
+        ],
+        "first_page_url": "http://localhost:8000/api/students?page=1",
+        "from": 1,
+        "last_page": 1,
+        "last_page_url": "http://localhost:8000/api/students?page=1",
+        "links": [
+          {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+          },
+          {
+            "url": "http://localhost:8000/api/students?page=1",
+            "label": "1",
+            "active": true
+          },
+          {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+          }
+        ],
+        "next_page_url": null,
+        "path": "http://localhost:8000/api/students",
+        "per_page": 10,
+        "prev_page_url": null,
+        "to": 2,
+        "total": 2
+      }
     }
-  ],
+  ,
   "institutions": [
     {
       "id": 1,

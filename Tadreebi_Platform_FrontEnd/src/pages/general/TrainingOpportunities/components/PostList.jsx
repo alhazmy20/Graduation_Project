@@ -17,9 +17,9 @@ const PostList = () => {
     return notification.error(error);
   }
 
-  if (!data) {
-    return <NoData text="لا توجد فرص تدريب حاليا" />;
-  }
+  // if (!data) {
+  //   return <NoData text="لا توجد فرص تدريب حاليا" />;
+  // }
 
   return (
     <List

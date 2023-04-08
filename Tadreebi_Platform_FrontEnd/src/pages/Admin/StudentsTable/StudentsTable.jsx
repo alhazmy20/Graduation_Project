@@ -30,6 +30,9 @@ const StudentsTable = () => {
   if (!data) {
     return <NoData text="لا يوجد طلاب حاليا"/>
   }
+
+  //NOTE
+  const { data: { data: studentsData } } = data;
   
   
   const columns = [
@@ -109,10 +112,11 @@ const StudentsTable = () => {
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
   };
+
+  //NOTE
   const filteredDataSource = statusFilter
-    ? data.filter((application) => application.status === statusFilter)
-    : data;
- 
+    ? studentsData.filter((application) => application.status === statusFilter)
+    : studentsData;
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
@@ -149,7 +153,7 @@ const StudentsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {data.length} سجل
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length} سجل
       </p>
       <Table
         col={columns}
