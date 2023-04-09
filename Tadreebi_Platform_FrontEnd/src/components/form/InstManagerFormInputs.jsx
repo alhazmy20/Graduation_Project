@@ -29,7 +29,7 @@ const InstManagerFormInputs = () => {
             label="البريد الإلكتروني"
             labelCol={{ span: 24 }}
             name="managerEmail"
-            rules={emailValidationRules()}
+            rules={emailValidationRules}
           />
         </Col>
         <Col xs={24} sm={12}>

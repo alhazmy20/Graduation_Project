@@ -3,21 +3,7 @@
 .student-profile {
   padding: 1rem;
   
-  .save-button {
-    width: 120px;
-    margin-bottom: 15px;
-    background-color: #008374;
-    font-weight: 500;
-    margin-top: 10px;
-
-    &:disabled{
-      background-color: rgb(190, 190, 190);
-    }
-  }
-
   .card {
-    margin-bottom: 2rem;
-
 
     h1{
       font-size: 19px;

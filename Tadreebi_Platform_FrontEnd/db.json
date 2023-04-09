@@ -184,7 +184,7 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
-          "status":"غير نشط",
+          "status": "غير نشط",
           "created_at": "2023-04-06",
           "logo": {
             "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
@@ -205,7 +205,7 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
-          "status":"غير نشط",
+          "status": "غير نشط",
           "created_at": "2023-04-06",
           "logo": {
             "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
@@ -226,7 +226,7 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
-          "status":"نشط",
+          "status": "نشط",
           "created_at": "2023-04-06",
           "logo": {
             "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
@@ -247,7 +247,7 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
-          "status":"نشط",
+          "status": "نشط",
           "created_at": "2023-04-06",
           "logo": {
             "logo_filename": null,
@@ -268,7 +268,7 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
-          "status":"نشط",
+          "status": "نشط",
           "created_at": "2023-04-06",
           "logo": {
             "logo_filename": null,
@@ -289,7 +289,7 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
-          "status":"نشط",
+          "status": "نشط",
           "created_at": "2023-04-06",
           "logo": {
             "logo_filename": null,
@@ -410,5 +410,18 @@
       "totalApplicant": 14,
       "year": "2016"
     }
-  ]
+  ],
+
+  "admin": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "fName": "يزيد",
+      "lName": "العلوي",
+      "email": "yazeed@javascript.com",
+      "phone": "0555555555",
+      "status": "نشط",
+      "created_at": "2023-03-31"
+    }
+  }
 }

@@ -48,8 +48,8 @@ const StudentSignup = () => {
             <FormInput
               label="البريد الجامعي"
               name="email"
-              rules={emailValidationRules()}
-            />
+              rules={emailValidationRules}
+              />
             <FormInput
               label="كلمة السر"
               inputType="password"

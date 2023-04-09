@@ -74,7 +74,7 @@ const InstProfile = ({ isAdmin }) => {
           <Button
             type="primary"
             htmlType="submit"
-            className="save-button"
+            className="form-btn"
             disabled={!isFormChanged} // Disable button if the form is not changed
           >
             {isSubmitting ? "جاري الحفظ..." : "حفظ"}

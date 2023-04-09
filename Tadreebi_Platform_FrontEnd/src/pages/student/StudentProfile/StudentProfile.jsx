@@ -7,7 +7,7 @@ import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import { useFetch } from "../../../data/API";
 import FormInput from "../../../components/form/FormInput";
-import { inputGpaRules, phoneRules } from "../../../Validation/rules";
+import { emailValidationRules, inputGpaRules, nationalIdRules, phoneRules } from "../../../Validation/rules";
 import InputFile from "../../../components/form/InputFile";
 import { useParams } from "react-router";
 
@@ -107,6 +107,7 @@ const StudentProfile = ({ isAdmin }) => {
                 labelCol={{ span: 24 }}
                 name="email"
                 disabled={!isAdmin}
+                rules={emailValidationRules}
               />
             </Col>
             <Col xs={24} sm={12}>
@@ -116,6 +117,7 @@ const StudentProfile = ({ isAdmin }) => {
                 name="national_ID"
                 inputType="number"
                 disabled={!isAdmin}
+                rules={nationalIdRules}
               />
             </Col>
             <Col xs={24} sm={12}>
@@ -202,7 +204,7 @@ const StudentProfile = ({ isAdmin }) => {
           <Button
             type="primary"
             htmlType="submit"
-            className="save-button"
+            className="form-btn"
             disabled={!isFormChanged} // Disable button if the form is not changed
           >
             حفظ

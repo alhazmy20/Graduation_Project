@@ -29,7 +29,8 @@
         margin-bottom: 10px;
       }
 
-      span {
+      .login-register {
+        display: block;
         font-weight: 600;
         button {
           color: $steelTeal;

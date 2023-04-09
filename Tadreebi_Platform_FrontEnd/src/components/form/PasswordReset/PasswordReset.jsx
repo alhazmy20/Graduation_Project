@@ -7,11 +7,7 @@ import FormCard from '../../ui/FormCard/FormCard';
 
 const ResetPassword = () => {
   const [form] = Form.useForm();
-  const [formData, setFormData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmNewPassword: "",
-  });
+  const [formData, setFormData] = useState(null);
 
   const handleFormChange = (changedValues, allValues) => {
     setFormData((prevState) => ({
@@ -21,7 +17,7 @@ const ResetPassword = () => {
   };
 
   const onFinish = (values) => {
-    console.log(formData);
+    console.log(values);
   };
 
   return (
@@ -33,6 +29,7 @@ const ResetPassword = () => {
           onValuesChange={handleFormChange}
           onFinish={onFinish}
           className="form"
+          initialValues={formData}
         >
           <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
@@ -40,13 +37,14 @@ const ResetPassword = () => {
                 label="كلمة السر الحالية"
                 inputType="password"
                 name="currentPassword"
+                rules={passwordRules}
               />
             </Col>
             <Col xs={24} sm={12}>
               <FormInput
                 label="كلمة السر الجديدة"
                 inputType="password"
-                name="newPassword"
+                name="password"
                 rules={passwordRules}
               />
             </Col>
@@ -59,7 +57,7 @@ const ResetPassword = () => {
               />
             </Col>
           </Row>
-          <Button type="primary" htmlType="submit" className="save-button">
+          <Button type="primary" htmlType="submit" className="form-btn">
             حفظ
           </Button>
           <span className="error-message">لقد حدث خطأ</span>

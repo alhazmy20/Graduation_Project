@@ -121,8 +121,8 @@ const Login = () => {
                 label="البريد الإلكتروني"
                 labelCol={{ span: 24 }}
                 name="email"
-                rules={emailValidationRules()}
-              />
+                rules={emailValidationRules}
+                />
 
               <FormInput
                 inputType="password"
@@ -132,10 +132,10 @@ const Login = () => {
                 rules={passwordRules}
               />
 
-              <Button type="primary" htmlType="submit" className="login-button">
+              <Button type="primary" htmlType="submit" className="form-btn">
                 دخول
               </Button>
-              <span>
+              <span className="login-register">
                 ليس لديك حساب؟
                 <Button
                   type="link"

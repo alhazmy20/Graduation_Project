@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   background-color: $background;
   min-height: 100%;
@@ -26,8 +25,8 @@ body {
   background-color: $white;
   padding: 0.5rem;
   flex-wrap: wrap;
-  
-  @include breakpoint-down(small){
+
+  @include breakpoint-down(small) {
     flex-direction: column;
     padding: 1rem;
   }
@@ -38,23 +37,22 @@ body {
     font-weight: 500;
     font-size: 1rem;
     margin: 0 5px;
-    @include breakpoint-down(medium){
+    @include breakpoint-down(medium) {
       margin: 0.25rem;
     }
   }
 }
 
-
-.btnContainer{
+.btnContainer {
   .acceptBtn {
-    background-color: #01AD7E;
+    background-color: #01ad7e;
     color: white;
     font-size: 15px;
     font-weight: 500;
   }
 
   .rejectBtn {
-    background-color: #F46A61;
+    background-color: #f46a61;
     color: white;
     font-size: 15px;
     font-weight: 500;
@@ -81,7 +79,7 @@ body {
   .ant-pagination-prev {
     a {
       color: $Green;
-      @include breakpoint-down(small){
+      @include breakpoint-down(small) {
         margin-left: 0.5rem;
       }
     }
@@ -96,16 +94,21 @@ body {
   .ant-pagination-next {
     a {
       color: $Green;
-      @include breakpoint-down(small){
+      @include breakpoint-down(small) {
         margin-right: 0.5rem;
       }
     }
   }
-
 }
 
 .green-underline {
   border-bottom: 1px solid $Green;
   padding-bottom: 10px;
   margin-bottom: 1rem;
+}
+
+.form-btn {
+  background-color: $Green;
+  width: 120px;
+  font-weight: 600;
 }

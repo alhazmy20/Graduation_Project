@@ -85,7 +85,7 @@ const InstFormInputs = ({ withPassword, region }) => {
             label="البريد الإلكتروني"
             labelCol={{ span: 24 }}
             name="institutionEmail"
-            rules={emailValidationRules()}
+            rules={emailValidationRules}
           />
         </Col>
         {withPassword && (
