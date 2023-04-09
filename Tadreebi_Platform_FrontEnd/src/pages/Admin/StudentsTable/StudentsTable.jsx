@@ -1,5 +1,5 @@
 import "./StudentsTable.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, notification } from "antd";
 import { Link } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
@@ -10,6 +10,7 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
+
 const StudentsTable = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/students");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,9 +19,8 @@ const StudentsTable = () => {
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
@@ -28,13 +28,14 @@ const StudentsTable = () => {
   }
 
   if (!data) {
-    return <NoData text="لا يوجد طلاب حاليا"/>
+    return <NoData text="لا يوجد طلاب حاليا" />;
   }
 
   //NOTE
-  const { data: { data: studentsData } } = data;
-  
-  
+  const {
+    data: { data: studentsData },
+  } = data;
+
   const columns = [
     {
       title: "اسم الطالب",
@@ -153,13 +154,15 @@ const StudentsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length} سجل
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
+        سجل
       </p>
       <Table
         col={columns}
         data={filteredDataSource}
         Size={pageSize}
         handleChange={handlePaginationChange}
+        emptyText="لا توجد بيانات"
       />
     </div>
   );

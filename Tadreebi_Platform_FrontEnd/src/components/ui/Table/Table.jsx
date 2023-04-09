@@ -3,7 +3,7 @@ import {Table} from "antd";
 import { itemRender } from "../../../components/ui/Pagination";
 import "./Table.scss"
 
-const TableUI = ({col,data,handleChange,Size}) => {
+const TableUI = ({col,data,handleChange,Size, emptyText}) => {
   return (
     <Table
         classname="Table"
@@ -16,7 +16,8 @@ const TableUI = ({col,data,handleChange,Size}) => {
           pageSize: Size,
           position: ["bottomLeft"],
         }}
-      />
+        locale={{ emptyText: emptyText }}
+        />
   )
 }
 
