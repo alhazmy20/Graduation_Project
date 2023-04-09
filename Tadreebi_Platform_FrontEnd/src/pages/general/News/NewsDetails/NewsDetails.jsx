@@ -1,11 +1,12 @@
 import React from 'react'
 import {useParams } from 'react-router-dom'
-import { Card,Image } from 'antd';
+import { Card,Image, notification } from 'antd';
 import Title from 'antd/es/typography/Title';
 import './NewsDetails.scss'
 import { GetNewsId } from '../../../../data/API';
 import NotFound from '../../NotFound/NotFound';
 import Spinner from '../../../../components/ui/Spinner/Spinner';
+import NoData from '../../../../components/ui/NoData/NoData';
 
 const { Meta } = Card;
 
@@ -15,11 +16,18 @@ const NewsDetails = () => {
  const {data,error,loading} = GetNewsId(`http://localhost:8000/news/${id}`);
 
  
-if(error){
-  return <NotFound/>
-} else if(!loading){
-  return <Spinner/>
-} else
+ if (loading) {
+  return <Spinner />
+}
+
+if (error) {
+  return notification.error(error);
+}
+
+if (!data) {
+  return <NoData text="لا توجد اخبار حاليا"/>
+}
+
   return (
           <Card
          className='newsDetailsCard'

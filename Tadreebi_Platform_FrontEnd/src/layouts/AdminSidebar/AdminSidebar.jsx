@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AdminSidebar.scss";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   Sidebar,
   SubMenu,
@@ -15,14 +15,17 @@ import {
   faClipboard,
   faInfoCircle,
   faSignOut,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "antd";
 
 const AdminSidebar = () => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
     useProSidebar();
   return (
-    <div className="SideBarContainer">
-      <Sidebar className="Sidebar" rtl>
+     <>
+     <aside className="SideBarContainer">
+      <Sidebar  customBreakPoint={"1399px"} className="Sidebar" rtl>
         <div className="platformContainer">
           <span className="Platform">تدريبي</span>
           <span className="Name">عبدالمحسن الحازمي</span>
@@ -166,7 +169,15 @@ const AdminSidebar = () => {
           </NavLink>
         </Menu>
       </Sidebar>
+    </aside>
+    <main className="barsMain">
+    <div className="barsDiv">
+      <Button type="text" className="sb-button" onClick={() => toggleSidebar()}>
+      <FontAwesomeIcon className="fa-xl" icon={faBars}/>
+      </Button>
     </div>
+  </main>
+     </>
   );
 };
 
