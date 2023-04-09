@@ -171,6 +171,48 @@
       "current_page": 1,
       "data": [
         {
+          "id": 1,
+          "institutionName": "سدايا",
+          "institutionField": "تقني",
+          "institutionSector": "خاص",
+          "institutionEmail": "x@a.com",
+          "institutionPhone": "0589911445",
+          "managerEmail": "a@a.com",
+          "managerPhone": "0582599922",
+          "managerPosition": "مشرف",
+          "fName": "عبدالمحسن",
+          "lName": "الحازمي",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "status":"غير نشط",
+          "created_at": "2023-04-06",
+          "logo": {
+            "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
+            "logo_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/institutions/logo/642b94822913b_MacBook%20Pro%2014_%20-%2020.png"
+          }
+        },
+        {
+          "id": 2,
+          "institutionName": "سدايا",
+          "institutionField": "تقني",
+          "institutionSector": "خاص",
+          "institutionEmail": "x@a.com",
+          "institutionPhone": "0589911445",
+          "managerEmail": "a@a.com",
+          "managerPhone": "0582599922",
+          "managerPosition": "مشرف",
+          "fName": "عبدالمحسن",
+          "lName": "الحازمي",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "status":"غير نشط",
+          "created_at": "2023-04-06",
+          "logo": {
+            "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
+            "logo_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/institutions/logo/642b94822913b_MacBook%20Pro%2014_%20-%2020.png"
+          }
+        },
+        {
           "id": 3,
           "institutionName": "سدايا",
           "institutionField": "تقني",
@@ -184,6 +226,8 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
+          "status":"نشط",
+          "created_at": "2023-04-06",
           "logo": {
             "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
             "logo_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/institutions/logo/642b94822913b_MacBook%20Pro%2014_%20-%2020.png"
@@ -203,6 +247,50 @@
           "lName": "الحازمي",
           "region": "منطقة الرياض",
           "city": "الرياض",
+          "status":"نشط",
+          "created_at": "2023-04-06",
+          "logo": {
+            "logo_filename": null,
+            "logo_url": null
+          }
+        },
+        {
+          "id": 5,
+          "institutionName": "سدايا",
+          "institutionField": "تقني",
+          "institutionSector": "خاص",
+          "institutionEmail": "d@a.com",
+          "institutionPhone": "0582511445",
+          "managerEmail": "g@a.com",
+          "managerPhone": "0582511422",
+          "managerPosition": "مشرف",
+          "fName": "عبدالمحسن",
+          "lName": "الحازمي",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "status":"نشط",
+          "created_at": "2023-04-06",
+          "logo": {
+            "logo_filename": null,
+            "logo_url": null
+          }
+        },
+        {
+          "id": 6,
+          "institutionName": "سدايا",
+          "institutionField": "تقني",
+          "institutionSector": "خاص",
+          "institutionEmail": "d@a.com",
+          "institutionPhone": "0582511445",
+          "managerEmail": "g@a.com",
+          "managerPhone": "0582511422",
+          "managerPosition": "مشرف",
+          "fName": "عبدالمحسن",
+          "lName": "الحازمي",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "status":"نشط",
+          "created_at": "2023-04-06",
           "logo": {
             "logo_filename": null,
             "logo_url": null

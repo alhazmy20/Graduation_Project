@@ -54,6 +54,7 @@ const adminRoutes = (
     <Route index element={<AdminHomePage />} />
     <Route index element={<h1>الصفحة الرئيسية</h1>} />
     <Route path="manage-institutions" element={<InstitutionsTable />} />
+    <Route path="manage-institutions/:id" element={<InstProfile isAdmin={true}/>} />
     <Route path="manage-students" element={<StudentsTable />} />
     <Route path="manage-students/:id" element={<StudentProfile isAdmin={true}/>} />
   </Route>

@@ -31,10 +31,13 @@ const StudentsTable = () => {
     return <NoData text="لا يوجد طلاب حاليا" />;
   }
 
-  //NOTE
   const {
     data: { data: studentsData },
   } = data;
+
+  const filteredDataSource = statusFilter
+    ? studentsData.filter((application) => application.status === statusFilter)
+    : studentsData;
 
   const columns = [
     {
@@ -114,14 +117,9 @@ const StudentsTable = () => {
     setStatusFilter(status);
   };
 
-  //NOTE
-  const filteredDataSource = statusFilter
-    ? studentsData.filter((application) => application.status === statusFilter)
-    : studentsData;
-
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, data.length);
+    const end = Math.min(start + pageSize - 1, studentsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };

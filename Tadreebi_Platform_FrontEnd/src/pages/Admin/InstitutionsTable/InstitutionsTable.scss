@@ -16,6 +16,19 @@
     margin-bottom: 1rem;
   }
 
+  .inactiveBtn {
+    background-color: #F46A61;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .activeBtn {
+    background-color: $Green;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
   .rangeText {
     color: #008374b2;
     font-size: larger;

@@ -1,6 +1,6 @@
 import "./InstitutionsTable.scss";
 import { useState } from "react";
-import { Button, notification } from "antd";
+import { Button, notification, Switch } from "antd";
 import { Link } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
@@ -10,17 +10,19 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
+
 const InstitutionsTable = () => {
-  const { data, loading, error } = useFetch("http://localhost:8000/institutions");
+  const { data, loading, error } = useFetch(
+    "http://localhost:8000/institutions"
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
@@ -28,10 +30,17 @@ const InstitutionsTable = () => {
   }
 
   if (!data) {
-    return <NoData text="لا توجد مؤسسات حاليا"/>
+    return <NoData text="لا توجد مؤسسات حاليا" />;
   }
-  
-  
+
+  const {
+    data: { data: studentsData },
+  } = data;
+
+  const filteredDataSource = statusFilter
+    ? studentsData.filter((application) => application.status === statusFilter)
+    : studentsData;
+
   const columns = [
     {
       title: "اسم المؤسسة",
@@ -52,14 +61,13 @@ const InstitutionsTable = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: (text) => {
-        let style = {};
-        if (text === "نشط") {
-          style.color = "#008374b2";
-        } else if (text === "غير نشط") {
-          style.color = "red";
-        }
-        return <span style={style}>{text}</span>;
+      render: (text, record) => {
+        let buttons = {};
+        if (record.status === "نشط") {
+          buttons = <Button className="activeBtn">نشط</Button>;
+        } else if (record.status === "غير نشط")
+          buttons = <Button className="inactiveBtn">غير نشط</Button>;
+        return buttons;
       },
     },
     {
@@ -70,6 +78,15 @@ const InstitutionsTable = () => {
         let buttons = {};
         buttons = (
           <span>
+            <Link to={`/admin/manage-institutions/${record.id}`}>
+              {
+                <FontAwesomeIcon
+                  className="icon"
+                  icon={faPenToSquare}
+                  style={{ color: "#008374b2" }}
+                />
+              }
+            </Link>
             <span onClick={() => handleDelete(`${record.institutionName}`)}>
               {
                 <FontAwesomeIcon
@@ -100,14 +117,10 @@ const InstitutionsTable = () => {
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
   };
-  const filteredDataSource = statusFilter
-    ? data.filter((application) => application.status === statusFilter)
-    : data;
- 
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, data.length);
+    const end = Math.min(start + pageSize - 1, studentsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -130,23 +143,25 @@ const InstitutionsTable = () => {
           className="button-filter"
           onClick={() => handleStatusFilterChange("نشط")}
         >
-          الطلاب النشطين
+          المؤسسات النشطة
         </Button>
         <Button
           className="button-filter"
           onClick={() => handleStatusFilterChange("غير نشط")}
         >
-          الطلاب الغير نشطين
+          المؤسسات الغير نشطة
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {data.length} سجل
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
+        سجل
       </p>
       <Table
         col={columns}
         data={filteredDataSource}
         Size={pageSize}
         handleChange={handlePaginationChange}
+        emptyText="لا توجد بيانات"
       />
     </div>
   );
