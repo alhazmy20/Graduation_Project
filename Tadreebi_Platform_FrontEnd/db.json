@@ -22,9 +22,7 @@
       "date": "منذ 3 أيام"
     }
   ],
-  "posts": [
-    
-  ],
+  "posts": [],
 
   "users": [
     {
@@ -104,140 +102,166 @@
       "avatar": ""
     }
   ],
-  "students": 
-    {
-      "status": "تم تنفيذ الطلب بنجاح",
-      "message": null,
-      "data": {
-        "current_page": 1,
-        "data": [
-          {
-            "id": 1,
-            "fullName": "Abdulmohsen Mansour Shalyah Alhazmy",
-            "phone": "0589900002",
-            "gender": "أنثى",
-            "national_ID": 1100000001,
-            "university": "جامعة طيبة",
-            "major": "information Systems",
-            "GPA": 5,
-            "GPA_Type": 5,
-            "status": "نشط",
-            "created_at": "2023-04-02"
-          },
-          {
-            "id": 2,
-            "fullName": "علي عبدالله سعد الحربي",
-            "phone": "0501231230",
-            "gender": "ذكر",
-            "national_ID": 1100000000,
-            "university": "جامعة طيبة",
-            "major": "نظم معلومات",
-            "GPA": 5,
-            "GPA_Type": 5,
-            "status": "غير نشط",
-            "created_at": "2023-04-06"
+  "students": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "id": 1,
+          "fullName": "Abdulmohsen Mansour Shalyah Alhazmy",
+          "phone": "0589900002",
+          "gender": "أنثى",
+          "national_ID": 1100000001,
+          "university": "جامعة طيبة",
+          "major": "information Systems",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "نشط",
+          "created_at": "2023-04-02"
+        },
+        {
+          "id": 2,
+          "fullName": "علي عبدالله سعد الحربي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        }
+      ],
+      "first_page_url": "http://localhost:8000/api/students?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8000/api/students?page=1",
+      "links": [
+        {
+          "url": null,
+          "label": "&laquo; Previous",
+          "active": false
+        },
+        {
+          "url": "http://localhost:8000/api/students?page=1",
+          "label": "1",
+          "active": true
+        },
+        {
+          "url": null,
+          "label": "Next &raquo;",
+          "active": false
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8000/api/students",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": 2,
+      "total": 2
+    }
+  },
+  "institutions": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "id": 3,
+          "institutionName": "سدايا",
+          "institutionField": "تقني",
+          "institutionSector": "خاص",
+          "institutionEmail": "x@a.com",
+          "institutionPhone": "0589911445",
+          "managerEmail": "a@a.com",
+          "managerPhone": "0582599922",
+          "managerPosition": "مشرف",
+          "fName": "عبدالمحسن",
+          "lName": "الحازمي",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "logo": {
+            "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
+            "logo_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/institutions/logo/642b94822913b_MacBook%20Pro%2014_%20-%2020.png"
           }
-        ],
-        "first_page_url": "http://localhost:8000/api/students?page=1",
-        "from": 1,
-        "last_page": 1,
-        "last_page_url": "http://localhost:8000/api/students?page=1",
-        "links": [
-          {
-            "url": null,
-            "label": "&laquo; Previous",
-            "active": false
-          },
-          {
-            "url": "http://localhost:8000/api/students?page=1",
-            "label": "1",
-            "active": true
-          },
-          {
-            "url": null,
-            "label": "Next &raquo;",
-            "active": false
+        },
+        {
+          "id": 4,
+          "institutionName": "سدايا",
+          "institutionField": "تقني",
+          "institutionSector": "خاص",
+          "institutionEmail": "d@a.com",
+          "institutionPhone": "0582511445",
+          "managerEmail": "g@a.com",
+          "managerPhone": "0582511422",
+          "managerPosition": "مشرف",
+          "fName": "عبدالمحسن",
+          "lName": "الحازمي",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "logo": {
+            "logo_filename": null,
+            "logo_url": null
           }
-        ],
-        "next_page_url": null,
-        "path": "http://localhost:8000/api/students",
-        "per_page": 10,
-        "prev_page_url": null,
-        "to": 2,
-        "total": 2
+        }
+      ],
+      "first_page_url": "http://localhost:8000/api/institutions?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8000/api/institutions?page=1",
+      "links": [
+        {
+          "url": null,
+          "label": "&laquo; Previous",
+          "active": false
+        },
+        {
+          "url": "http://localhost:8000/api/institutions?page=1",
+          "label": "1",
+          "active": true
+        },
+        {
+          "url": null,
+          "label": "Next &raquo;",
+          "active": false
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8000/api/institutions",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": 2,
+      "total": 2
+    }
+  },
+
+  "institution": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "id": 3,
+      "institutionName": "سدايا",
+      "institutionField": "تقني",
+      "institutionSector": "خاص",
+      "institutionEmail": "x@a.com",
+      "institutionPhone": "0589911445",
+      "managerEmail": "a@a.com",
+      "managerPhone": "0582599922",
+      "managerPosition": "مشرف",
+      "fName": "عبدالمحسن",
+      "lName": "الحازمي",
+      "region": "منطقة الرياض",
+      "city": "الرياض",
+      "logo": {
+        "logo_filename": "642b94822913b_MacBook Pro 14_ - 20.png",
+        "logo_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/institutions/logo/642b94822913b_MacBook%20Pro%2014_%20-%2020.png"
       }
     }
-  ,
-  "institutions": [
-    {
-      "id": 1,
-      "institutionName": "شركة التقنيات الحديثة",
-      "institutionSector": "قطاع خاص",
-      "region": "منطقة المدينة المنورة",
-      "city": "ينبع",
-      "institutionField": "إتصالات وتقنية المعلومات",
-      "email": "altiqniaat_alhaditha@example.com",
-      "fName": "يزيد",
-      "lName": "العلوي",
-      "managerPosition": "مسؤول التدريب",
-      "managerEmail": "yazeed.alalawi@example.com",
-      "managerPhone": "0545930922",
-      "institutionPhone": "0545930922",
-      "status": "نشط",
-      "created_at": "2023-04-02"
-    },
-    {
-      "id": 2,
-      "institutionName": "شركة التقنيات الحديثة",
-      "institutionSector": "قطاع خاص",
-      "region": "منطقة المدينة المنورة",
-      "city": "ينبع",
-      "institutionField": "إتصالات وتقنية المعلومات",
-      "email": "altiqniaat_alhaditha@example.com",
-      "fName": "يزيد",
-      "lName": "العلوي",
-      "managerPosition": "مسؤول التدريب",
-      "managerEmail": "yazeed.alalawi@example.com",
-      "managerPhone": "0545930922",
-      "institutionPhone": "0545930922",
-      "status": "غير نشط",
-      "created_at": "2023-04-02"
-    },
-    {
-      "id": 3,
-      "institutionName": "شركة التقنيات الحديثة",
-      "institutionSector": "قطاع خاص",
-      "region": "منطقة المدينة المنورة",
-      "city": "ينبع",
-      "institutionField": "إتصالات وتقنية المعلومات",
-      "email": "altiqniaat_alhaditha@example.com",
-      "fName": "يزيد",
-      "lName": "العلوي",
-      "managerPosition": "مسؤول التدريب",
-      "managerEmail": "yazeed.alalawi@example.com",
-      "managerPhone": "0545930922",
-      "institutionPhone": "0545930922",
-      "status": "غير نشط",
-      "created_at": "2023-04-02"
-    },
-    {
-      "id": 4,
-      "institutionName": "شركة التقنيات الحديثة",
-      "institutionSector": "قطاع خاص",
-      "region": "منطقة المدينة المنورة",
-      "city": "ينبع",
-      "institutionField": "إتصالات وتقنية المعلومات",
-      "email": "altiqniaat_alhaditha@example.com",
-      "fName": "يزيد",
-      "lName": "العلوي",
-      "managerPosition": "مسؤول التدريب",
-      "managerEmail": "yazeed.alalawi@example.com",
-      "managerPhone": "0545930922",
-      "institutionPhone": "0545930922",
-      "status": "نشط",
-      "created_at": "2023-04-02"
-    }
-  ],
+  },
 
   "student": {
     "status": "تم تنفيذ الطلب بنجاح",
@@ -275,7 +299,7 @@
       "studentApplay": "21",
       "university": "جامعة طيبة",
       "totalApplicant": 12,
-      "year":"2016"
+      "year": "2016"
     },
     {
       "id": 2,
