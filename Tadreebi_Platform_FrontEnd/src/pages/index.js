@@ -15,13 +15,16 @@ import InstProfile from "./institution/InstProfile/InstProfile";
 import InstPosts from "../pages/institution/InstApplications/InstPosts";
 import InstPostDetails from "../pages/institution/InstPostDetails/InstPostDetails";
 import InstPostForm from "./institution/instPostForm/InstPostForm";
+
 // Imports from student folder
 import Applications from "./student/Applications/Application";
 import StudentProfile from "./student/StudentProfile/StudentProfile";
 import StudentSignup from "./student/StudentSignup/StudentSignup";
+
+//Imports from admin folder
 import AdminLayout from "../layouts/AdminLayout";
 import AdminHomePage from "../pages/Admin/HomePage/Home";
-//Imports from admin folder
+import AdminProfile from "./Admin/AdminProfile/AdminProfile";
 
 //Export all pages
 export {
@@ -44,4 +47,5 @@ export {
   InstPostForm,
   AdminLayout,
   AdminHomePage,
+  AdminProfile,
 };

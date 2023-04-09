@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import StepOne from "./components/StepOne";
-// import StepTwo from "./components/StepTwo";
 import "./InstSignup.scss";
 import { Steps, Form, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -95,7 +93,7 @@ const InstSignup = () => {
               <Button
                 type="primary"
                 onClick={handleNextStep}
-                style={{ backgroundColor: "#008374", width: "100px" }}
+                className='main-btn'
               >
                 التالي
               </Button>
@@ -104,7 +102,7 @@ const InstSignup = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                style={{ backgroundColor: "#008374", width: "100px" }}
+                className='main-btn'
               >
                 تسجيل
               </Button>
@@ -112,11 +110,7 @@ const InstSignup = () => {
             {currentStep > 0 && (
               <Button
                 type="text"
-                style={{
-                  margin: "0 8px",
-                  color: "#008374",
-                  fontWeight: "bolder",
-                }}
+                className='back-btn'
                 onClick={handlePrevStep}
               >
                 العودة

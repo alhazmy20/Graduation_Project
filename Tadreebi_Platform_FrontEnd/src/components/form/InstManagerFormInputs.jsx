@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import React from "react";
-import { phoneRules } from "../../Validation/rules";
+import { emailValidationRules, phoneRules } from "../../Validation/rules";
 import FormInput from "./FormInput";
 
 const InstManagerFormInputs = () => {
@@ -29,6 +29,7 @@ const InstManagerFormInputs = () => {
             label="البريد الإلكتروني"
             labelCol={{ span: 24 }}
             name="managerEmail"
+            rules={emailValidationRules()}
           />
         </Col>
         <Col xs={24} sm={12}>

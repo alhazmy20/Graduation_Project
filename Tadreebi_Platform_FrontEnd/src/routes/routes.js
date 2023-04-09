@@ -24,6 +24,7 @@ import {
   InstPostForm,
   AdminLayout,
   AdminHomePage,
+  AdminProfile,
 } from "../pages/index";
 import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
 import InstitutionsTable from "../pages/Admin/InstitutionsTable/InstitutionsTable";
@@ -56,7 +57,11 @@ const adminRoutes = (
     <Route path="manage-institutions" element={<InstitutionsTable />} />
     <Route path="manage-institutions/:id" element={<InstProfile isAdmin={true}/>} />
     <Route path="manage-students" element={<StudentsTable />} />
-    <Route path="manage-students/:id" element={<StudentProfile isAdmin={true}/>} />
+    <Route
+      path="manage-students/:id"
+      element={<StudentProfile isAdmin={true} />}
+    />
+    <Route path="profile" element={<AdminProfile />} />
   </Route>
 );
 

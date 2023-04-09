@@ -7,6 +7,10 @@ import { AuthContext } from "../../../auth/useContext";
 import { useNavigate } from "react-router-dom";
 import { UserRole, GetAllNews } from "../../../data/API.js";
 import { useParams } from "react-router-dom";
+import FormCard from "../../../components/ui/FormCard/FormCard";
+import { useForm } from "antd/es/form/Form";
+import FormInput from "../../../components/form/FormInput";
+import { emailValidationRules, passwordRules } from "../../../Validation/rules";
 const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState({
@@ -24,19 +28,19 @@ const Login = () => {
   };
 
   // const handleSubmit = async (e) => {
-    // try {
-    //   if (userRole === "student") {
-    //     await login(inputs);
-    //     navigate("/TrainingOpportunities");
-    //   } else if (userRole === "institution") {
-    //     await login(inputs);
-    //     navigate("/institution/");
-    //   } else {
-    //     navigate("/");
-    //   }
-    // } catch (err) {
-    //   setError(err);
-    // }
+  // try {
+  //   if (userRole === "student") {
+  //     await login(inputs);
+  //     navigate("/TrainingOpportunities");
+  //   } else if (userRole === "institution") {
+  //     await login(inputs);
+  //     navigate("/institution/");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // } catch (err) {
+  //   setError(err);
+  // }
 
   //   navigate(`/login/${inputs.email}`);
   // };
@@ -72,27 +76,27 @@ const Login = () => {
   //   }
   // };
 
+  const form = useForm();
+
   const handleSubmit = async (e) => {
-    const test = {
-      username: "AAAAAA",
-      email: "a@giml.com",
-      password: "aosejnfoiejaomcojasoiejfj",
-    };
-
-    try {
-      // console.log(inputs);
-      await login(test);
-      if (
-        test.email === "a@giml.com" &&
-        test.password === "aosejnfoiejaomcojasoiejfj"
-      ) {
-        navigate("/");
-      }
-    } catch (err) {
-      setError(err);
-    }
+    // const test = {
+    //   username: "AAAAAA",
+    //   email: "a@giml.com",
+    //   password: "aosejnfoiejaomcojasoiejfj",
+    // };
+    // try {
+    //   // console.log(inputs);
+    //   await login(test);
+    //   if (
+    //     test.email === "a@giml.com" &&
+    //     test.password === "aosejnfoiejaomcojasoiejfj"
+    //   ) {
+    //     navigate("/");
+    //   }
+    // } catch (err) {
+    //   setError(err);
+    // }
   };
-
 
   const onFinishFailed = (error) => {
     console.log("error", error);
@@ -102,53 +106,51 @@ const Login = () => {
     <Container className="login-container">
       <Row justify="center" align="middle" className="login">
         <Col lg={10} md={18} xs={24} sm={24}>
-          <Form
-            name="basic"
-            initialValues={{ remember: true }}
-            onFinish={handleSubmit}
-            onFinishFailed={onFinishFailed}
-            className="form-wrapper"
-            style={{ height: "fit-content" }}
-          >
-            <label className="label">البريد الالكتروني</label>
-            <Form.Item
-              name="email"
-              rules={[
-                { required: true, message: "الرجاء ادخال البريد الإلكتروني" },
-                { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
-              ]}
+          <FormCard className="card">
+            <h1 className='green-underline'>تسجيل الدخول</h1>
+            <Form
+              name="basic"
+              initialValues={{ remember: true }}
+              onFinish={handleSubmit}
+              onFinishFailed={onFinishFailed}
+              className="form-wrapper"
+              style={{ height: "fit-content" }}
+              validateTrigger="onSubmit" // Only validate on submit
             >
-              <Input name="email" onChange={handleChange} />
-            </Form.Item>
-            <label className="label">كلمة المرور</label>
-            <Form.Item
-              name="password"
-              rules={[
-                { required: true, message: "الرجاء ادخال كلمة المرور" },
-                { message: "يجب أن يكون 8 احرف على الأقل", pattern: "^.{8,}$" },
-              ]}
-            >
-              <Input.Password name="password" onChange={handleChange} />
-            </Form.Item>
-
-            <Button type="primary" htmlType="submit" className="login-button">
-              دخول
-            </Button>
-            <span>
-              ليس لديك حساب؟
-              <Button
-                type="link"
-                style={{ padding: "0" }}
-                onClick={() => setIsModalOpen(true)}
-              >
-                حساب جديد
-              </Button>
-              <RegisterModal
-                modalOpen={isModalOpen}
-                setModalOpen={setIsModalOpen}
+              <FormInput
+                label="البريد الإلكتروني"
+                labelCol={{ span: 24 }}
+                name="email"
+                rules={emailValidationRules()}
               />
-            </span>
-          </Form>
+
+              <FormInput
+                inputType="password"
+                label="كلمة السر"
+                labelCol={{ span: 24 }}
+                name="password"
+                rules={passwordRules}
+              />
+
+              <Button type="primary" htmlType="submit" className="login-button">
+                دخول
+              </Button>
+              <span>
+                ليس لديك حساب؟
+                <Button
+                  type="link"
+                  style={{ padding: "0" }}
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  حساب جديد
+                </Button>
+                <RegisterModal
+                  modalOpen={isModalOpen}
+                  setModalOpen={setIsModalOpen}
+                />
+              </span>
+            </Form>
+          </FormCard>
         </Col>
       </Row>
     </Container>

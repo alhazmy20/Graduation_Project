@@ -1,7 +1,12 @@
 import { Col, Row, Select } from "antd";
 import React, { useState } from "react";
 import { RegionData, SECTORS } from "../../data/TestData";
-import { confirmPasswordRules, passwordRules } from "../../Validation/rules";
+import {
+  confirmPasswordRules,
+  emailValidationRules,
+  passwordRules,
+  phoneRules,
+} from "../../Validation/rules";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useFetchMajorsAndCities } from "../../data/API";
@@ -52,13 +57,13 @@ const InstFormInputs = ({ withPassword, region }) => {
         </Col>
         <Col xs={24} sm={12}>
           <FormSelect name="city" label="المدينة" labelCol={{ span: 24 }}>
-            {RegionData.find((r) => r.region === (selectedRegion || region))?.cities.map(
-              (city) => (
-                <Select.Option key={city.id} value={city.city}>
-                  {city.city}
-                </Select.Option>
-              )
-            )}
+            {RegionData.find(
+              (r) => r.region === (selectedRegion || region)
+            )?.cities.map((city) => (
+              <Select.Option key={city.id} value={city.city}>
+                {city.city}
+              </Select.Option>
+            ))}
           </FormSelect>
         </Col>
 
@@ -79,7 +84,8 @@ const InstFormInputs = ({ withPassword, region }) => {
           <FormInput
             label="البريد الإلكتروني"
             labelCol={{ span: 24 }}
-            name="email"
+            name="institutionEmail"
+            rules={emailValidationRules()}
           />
         </Col>
         {withPassword && (

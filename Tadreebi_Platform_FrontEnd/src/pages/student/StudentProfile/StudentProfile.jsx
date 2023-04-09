@@ -91,7 +91,7 @@ const StudentProfile = ({ isAdmin }) => {
           encType="multipart/form-data"
           initialValues={studentData}
         >
-          <h1>البيانات الأساسية</h1>
+          <h1 className='green-underline'>البيانات الأساسية</h1>
           <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
               <FormInput
@@ -148,7 +148,7 @@ const StudentProfile = ({ isAdmin }) => {
               />
             </Col>
           </Row>
-          <h1>البيانات الأكاديمية</h1>
+          <h1 className='green-underline'>البيانات الأكاديمية</h1>
           <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
               <FormInput

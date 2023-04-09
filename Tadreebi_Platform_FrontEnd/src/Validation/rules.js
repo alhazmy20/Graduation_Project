@@ -49,3 +49,13 @@ export const inputGpaRules = (max) => [
     },
   },
 ];
+
+export const emailValidationRules = () => {
+  const rules = [
+    {
+      type: "email",
+      message: "الرجاء ادخال بريد الكتروني صالح",
+    },
+  ];
+  return rules;
+};

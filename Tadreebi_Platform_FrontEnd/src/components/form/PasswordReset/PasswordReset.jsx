@@ -27,13 +27,13 @@ const ResetPassword = () => {
   return (
     <div className="reset-password">
       <FormCard className="card">
+      <h1 className='green-underline'>تحديث كلمة السر</h1>
         <Form
           form={form}
           onValuesChange={handleFormChange}
           onFinish={onFinish}
           className="form"
         >
-          <h1>تحديث كلمة السر</h1>
           <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
               <FormInput

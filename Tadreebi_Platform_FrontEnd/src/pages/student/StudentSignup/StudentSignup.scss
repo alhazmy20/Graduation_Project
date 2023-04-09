@@ -1,6 +1,8 @@
 .student-signup {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 
   .card {
     display: flex;
@@ -44,6 +46,7 @@
       }
 
       span {
+        font-weight: 600;
         a {
           text-decoration: none;
           color: #4a98ae;

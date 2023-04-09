@@ -6,7 +6,11 @@ import { UNIVERSITIES } from "../../../data/StudentData.js";
 import mobile_login_amico from "../../../assets/images/mobile_login_amico.png";
 import FormInput from "../../../components/form/FormInput";
 import FormSelect from "../../../components/form/FormSelect";
-import { passwordRules, confirmPasswordRules} from '../../../Validation/rules.js'
+import {
+  passwordRules,
+  confirmPasswordRules,
+  emailValidationRules,
+} from "../../../Validation/rules.js";
 
 const StudentSignup = () => {
   const navigate = useNavigate();
@@ -44,9 +48,7 @@ const StudentSignup = () => {
             <FormInput
               label="البريد الجامعي"
               name="email"
-              rules={[
-                { message: "الرجاء إدخال بريد الكتروني صالح", type: "email" },
-              ]}
+              rules={emailValidationRules()}
             />
             <FormInput
               label="كلمة السر"
@@ -61,10 +63,7 @@ const StudentSignup = () => {
               rules={confirmPasswordRules}
             />
 
-            <FormSelect
-              label="الجامعة"
-              name="university"
-            >
+            <FormSelect label="الجامعة" name="university">
               {UNIVERSITIES.map((university) => (
                 <Select.Option key={university.id} value={university.name}>
                   {university.name}
@@ -72,10 +71,7 @@ const StudentSignup = () => {
               ))}
             </FormSelect>
 
-            <FormSelect
-              label="التخصص"
-              name="major"
-            >
+            <FormSelect label="التخصص" name="major">
               {UNIVERSITIES.map((university) => (
                 <Select.Option key={university.id} value={university.name}>
                   {university.name}
