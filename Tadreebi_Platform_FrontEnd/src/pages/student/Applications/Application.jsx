@@ -5,6 +5,11 @@ import Table from "../../../components/ui/Table/Table";
 import { TableText } from "../../../components/ui/Table/TableFilter";
 
 const Application = () => {
+  
+  const [statusFilter, setStatusFilter] = useState(null);
+  const handleStatusFilterChange = (status) => {
+    setStatusFilter(status);
+  };
   const dataSource = [
     {
       key: "1",
@@ -99,10 +104,6 @@ const Application = () => {
     },
   ];
 
-  const [statusFilter, setStatusFilter] = useState(null);
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
   const filteredDataSource = statusFilter
     ? dataSource.filter((application) => application.status === statusFilter)
     : dataSource;

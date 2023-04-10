@@ -1,5 +1,7 @@
 import { Button } from 'antd';
 import React, { useState } from 'react'
+import ConditionModal from "../../../pages/institution/InstPostDetails/components/conditionModal";
+import StudentModal from '../../../pages/institution/InstPostDetails/components/StudentModal';
 
  export const TableText = (text) => {
     let style = {};
@@ -33,4 +35,46 @@ export const AdminInstitutionText = (record) => {
     style.color = "red";
   }
   return <span style={style}>{text}</span>;
+ }
+ 
+ export function InstitutionAccept({row}) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [condition, setCondition] = useState("");
+  
+  if (row.status === "بإنتظار موافقة المنشأة") {
+    return (
+      <span className="btnContainer">
+        <Button
+          className="acceptBtn"
+          onClick={() => {
+            setModalOpen(true);
+            setCondition("accept");
+          }}
+        >
+          قبول
+        </Button>
+        <Button
+          className="rejectBtn"
+          onClick={() => {
+            setModalOpen(true);
+            setCondition("reject");
+          }}
+        >
+          رفض
+        </Button>
+        <ConditionModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          condition={condition}
+        />
+      </span>
+    );
+  } else {
+    return <span>-</span>;
+  }
+ }
+
+ export function StudentDetails({name}){
+  const [detailsOpen, setDetailsOpen] = useState(false)
+  return <span>{<Button type='text' style={{color: "blue", fontWeight: "bold"}} onClick={() => {setDetailsOpen(true)}}>{name}</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>
  }

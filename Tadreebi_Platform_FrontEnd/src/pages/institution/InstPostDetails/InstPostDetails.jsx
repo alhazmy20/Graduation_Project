@@ -1,58 +1,78 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import Spinner from "../../../components/ui/Spinner/Spinner"
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import TableUI from "../../../components/ui/Table/Table";
-import {TableText} from "../../../components/ui/Table/TableFilter";
-import { GetNewsId } from "../../../data/API";
+import {TableText, InstitutionAccept,StudentDetails} from "../../../components/ui/Table/TableFilter";
+import { GetAllNews, GetNewsId, useFetch } from "../../../data/API";
 import "./InstPostDetails.scss";
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import ConditionModal from "./components/conditionModal";
 import StudentModal from "./components/StudentModal";
+import NoData from "../../../components/ui/NoData/NoData";
 
 const InstPostDetails = () => {
   const { id } = useParams();
   const { data, error, loading } = GetNewsId(
     `http://localhost:8000/posts/${id}`
   );
-  const [modalOpen, setModalOpen] = useState(false);
-  const [condition, setCondition] = useState("");
-  const [detailsOpen, setDetailsOpen] = useState(false)
-  const dataSource = [
-    {
-      key: "1",
-      stuName: <span>{<Button type='text' style={{color: "blue", fontWeight: "bold"}} onClick={() => {setDetailsOpen(true)}}>فلان فلان الفلاني</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>,
-      university: "جامعة طيبة",
-      gpa: "5/4.9",
-      specialization: "نظم معلومات",
-      status: "بإنتظار موافقة الطالب",
-      accept: "-",
-    },
-    {
-      key: "2",
-      stuName: "فلان فلان الفلاني",
-      university: "جامعة الملك فهد للبترول و المعادن",
-      gpa: "4/3.5",
-      specialization: "هندسة برمجيات",
-      status: "مرفوض",
-      accept: "-",
-    },
-    {
-      key: "3",
-      stuName: "فلان فلان الفلاني",
-      university: "جامعة الملك سعود",
-      gpa: "5/4.4",
-      specialization: "هندسة معمارية",
-      status: "بإنتظار موافقة المنشأة",
-      accept: "-",
-    },
-  ];
+  const {data: {data: response}} = useFetch( `http://localhost:8000/students`)
+  const [statusFilter, setStatusFilter] = useState(null);
+  const handleStatusFilterChange = (status) => {
+    setStatusFilter(status);
+  };
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error(error);
+  }
+
+  if (!data) {
+    return <NoData text="لا توجد مؤسسات حاليا" />;
+  }
+
+  console.log(response);
+
+
+  // const dataSource = [
+  //   {
+  //     key: "1",
+  //     stuName: <StudentDetails/>,
+  //     university: "جامعة طيبة",
+  //     gpa: "5/4.9",
+  //     specialization: "نظم معلومات",
+  //     status: "بإنتظار موافقة الطالب",
+  //     accept: "-",
+  //   },
+  //   {
+  //     key: "2",
+  //     stuName: "فلان فلان الفلاني",
+  //     university: "جامعة الملك فهد للبترول و المعادن",
+  //     gpa: "4/3.5",
+  //     specialization: "هندسة برمجيات",
+  //     status: "مرفوض",
+  //     accept: "-",
+  //   },
+  //   {
+  //     key: "3",
+  //     stuName: "فلان فلان الفلاني",
+  //     university: "جامعة الملك سعود",
+  //     gpa: "5/4.4",
+  //     specialization: "هندسة معمارية",
+  //     status: "بإنتظار موافقة المنشأة",
+  //     accept: "-",
+  //   },
+  // ];
 
   const columns = [
     {
       title: "الاسم",
-      dataIndex: "stuName",
+      dataIndex: "fullName",
       align: "center",
     },
     {
@@ -62,12 +82,12 @@ const InstPostDetails = () => {
     },
     {
       title: "المعدل",
-      dataIndex: "gpa",
+      dataIndex: "GPA",
       align: "center",
     },
     {
       title: "التخصص",
-      dataIndex: "specialization",
+      dataIndex: "major",
       align: "center",
     },
     {
@@ -80,54 +100,14 @@ const InstPostDetails = () => {
       title: "الإجراء",
       dataIndex: "accept",
       align: "center",
-      render: (text, row) => {
-        let buttons = {};
-        let style = {};
-        if (row.status === "بإنتظار موافقة المنشأة") {
-          buttons = (
-            <span className="btnContainer">
-              {
-                <Button
-                  className="acceptBtn"
-                  onClick={() => {
-                    setModalOpen(true);
-                    setCondition("accept");
-                  }}
-                >
-                  قبول
-                </Button>
-              }
-              {
-                <Button
-                  className="rejectBtn"
-                  onClick={() => {
-                    setModalOpen(true);
-                    setCondition("reject");
-                  }}
-                >
-                  رفض
-                </Button>
-              }
-              <ConditionModal
-                modalOpen={modalOpen}
-                setModalOpen={setModalOpen}
-                condition={condition}
-              />
-            </span>
-          );
-        } else buttons = <span>-</span>;
-        return buttons;
-      },
+      render: (text, row) => <InstitutionAccept row={row}/>,
     },
   ];
 
-  const [statusFilter, setStatusFilter] = useState(null);
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
   const filteredDataSource = statusFilter
-    ? dataSource.filter((application) => application.status === statusFilter)
-    : dataSource;
+  ? response.data.data.filter((application) => application.status === statusFilter)
+  : response.data.data;
+
 
   return (
     <div className="postDetailsContainer">
