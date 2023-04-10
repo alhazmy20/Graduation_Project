@@ -12,8 +12,7 @@ import {
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
-const PostDetailsTable = (props) => {
-  const { data } = props;
+const PostDetailsTable = ({data}) => {
   return (
     <Table responsive className="post-detail-table">
       <tbody>
