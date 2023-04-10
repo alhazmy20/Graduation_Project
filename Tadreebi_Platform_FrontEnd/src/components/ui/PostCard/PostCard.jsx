@@ -10,18 +10,18 @@ import {
 import "./PostCard.scss";
 import { useNavigate } from "react-router-dom";
 
-const PostCard = (props) => {
-  const { item } = props;
+const PostCard = ({data}) => {
   const navigate = useNavigate();
+  console.log(data);
 
   return (
     <Card
-      title={<h2 className="card-title">{item.title}</h2>}
+      title={<h2 className="card-title">{data.title}</h2>}
       className="post-card"
     >
       <Space direction="vertical" size="large" className="space-tag">
         <div className="majors">
-          {item.majors?.map((major, index) => (
+          {data.post_majors?.map((major, index) => (
             <span key={index} className="major">
               {" "}
               {/*NOTE Add the id to key like 'key={major.id} */}
@@ -33,29 +33,29 @@ const PostCard = (props) => {
           <div className="detail">
             <FontAwesomeIcon className="icon" icon={faCity} />
             <span className="label">المدينة:</span>
-            <span className="data">{item.city}</span>
+            <span className="data">{data.city}</span>
           </div>
           <div className="detail">
             <FontAwesomeIcon className="icon" icon={faTransgender} />
             <span className="label">الجنس:</span>
-            <span className="data">{item.gender}</span>
+            <span className="data">{data.gender}</span>
           </div>
           <div className="detail">
             <FontAwesomeIcon className="icon" icon={faDollar} />
             <span className="label">مكافأة:</span>
-            <span className="data">{item.reward}</span>
+            <span className="data">{data.reward}</span>
           </div>
           <div className="detail">
             <FontAwesomeIcon className="icon" icon={faCalendar} />
             <span className="label">تاريخ الإنتهاء:</span>
-            <span className="data">{item.subEndDate}</span>
+            <span className="data">{data.subEndDate}</span>
           </div>
         </div>
         <Button
           type="primary"
           className="more-detail-btn"
           onClick={() => {
-            navigate(`/training-opportunities/${item.id}`);
+            navigate(`/training-opportunities/${data.id}`);
           }}
         >
           عرض التفاصيل

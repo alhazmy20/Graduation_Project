@@ -1,11 +1,25 @@
 import React from "react";
 import "./NewestPost.scss";
-import { List } from "antd";
+import { List, notification } from "antd";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 import { data } from "../../../../data/TestData.js";
 import { Link } from "react-router-dom";
+import { useFetch } from '../../../../data/API';
+import Spinner from '../../../../components/ui/Spinner/Spinner';
 
 const NewestPost = () => {
+
+  const { data, error, loading } = useFetch(`http://localhost:8000/posts`);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error(error);
+  }
+
+  const {data: {data: posts}} = data;
   return (
     <div style={{ margin: "40px 0" }}>
       <div className="title">احدث فرص التدريب</div>
@@ -21,12 +35,12 @@ const NewestPost = () => {
             xl: 3,
             xxl: 4,
           }}
-          dataSource={data.filter((element, index) => {
+          dataSource={posts.filter((element, index) => {
             return index < 3;
           })}
           renderItem={(item) => (
             <List.Item style={{ padding: "30px" }}>
-              <PostCard item={item} />
+              <PostCard data={item} />
             </List.Item>
           )}
         />

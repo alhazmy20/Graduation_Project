@@ -21,6 +21,8 @@ const PostList = () => {
   //   return <NoData text="لا توجد فرص تدريب حاليا" />;
   // }
 
+  const {data: {data: posts}} = data;
+
   return (
     <List
       className="post-list"
@@ -44,10 +46,10 @@ const PostList = () => {
         pageSize: 8,
       }}
       locale={{ emptyText: <NoData text={"لا توجد فرص تدريب حاليا"} /> }}
-      dataSource={data}
+      dataSource={posts}
       renderItem={(item) => (
         <List.Item>
-          <PostCard item={item} />
+          <PostCard data={item} />
         </List.Item>
       )}
     />

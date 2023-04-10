@@ -175,7 +175,7 @@ const StudentProfile = ({ isAdmin }) => {
                   labelCol={{ span: 24 }}
                   name="GPA"
                   inputType="number"
-                  rules={inputGpaRules(data.GPA_Type)}
+                  rules={inputGpaRules(studentData.GPA_Type)}
                 />
                 <FormInput
                   label="من"

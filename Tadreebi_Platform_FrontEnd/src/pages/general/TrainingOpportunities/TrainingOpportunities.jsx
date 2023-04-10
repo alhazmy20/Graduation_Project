@@ -83,7 +83,7 @@ const TrainingOpportunities = () => {
             />
           </Form.Item>
 
-          <Button type="primary" className="search-button" htmlType="submit">
+          <Button type="primary" className="form-btn search-btn" htmlType="submit">
             بـحـث
           </Button>
         </Form>

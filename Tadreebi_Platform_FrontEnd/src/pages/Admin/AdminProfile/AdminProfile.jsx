@@ -9,7 +9,6 @@ import { useFetch } from "../../../data/API";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 
 const AdminProfile = () => {
-  const [formData, setFormData] = useState(null);
   const [isFormChanged, setIsFormChanged] = useState(false);
 
   const { data, loading, error } = useFetch(`http://localhost:8000/admin`);

@@ -108,7 +108,11 @@ body {
 }
 
 .form-btn {
-  background-color: $Green;
+  background-color: #51a59a;
   width: 120px;
   font-weight: 600;
+
+  &:hover{
+  background-color: #459389 !important;
+  }
 }

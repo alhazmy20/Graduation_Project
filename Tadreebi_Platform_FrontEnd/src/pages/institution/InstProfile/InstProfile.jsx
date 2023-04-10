@@ -1,4 +1,4 @@
-import { Button, Form,  notification } from "antd";
+import { Button, Form, notification } from "antd";
 import React, { useState } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./InstProfile.scss";
@@ -8,6 +8,7 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import { useFetch } from "../../../data/API";
+import { useParams } from "react-router-dom";
 
 const InstProfile = ({ isAdmin }) => {
   const [form] = Form.useForm();
@@ -17,6 +18,8 @@ const InstProfile = ({ isAdmin }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // const { data, loading, error } = useFetch("http://localhost:8000/institution");
+  const { id } = useParams() ;
+  console.log(id);
   const { data, loading, error } = useFetch(
     isAdmin
       ? `http://localhost:8000/institution`
@@ -67,9 +70,9 @@ const InstProfile = ({ isAdmin }) => {
           initialValues={institutionData}
           onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
         >
-          <h1 className='green-underline'>بيانات المنشأة</h1>
+          <h1 className="green-underline">بيانات المنشأة</h1>
           <InstFormInputs region={institutionData.region} />
-          <h1 className='green-underline'>بيانات المسؤول</h1>
+          <h1 className="green-underline">بيانات المسؤول</h1>
           <InstManagerFormInputs />
           <Button
             type="primary"
