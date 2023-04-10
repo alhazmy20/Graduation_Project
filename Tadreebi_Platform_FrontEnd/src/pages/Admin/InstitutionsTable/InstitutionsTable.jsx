@@ -10,6 +10,7 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
+import { AdminInstitutionText } from "../../../components/ui/Table/TableFilter";
 
 const InstitutionsTable = () => {
   const { data, loading, error } = useFetch(
@@ -61,14 +62,7 @@ const InstitutionsTable = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: (text, record) => {
-        let buttons = {};
-        if (record.status === "نشط") {
-          buttons = <Button className="activeBtn">نشط</Button>;
-        } else if (record.status === "غير نشط")
-          buttons = <Button className="inactiveBtn">غير نشط</Button>;
-        return buttons;
-      },
+      render: AdminInstitutionText
     },
     {
       title: "الإجراء",

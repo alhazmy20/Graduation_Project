@@ -24,6 +24,7 @@
 
           .ant-table-thead, .ant-table-tbody{
             tr{
+              font-family: $font-inter-regular;
               .ant-table-cell{
                 @include breakpoint-down(small){
                   padding: 0;

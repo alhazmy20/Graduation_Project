@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import TableUI from "../../../components/ui/Table/Table";
+import {TableText} from "../../../components/ui/Table/TableFilter";
 import { GetNewsId } from "../../../data/API";
 import "./InstPostDetails.scss";
 import { Button } from "antd";
@@ -21,7 +22,7 @@ const InstPostDetails = () => {
   const dataSource = [
     {
       key: "1",
-      stuName: <span>{<Button type='text' onClick={() => {setDetailsOpen(true)}}>فلان فلان الفلاني</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>,
+      stuName: <span>{<Button type='text' style={{color: "blue", fontWeight: "bold"}} onClick={() => {setDetailsOpen(true)}}>فلان فلان الفلاني</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>,
       university: "جامعة طيبة",
       gpa: "5/4.9",
       specialization: "نظم معلومات",
@@ -73,20 +74,7 @@ const InstPostDetails = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: (text) => {
-        let style = {};
-        if (
-          text === "بإنتظار موافقة الطالب" ||
-          text === "بإنتظار موافقة المنشأة"
-        ) {
-          style.color = "#F9C068";
-        } else if (text === "مرفوض") {
-          style.color = "red";
-        } else if (text === "مقبول") {
-          style.color = "#008374b2";
-        }
-        return <span style={style}>{text}</span>;
-      },
+      render: TableText
     },
     {
       title: "الإجراء",

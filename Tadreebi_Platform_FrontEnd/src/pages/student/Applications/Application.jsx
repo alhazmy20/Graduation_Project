@@ -2,6 +2,7 @@ import "./Application.scss";
 import { useState } from "react";
 import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
+import { TableText } from "../../../components/ui/Table/TableFilter";
 
 const Application = () => {
   const dataSource = [
@@ -75,20 +76,7 @@ const Application = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: (text) => {
-        let style = {};
-        if (
-          text === "بإنتظار موافقة الطالب" ||
-          text === "بإنتظار موافقة المنشأة"
-        ) {
-          style.color = "#F9C068";
-        } else if (text === "مرفوض") {
-          style.color = "red";
-        } else if (text === "مقبول") {
-          style.color = "#008374b2";
-        }
-        return <span style={style}>{text}</span>;
-      },
+      render: TableText,
     },
     {
       title: "الإجراء",

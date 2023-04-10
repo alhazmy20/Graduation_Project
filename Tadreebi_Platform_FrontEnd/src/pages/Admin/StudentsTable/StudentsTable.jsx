@@ -10,6 +10,7 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
+import { AdminStudentTable } from "../../../components/ui/Table/TableFilter";
 
 const StudentsTable = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/students");
@@ -59,15 +60,7 @@ const StudentsTable = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: (text) => {
-        let style = {};
-        if (text === "نشط") {
-          style.color = "#008374b2";
-        } else if (text === "غير نشط") {
-          style.color = "red";
-        }
-        return <span style={style}>{text}</span>;
-      },
+      render: AdminStudentTable
     },
     {
       title: "الإجراء",
