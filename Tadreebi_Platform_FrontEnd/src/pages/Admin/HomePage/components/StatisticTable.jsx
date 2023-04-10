@@ -1,10 +1,8 @@
 import React from "react";
 import Table from "../../../../components/ui/Table/Table";
-import { TableDetailData } from "../../../../data/TestData";
 import { useFetch } from "../../../../data/API";
 import Spinner from "../../../../components/ui/Spinner/Spinner";
 import { notification } from "antd";
-import NoData from "../../../../components/ui/NoData/NoData";
 const StatisticTable = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:8000/getAllStudentsData"

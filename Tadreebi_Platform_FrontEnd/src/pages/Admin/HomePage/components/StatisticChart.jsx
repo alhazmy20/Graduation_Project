@@ -36,7 +36,7 @@ const chartData = data.map(({ university, totalApplicant }) => ({
   const option = {
     title: {
       text: "احصائيات بناء على الجامعات",
-      subtext: "Fake Data",
+      subtext: "",
       left: "center",
     },
     tooltip: {

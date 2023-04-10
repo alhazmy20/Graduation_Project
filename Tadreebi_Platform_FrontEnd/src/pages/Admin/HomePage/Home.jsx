@@ -1,49 +1,56 @@
 import React from "react";
 import StatisticCard from "./components/StatisticCard";
-import { Col, Row } from "antd";
+import { Col, Row, notification } from "antd";
 import StatisticChart from "./components/StatisticChart";
 import StatisticTable from "./components/StatisticTable";
+import { useFetch } from "../../../data/API";
 import "./AdminHomePage.scss";
+import Spinner from "../../../components/ui/Spinner/Spinner";
 const Home = () => {
+  const { data, loading, error } = useFetch("http://localhost:8000/adminStat");
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error(error);
+  }
+
   return (
-    <div
-      style={{
-        maxWidth: "1848px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "50px",
-      }}
-    >
+    <div className="AdminHomeContiner">
       <Col>
-        <Row
-          gutter={16}
-          style={{ marginTop: "20px", justifyContent: "center" }}
-        >
+        <Row className="rowStyleStat" gutter={16}>
           <StatisticCard
-            title="عدد الزائرين الحاليين"
-            value={523}
+            title="عدد الطلاب"
+            value={data.StudnetNum}
             lable={"زائر"}
           />
-          <StatisticCard title="عدد الطلاب الجدد" value={523} lable={"طالب"} />
-          <StatisticCard title="عدد تقديم الطلاب" value={523} lable={"طلب"} />
+          <StatisticCard
+            title="عدد الطلاب الجدد"
+            value={data.NewStudent}
+            lable={"طالب"}
+          />
+          <StatisticCard
+            title="عدد تقديم الطلاب"
+            value={data.StudnetSubmission}
+            lable={"طلب"}
+          />
         </Row>
-        <Row
-          gutter={16}
-          style={{ marginTop: "20px", justifyContent: "center" }}
-        >
+        <Row gutter={16} className="rowStyleStat">
           <StatisticCard
             title="عدد المنشئات الجديدة"
-            value={523}
+            value={data.NewInstitution}
             lable={"منشأة"}
           />
           <StatisticCard
             title="عدد المنشئات بإنتظار التفعيل "
-            value={523}
+            value={data.Inactive}
             lable={"منشأة"}
           />
           <StatisticCard
             title="عدد الفرص التدريبية الجديدة "
-            value={523}
+            value={data.NewPost}
             lable={"فرصة تدريبية"}
           />
         </Row>
@@ -51,7 +58,7 @@ const Home = () => {
 
       <Col>
         <Row gutter={20} className="AdmindateDisplay">
-          <Col span={12}>
+          <Col span={9}>
             <StatisticChart />
           </Col>
           <Col span={9}>
