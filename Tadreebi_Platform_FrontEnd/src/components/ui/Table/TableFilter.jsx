@@ -76,5 +76,5 @@ export const AdminInstitutionText = (record) => {
 
  export function StudentDetails({name}){
   const [detailsOpen, setDetailsOpen] = useState(false)
-  return <span>{<Button type='text' style={{color: "blue", fontWeight: "bold"}} onClick={() => {setDetailsOpen(true)}}>{name}</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>
+  return <span>{<Button type='text' className='row-title' onClick={() => {setDetailsOpen(true)}}>{name}</Button>}<StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen}/></span>
  }

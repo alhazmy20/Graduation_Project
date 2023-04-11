@@ -85,6 +85,9 @@ const InstPostDetails = () => {
       title: "الاسم",
       dataIndex: "fullName",
       align: "center",
+      render: (text) => {
+        return <StudentDetails name={text} />
+      }
     },
     {
       title: "الجامعة",
