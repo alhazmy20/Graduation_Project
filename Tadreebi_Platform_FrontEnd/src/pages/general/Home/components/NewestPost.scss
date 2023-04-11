@@ -10,13 +10,14 @@
   width: 100%;
   background-color: $Green;
 
-  //   .NewsetPostContainer {
-  //     display: flex;
-  //     flex-direction: column;
-  // justify-content: center;
-  //     margin-top: 1rem;
-  //     margin-bottom: 1rem;
-  //   }
+    .NewsetPostContainer {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+  justify-content: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
 
   .ant-list-pagination {
     display: flex;
