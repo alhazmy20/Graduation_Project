@@ -4,7 +4,7 @@ import { Col, Row, notification } from "antd";
 import StatisticChart from "./components/StatisticChart";
 import StatisticTable from "./components/StatisticTable";
 import { useFetch } from "../../../data/API";
-import "./AdminHomePage.scss";
+import "./Home.scss";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 const Home = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/adminStat");

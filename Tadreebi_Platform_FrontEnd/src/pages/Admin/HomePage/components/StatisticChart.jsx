@@ -26,13 +26,11 @@ const StatisticChart = () => {
     return notification.error(error);
   }
 
+  const chartData = data.map(({ university, totalApplicant }) => ({
+    name: university,
+    value: totalApplicant,
+  }));
 
-const chartData = data.map(({ university, totalApplicant }) => ({
-  name: university,
-  value: totalApplicant,
-}));
-
-  
   const option = {
     title: {
       text: "احصائيات بناء على الجامعات",
@@ -43,8 +41,8 @@ const chartData = data.map(({ university, totalApplicant }) => ({
       trigger: "item",
     },
     legend: {
-      orient: "vertical",
-      left: "left",
+      orient: "horizontal",
+      bottom: "bottom",
     },
     series: [
       {
@@ -84,7 +82,7 @@ const chartData = data.map(({ university, totalApplicant }) => ({
         echarts={echarts}
         notMerge={true}
         lazyUpdate={true}
-        style={{ height: "400px" }}
+        style={{ height: "210px", width: "100%" }}
       />
     </div>
   );

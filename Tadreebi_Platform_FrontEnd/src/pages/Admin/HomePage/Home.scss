@@ -1,3 +1,4 @@
+@import "../../../index.scss";
 .AdminHomeContiner {
   width: 100%;
   display: flex;
@@ -5,11 +6,12 @@
   gap: 50px;
   .AdmindateDisplay {
     justify-content: center;
+
+
   }
 
   .rowStyleStat {
     margin-top: 20px;
     justify-content: center;
   }
- 
 }
