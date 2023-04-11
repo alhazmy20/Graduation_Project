@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Spinner from "../../../components/ui/Spinner/Spinner"
+import Spinner from "../../../components/ui/Spinner/Spinner";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import TableUI from "../../../components/ui/Table/Table";
-import {TableText, InstitutionAccept,StudentDetails} from "../../../components/ui/Table/TableFilter";
+import {
+  TableText,
+  InstitutionAccept,
+  StudentDetails,
+} from "../../../components/ui/Table/TableFilter";
 import { GetNewsId, useFetch } from "../../../data/API";
 import "./InstPostDetails.scss";
 import { Button, notification } from "antd";
@@ -14,17 +18,23 @@ import StudentModal from "./components/StudentModal";
 import NoData from "../../../components/ui/NoData/NoData";
 
 const InstPostDetails = () => {
-  const { id } = useParams();
-  const { data, error, loading } = GetNewsId(
-    `http://localhost:8000/post`
+  // const { id } = useParams();
+  const {
+    data,
+    error,
+    loading: loadingPost,
+  } = useFetch(`http://localhost:8000/post`);
+
+  const { data: studentsData, loading: loadingStudents } = useFetch(
+    `http://localhost:8000/students`
   );
-  const {data: {data: response}} = useFetch( `http://localhost:8000/students`)
+
   const [statusFilter, setStatusFilter] = useState(null);
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
   };
 
-  if (loading) {
+  if (loadingPost || loadingStudents) {
     return <Spinner />;
   }
 
@@ -32,11 +42,12 @@ const InstPostDetails = () => {
     return notification.error(error);
   }
 
-  if (!data) {
+  if (!data && !studentsData) {
     return <NoData text="لا توجد مؤسسات حاليا" />;
   }
 
-  console.log(response);
+  const { data: post } = data;
+  const { data: students } = studentsData;
 
 
   // const dataSource = [
@@ -94,26 +105,25 @@ const InstPostDetails = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: TableText
+      render: TableText,
     },
     {
       title: "الإجراء",
       dataIndex: "accept",
       align: "center",
-      render: (text, row) => <InstitutionAccept row={row}/>,
+      render: (text, row) => <InstitutionAccept row={row} />,
     },
   ];
 
   const filteredDataSource = statusFilter
-  ? response.data.data.filter((application) => application.status === statusFilter)
-  : response.data.data;
-
+    ? students.filter((application) => application.status === statusFilter)
+    : students;
 
   return (
     <div className="postDetailsContainer">
       <div className="detailsContainer">
         <div className="detailsTable">
-          <PostDetailsTable data={data} />
+          <PostDetailsTable data={post} />
         </div>
         <div className="contactContainer">
           <strong className="header">
@@ -182,7 +192,11 @@ const InstPostDetails = () => {
           مرفوض
         </Button>
       </div>
-      <TableUI col={columns} data={filteredDataSource} filter={statusFilter} />
+      <TableUI
+        col={columns}
+        data={filteredDataSource.data}
+        filter={statusFilter}
+      />
     </div>
   );
 };
