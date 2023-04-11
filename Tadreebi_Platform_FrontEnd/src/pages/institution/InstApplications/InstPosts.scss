@@ -23,8 +23,12 @@
     font-weight: 500;
   }
  
-    .newBtn {
-      background-color: #01AD7E;
+    .add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      background-color: #1fa181;
       color: white;
       font-size: 15px;
       font-weight: 500;

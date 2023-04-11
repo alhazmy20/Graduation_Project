@@ -4,7 +4,7 @@ import Spinner from "../../../components/ui/Spinner/Spinner"
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import TableUI from "../../../components/ui/Table/Table";
 import {TableText, InstitutionAccept,StudentDetails} from "../../../components/ui/Table/TableFilter";
-import { GetAllNews, GetNewsId, useFetch } from "../../../data/API";
+import { GetNewsId, useFetch } from "../../../data/API";
 import "./InstPostDetails.scss";
 import { Button, notification } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,7 @@ import NoData from "../../../components/ui/NoData/NoData";
 const InstPostDetails = () => {
   const { id } = useParams();
   const { data, error, loading } = GetNewsId(
-    `http://localhost:8000/posts/${id}`
+    `http://localhost:8000/post`
   );
   const {data: {data: response}} = useFetch( `http://localhost:8000/students`)
   const [statusFilter, setStatusFilter] = useState(null);

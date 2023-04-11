@@ -2,6 +2,10 @@
 @import "../../../index.scss";
 
 .ant-table {
+  .row-title{
+    color: #00B1E7;
+    font-weight: 600;
+  }
     border: 0.847884px solid #CCCCCC;
     .ant-table-container {
       .ant-table-content {

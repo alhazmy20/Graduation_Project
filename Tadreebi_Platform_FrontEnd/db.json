@@ -29,7 +29,7 @@
       "current_page": 1,
       "data": [
         {
-          "id": 18,
+          "id": 1,
           "title": "فرصة تدريبية",
           "content": "فرصة تدريبية جديدة",
           "t_type": "حضوري",
@@ -41,6 +41,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
+          "postStatus":"نشط",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -51,7 +52,7 @@
           ]
         },
         {
-          "id": 18,
+          "id": 2,
           "title": "فرصة تدريبية",
           "content": "فرصة تدريبية جديدة",
           "t_type": "حضوري",
@@ -63,6 +64,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
+          "postStatus":"مغلق",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -73,7 +75,7 @@
           ]
         },
         {
-          "id": 18,
+          "id": 3,
           "title": "فرصة تدريبية",
           "content": "فرصة تدريبية جديدة",
           "t_type": "حضوري",
@@ -85,6 +87,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
+          "postStatus":"مغلق",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -95,7 +98,7 @@
           ]
         },
         {
-          "id": 18,
+          "id": 4,
           "title": "فرصة تدريبية",
           "content": "فرصة تدريبية جديدة",
           "t_type": "حضوري",
@@ -107,6 +110,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
+          "postStatus":"مغلق",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -117,7 +121,7 @@
           ]
         },
         {
-          "id": 18,
+          "id": 5,
           "title": "فرصة تدريبية",
           "content": "فرصة تدريبية جديدة",
           "t_type": "حضوري",
@@ -129,6 +133,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
+          "postStatus":"نشط",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -173,8 +178,6 @@
     "status": "تم تنفيذ الطلب بنجاح",
     "message": null,
     "data": {
-      "current_page": 1,
-      "data": {
         "id": 18,
         "title": "فرصة تدريبية",
         "content": "فرصة تدريبية جديدة",
@@ -186,45 +189,19 @@
         "t_startDate": "2023-02-22",
         "t_endDate": "2023-02-22",
         "p_endDate": "2024-02-14",
+        "postStatus": "نشط",
         "postMajorsCount": 2,
+        "created_at":"منذ 3 أيام",
         "post_majors": [
-          {
-            "major": "هندسة حاسب"
-          },
-          {
-            "major": "نظم معلومات"
-          }
+            {
+                "major": "هندسة حاسب"
+            },
+            {
+                "major": "نظم معلومات"
+            }
         ]
-      },
-      "first_page_url": "http://localhost:8000/api/posts?page=1",
-      "from": 1,
-      "last_page": 1,
-      "last_page_url": "http://localhost:8000/api/posts?page=1",
-      "links": [
-        {
-          "url": null,
-          "label": "&laquo; Previous",
-          "active": false
-        },
-        {
-          "url": "http://localhost:8000/api/posts?page=1",
-          "label": "1",
-          "active": true
-        },
-        {
-          "url": null,
-          "label": "Next &raquo;",
-          "active": false
-        }
-      ],
-      "next_page_url": null,
-      "path": "http://localhost:8000/api/posts",
-      "per_page": 8,
-      "prev_page_url": null,
-      "to": 1,
-      "total": 1
     }
-  },
+},
 
   "users": [
     {
@@ -625,13 +602,5 @@
       "status": "نشط",
       "created_at": "2023-03-31"
     }
-  },
-  "adminStat": {
-    "StudnetNum": 342,
-    "NewStudent": 423,
-    "StudnetSubmission": 332,
-    "NewInstitution": 52,
-    "Inactive": 32,
-    "NewPost": 14
   }
 }

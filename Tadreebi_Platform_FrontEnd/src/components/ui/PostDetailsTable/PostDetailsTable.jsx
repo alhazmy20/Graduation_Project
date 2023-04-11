@@ -32,24 +32,24 @@ const PostDetailsTable = ({data}) => {
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
             <span className="label">تاريخ النشر:</span>
-            <span>{data?.publishDate}</span>
+            <span>{data?.created_at}</span> 
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faBriefcase} />
             <span className="label">نوع البرنامج التدريبي:</span>
-            <span>{data?.programType}</span>
+            <span>{data?.t_type}</span>
           </td>
         </tr>
         <tr>
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
             <span className="label">تاريخ البدء:</span>
-            <span>{data?.startDate}</span>
+            <span>{data?.t_startDate}</span>
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
             <span className="label">تاريخ الإنتهاء:</span>
-            <span>{data?.endDate}</span>
+            <span>{data?.t_endDate}</span>
           </td>
         </tr>
         <tr>
@@ -68,13 +68,13 @@ const PostDetailsTable = ({data}) => {
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
             <span className="label">تاريخ انتهاء التقديم:</span>
-            <span>{data?.subEndDate}</span>
+            <span>{data?.p_endDate}</span>
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faGraduationCap} />
             <span className="label">التخصصات المطلوبة:</span>
             <div className='majors'>
-              {data.majors?.map((m) => (
+              {data.post_majors?.map((m) => (
                 <span key={m.major} className="major">{m.major}</span>
               ))}
             </div>

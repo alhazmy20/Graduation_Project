@@ -1,16 +1,39 @@
 import { Button, Image, Space, notification } from "antd";
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import linkedin from "../../../assets/images/image14.png";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import sdaia from "../../../assets/images/image14.png";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import "./TrainingOpportunity.scss";
-import { GetNewsId, useFetch } from "../../../data/API";
-import NotFound from "../NotFound/NotFound";
+import {  useFetch } from "../../../data/API";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 
 const TrainingOpportunity = () => {
-  // const { id } = useParams();
   const { data, error, loading } = useFetch(`http://localhost:8000/post`);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState(null);
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('http://localhost:8000/apply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ postId: data.id })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to apply to training opportunity.');
+      }
+      setIsSubmitting(false);
+      notification.success({ message: 'تم التقديم بنجاح.' });
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmissionError(error.message);
+      notification.error({ message: 'حدث خطأ أثناء تقديم الطلب.' });
+    }
+  };
 
   if (loading) {
     return <Spinner />;
@@ -20,8 +43,7 @@ const TrainingOpportunity = () => {
     return notification.error(error);
   }
 
-  const {data: {data: post}} = data;
-  console.log(post);
+  const { data: post } = data;
 
   return (
     <div className="training-opportunity">
@@ -29,22 +51,18 @@ const TrainingOpportunity = () => {
       <Space wrap size={5}>
         <div>
           <Image
-            src={linkedin}
+            src={sdaia}
             shape="circle"
             preview={false}
-            style={{
-              width: "100px",
-              height: "50px",
-              objectFit: "contain",
-              cursor: "pointer",
-            }}
+            className='institution-img'
           />
           <Link to="/">سدايا</Link>
         </div>
       </Space>
-      <p>{post.description}</p>
+      <p>{post.content}</p>
       <PostDetailsTable data={post} />
-      <Button type="primary">تقديم</Button>
+      <Button type="primary" className='form-btn' onClick={handleSubmit} loading={isSubmitting}>تقديم</Button>
+      {submissionError && <div>{submissionError}</div>}
     </div>
   );
 };
