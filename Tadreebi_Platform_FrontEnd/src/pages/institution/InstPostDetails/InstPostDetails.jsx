@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
-import TableUI from "../../../components/ui/Table/Table";
+import Table from "../../../components/ui/Table/Table";
 import {
   TableText,
   InstitutionAccept,
@@ -19,6 +19,7 @@ import NoData from "../../../components/ui/NoData/NoData";
 
 const InstPostDetails = () => {
   // const { id } = useParams();
+  
   const {
     data,
     error,
@@ -30,10 +31,8 @@ const InstPostDetails = () => {
   );
 
   const [statusFilter, setStatusFilter] = useState(null);
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
 
+  
   if (loadingPost || loadingStudents) {
     return <Spinner />;
   }
@@ -47,38 +46,13 @@ const InstPostDetails = () => {
   }
 
   const { data: post } = data;
-  const { data: students } = studentsData;
+  const { data: detailedStudentObject} = studentsData;
+  const { data: {data:students}} = studentsData;
 
+  const filteredDataSource = statusFilter
+  ? students?.filter((application) => application.status === statusFilter)
+  : students;
 
-  // const dataSource = [
-  //   {
-  //     key: "1",
-  //     stuName: <StudentDetails/>,
-  //     university: "جامعة طيبة",
-  //     gpa: "5/4.9",
-  //     specialization: "نظم معلومات",
-  //     status: "بإنتظار موافقة الطالب",
-  //     accept: "-",
-  //   },
-  //   {
-  //     key: "2",
-  //     stuName: "فلان فلان الفلاني",
-  //     university: "جامعة الملك فهد للبترول و المعادن",
-  //     gpa: "4/3.5",
-  //     specialization: "هندسة برمجيات",
-  //     status: "مرفوض",
-  //     accept: "-",
-  //   },
-  //   {
-  //     key: "3",
-  //     stuName: "فلان فلان الفلاني",
-  //     university: "جامعة الملك سعود",
-  //     gpa: "5/4.4",
-  //     specialization: "هندسة معمارية",
-  //     status: "بإنتظار موافقة المنشأة",
-  //     accept: "-",
-  //   },
-  // ];
 
   const columns = [
     {
@@ -118,10 +92,11 @@ const InstPostDetails = () => {
     },
   ];
 
-  const filteredDataSource = statusFilter
-    ? students.filter((application) => application.status === statusFilter)
-    : students;
+  const handleStatusFilterChange = (status) => {
+    setStatusFilter(status);
+  };
 
+// console.log(filteredDataSource)
   return (
     <div className="postDetailsContainer">
       <div className="detailsContainer">
@@ -195,10 +170,10 @@ const InstPostDetails = () => {
           مرفوض
         </Button>
       </div>
-      <TableUI
+      <Table
         col={columns}
-        data={filteredDataSource.data}
-        filter={statusFilter}
+        data={filteredDataSource}
+        emptyText="لا توجد بيانات"
       />
     </div>
   );
