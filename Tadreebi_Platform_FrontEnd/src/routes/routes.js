@@ -25,9 +25,11 @@ import {
   AdminLayout,
   AdminHomePage,
   AdminProfile,
+  StudentsTable,
+  InstitutionsTable,
+  NewsTable,
+  PostsTable
 } from "../pages/index";
-import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
-import InstitutionsTable from "../pages/Admin/InstitutionsTable/InstitutionsTable";
 
 //Institution Routes
 const institutionRoutes = (
@@ -62,6 +64,8 @@ const adminRoutes = (
       element={<StudentProfile isAdmin={true} />}
     />
     <Route path="profile" element={<AdminProfile />} />
+    <Route path="manage-posts" element={<NewsTable/>}/>
+    <Route path="manage-news" element={<PostsTable/>}/>
   </Route>
 );
 

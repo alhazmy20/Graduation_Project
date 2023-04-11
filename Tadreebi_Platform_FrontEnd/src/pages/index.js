@@ -25,7 +25,10 @@ import StudentSignup from "./student/StudentSignup/StudentSignup";
 import AdminLayout from "../layouts/AdminLayout";
 import AdminHomePage from "../pages/Admin/HomePage/Home";
 import AdminProfile from "./Admin/AdminProfile/AdminProfile";
-
+import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
+import InstitutionsTable from "../pages/Admin/InstitutionsTable/InstitutionsTable";
+import NewsTable from "../pages/Admin/NewsTable/NewsTable";
+import PostsTable from "../pages/Admin/PostsTable/PostsTable";
 //Export all pages
 export {
   Home,
@@ -48,4 +51,8 @@ export {
   AdminLayout,
   AdminHomePage,
   AdminProfile,
+  StudentsTable,
+  InstitutionsTable,
+  NewsTable,
+  PostsTable
 };
