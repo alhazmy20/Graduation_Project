@@ -19,7 +19,7 @@ import NoData from "../../../components/ui/NoData/NoData";
 
 const InstPostDetails = () => {
   // const { id } = useParams();
-  
+
   const {
     data,
     error,
@@ -32,7 +32,6 @@ const InstPostDetails = () => {
 
   const [statusFilter, setStatusFilter] = useState(null);
 
-  
   if (loadingPost || loadingStudents) {
     return <Spinner />;
   }
@@ -46,22 +45,23 @@ const InstPostDetails = () => {
   }
 
   const { data: post } = data;
-  const { data: detailedStudentObject} = studentsData;
-  const { data: {data:students}} = studentsData;
+  const { data: detailedStudentObject } = studentsData;
+  const {
+    data: { data: students },
+  } = studentsData;
 
   const filteredDataSource = statusFilter
-  ? students?.filter((application) => application.status === statusFilter)
-  : students;
-
+    ? students?.filter((application) => application.status === statusFilter)
+    : students;
 
   const columns = [
     {
       title: "الاسم",
       dataIndex: "fullName",
       align: "center",
-      render: (text) => {
-        return <StudentDetails name={text} />
-      }
+      render: (text, record) => {
+        return <StudentDetails name={text} id={record.id} />;
+      },
     },
     {
       title: "الجامعة",
@@ -96,7 +96,7 @@ const InstPostDetails = () => {
     setStatusFilter(status);
   };
 
-// console.log(filteredDataSource)
+  // console.log(filteredDataSource)
   return (
     <div className="postDetailsContainer">
       <div className="detailsContainer">

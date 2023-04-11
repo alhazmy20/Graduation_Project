@@ -41,7 +41,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
-          "postStatus":"نشط",
+          "postStatus": "نشط",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -64,7 +64,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
-          "postStatus":"مغلق",
+          "postStatus": "مغلق",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -87,7 +87,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
-          "postStatus":"مغلق",
+          "postStatus": "مغلق",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -110,7 +110,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
-          "postStatus":"مغلق",
+          "postStatus": "مغلق",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -133,7 +133,7 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
-          "postStatus":"نشط",
+          "postStatus": "نشط",
           "post_majors": [
             {
               "major": "هندسة حاسب"
@@ -178,30 +178,30 @@
     "status": "تم تنفيذ الطلب بنجاح",
     "message": null,
     "data": {
-        "id": 18,
-        "title": "فرصة تدريبية",
-        "content": "فرصة تدريبية جديدة",
-        "t_type": "حضوري",
-        "reward": "لا يوجد",
-        "gender": "ذكر",
-        "region": "منطقة الرياض",
-        "city": "الرياض",
-        "t_startDate": "2023-02-22",
-        "t_endDate": "2023-02-22",
-        "p_endDate": "2024-02-14",
-        "postStatus": "نشط",
-        "postMajorsCount": 2,
-        "created_at":"منذ 3 أيام",
-        "post_majors": [
-            {
-                "major": "هندسة حاسب"
-            },
-            {
-                "major": "نظم معلومات"
-            }
-        ]
+      "id": 18,
+      "title": "فرصة تدريبية",
+      "content": "فرصة تدريبية جديدة",
+      "t_type": "حضوري",
+      "reward": "لا يوجد",
+      "gender": "ذكر",
+      "region": "منطقة الرياض",
+      "city": "الرياض",
+      "t_startDate": "2023-02-22",
+      "t_endDate": "2023-02-22",
+      "p_endDate": "2024-02-14",
+      "postStatus": "نشط",
+      "postMajorsCount": 2,
+      "created_at": "منذ 3 أيام",
+      "post_majors": [
+        {
+          "major": "هندسة حاسب"
+        },
+        {
+          "major": "نظم معلومات"
+        }
+      ]
     }
-},
+  },
 
   "users": [
     {
@@ -289,7 +289,7 @@
       "data": [
         {
           "id": 1,
-          "fullName": "Abdulmohsen Mansour Shalyah Alhazmy",
+          "fullName": "يزيد سعد نفاع العلوي",
           "phone": "0589900002",
           "gender": "أنثى",
           "national_ID": 1100000001,
@@ -302,7 +302,7 @@
         },
         {
           "id": 2,
-          "fullName": "علي عبدالله سعد الحربي",
+          "fullName": "يزيد سعد نفاع العلوي",
           "phone": "0501231230",
           "gender": "ذكر",
           "national_ID": 1100000000,
@@ -542,20 +542,20 @@
       "national_ID": 1100000001,
       "university": "جامعة طيبة",
       "major": "نظم المعلومات",
-      "GPA": 5,
+      "GPA": 4.5,
       "GPA_Type": 5,
       "status": "نشط",
       "created_at": "2023-04-02",
       "studentFiles": {
         "transcript_filename": null,
-        "transcript_url": null,
+        "transcript_url": "https://global.oup.com/us/companion.websites/fdscontent/uscompanion/us/pdf/globalmusic/SIndiaQuizzes.pdf",
         "CV_filename": "myCV.pdf",
         "CV_url": null,
         "internshipLetter_filename": null,
-        "internshipLetter_url": null,
+        "internshipLetter_url": "https://global.oup.com/us/companion.websites/fdscontent/uscompanion/us/pdf/globalmusic/SIndiaQuizzes.pdf",
         "nationalID_filename": null,
-        "nationalID_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/642b94abc3597_MacBook%20Pro%2014_%20-%2020.png",
-        "personalPicture_url": "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/642b94abc3597_MacBook%20Pro%2014_%20-%2020.png"
+        "nationalID_url": null,
+        "personalPicture_url": "https://www4.0zz0.com/2023/04/11/06/618174888.jpg"
       }
     }
   },
@@ -604,12 +604,11 @@
     }
   },
   "adminStat": {
-"StudentNum": 342,
-"NewStudent": 423,
-"StudentSubmission": 332,
-"NewInstitution": 52,
-"Inactive": 32,
-"NewPost": 14
+    "StudentNum": 342,
+    "NewStudent": 423,
+    "StudentSubmission": 332,
+    "NewInstitution": 52,
+    "Inactive": 32,
+    "NewPost": 14
   }
-  }
-
+}

@@ -15,17 +15,17 @@
     bottom: 1rem;
 
     .avatar {
-      background-color: #82cec4;
+      background-color: #afe1da;
     }
 
     .avatar-name {
-      color: #808080;
+      color: #000;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
     }
   }
 
-  .row {
+  .first-row, .second-row {
     .col-one,
     .col-two {
       display: flex;
@@ -35,19 +35,6 @@
     }
   }
 
-  .fiels-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 5px;
-    flex-wrap: wrap;
-
-    @media (max-width: 552px) {
-        flex-direction: column;
-        align-items: start;
-        gap: 6px;
-    }
-  }
 
   .space {
     display: flex;
@@ -60,7 +47,11 @@
     }
 
     .text {
-      color: #000;
+      color: #808080;
+    }
+
+    .nothing{
+        color: #F46A61;
     }
 
     button {
