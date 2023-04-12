@@ -2,7 +2,12 @@ import { Button } from "antd";
 import React, { useState } from "react";
 import ConditionModal from "../../../pages/institution/InstPostDetails/components/conditionModal";
 import StudentModal from "../../../pages/institution/InstPostDetails/components/StudentModal";
-
+import PostsModal from "../../../pages/Admin/PostsTable/components/PostsModal";
+import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NewsModal from "../../../pages/Admin/NewsTable/components/NewsModal";
+import { Link } from "react-router-dom";
 export const TableText = (text) => {
   let style = {};
   if (text === "بإنتظار موافقة الطالب" || text === "بإنتظار موافقة المنشأة") {
@@ -88,5 +93,82 @@ export function StudentDetails({ name, id }) {
       }
       <StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen} id={id}/>
     </span>
+  );
+}
+
+
+export function NewDelete({record}){
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNews, setSelectedNews] = useState(null);
+
+  const handleDelete = (student) => {
+    setSelectedNews(student);
+    setIsModalOpen(true);
+  };
+  
+  return (
+      <span>
+        <span onClick={() => handleDelete(`${record.title}`)}>
+          {
+            <FontAwesomeIcon
+              icon={faTrash}
+              style={{ color: "red", cursor: "pointer" }}
+            />
+          }
+        </span>
+        {selectedNews && (
+          <NewsModal
+            modalOpen={isModalOpen}
+            setModalOpen={setIsModalOpen}
+            name={selectedNews}
+          />
+        )}
+      </span> 
+  );
+}
+
+export function PostDelete({record}){
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNews, setSelectedNews] = useState(null);
+
+  const handleDelete = (student) => {
+    setSelectedNews(student);
+    setIsModalOpen(true);
+  };
+  
+  return (
+      <span>
+        <span onClick={() => handleDelete(`${record.title}`)}>
+          {
+            <FontAwesomeIcon
+              icon={faTrash}
+              style={{ color: "red", cursor: "pointer" }}
+            />
+          }
+        </span>
+        {selectedNews && (
+          <PostsModal
+            modalOpen={isModalOpen}
+            setModalOpen={setIsModalOpen}
+            name={selectedNews}
+          />
+        )}
+      </span> 
+  );
+}
+
+export function NewEdit({record}){
+  return (
+    <span>
+    <Link to={`/admin/manage-institutions/${record.id}`}>
+      {
+        <FontAwesomeIcon
+          className="icon"
+          icon={faPenToSquare}
+          style={{ color: "#008374b2" }}
+        />
+      }
+    </Link>
+  </span>
   );
 }

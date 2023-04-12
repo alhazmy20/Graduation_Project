@@ -5,19 +5,15 @@ import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminInstitutionText } from "../../../components/ui/Table/TableFilter";
-import PostsModal from './components/PostsModal';
+import { AdminInstitutionText, PostDelete} from "../../../components/ui/Table/TableFilter";
 
 
 const PostsTable = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:8000/adminPosts"
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedNews, setSelectedNews] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -69,35 +65,32 @@ const PostsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        let buttons = {};
-        buttons = (
-          <span>
-            <span onClick={() => handleDelete(`${record.title}`)}>
-              {
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  style={{ color: "red", cursor: "pointer" }}
-                />
-              }
-            </span>
-            {selectedNews && (
-              <PostsModal
-                modalOpen={isModalOpen}
-                setModalOpen={setIsModalOpen}
-                name={selectedNews}
-              />
-            )}
-          </span>
-        );
-        return buttons;
+        // let buttons = {};
+        // buttons = (
+        //   <span>
+        //     <span onClick={() => handleDelete(`${record.title}`)}>
+        //       {
+        //         <FontAwesomeIcon
+        //           icon={faTrash}
+        //           style={{ color: "red", cursor: "pointer" }}
+        //         />
+        //       }
+        //     </span>
+        //     {selectedNews && (
+        //       <PostsModal
+        //         modalOpen={isModalOpen}
+        //         setModalOpen={setIsModalOpen}
+        //         name={selectedNews}
+        //       />
+        //     )}
+        //   </span>
+        // );
+        // return buttons;
+         return <PostDelete del={true} record={record}/>
       },
     },
   ];
 
-  const handleDelete = (student) => {
-    setSelectedNews(student);
-    setIsModalOpen(true);
-  };
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
