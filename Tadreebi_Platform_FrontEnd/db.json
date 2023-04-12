@@ -838,36 +838,22 @@
     }
   },
 
-  "getAllStudentsData": [
-    {
-      "id": 1,
-      "studentApplay": "21",
-      "university": "جامعة طيبة",
-      "totalApplicant": 12,
-      "year": "2016"
-    },
-    {
-      "id": 2,
-      "studentApplay": "14",
-      "university": "جامعة سعود",
-      "totalApplicant": 16,
-      "year": "2013"
-    },
-    {
-      "id": 2,
-      "studentApplay": "10",
-      "university": "جامعة نورة",
-      "totalApplicant": 5,
-      "year": "2016"
-    },
-    {
-      "id": 3,
-      "studentApplay": "10",
-      "university": "جامعة القصيم",
-      "totalApplicant": 14,
-      "year": "2016"
-    }
-  ],
+  "getAllStudentsData": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": [
+      {
+        "university": "جامعة الملك سعود",
+        "total_students": 1,
+        "total_applications": 0
+      },
+      {
+        "university": "جامعة طيبة",
+        "total_students": 1,
+        "total_applications": 0
+      }
+    ]
+  },
 
   "admin": {
     "status": "تم تنفيذ الطلب بنجاح",
@@ -882,11 +868,27 @@
     }
   },
   "adminStat": {
-    "StudentNum": 342,
-    "NewStudent": 423,
-    "StudentSubmission": 332,
-    "NewInstitution": 52,
-    "Inactive": 32,
-    "NewPost": 14
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "total_users": 3,
+      "new_students": {
+        "current_week_count": 0,
+        "percentage_difference": "-100%"
+      },
+      "new_applications": {
+        "current_week_count": 0,
+        "percentage_difference": "0%"
+      },
+      "new_institutions": {
+        "current_week_count": 1,
+        "percentage_difference": "0%"
+      },
+      "unactive_institutions": 1,
+      "new_posts": {
+        "current_week_count": 0,
+        "percentage_difference": "0%"
+      }
+    }
   }
 }

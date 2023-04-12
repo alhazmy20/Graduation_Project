@@ -15,6 +15,8 @@ const StatisticTable = () => {
   if (error) {
     return notification.error(error);
   }
+  const { data: tableInfo } = data;
+
 
   const columns = [
     {
@@ -24,17 +26,17 @@ const StatisticTable = () => {
     },
     {
       title: "الطلاب",
-      dataIndex: "studentApplay",
+      dataIndex: "total_students",
       align: "center",
     },
     {
       title: "عدد التقديمات",
-      dataIndex: "totalApplicant",
+      dataIndex: "total_applications",
       align: "center",
     },
   ];
 
-  return <Table data={data} col={columns} Size={4} />;
+  return <Table data={tableInfo} col={columns} Size={4} />;
 };
 
 export default StatisticTable;

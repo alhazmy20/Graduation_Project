@@ -40,63 +40,71 @@
     }
   }
 
+  .formInputContainer {
+    margin-top: 30px;
 
-.contenttextareDir {
-}
-
-.quill > .ql-container {
-  height: 200px;
-}
-.quill > .ql-container > .ql-editor.ql-blank::before {
-  font-size: 20px;
-  text-align: right;
-}
-
-.label {
-  width: 130px;
-  color: $Green;
-}
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-
-  .form-item {
-    margin: 0;
-    width: 230px;
-    @media (max-width: 930px) {
-      width: 180px;
+    .InputsContainer {
+      width: 50%;
+      padding: 10px;
     }
 
-    @media (max-width: 720px) {
+    .RowDivElment {
+      margin-bottom: 10px;
+      align-items: center;
       width: 100%;
-    }
 
-    label {
-      font-weight: 500;
+      .formItemStyle {
+        flex-grow: 2;
+        justify-content: center;
+      }
     }
   }
-}
-h1,
-h2,
-h3 {
-  text-align: right;
-}
 
-.ant-form-item {
-  margin: 0px;
-}
+  .quill > .ql-container {
+    height: 200px;
+  }
+  .quill > .ql-container > .ql-editor.ql-blank::before {
+    font-size: 20px;
+    text-align: right;
+  }
 
-.RowDivElment {
-  margin-bottom: 10px;
-  align-items: center;
-}
+  .label {
+    width: 130px;
+    color: $Green;
+  }
 
-p {
-  text-align: right;
-}
-// li {
-//   text-align: right;
-// }
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .form-item {
+      margin: 0;
+      width: 230px;
+      @media (max-width: 930px) {
+        width: 180px;
+      }
+
+      @media (max-width: 720px) {
+        width: 100%;
+      }
+
+      label {
+        font-weight: 500;
+      }
+    }
+  }
+  h1,
+  h2,
+  h3 {
+    text-align: right;
+  }
+
+  .ant-form-item {
+    margin: 0px;
+  }
+
+  p {
+    text-align: right;
+  }
 }

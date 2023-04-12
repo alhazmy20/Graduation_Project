@@ -4,8 +4,12 @@ import { RegionData } from "../../../data/TestData.js";
 import { data } from "../../../data/SaudiClassification";
 import ReactTextArea from "./components/ReactTextArea";
 import "../instPostForm/InstPostForm.scss";
+import ReactRadio from "./components/ReactRadio.jsx";
+import MultiSelect from "./components/MultiSelect .jsx";
+import CustomDatePicker from "./components/CustomDatePicker.jsx";
 
 const InstPostForm = () => {
+  const [form] = Form.useForm();
   const [formPostData, setFormPostData] = useState({
     title: "",
     content: "",
@@ -29,7 +33,7 @@ const InstPostForm = () => {
 
   const onFinish = async (values) => {
     //api code
-    console.log(formPostData);
+    console.log(values);
   };
 
   const handleEditorChange = (content) => {
@@ -62,6 +66,19 @@ const InstPostForm = () => {
       }));
     })
     .flat();
+  const radioOptionsType = [
+    { label: "حضوري", value: "حضوري" },
+    { label: "عن بعد", value: "عن بعد" },
+  ];
+  const radioOptionsReward = [
+    { label: "نعم", value: 1 },
+    { label: "لا", value: 0 },
+  ];
+  const radioOptionsGender = [
+    { label: "ذكر", value: 0 },
+    { label: "انثى", value: 1 },
+    { label: "كليهما", value: 2 },
+  ];
 
   return (
     <div className="institution-NewPostCont">
@@ -73,6 +90,7 @@ const InstPostForm = () => {
           onValuesChange={handleFormChange}
           onFinish={onFinish}
           className="form"
+          form={form}
         >
           <Col>
             <Form.Item
@@ -88,25 +106,15 @@ const InstPostForm = () => {
               formfun={handleEditorChange}
             />
           </Col>
-          <Row style={{ marginTop: "30px" }}>
-            <Col style={{ width: "50%", padding: "10px" }}>
+          <Row className="formInputContainer">
+            <Col className="InputsContainer">
               <Row className="RowDivElment">
                 <label className="label">نوع البرنامج التدريبي: </label>
-                <Form.Item
+                <ReactRadio
                   name="t_type"
-                  rules={[
-                    {
-                      required: true,
-                      message: "الرجاء الاختيار",
-                    },
-                  ]}
-                  style={{ flexGrow: "2", justifyContent: "center" }}
-                >
-                  <Radio.Group>
-                    <Radio value={"حضوري"}>حضوري</Radio>
-                    <Radio value={"عن بعد"}>عن بعد</Radio>
-                  </Radio.Group>
-                </Form.Item>
+                  rules={[{ required: true, message: "الرجاء الاختيار" }]}
+                  options={radioOptionsType}
+                />
               </Row>
 
               <Row className="RowDivElment">
@@ -119,8 +127,7 @@ const InstPostForm = () => {
                     },
                   ]}
                   name="region"
-                  className="form-item"
-                  style={{ flexGrow: "2", justifyContent: "center" }}
+                  className="formItemStyle"
                 >
                   <Select
                     style={{ flexGrow: "2" }}
@@ -138,65 +145,32 @@ const InstPostForm = () => {
               </Row>
               <Row className="RowDivElment">
                 <label className="label">تاريخ البدء: </label>
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: " ادخال تاريخ بدء التدريب",
-                    },
-                  ]}
-                  style={{ flexGrow: "2", justifyContent: "center" }}
-                >
-                  <DatePicker
-                    placeholder="اختر تاريخ بدء التدريب"
-                    style={{ width: "100%" }}
-                    name="t_startDate"
-                    onChange={(date, dateString) =>
-                      handleInputChange("t_startDate", dateString)
-                    }
-                  />
-                </Form.Item>
+                <CustomDatePicker
+                  name="t_startDate"
+                  label="تاريخ بدء التدريب"
+                  required={true}
+                  handleInputChange={handleInputChange}
+                />
               </Row>
               <Row className="RowDivElment">
                 <label className="label">تاريخ انتهاء الإعلان: </label>
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: " ادخال تاريخ انتهاء الإعلان",
-                    },
-                  ]}
-                  style={{ flexGrow: "2", justifyContent: "center" }}
-                >
-                  <DatePicker
-                    placeholder="اختر تاريخ انتهاء الإعلان"
-                    style={{ width: "100%" }}
-                    onChange={(date, dateString) =>
-                      handleInputChange("p_endDate", dateString)
-                    }
-                  />
-                </Form.Item>
+                <CustomDatePicker
+                  name="p_endDate"
+                  label="تاريخ انتهاء الإعلان"
+                  required={true}
+                  handleInputChange={handleInputChange}
+                />
               </Row>
             </Col>
 
-            <Col style={{ width: "50%", padding: "10px" }}>
+            <Col className="InputsContainer">
               <Row className="RowDivElment">
                 <label className="label">مكافأة: </label>
-                <Form.Item
+                <ReactRadio
                   name="reward"
-                  rules={[
-                    {
-                      required: true,
-                      message: "الرجاء  الاختيار",
-                    },
-                  ]}
-                  style={{ flexGrow: "2", justifyContent: "center" }}
-                >
-                  <Radio.Group>
-                    <Radio value={1}>نعم</Radio>
-                    <Radio value={0}>لا</Radio>
-                  </Radio.Group>
-                </Form.Item>
+                  rules={[{ required: true, message: "الرجاء الاختيار" }]}
+                  options={radioOptionsReward}
+                />
               </Row>
 
               <Row className="RowDivElment">
@@ -208,9 +182,8 @@ const InstPostForm = () => {
                       message: "الرجاء إختيار المدينة",
                     },
                   ]}
-                  className="form-item"
                   name="city"
-                  style={{ flexGrow: "2", justifyContent: "center" }}
+                  className="formItemStyle"
                 >
                   <Select
                     style={{ flexGrow: "2" }}
@@ -233,65 +206,33 @@ const InstPostForm = () => {
 
               <Row className="RowDivElment">
                 <label className="label">تاريخ الإنتهاء: </label>
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: " ادخال تاريخ انتهاء الإعلان",
-                    },
-                  ]}
-                  style={{ flexGrow: "2", justifyContent: "center" }}
-                >
-                  <DatePicker
-                    placeholder="اختر تاريخ إنتهاء التدريب"
-                    style={{ width: "100%" }}
-                    onChange={(date, dateString) =>
-                      handleInputChange("t_endDate", dateString)
-                    }
-                  />
-                </Form.Item>
+
+                <CustomDatePicker
+                  name="t_endDate"
+                  label="تاريخ إنتهاء التدريب"
+                  required={true}
+                  handleInputChange={handleInputChange}
+                />
               </Row>
 
               <Row className="RowDivElment">
                 <label className="label">الجنس: </label>
-                <Form.Item
+                <ReactRadio
                   name="gender"
-                  rules={[
-                    {
-                      required: true,
-                      message: "الرجاء الاختيار",
-                    },
-                  ]}
-                  style={{ flexGrow: "2", justifyContent: "center" }}
-                >
-                  <Radio.Group>
-                    <Radio value={0}>ذكر</Radio>
-                    <Radio value={1}>انثى</Radio>
-                    <Radio value={2}>كليهما</Radio>
-                  </Radio.Group>
-                </Form.Item>
+                  rules={[{ required: true, message: "الرجاء الاختيار" }]}
+                  options={radioOptionsGender}
+                />
               </Row>
             </Col>
 
-            <Row className="RowDivElment" style={{ width: "100%" }}>
+            <Row className="RowDivElment">
               <label className="label">التخصص: </label>
-              <Form.Item
-                rules={[
-                  {
-                    required: true,
-                    message: "الرجاء إختيار التخصصات",
-                  },
-                ]}
-                style={{ flexGrow: "2", justifyContent: "center" }}
-              >
-                <Select
-                  mode="multiple"
-                  allowClear
-                  placeholder="اختر التخصصات"
-                  onChange={(e) => handleInputChange("majors", e)}
-                  options={options}
-                />
-              </Form.Item>
+              <MultiSelect
+                name="majors"
+                label="التخصصات"
+                handleInputChange={handleInputChange}
+                options={options}
+              />
             </Row>
           </Row>
           <div className="addbuttonContainer">

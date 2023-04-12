@@ -7,9 +7,10 @@ import Spinner from "../../../../components/ui/Spinner/Spinner";
 import { useFetch } from "../../../../data/API";
 const StatisticChart = () => {
   const { data, loading, error } = useFetch(
-    "http://localhost:8000/getAllStudentsData"
+    `http://localhost:8000/getAllStudentsData`
   );
   const currentYear = new Date().getFullYear();
+  const [selectedYear, setSelectedYear] = useState(currentYear);
   const [years, setYears] = useState(() => {
     const yearsArr = [];
     for (let year = currentYear; year >= 2023; year--) {
@@ -17,6 +18,10 @@ const StatisticChart = () => {
     }
     return yearsArr;
   });
+
+  const handleYearChange = (value) => {
+    setSelectedYear(value);
+  };
 
   if (loading) {
     return <Spinner />;
@@ -26,9 +31,11 @@ const StatisticChart = () => {
     return notification.error(error);
   }
 
-  const chartData = data.map(({ university, totalApplicant }) => ({
+  const { data: mainData } = data;
+
+  const chartData = mainData.map(({ university, total_applications }) => ({
     name: university,
-    value: totalApplicant,
+    value: total_applications,
   }));
 
   const option = {
@@ -66,7 +73,8 @@ const StatisticChart = () => {
       <div>
         <Select
           style={{ flexGrow: "2" }}
-          defaultValue="اختر السنة"
+          defaultValue={currentYear}
+          onChange={handleYearChange}
           className="filter"
         >
           {years.map((year, index) => (
