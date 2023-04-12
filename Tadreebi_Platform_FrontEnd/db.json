@@ -22,6 +22,284 @@
       "date": "منذ 3 أيام"
     }
   ],
+  "newsAdmin": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "id": 1,
+          "auth": "عبدالمحسن الناصر",
+          "title": "فرصة تدريبية",
+          "institutionName": "سدايا",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "created_at": "2023-02-22",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "auth": "ابراهيم عبدالله",
+          "title": "فرصة تدريبية",
+          "institutionName": "كاكست",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "created_at": "2023-02-22",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "غير نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "auth": "يزيد العلوي" ,
+          "title": "فرصة تدريبية",
+          "institutionName": "كاوست",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "created_at": "2023-02-22",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "غير نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        }
+      ],
+      "first_page_url": "http://localhost:8000/api/posts?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8000/api/posts?page=1",
+      "links": [
+        {
+          "url": null,
+          "label": "&laquo; Previous",
+          "active": false
+        },
+        {
+          "url": "http://localhost:8000/api/posts?page=1",
+          "label": "1",
+          "active": true
+        },
+        {
+          "url": null,
+          "label": "Next &raquo;",
+          "active": false
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8000/api/posts",
+      "per_page": 8,
+      "prev_page_url": null,
+      "to": 1,
+      "total": 1
+    }
+  },
+
+  "adminPosts": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "id": 1,
+          "inst": "سدايا",
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "created_at": "2023-02-22",
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "فرصة تدريبية",
+          "inst": "الهيئة الملكية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "created_at": "2023-02-22",
+          "postMajorsCount": 2,
+          "postStatus": "غير نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "فرصة تدريبية",
+          "inst": "وزارة التعليم",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "created_at": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "غير نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "فرصة تدريبية",
+          "inst": "جامعة طيبة",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "created_at": "2023-02-22",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "title": "فرصة تدريبية",
+          "inst": "وزارة الاعلام",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "created_at": "2023-02-22",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        }
+      ],
+      "first_page_url": "http://localhost:8000/api/posts?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8000/api/posts?page=1",
+      "links": [
+        {
+          "url": null,
+          "label": "&laquo; Previous",
+          "active": false
+        },
+        {
+          "url": "http://localhost:8000/api/posts?page=1",
+          "label": "1",
+          "active": true
+        },
+        {
+          "url": null,
+          "label": "Next &raquo;",
+          "active": false
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8000/api/posts",
+      "per_page": 8,
+      "prev_page_url": null,
+      "to": 1,
+      "total": 1
+    }
+  },
+
+
   "posts": {
     "status": "تم تنفيذ الطلب بنجاح",
     "message": null,
@@ -41,7 +319,6 @@
           "t_endDate": "2023-02-22",
           "p_endDate": "2024-02-14",
           "postMajorsCount": 2,
-          "postStatus": "نشط",
           "post_majors": [
             {
               "major": "هندسة حاسب"
