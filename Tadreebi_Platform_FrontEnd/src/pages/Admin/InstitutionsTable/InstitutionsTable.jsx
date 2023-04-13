@@ -1,23 +1,19 @@
 import "./InstitutionsTable.scss";
 import { useState } from "react";
-import { Button, notification, Switch } from "antd";
-import { Link } from "react-router-dom";
+import { Button, notification } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import InstitutionsModal from "./components/InstitutionsModal.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminInstitutionText } from "../../../components/ui/Table/TableFilter";
+import { AdminInstitutionText, Edit, InstitutionDelete } from "../../../components/ui/Table/TableFilter";
 
 const InstitutionsTable = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:8000/institutions"
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null);
+
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -69,44 +65,12 @@ const InstitutionsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        let buttons = {};
-        buttons = (
-          <span>
-            <Link to={`/admin/manage-institutions/${record.id}`}>
-              {
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faPenToSquare}
-                  style={{ color: "#008374b2" }}
-                />
-              }
-            </Link>
-            <span onClick={() => handleDelete(`${record.institutionName}`)}>
-              {
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  style={{ color: "red", cursor: "pointer" }}
-                />
-              }
-            </span>
-            {selectedStudent && (
-              <InstitutionsModal
-                modalOpen={isModalOpen}
-                setModalOpen={setIsModalOpen}
-                name={selectedStudent}
-              />
-            )}
-          </span>
-        );
-        return buttons;
+        return <><Edit record={record} endPoint={"manage-institutions"}/>
+         <InstitutionDelete attr={record.institutionName}/></>
       },
     },
   ];
 
-  const handleDelete = (student) => {
-    setSelectedStudent(student);
-    setIsModalOpen(true);
-  };
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);

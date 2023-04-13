@@ -1,21 +1,16 @@
 import "./StudentsTable.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, notification } from "antd";
-import { Link } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import StudentsModal from "./components/StudentsModal.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminStudentTable } from "../../../components/ui/Table/TableFilter";
+import { AdminStudentTable, Edit, StudentDelete } from "../../../components/ui/Table/TableFilter";
 
 const StudentsTable = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/students");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -67,44 +62,12 @@ const StudentsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        let buttons = {};
-        buttons = (
-          <span>
-            <Link to={`/admin/manage-students/${record.id}`}>
-              {
-                <FontAwesomeIcon
-                  className="icon"
-                  icon={faPenToSquare}
-                  style={{ color: "#008374b2" }}
-                />
-              }
-            </Link>
-            <span onClick={() => handleDelete(`${record.fullName}`)}>
-              {
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  style={{ color: "red", cursor: "pointer" }}
-                />
-              }
-            </span>
-            {selectedStudent && (
-              <StudentsModal
-                modalOpen={isModalOpen}
-                setModalOpen={setIsModalOpen}
-                name={selectedStudent}
-              />
-            )}
-          </span>
-        );
-        return buttons;
+        return <><Edit record={record} endPoint={"manage-students"}/>
+        <StudentDelete attr={record.fullName}/></>
       },
     },
   ];
 
-  const handleDelete = (student) => {
-    setSelectedStudent(student);
-    setIsModalOpen(true);
-  };
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);

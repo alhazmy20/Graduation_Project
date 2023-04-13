@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from "react";
-import { Button, notification, Switch } from "antd";
+import { Button, notification } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -65,28 +65,7 @@ const PostsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        // let buttons = {};
-        // buttons = (
-        //   <span>
-        //     <span onClick={() => handleDelete(`${record.title}`)}>
-        //       {
-        //         <FontAwesomeIcon
-        //           icon={faTrash}
-        //           style={{ color: "red", cursor: "pointer" }}
-        //         />
-        //       }
-        //     </span>
-        //     {selectedNews && (
-        //       <PostsModal
-        //         modalOpen={isModalOpen}
-        //         setModalOpen={setIsModalOpen}
-        //         name={selectedNews}
-        //       />
-        //     )}
-        //   </span>
-        // );
-        // return buttons;
-         return <PostDelete del={true} record={record}/>
+         return <PostDelete attr={record.title}/>
       },
     },
   ];

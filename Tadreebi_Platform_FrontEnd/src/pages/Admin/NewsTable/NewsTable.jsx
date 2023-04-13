@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState } from "react";
-import { Button, notification, Switch } from "antd";
+import { Button, notification } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminInstitutionText, NewDelete, NewEdit } from "../../../components/ui/Table/TableFilter";
+import { AdminInstitutionText, Edit, NewDelete} from "../../../components/ui/Table/TableFilter";
 
 
 const NewsTable = () => {
@@ -65,7 +65,8 @@ const NewsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><NewEdit record={record}/> <NewDelete record={record}/></>
+        return <><Edit record={record}/>
+         <NewDelete attr={record.title}/></>
       },
     },
   ];

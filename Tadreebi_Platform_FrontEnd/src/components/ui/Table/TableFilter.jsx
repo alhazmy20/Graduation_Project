@@ -8,6 +8,8 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NewsModal from "../../../pages/Admin/NewsTable/components/NewsModal";
 import { Link } from "react-router-dom";
+import InstitutionsModal from "../../../pages/Admin/InstitutionsTable/components/InstitutionsModal";
+import StudentsModal from "../../../pages/Admin/StudentsTable/components/StudentsModal";
 export const TableText = (text) => {
   let style = {};
   if (text === "بإنتظار موافقة الطالب" || text === "بإنتظار موافقة المنشأة") {
@@ -97,18 +99,18 @@ export function StudentDetails({ name, id }) {
 }
 
 
-export function NewDelete({record}){
+export function NewDelete({attr}){
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNews, setSelectedNews] = useState(null);
 
-  const handleDelete = (student) => {
-    setSelectedNews(student);
+  const handleDelete = (news) => {
+    setSelectedNews(news);
     setIsModalOpen(true);
   };
   
   return (
       <span>
-        <span onClick={() => handleDelete(`${record.title}`)}>
+        <span onClick={() => handleDelete(`${attr}`)}>
           {
             <FontAwesomeIcon
               icon={faTrash}
@@ -127,18 +129,18 @@ export function NewDelete({record}){
   );
 }
 
-export function PostDelete({record}){
+export function InstitutionDelete({attr}){
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedNews, setSelectedNews] = useState(null);
+  const [selectedInst, setSelectedInst] = useState(null);
 
-  const handleDelete = (student) => {
-    setSelectedNews(student);
+  const handleDelete = (institution) => {
+    setSelectedInst(institution);
     setIsModalOpen(true);
   };
   
   return (
       <span>
-        <span onClick={() => handleDelete(`${record.title}`)}>
+        <span onClick={() => handleDelete(`${attr}`)}>
           {
             <FontAwesomeIcon
               icon={faTrash}
@@ -146,21 +148,82 @@ export function PostDelete({record}){
             />
           }
         </span>
-        {selectedNews && (
-          <PostsModal
+        {selectedInst && (
+          <InstitutionsModal
             modalOpen={isModalOpen}
             setModalOpen={setIsModalOpen}
-            name={selectedNews}
+            name={selectedInst}
           />
         )}
       </span> 
   );
 }
 
-export function NewEdit({record}){
+
+export function PostDelete({attr}){
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const handleDelete = (post) => {
+    setSelectedPost(post);
+    setIsModalOpen(true);
+  };
+  
+  return (
+      <span>
+        <span onClick={() => handleDelete(`${attr}`)}>
+          {
+            <FontAwesomeIcon
+              icon={faTrash}
+              style={{ color: "red", cursor: "pointer" }}
+            />
+          }
+        </span>
+        {selectedPost && (
+          <PostsModal
+            modalOpen={isModalOpen}
+            setModalOpen={setIsModalOpen}
+            name={selectedPost}
+          />
+        )}
+      </span> 
+  );
+}
+
+export function StudentDelete({attr}){
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null);
+
+  const handleDelete = (student) => {
+    setSelectedStudent(student);
+    setIsModalOpen(true);
+  };
+  
+  return (
+      <span>
+        <span onClick={() => handleDelete(`${attr}`)}>
+          {
+            <FontAwesomeIcon
+              icon={faTrash}
+              style={{ color: "red", cursor: "pointer" }}
+            />
+          }
+        </span>
+        {selectedStudent && (
+          <StudentsModal
+            modalOpen={isModalOpen}
+            setModalOpen={setIsModalOpen}
+            name={selectedStudent}
+          />
+        )}
+      </span> 
+  );
+}
+
+export function Edit({record,endPoint}){
   return (
     <span>
-    <Link to={`/admin/manage-institutions/${record.id}`}>
+    <Link to={`/admin/${endPoint}/${record.id}`}>
       {
         <FontAwesomeIcon
           className="icon"
