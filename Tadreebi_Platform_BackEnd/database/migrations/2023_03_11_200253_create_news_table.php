@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->string('Title');
-            $table->longText('Content');
-            $table->longText('logo_url');
+            $table->string('title');
+            $table->longText('content');
+            $table->longText('logo_url')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

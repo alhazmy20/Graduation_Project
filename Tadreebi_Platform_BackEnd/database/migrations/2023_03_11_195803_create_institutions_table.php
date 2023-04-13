@@ -14,22 +14,24 @@ return new class extends Migration
     public function up()
     {
         Schema::create('institutions', function (Blueprint $table) {
-            $table->unsignedBigInteger('institution_id')->primary();
+            $table->id();
             $table->string('institutionName');
-            $table->string('InstitutionSector');
-            $table->string('InstitutionField');
-            $table->integer('institutionPhone')->unique();
+            $table->string('institutionSector');
+            $table->string('institutionField');
+            $table->string('institutionPhone')->unique();
             $table->string('managerEmail')->unique();
-            $table->integer('managerPhone')->unique();
+            $table->string('managerPhone')->unique();
             $table->string('managerPosition');
             $table->string('fName');
             $table->string('lName');
+            $table->longText('logo_filename')->nullable();
             $table->longText('logo_url')->nullable();
-            $table->tinyInteger('isActive')->default(0);
-            $table->string('Region');
-            $table->string('City');
+            $table->boolean('isActive')->default(0);
+            $table->string('region');
+            $table->string('city');
             $table->timestamps();
-            $table->foreign('institution_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->softDeletes();
+            $table->foreign('id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -13,13 +13,13 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->unsignedBigInteger('admin_id')->primary();
+            $table->id();
             $table->string('fName');
             $table->string('lName');
-            $table->integer('Phone');
+            $table->string('phone');
             $table->timestamps();
-            $table->foreign('admin_id')->references('id')->on('users')->cascadeOnDelete();
-
+            $table->softDeletes();
+            $table->foreign('id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

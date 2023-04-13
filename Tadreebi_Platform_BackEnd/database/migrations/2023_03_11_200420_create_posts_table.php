@@ -15,17 +15,20 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('Title');
-            $table->longText('Content');
-            $table->string('T_type');
-            $table->tinyInteger('Reward');
-            $table->tinyInteger('Gender');
-            $table->string('Region');
-            $table->string('City');
+            $table->unsignedBigInteger('institution_id');
+            $table->string('title');
+            $table->longText('content');
+            $table->string('t_type');
+            $table->boolean('reward');
+            $table->tinyInteger('gender');
+            $table->string('region');
+            $table->string('city');
             $table->date('t_startDate');
             $table->date('t_endDate');
             $table->date('p_endDate');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('institution_id')->references('id')->on('institutions')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

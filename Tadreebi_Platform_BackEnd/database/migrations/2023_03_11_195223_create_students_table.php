@@ -14,25 +14,22 @@ return new class extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->unsignedBigInteger('student_id')->primary();
+            $table->id();
             $table->string('fName');
             $table->string('sName');
             $table->string('tName');
             $table->string('lName');
-            $table->integer('Phone');
-            $table->tinyInteger('Gender');
-            $table->integer('National_ID');
-            $table->string('University');
-            $table->string('Major');
-            $table->integer('SCC');
+            $table->string('phone');
+            $table->tinyInteger('gender');
+            $table->integer('national_ID');
+            $table->string('university');
+            $table->string('major');
+            $table->string('SCC');
             $table->double('GPA');
             $table->integer('GPA_Type');
-            $table->longText('CV_url')->nullable();
-            $table->longText('InternshipLetter_url')->nullable();
-            $table->longText('NationalID_url')->nullable();
-            $table->longText('personalPicture_url')->nullable();
             $table->timestamps();
-            $table->foreign('student_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->softDeletes();
+            $table->foreign('id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
