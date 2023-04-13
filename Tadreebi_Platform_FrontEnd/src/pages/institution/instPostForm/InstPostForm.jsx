@@ -7,7 +7,8 @@ import "../instPostForm/InstPostForm.scss";
 import ReactRadio from "./components/ReactRadio.jsx";
 import MultiSelect from "./components/MultiSelect .jsx";
 import CustomDatePicker from "./components/CustomDatePicker.jsx";
-
+import moment from "moment";
+import SelectRegion from "./components/SelectRegion.jsx";
 const InstPostForm = () => {
   const [form] = Form.useForm();
   const [formPostData, setFormPostData] = useState({
@@ -25,15 +26,26 @@ const InstPostForm = () => {
   });
 
   const handleFormChange = (changedValues, allValues) => {
+    const formattedValues = Object.entries(allValues).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]: key.endsWith("Date") && value ? formatDate(value) : value,
+      }),
+      {}
+    );
     setFormPostData((prevState) => ({
       ...prevState,
-      ...allValues,
+      ...formattedValues,
     }));
+  };
+  const formatDate = (dateValue) => {
+    return moment(dateValue).format("YYYY-MM-DD");
   };
 
   const onFinish = async (values) => {
     //api code
-    console.log(values);
+
+    console.log(formPostData);
   };
 
   const handleEditorChange = (content) => {
@@ -119,29 +131,7 @@ const InstPostForm = () => {
 
               <Row className="RowDivElment">
                 <label className="label">المنطقة: </label>
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: "الرجاء إختيار المنطقة",
-                    },
-                  ]}
-                  name="region"
-                  className="formItemStyle"
-                >
-                  <Select
-                    style={{ flexGrow: "2" }}
-                    defaultValue="اختر المنطقة"
-                    showSearch
-                  >
-                    <Select.Option key="*" value="كل المناطق" />
-                    {RegionData.map((region) => (
-                      <Select.Option key={region.id} value={region.region}>
-                        {region.name}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <SelectRegion name="region" options={RegionData} />
               </Row>
               <Row className="RowDivElment">
                 <label className="label">تاريخ البدء: </label>
@@ -149,7 +139,6 @@ const InstPostForm = () => {
                   name="t_startDate"
                   label="تاريخ بدء التدريب"
                   required={true}
-                  handleInputChange={handleInputChange}
                 />
               </Row>
               <Row className="RowDivElment">
@@ -158,7 +147,6 @@ const InstPostForm = () => {
                   name="p_endDate"
                   label="تاريخ انتهاء الإعلان"
                   required={true}
-                  handleInputChange={handleInputChange}
                 />
               </Row>
             </Col>
@@ -206,12 +194,10 @@ const InstPostForm = () => {
 
               <Row className="RowDivElment">
                 <label className="label">تاريخ الإنتهاء: </label>
-
                 <CustomDatePicker
                   name="t_endDate"
                   label="تاريخ إنتهاء التدريب"
                   required={true}
-                  handleInputChange={handleInputChange}
                 />
               </Row>
 

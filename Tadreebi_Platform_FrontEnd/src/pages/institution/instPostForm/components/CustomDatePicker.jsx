@@ -1,28 +1,20 @@
 import React from "react";
 import { Form, DatePicker } from "antd";
+import moment from "moment";
 
-const CustomDatePicker = ({ name, label, required, handleInputChange }) => {
-  const handleDateChange = (date, dateString) => {
-    handleInputChange(name, dateString);
-  };
-
+const CustomDatePicker = ({ name, label }) => {
   return (
     <Form.Item
       name={name}
       rules={[
         {
           required: true,
-          message: "Please select a date!",
+          message: "الرجاء تحديد تاريخ",
         },
       ]}
       className="formItemStyle"
     >
-      <DatePicker
-        placeholder={`اختر ${label}`}
-        style={{ width: "100%" }}
-        onChange={handleDateChange}
-        format="YYYY-MM-DD"
-      />
+      <DatePicker placeholder={`اختر ${label}`} style={{ width: "100%" }} />
     </Form.Item>
   );
 };
