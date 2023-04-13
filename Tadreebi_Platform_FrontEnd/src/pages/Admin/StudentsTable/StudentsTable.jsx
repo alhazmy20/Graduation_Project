@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminStudentTable, Edit, StudentDelete } from "../../../components/ui/Table/TableFilter";
+import { AdminStudentTable, Delete, Edit, StudentDelete } from "../../../components/ui/Table/TableFilter";
+import StudentsModal from "./components/StudentsModal";
 
 const StudentsTable = () => {
   const { data, loading, error } = useFetch("http://localhost:8000/students");
@@ -63,7 +64,7 @@ const StudentsTable = () => {
       align: "center",
       render: (text, record) => {
         return <><Edit record={record} endPoint={"manage-students"}/>
-        <StudentDelete attr={record.fullName}/></>
+        <Delete attr={record.fullName} modal={StudentsModal}/></>
       },
     },
   ];

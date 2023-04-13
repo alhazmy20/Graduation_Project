@@ -102,12 +102,12 @@ export function StudentDetails({ name, id }) {
 }
 
 
-export function NewDelete({attr}){
+export function Delete({attr , modal: Modal}){
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedNews, setSelectedNews] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   const handleDelete = (news) => {
-    setSelectedNews(news);
+    setSelected(news);
     setIsModalOpen(true);
   };
   
@@ -121,107 +121,108 @@ export function NewDelete({attr}){
             />
           }
         </span>
-        {selectedNews && (
-          <NewsModal
-            modalOpen={isModalOpen}
-            setModalOpen={setIsModalOpen}
-            name={selectedNews}
-          />
+        {selected && (
+          // <NewsModal
+          //   modalOpen={isModalOpen}
+          //   setModalOpen={setIsModalOpen}
+          //   name={selectedNews}
+          // />
+          <Modal modalOpen={isModalOpen} setModalOpen={setIsModalOpen} name={selected}/>
         )}
       </span> 
   );
 }
 
-export function InstitutionDelete({attr}){
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedInst, setSelectedInst] = useState(null);
+// export function InstitutionDelete({attr}){
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [selectedInst, setSelectedInst] = useState(null);
 
-  const handleDelete = (institution) => {
-    setSelectedInst(institution);
-    setIsModalOpen(true);
-  };
+//   const handleDelete = (institution) => {
+//     setSelectedInst(institution);
+//     setIsModalOpen(true);
+//   };
   
-  return (
-      <span>
-        <span onClick={() => handleDelete(`${attr}`)}>
-          {
-            <FontAwesomeIcon
-              icon={faTrash}
-              style={{ color: "red", cursor: "pointer" }}
-            />
-          }
-        </span>
-        {selectedInst && (
-          <InstitutionsModal
-            modalOpen={isModalOpen}
-            setModalOpen={setIsModalOpen}
-            name={selectedInst}
-          />
-        )}
-      </span> 
-  );
-}
+//   return (
+//       <span>
+//         <span onClick={() => handleDelete(`${attr}`)}>
+//           {
+//             <FontAwesomeIcon
+//               icon={faTrash}
+//               style={{ color: "red", cursor: "pointer" }}
+//             />
+//           }
+//         </span>
+//         {selectedInst && (
+//           <InstitutionsModal
+//             modalOpen={isModalOpen}
+//             setModalOpen={setIsModalOpen}
+//             name={selectedInst}
+//           />
+//         )}
+//       </span> 
+//   );
+// }
 
 
-export function PostDelete({attr}){
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+// export function PostDelete({attr}){
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [selectedPost, setSelectedPost] = useState(null);
 
-  const handleDelete = (post) => {
-    setSelectedPost(post);
-    setIsModalOpen(true);
-  };
+//   const handleDelete = (post) => {
+//     setSelectedPost(post);
+//     setIsModalOpen(true);
+//   };
   
-  return (
-      <span>
-        <span onClick={() => handleDelete(`${attr}`)}>
-          {
-            <FontAwesomeIcon
-              icon={faTrash}
-              style={{ color: "red", cursor: "pointer" }}
-            />
-          }
-        </span>
-        {selectedPost && (
-          <PostsModal
-            modalOpen={isModalOpen}
-            setModalOpen={setIsModalOpen}
-            name={selectedPost}
-          />
-        )}
-      </span> 
-  );
-}
+//   return (
+//       <span>
+//         <span onClick={() => handleDelete(`${attr}`)}>
+//           {
+//             <FontAwesomeIcon
+//               icon={faTrash}
+//               style={{ color: "red", cursor: "pointer" }}
+//             />
+//           }
+//         </span>
+//         {selectedPost && (
+//           <PostsModal
+//             modalOpen={isModalOpen}
+//             setModalOpen={setIsModalOpen}
+//             name={selectedPost}
+//           />
+//         )}
+//       </span> 
+//   );
+// }
 
-export function StudentDelete({attr}){
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState(null);
+// export function StudentDelete({attr}){
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [selectedStudent, setSelectedStudent] = useState(null);
 
-  const handleDelete = (student) => {
-    setSelectedStudent(student);
-    setIsModalOpen(true);
-  };
+//   const handleDelete = (student) => {
+//     setSelectedStudent(student);
+//     setIsModalOpen(true);
+//   };
   
-  return (
-      <span>
-        <span onClick={() => handleDelete(`${attr}`)}>
-          {
-            <FontAwesomeIcon
-              icon={faTrash}
-              style={{ color: "red", cursor: "pointer" }}
-            />
-          }
-        </span>
-        {selectedStudent && (
-          <StudentsModal
-            modalOpen={isModalOpen}
-            setModalOpen={setIsModalOpen}
-            name={selectedStudent}
-          />
-        )}
-      </span> 
-  );
-}
+//   return (
+//       <span>
+//         <span onClick={() => handleDelete(`${attr}`)}>
+//           {
+//             <FontAwesomeIcon
+//               icon={faTrash}
+//               style={{ color: "red", cursor: "pointer" }}
+//             />
+//           }
+//         </span>
+//         {selectedStudent && (
+//           <StudentsModal
+//             modalOpen={isModalOpen}
+//             setModalOpen={setIsModalOpen}
+//             name={selectedStudent}
+//           />
+//         )}
+//       </span> 
+//   );
+// }
 
 export function Edit({record,endPoint}){
   return (

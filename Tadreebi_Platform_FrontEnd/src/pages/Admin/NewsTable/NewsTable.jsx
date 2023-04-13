@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { Edit, NewDelete, StatusText} from "../../../components/ui/Table/TableFilter";
+import { Delete, Edit, StatusText} from "../../../components/ui/Table/TableFilter";
+import NewsModal from './components/NewsModal';
 
 
 const NewsTable = () => {
@@ -66,7 +67,7 @@ const NewsTable = () => {
       align: "center",
       render: (text, record) => {
         return <><Edit record={record}/>
-         <NewDelete attr={record.title}/></>
+         <Delete attr={record.title} modal={NewsModal}/></>
       },
     },
   ];

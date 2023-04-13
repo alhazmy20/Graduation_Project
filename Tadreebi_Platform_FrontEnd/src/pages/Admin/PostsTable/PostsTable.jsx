@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { PostDelete, StatusText} from "../../../components/ui/Table/TableFilter";
+import { Delete, StatusText} from "../../../components/ui/Table/TableFilter";
+import PostsModal from './components/PostsModal';
 
 
 const PostsTable = () => {
@@ -65,7 +66,7 @@ const PostsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-         return <PostDelete attr={record.title}/>
+         return <Delete attr={record.title} modal={PostsModal}/>
       },
     },
   ];

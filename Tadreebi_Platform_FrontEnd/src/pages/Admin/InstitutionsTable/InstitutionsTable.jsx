@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { Edit, InstitutionDelete, StatusText } from "../../../components/ui/Table/TableFilter";
+import { Delete, Edit, StatusText } from "../../../components/ui/Table/TableFilter";
+import InstitutionsModal from "./components/InstitutionsModal";
 
 const InstitutionsTable = () => {
   const { data, loading, error } = useFetch(
@@ -66,7 +67,7 @@ const InstitutionsTable = () => {
       align: "center",
       render: (text, record) => {
         return <><Edit record={record} endPoint={"manage-institutions"}/>
-         <InstitutionDelete attr={record.institutionName}/></>
+         <Delete attr={record.institutionName} modal={InstitutionsModal}/></>
       },
     },
   ];
