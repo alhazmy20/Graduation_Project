@@ -106,8 +106,8 @@ export function Delete({attr , modal: Modal}){
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const handleDelete = (news) => {
-    setSelected(news);
+  const handleDelete = (para) => {
+    setSelected(para);
     setIsModalOpen(true);
   };
   
