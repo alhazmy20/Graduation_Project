@@ -30,6 +30,7 @@ import {
   NewsTable,
   PostsTable
 } from "../pages/index";
+import AdminsTable from "../pages/Admin/AdminsTable/AdminsTable";
 
 //Institution Routes
 const institutionRoutes = (
@@ -63,6 +64,7 @@ const adminRoutes = (
       path="manage-students/:id"
       element={<StudentProfile isAdmin={true} />}
     />
+    <Route path="manage-admins" element={<AdminsTable/>}/>
     <Route path="profile" element={<AdminProfile />} />
     <Route path="manage-posts" element={<PostsTable/>}/>
     <Route path="manage-news" element={<NewsTable/>}/>

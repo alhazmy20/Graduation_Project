@@ -91,7 +91,7 @@ const AdminSidebar = () => {
                   className={({ isActive }) =>
                     isActive ? "SubMenu activeMenu" : "SubMenu notActive"
                   }
-                  to={"/admin/manage-admin"}
+                  to={"/admin/manage-admins"}
                   end
                 >
                   <MenuItem> ادارة المشرفين </MenuItem>
