@@ -90,8 +90,8 @@ export function StudentDetails({ name, id }) {
         >
           {name}
         </Button>
-      }
-      <StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen} id={id}/>
+      }{/*I ADD This */}
+       {detailsOpen && <StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen} id={id}/>}
     </span>
   );
 }

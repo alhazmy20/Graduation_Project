@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const PostCard = ({data}) => {
   const navigate = useNavigate();
-  console.log(data);
 
   return (
     <Card
@@ -23,8 +22,6 @@ const PostCard = ({data}) => {
         <div className="majors">
           {data.post_majors?.map((major, index) => (
             <span key={index} className="major">
-              {" "}
-              {/*NOTE Add the id to key like 'key={major.id} */}
               {major.major}
             </span>
           ))}
@@ -47,8 +44,8 @@ const PostCard = ({data}) => {
           </div>
           <div className="detail">
             <FontAwesomeIcon className="icon" icon={faCalendar} />
-            <span className="label">تاريخ الإنتهاء:</span>
-            <span className="data">{data.subEndDate}</span>
+            <span className="label">تاريخ نهاية التقديم:</span>
+            <span className="data">{data.p_endDate}</span>
           </div>
         </div>
         <Button

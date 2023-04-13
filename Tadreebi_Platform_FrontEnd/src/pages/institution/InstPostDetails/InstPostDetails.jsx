@@ -45,7 +45,6 @@ const InstPostDetails = () => {
   }
 
   const { data: post } = data;
-  const { data: detailedStudentObject } = studentsData;
   const {
     data: { data: students },
   } = studentsData;
@@ -88,7 +87,7 @@ const InstPostDetails = () => {
       title: "الإجراء",
       dataIndex: "accept",
       align: "center",
-      render: (text, row) => <InstitutionAccept row={row} />,
+      render: (text, row) =>  <InstitutionAccept row={row} />,
     },
   ];
 

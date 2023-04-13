@@ -1,4 +1,4 @@
-import { Button, Card, Col, Form, Row } from "antd";
+import { Button, Col, Form, Row } from "antd";
 import React, { useState } from "react";
 import FormInput from '../FormInput';
 import "./PasswordReset.scss";
@@ -6,7 +6,6 @@ import { passwordRules, confirmPasswordRules } from "../../../Validation/rules";
 import FormCard from '../../ui/FormCard/FormCard';
 
 const ResetPassword = () => {
-  const [form] = Form.useForm();
   const [formData, setFormData] = useState(null);
 
   const handleFormChange = (changedValues, allValues) => {
@@ -25,7 +24,6 @@ const ResetPassword = () => {
       <FormCard className="card">
       <h1 className='green-underline'>تحديث كلمة السر</h1>
         <Form
-          form={form}
           onValuesChange={handleFormChange}
           onFinish={onFinish}
           className="form"

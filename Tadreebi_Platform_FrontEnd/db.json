@@ -399,7 +399,168 @@
           ]
         },
         {
-          "id": 18,
+          "id": 5,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "title": "فرصة تدريبية",
+          "content": "فرصة تدريبية جديدة",
+          "t_type": "حضوري",
+          "reward": "لا يوجد",
+          "gender": "ذكر",
+          "region": "منطقة الرياض",
+          "city": "الرياض",
+          "t_startDate": "2023-02-22",
+          "t_endDate": "2023-02-22",
+          "p_endDate": "2024-02-14",
+          "postMajorsCount": 2,
+          "postStatus": "نشط",
+          "post_majors": [
+            {
+              "major": "هندسة حاسب"
+            },
+            {
+              "major": "نظم معلومات"
+            }
+          ]
+        },
+        {
+          "id": 12,
           "title": "فرصة تدريبية",
           "content": "فرصة تدريبية جديدة",
           "t_type": "حضوري",
@@ -447,8 +608,8 @@
       "path": "http://localhost:8000/api/posts",
       "per_page": 8,
       "prev_page_url": null,
-      "to": 1,
-      "total": 1
+      "to": 2,
+      "total": 2
     }
   },
 
@@ -580,6 +741,123 @@
         },
         {
           "id": 2,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 3,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 4,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 5,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 6,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 7,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 8,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 9,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 10,
+          "fullName": "يزيد سعد نفاع العلوي",
+          "phone": "0501231230",
+          "gender": "ذكر",
+          "national_ID": 1100000000,
+          "university": "جامعة طيبة",
+          "major": "نظم معلومات",
+          "GPA": 5,
+          "GPA_Type": 5,
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 11,
           "fullName": "يزيد سعد نفاع العلوي",
           "phone": "0501231230",
           "gender": "ذكر",
