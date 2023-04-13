@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import {  useFetch } from "../../../data/API";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import { InstitutionPosts } from "../../../components/ui/Table/TableFilter";
 
 const InstPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -69,28 +70,7 @@ const InstPosts = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        const buttons = (
-          <span>
-            <Link to={`/institution/newPost/${record.id}`}>
-              <FontAwesomeIcon
-                className="icon"
-                icon={faPen}
-                style={{ color: "#008374b2" }}
-              />
-            </Link>
-            <span onClick={() => setIsModalOpen(true)}>
-              <FontAwesomeIcon
-                icon={faTrash}
-                style={{ color: "red", cursor: "pointer" }}
-              />
-            </span>
-            <InstModal
-              modalOpen={isModalOpen}
-              setModalOpen={setIsModalOpen}
-            />
-          </span>
-        );
-        return buttons;
+        return <InstitutionPosts record={record}/>
       },
     },
   ];

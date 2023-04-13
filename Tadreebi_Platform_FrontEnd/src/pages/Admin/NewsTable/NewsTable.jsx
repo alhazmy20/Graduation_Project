@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminInstitutionText, Edit, NewDelete} from "../../../components/ui/Table/TableFilter";
+import { Edit, NewDelete, StatusText} from "../../../components/ui/Table/TableFilter";
 
 
 const NewsTable = () => {
@@ -58,7 +58,7 @@ const NewsTable = () => {
       title: "الحالة",
       dataIndex: "postStatus",
       align: "center",
-      render: AdminInstitutionText
+      render: StatusText
     },
     {
       title: "الإجراء",

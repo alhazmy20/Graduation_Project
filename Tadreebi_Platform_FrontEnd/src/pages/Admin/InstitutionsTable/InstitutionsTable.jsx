@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminInstitutionText, Edit, InstitutionDelete } from "../../../components/ui/Table/TableFilter";
+import { Edit, InstitutionDelete, StatusText } from "../../../components/ui/Table/TableFilter";
 
 const InstitutionsTable = () => {
   const { data, loading, error } = useFetch(
@@ -58,7 +58,7 @@ const InstitutionsTable = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: AdminInstitutionText
+      render: StatusText
     },
     {
       title: "الإجراء",

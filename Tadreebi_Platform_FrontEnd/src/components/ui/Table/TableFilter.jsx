@@ -3,13 +3,16 @@ import React, { useState } from "react";
 import ConditionModal from "../../../pages/institution/InstPostDetails/components/conditionModal";
 import StudentModal from "../../../pages/institution/InstPostDetails/components/StudentModal";
 import PostsModal from "../../../pages/Admin/PostsTable/components/PostsModal";
-import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faPen, faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NewsModal from "../../../pages/Admin/NewsTable/components/NewsModal";
 import { Link } from "react-router-dom";
 import InstitutionsModal from "../../../pages/Admin/InstitutionsTable/components/InstitutionsModal";
 import StudentsModal from "../../../pages/Admin/StudentsTable/components/StudentsModal";
+import InstModal from "../../../pages/institution/InstApplications/components/InstModal";
+
+
+
 export const TableText = (text) => {
   let style = {};
   if (text === "بإنتظار موافقة الطالب" || text === "بإنتظار موافقة المنشأة") {
@@ -22,7 +25,7 @@ export const TableText = (text) => {
   return <span style={style}>{text}</span>;
 };
 
-export const AdminInstitutionText = (record) => {
+export const StatusText = (record) => {
   let buttons = {};
   if (record === "نشط") {
     buttons = <Button className="activeBtn">نشط</Button>;
@@ -234,4 +237,41 @@ export function Edit({record,endPoint}){
     </Link>
   </span>
   );
+}
+
+export function InstitutionPosts({record}){
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+<span>
+            <Link to={`/institution/newPost/${record.id}`}>
+              <FontAwesomeIcon
+                className="icon"
+                icon={faPen}
+                style={{ color: "#008374b2" }}
+              />
+            </Link>
+            <span onClick={() => setIsModalOpen(true)}>
+              <FontAwesomeIcon
+                icon={faTrash}
+                style={{ color: "red", cursor: "pointer" }}
+              />
+            </span>
+            <InstModal
+              modalOpen={isModalOpen}
+              setModalOpen={setIsModalOpen}
+            />
+          </span>
+  );
+}
+
+export function StudentAccept({row}){
+if (row.status === "بإنتظار موافقة الطالب") {
+  return(
+    <span className="btnContainer">
+    {<Button className="acceptBtn">قبول</Button>}
+    {<Button className="rejectBtn">رفض</Button>}
+  </span>
+  )
+} else return <span>-</span>
 }

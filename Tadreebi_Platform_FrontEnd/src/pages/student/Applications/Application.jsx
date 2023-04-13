@@ -2,7 +2,7 @@ import "./Application.scss";
 import { useState } from "react";
 import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
-import { TableText } from "../../../components/ui/Table/TableFilter";
+import { StudentAccept, TableText } from "../../../components/ui/Table/TableFilter";
 
 const Application = () => {
   
@@ -88,18 +88,7 @@ const Application = () => {
       dataIndex: "accept",
       align: "center",
       render: (text, row) => {
-        let buttons = {};
-        let style = {};
-        if (row.status === "بإنتظار موافقة الطالب") {
-          buttons = (
-            <span className="btnContainer">
-              {<Button className="acceptBtn">قبول</Button>}
-              {<Button className="rejectBtn">رفض</Button>}
-            </span>
-          );
-        } else
-          buttons = <span>-</span>;
-        return buttons;
+        return <StudentAccept row={row}/>
       },
     },
   ];
