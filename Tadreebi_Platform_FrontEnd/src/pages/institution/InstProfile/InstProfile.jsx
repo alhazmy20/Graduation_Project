@@ -19,10 +19,9 @@ const InstProfile = ({ isAdmin }) => {
 
   // const { data, loading, error } = useFetch("http://localhost:8000/institution");
   const { id } = useParams() ;
-  console.log(id);
   const { data, loading, error } = useFetch(
     isAdmin
-      ? `http://localhost:8000/institution`
+      ? `http://165.227.159.49/api/institutions/${id}`
       : `http://localhost:8000/institution`
   );
 

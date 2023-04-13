@@ -10,9 +10,9 @@ import {
 import "./PostCard.scss";
 import { useNavigate } from "react-router-dom";
 
-const PostCard = ({data}) => {
+const PostCard = ({ data }) => {
   const navigate = useNavigate();
-
+  
   return (
     <Card
       title={<h2 className="card-title">{data.title}</h2>}

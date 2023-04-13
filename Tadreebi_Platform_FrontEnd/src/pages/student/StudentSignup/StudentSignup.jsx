@@ -6,6 +6,7 @@ import { UNIVERSITIES } from "../../../data/StudentData.js";
 import mobile_login_amico from "../../../assets/images/mobile_login_amico.png";
 import FormInput from "../../../components/form/FormInput";
 import FormSelect from "../../../components/form/FormSelect";
+import { data as saudiClassificationData } from "../../../data/SaudiClassification";
 import {
   passwordRules,
   confirmPasswordRules,
@@ -34,6 +35,10 @@ const StudentSignup = () => {
     navigate("/verify-account");
   };
 
+  const majorOptions = saudiClassificationData.flatMap(({ majors }) =>
+    majors.map(({ id, title: label }) => ({ label, value: label }))
+  );
+
   return (
     <div className="student-signup">
       <div className="card">
@@ -49,7 +54,7 @@ const StudentSignup = () => {
               label="البريد الجامعي"
               name="email"
               rules={emailValidationRules}
-              />
+            />
             <FormInput
               label="كلمة السر"
               inputType="password"
@@ -71,14 +76,7 @@ const StudentSignup = () => {
               ))}
             </FormSelect>
 
-            <FormSelect label="التخصص" name="major">
-              {UNIVERSITIES.map((university) => (
-                <Select.Option key={university.id} value={university.name}>
-                  {university.name}
-                </Select.Option>
-              ))}
-            </FormSelect>
-
+            <FormSelect label="التخصص" name="major" options={majorOptions}/>
             <div className="btn-wrapper">
               <Button type="primary" htmlType="submit">
                 تسجيل
