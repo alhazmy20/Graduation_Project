@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import {  useFetch } from "../../../data/API";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { InstitutionPosts } from "../../../components/ui/Table/TableFilter";
+import { Delete, Edit, InstitutionPosts } from "../../../components/ui/Table/TableFilter";
 
 const InstPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,7 +70,7 @@ const InstPosts = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <InstitutionPosts record={record}/>
+        return <><Edit record={record}/><Delete attr={record.title} modal={InstModal}/></>
       },
     },
   ];

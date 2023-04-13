@@ -240,31 +240,31 @@ export function Edit({record,endPoint}){
   );
 }
 
-export function InstitutionPosts({record}){
-  const [isModalOpen, setIsModalOpen] = useState(false);
+// export function InstitutionPosts({record}){
+//   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  return (
-<span>
-            <Link to={`/institution/newPost/${record.id}`}>
-              <FontAwesomeIcon
-                className="icon"
-                icon={faPen}
-                style={{ color: "#008374b2" }}
-              />
-            </Link>
-            <span onClick={() => setIsModalOpen(true)}>
-              <FontAwesomeIcon
-                icon={faTrash}
-                style={{ color: "red", cursor: "pointer" }}
-              />
-            </span>
-            <InstModal
-              modalOpen={isModalOpen}
-              setModalOpen={setIsModalOpen}
-            />
-          </span>
-  );
-}
+//   return (
+// <span>
+//             <Link to={`/institution/newPost/${record.id}`}>
+//               <FontAwesomeIcon
+//                 className="icon"
+//                 icon={faPen}
+//                 style={{ color: "#008374b2" }}
+//               />
+//             </Link>
+//             <span onClick={() => setIsModalOpen(true)}>
+//               <FontAwesomeIcon
+//                 icon={faTrash}
+//                 style={{ color: "red", cursor: "pointer" }}
+//               />
+//             </span>
+//             <InstModal
+//               modalOpen={isModalOpen}
+//               setModalOpen={setIsModalOpen}
+//             />
+//           </span>
+//   );
+// }
 
 export function StudentAccept({row}){
 if (row.status === "بإنتظار موافقة الطالب") {
