@@ -1061,6 +1061,84 @@
       "total": 2
     }
   },
+  "admins": {
+    "status": "تم تنفيذ الطلب بنجاح",
+    "message": null,
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "id": 1,
+          "managerEmail": "a@a.com",
+          "managerPhone": "0582599922",
+          "status": "نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 2,
+          "managerEmail": "d@a.com",
+          "managerPhone": "0582599922",
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 3,
+          "managerEmail": "f@a.com",
+          "managerPhone": "0582599922",
+          "status": "نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 4,
+          "managerEmail": "g@a.com",
+          "managerPhone": "0582599922",
+          "status": "غير نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 5,
+          "managerEmail": "c@a.com",
+          "managerPhone": "0582599922",
+          "status": "نشط",
+          "created_at": "2023-04-06"
+        },
+        {
+          "id": 6,
+          "managerEmail": "b@a.com",
+          "managerPhone": "0582599922",
+          "status": "نشط",
+          "created_at": "2023-04-06"
+        }
+      ],
+      "first_page_url": "http://localhost:8000/api/institutions?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8000/api/institutions?page=1",
+      "links": [
+        {
+          "url": null,
+          "label": "&laquo; Previous",
+          "active": false
+        },
+        {
+          "url": "http://localhost:8000/api/institutions?page=1",
+          "label": "1",
+          "active": true
+        },
+        {
+          "url": null,
+          "label": "Next &raquo;",
+          "active": false
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8000/api/admins",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": 2,
+      "total": 2
+    }
+  },
 
   "institution": {
     "status": "تم تنفيذ الطلب بنجاح",

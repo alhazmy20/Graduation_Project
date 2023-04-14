@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminStudentTable, Delete, Edit, StudentDelete } from "../../../components/ui/Table/TableFilter";
-import StudentsModal from "./components/AdminsModal";
+import { AdminStudentTable, Delete, Edit } from "../../../components/ui/Table/TableFilter";
+import AdminsModal from "./components/AdminsModal";
 
 const AdminsTable = () => {
-  const { data, loading, error } = useFetch("http://localhost:8000/newsAdmin");
+  const { data, loading, error } = useFetch("http://localhost:8000/admins");
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -29,22 +29,22 @@ const AdminsTable = () => {
   }
 
   const {
-    data: { data: studentsData },
+    data: { data: adminsData },
   } = data;
 
   const filteredDataSource = statusFilter
-    ? studentsData.filter((application) => application.status === statusFilter)
-    : studentsData;
+    ? adminsData.filter((application) => application.status === statusFilter)
+    : adminsData;
 
   const columns = [
     {
-      title: "اسم الطالب",
-      dataIndex: "fullName",
+      title: "إيميل المشرف",
+      dataIndex: "managerEmail",
       align: "center",
     },
     {
-      title: "الجامعة",
-      dataIndex: "university",
+      title: "هاتف المشرف",
+      dataIndex: "managerPhone",
       align: "center",
     },
     {
@@ -63,8 +63,8 @@ const AdminsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record} endPoint={"manage-students"}/>
-        <Delete attr={record.fullName} modal={StudentsModal}/></>
+        return <><Edit record={record} endPoint={"manage-admins"}/>
+        <Delete attr={record.managerEmail} modal={AdminsModal}/></>
       },
     },
   ];
@@ -76,7 +76,7 @@ const AdminsTable = () => {
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, studentsData.length);
+    const end = Math.min(start + pageSize - 1, adminsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -99,17 +99,17 @@ const AdminsTable = () => {
           className="button-filter"
           onClick={() => handleStatusFilterChange("نشط")}
         >
-          الطلاب النشطين
+          المشرفين النشطين
         </Button>
         <Button
           className="button-filter"
           onClick={() => handleStatusFilterChange("غير نشط")}
         >
-          الطلاب الغير نشطين
+          المشرفين الغير نشطين
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {adminsData.length}{" "}
         سجل
       </p>
       <Table

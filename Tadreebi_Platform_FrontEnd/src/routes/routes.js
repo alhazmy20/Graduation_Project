@@ -65,6 +65,7 @@ const adminRoutes = (
       element={<StudentProfile isAdmin={true} />}
     />
     <Route path="manage-admins" element={<AdminsTable/>}/>
+    <Route path="manage-admins/:id" element={<AdminProfile isAdmin={true}/>}/>
     <Route path="profile" element={<AdminProfile />} />
     <Route path="manage-posts" element={<PostsTable/>}/>
     <Route path="manage-news" element={<NewsTable/>}/>

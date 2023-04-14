@@ -32,12 +32,12 @@ const InstitutionsTable = () => {
   }
 
   const {
-    data: { data: studentsData },
+    data: { data: InstData },
   } = data;
 
   const filteredDataSource = statusFilter
-    ? studentsData.filter((application) => application.status === statusFilter)
-    : studentsData;
+    ? InstData.filter((application) => application.status === statusFilter)
+    : InstData;
 
   const columns = [
     {
@@ -79,7 +79,7 @@ const InstitutionsTable = () => {
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, studentsData.length);
+    const end = Math.min(start + pageSize - 1, InstData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -112,7 +112,7 @@ const InstitutionsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {InstData.length}{" "}
         سجل
       </p>
       <Table
