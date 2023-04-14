@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./InstSignup.scss";
-import { Steps, Form, Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Steps, Form, Button, message } from "antd";
+import { useNavigate } from "react-router-dom";
 import InstFormInputs from "../InstFormInputs";
 import InstManagerFormInputs from "../InstManagerFormInputs";
-import FormCard from "../../ui/FormCard/FormCard";
+import axios from "axios";
+import api from "../../../data/testApi";
 
 const InstSignup = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const InstSignup = () => {
     city: "",
     institutionSector: "",
     region: "",
-    institutionEmail: "",
+    email: "",
     password: "",
     password_confirmation: "",
     fName: "",
@@ -44,9 +45,22 @@ const InstSignup = () => {
     setCurrentStep(currentStep - 1);
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log(formData);
-    navigate("/verify-account");
+    api(true)
+      .get("/sanctum/csrf-cookie")
+      // .then(() => {
+      //   api()
+      //     .post("http://165.227.159.49/api/institutions", formData)
+      //     .then((postResponse) => {
+      //       console.log(postResponse.data);
+      //       navigate("/verify-account");
+      //     })
+          .catch((error) => {
+            message.error(error.response.data.message);
+            console.log(error.response.data.message);
+          });
+      // });
   };
 
   const isStepDisabled = (stepNumber) => {

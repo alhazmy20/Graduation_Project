@@ -84,7 +84,7 @@ const InstFormInputs = ({ withPassword, region }) => {
           <FormInput
             label="البريد الإلكتروني"
             labelCol={{ span: 24 }}
-            name="institutionEmail"
+            name="email"
             rules={emailValidationRules}
           />
         </Col>
@@ -105,7 +105,7 @@ const InstFormInputs = ({ withPassword, region }) => {
                 inputType="password"
                 label="تأكيد كلمة السر"
                 labelCol={{ span: 24 }}
-                name="confirmPassword"
+                name="password_confirmation"
                 rules={confirmPasswordRules}
               />
             </Col>
