@@ -32,12 +32,12 @@ const PostsTable = () => {
   }
 
   const {
-    data: { data: studentsData },
+    data: { data: PostData },
   } = data;
 
   const filteredDataSource = statusFilter
-    ? studentsData.filter((application) => application.postStatus === statusFilter)
-    : studentsData;
+    ? PostData.filter((application) => application.postStatus === statusFilter)
+    : PostData;
 
   const columns = [
     {
@@ -78,7 +78,7 @@ const PostsTable = () => {
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, studentsData.length);
+    const end = Math.min(start + pageSize - 1, PostData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -111,7 +111,7 @@ const PostsTable = () => {
       </Button>
     </div>
     <p className="rangeText">
-      عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
+      عرض {currentRange[0]} إلى {currentRange[1]} من أصل {PostData.length}{" "}
       سجل
     </p>
     <Table
