@@ -2,9 +2,8 @@ import "./Login.scss";
 import { Button, Col, Form, Input, Row } from "antd";
 import React, { useContext, useState } from "react";
 import Container from "../../../layouts/Container/Container";
-import RegisterModal from "../RegisterModal/RegisterModal";
 import { AuthContext } from "../../../auth/useContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserRole, GetAllNews } from "../../../data/API.js";
 import { useParams } from "react-router-dom";
 import FormCard from "../../../components/ui/FormCard/FormCard";
@@ -107,7 +106,7 @@ const Login = () => {
       <Row justify="center" align="middle" className="login">
         <Col lg={10} md={18} xs={24} sm={24}>
           <FormCard className="card">
-            <h1 className='green-underline'>تسجيل الدخول</h1>
+            <h1 className="green-underline">تسجيل الدخول</h1>
             <Form
               name="basic"
               initialValues={{ remember: true }}
@@ -122,7 +121,7 @@ const Login = () => {
                 labelCol={{ span: 24 }}
                 name="email"
                 rules={emailValidationRules}
-                />
+              />
 
               <FormInput
                 inputType="password"
@@ -137,17 +136,7 @@ const Login = () => {
               </Button>
               <span className="login-register">
                 ليس لديك حساب؟
-                <Button
-                  type="link"
-                  style={{ padding: "0" }}
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  حساب جديد
-                </Button>
-                <RegisterModal
-                  modalOpen={isModalOpen}
-                  setModalOpen={setIsModalOpen}
-                />
+                <Link to="/signup">تسجيل جديد</Link>
               </span>
             </Form>
           </FormCard>

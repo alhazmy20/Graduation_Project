@@ -1,0 +1,33 @@
+.student-signup {
+
+  .form-container {
+    width: 100%;
+
+    h4 {
+      font-size: 22px;
+      text-align: center;
+    }
+
+    form {
+      .label {
+        color: #808080;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .btn-wrapper {
+        display: flex;
+        justify-content: center;
+
+        button {
+          width: 120px;
+          margin-bottom: 15px;
+          background-color: #008374;
+        }
+      }
+    }
+
+  }
+
+}

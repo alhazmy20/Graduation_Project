@@ -8,12 +8,10 @@ import InstitutionInfo from "../pages/general/institutionInfo/InstitutionInfo";
 import {
   Home,
   Applications,
-  InstSignup,
   Login,
   News,
   NotFound,
   StudentProfile,
-  StudentSignup,
   TrainingOpportunities,
   TrainingOpportunity,
   NewsDetails,
@@ -28,7 +26,8 @@ import {
   StudentsTable,
   InstitutionsTable,
   NewsTable,
-  PostsTable
+  PostsTable,
+  Signup
 } from "../pages/index";
 import AdminsTable from "../pages/Admin/AdminsTable/AdminsTable";
 
@@ -97,8 +96,7 @@ export const routes = createBrowserRouter(
 
       {adminRoutes}
 
-      <Route path="institution/signup" element={<InstSignup />} />
-      <Route path="student/signup" element={<StudentSignup />} />
+      <Route path="signup" element={<Signup/>} />
       <Route path="verify-account" element={<VerifyAccount />} />
       <Route path="login" element={<Login />} />
       <Route path="admin/login" element={<h1>Login for admin</h1>} />

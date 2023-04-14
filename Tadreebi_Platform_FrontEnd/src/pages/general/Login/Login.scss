@@ -32,11 +32,15 @@
       .login-register {
         display: block;
         font-weight: 600;
-        button {
-          color: $steelTeal;
+        margin-top: 5px;
+        a {
+          text-decoration: none;
+          color: #4a98ae;
           font-weight: 600;
+          margin-right: 5px;
         }
       }
     }
   }
+  
 }

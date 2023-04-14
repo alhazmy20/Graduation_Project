@@ -48,7 +48,8 @@ const UserInfo = () => {
                   className="userimg"
                   src={userimg}
                   style={{ width: "50px", objectFit: "cover" }}
-                ></img>
+                  alt=''
+                />
               </div>
             </Space>
           </a>
