@@ -1,85 +1,60 @@
 import "./Application.scss";
 import { useState } from "react";
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import Table from "../../../components/ui/Table/Table";
-import { StudentAccept, TableText } from "../../../components/ui/Table/TableFilter";
+import {
+  StudentAccept,
+  TableText,
+} from "../../../components/ui/Table/TableFilter";
+import Spinner from "../../../components/ui/Spinner/Spinner";
+import { useFetch } from "../../../data/API";
+import NoData from "../../../components/ui/NoData/NoData";
 
 const Application = () => {
-  
+  const { data, loading, error } = useFetch("http://localhost:8000/studentPosts");
   const [statusFilter, setStatusFilter] = useState(null);
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
-  const dataSource = [
-    {
-      key: "1",
-      instname: "xxxxx",
-      opp: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "بإنتظار موافقة الطالب",
-      accept: "-",
-    },
-    {
-      key: "2",
-      instname: "xxxx",
-      opp: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "مرفوض",
-      accept: "-",
-    },
-    {
-      key: "3",
-      instname: "xxxx",
-      opp: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "بإنتظار موافقة المنشأة",
-      accept: "-",
-    },
-    {
-      key: "4",
-      instname: "xxxx",
-      opp: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "مرفوض",
-      accept: "-",
-    },
-    {
-      key: "5",
-      instname: "xxxx",
-      opp: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "بإنتظار موافقة الطالب",
-      accept: "-",
-    },
-    {
-      key: "6",
-      instname: "xxxx",
-      opp: "xxxxx",
-      date: "تدريب تعاوني - تطوير تطبيقات الويب",
-      status: "مقبول",
-      accept: "-",
-    },
-  ];
+  const [pageSize, setPageSize] = useState(3);
+  const [currentRange, setCurrentRange] = useState([1, pageSize]);
+  
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return notification.error(error);
+  }
+
+  if (!data) {
+    return <NoData text="لا يوجد طلاب حاليا" />;
+  }
+
+  const {
+    data: { data: studentsData },
+  } = data;
+  
+  const filteredDataSource = statusFilter
+    ? studentsData.filter((application) => application.postStatus === statusFilter)
+    : studentsData;
 
   const columns = [
     {
       title: "اسم المؤسسة",
-      dataIndex: "instname",
+      dataIndex: "inst",
       align: "center",
     },
     {
       title: "الفرصة التدريبية",
-      dataIndex: "opp",
+      dataIndex: "title",
       align: "center",
     },
     {
       title: "تاريخ التقديم",
-      dataIndex: "date",
+      dataIndex: "t_startDate",
       align: "center",
     },
     {
       title: "الحالة",
-      dataIndex: "status",
+      dataIndex: "postStatus",
       align: "center",
       render: TableText,
     },
@@ -88,21 +63,20 @@ const Application = () => {
       dataIndex: "accept",
       align: "center",
       render: (text, row) => {
-        return <StudentAccept row={row}/>
+        return <StudentAccept row={row} />;
       },
     },
   ];
 
-  const filteredDataSource = statusFilter
-    ? dataSource.filter((application) => application.status === statusFilter)
-    : dataSource;
+ 
 
-  const [pageSize, setPageSize] = useState(3);
-  const [currentRange, setCurrentRange] = useState([1, pageSize]);
+    const handleStatusFilterChange = (status) => {
+      setStatusFilter(status);
+    };
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, dataSource.length);
+    const end = Math.min(start + pageSize - 1, studentsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -143,10 +117,17 @@ const Application = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {dataSource.length}{" "}
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
         سجل
       </p>
-      <Table col={columns} data={filteredDataSource} filter={statusFilter} Size={pageSize} handleChange={handlePaginationChange}/>
+      <Table
+        col={columns}
+        data={filteredDataSource}
+        filter={statusFilter}
+        Size={pageSize}
+        handleChange={handlePaginationChange}
+        emptyText="لا توجد بيانات"
+      />
     </div>
   );
 };

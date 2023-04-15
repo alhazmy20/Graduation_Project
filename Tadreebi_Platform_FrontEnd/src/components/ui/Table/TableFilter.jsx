@@ -267,7 +267,7 @@ export function Edit({record,endPoint}){
 // }
 
 export function StudentAccept({row}){
-if (row.status === "بإنتظار موافقة الطالب") {
+if (row.postStatus === "بإنتظار موافقة الطالب") {
   return(
     <span className="btnContainer">
     {<Button className="acceptBtn">قبول</Button>}
