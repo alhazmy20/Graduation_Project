@@ -4,7 +4,7 @@ import { Button, notification } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
+import { faFileCsv, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
 import { AdminStudentTable, Delete, Edit } from "../../../components/ui/Table/TableFilter";
@@ -83,6 +83,10 @@ const AdminsTable = () => {
   return (
     <div className="tableContainer">
       <div className="excelContainer">
+      <Button className="excelBtn">
+      <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
+          <strong>اضافة مشرف</strong>
+        </Button>
         <Button className="excelBtn">
           <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
           <strong>Excel</strong>
