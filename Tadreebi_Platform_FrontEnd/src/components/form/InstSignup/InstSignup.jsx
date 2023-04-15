@@ -4,8 +4,7 @@ import { Steps, Form, Button, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import InstFormInputs from "../InstFormInputs";
 import InstManagerFormInputs from "../InstManagerFormInputs";
-import axios from "axios";
-import api from "../../../data/testApi";
+import api from "../../../data/axiosConfig";
 
 const InstSignup = () => {
   const navigate = useNavigate();
@@ -46,21 +45,26 @@ const InstSignup = () => {
   };
 
   const onFinish = async (values) => {
-    console.log(formData);
-    api(true)
-      .get("/sanctum/csrf-cookie")
-      // .then(() => {
-      //   api()
-      //     .post("http://165.227.159.49/api/institutions", formData)
-      //     .then((postResponse) => {
-      //       console.log(postResponse.data);
-      //       navigate("/verify-account");
-      //     })
+    api().get('/api/csrf-token').then((response) => {
+      const csrfToken = response.data.csrf_token;
+      localStorage.setItem('csrf_token', csrfToken);
+    })
+      .then(() => {
+        api()
+          .post("/api/institutions", formData)
+          .then((postResponse) => {
+            navigate("/verify-account");
+          })
           .catch((error) => {
-            message.error(error.response.data.message);
-            console.log(error.response.data.message);
+            const errors = error.response.data.errors;
+            const errorMessages = Object.keys(errors).map((key) => {
+              return errors[key][0];
+            });
+            message.error(errorMessages.join(", "));
+            console.log(errors);
           });
-      // });
+          
+    });
   };
 
   const isStepDisabled = (stepNumber) => {

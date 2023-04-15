@@ -1,5 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import api from "../data/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -8,12 +10,21 @@ export const AuthContexProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  const login = async (inputs) => {
-    const res = await axios.post("/login", inputs);
-    setCurrentUser(res.data);
-    console.log(res.data);
 
-    setCurrentUser(inputs);
+
+  const login = async (values) => {
+     api()
+      .get("/api/csrf-token")
+      .then(() => {
+        api()
+          .post("/api/login/", values)
+          .then((res) => {
+            console.log(res.data);
+            setCurrentUser(res.data.data);
+            localStorage.setItem("bearer_token", res.data.data.token);
+            console.log(currentUser);
+          });
+      });
   };
 
   const logout = async (inputs) => {
