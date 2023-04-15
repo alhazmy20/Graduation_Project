@@ -44,6 +44,16 @@ export const AdminStudentTable = (text) => {
   return <span style={style}>{text}</span>;
 };
 
+export const InstPostsText = (text) => {
+  let style = {};
+  if (text === "نشط") {
+    style.color = "#008374b2";
+  } else if (text === "مغلق") {
+    style.color = "red";
+  }
+  return <span style={style}>{text}</span>;
+};
+
 export function InstitutionAccept({ row }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [condition, setCondition] = useState("");
@@ -224,10 +234,10 @@ export function Delete({attr , modal: Modal}){
 //   );
 // }
 
-export function Edit({record,endPoint}){
+export function Edit({record,endPoint_1,endPoint_2}){
   return (
     <span>
-    <Link to={`/admin/${endPoint}/${record.id}`}>
+    <Link to={`/${endPoint_1}/${endPoint_2}/${record.id}`}>
       {
         <FontAwesomeIcon
           className="icon"
@@ -237,6 +247,14 @@ export function Edit({record,endPoint}){
       }
     </Link>
   </span>
+  );
+}
+
+export function InstTitle({text,record}){
+  return (
+    <span>
+          <Link className='row-title' to={`/institution/posts/${record.id}`}>{text}</Link>
+        </span>
   );
 }
 

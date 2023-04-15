@@ -66,7 +66,7 @@ const InstitutionsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record} endPoint={"manage-institutions"}/>
+        return <><Edit record={record} endPoint_1={"admin"} endPoint_2={"manage-institutions"}/>
          <Delete attr={record.institutionName} modal={InstitutionsModal}/></>
       },
     },

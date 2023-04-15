@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import {  useFetch } from "../../../data/API";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { Delete, Edit, InstitutionPosts } from "../../../components/ui/Table/TableFilter";
+import { Delete, Edit, InstPostsText, InstTitle } from "../../../components/ui/Table/TableFilter";
 
 const InstPosts = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,11 +35,9 @@ const InstPosts = () => {
       title: "عنوان الإعلان",
       dataIndex: "title",
       align: "center",
-      render: (text, record) => (
-        <span>
-          <Link className='row-title' to={`/institution/posts/${record.id}`}>{text}</Link>
-        </span>
-      ),
+      render: (text, record) => {
+        return <><InstTitle record={record} text={text}/></>
+      },
     },
     {
       title: "المدينة",
@@ -55,22 +53,14 @@ const InstPosts = () => {
       title: "الحالة",
       dataIndex: "postStatus",
       align: "center",
-      render: (text) => {
-        const style = {};
-        if (text === "نشط") {
-          style.color = "#008374b2";
-        } else if (text === "مغلق") {
-          style.color = "red";
-        }
-        return <span style={style}>{text}</span>;
-      },
+      render: InstPostsText,
     },
     {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record}/><Delete attr={record.title} modal={InstModal}/></>
+        return <><Edit endPoint_1={"institution"} endPoint_2={"newPost"} record={record}/><Delete attr={record.title} modal={InstModal}/></>
       },
     },
   ];

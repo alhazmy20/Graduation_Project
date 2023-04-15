@@ -63,7 +63,7 @@ const AdminsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record} endPoint={"manage-admins"}/>
+        return <><Edit record={record} endPoint_1={"admin"} endPoint_2={"manage-admins"}/>
         <Delete attr={record.managerEmail} modal={AdminsModal}/></>
       },
     },
