@@ -3,7 +3,7 @@ import { Button, Card, Space } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCity,
-  faTransgender,
+  faVenusMars,
   faDollar,
   faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
@@ -33,7 +33,7 @@ const PostCard = ({ data }) => {
             <span className="data">{data.city}</span>
           </div>
           <div className="detail">
-            <FontAwesomeIcon className="icon" icon={faTransgender} />
+          <FontAwesomeIcon className="icon" icon={faVenusMars} />
             <span className="label">الجنس:</span>
             <span className="data">{data.gender}</span>
           </div>
