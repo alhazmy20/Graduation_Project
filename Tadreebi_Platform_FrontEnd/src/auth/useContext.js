@@ -1,44 +1,54 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import api from "../data/axiosConfig";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
 export const AuthContexProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(
+  const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
-
-
+  console.log(user);
+  const [role, setRole] = useState(null);
 
   const login = async (values) => {
-     api()
-      .get("/api/csrf-token")
-      .then(() => {
-        api()
-          .post("/api/login/", values)
-          .then((res) => {
-            console.log(res.data);
-            setCurrentUser(res.data.data);
-            localStorage.setItem("bearer_token", res.data.data.token);
-            console.log(currentUser);
-          });
-      });
+    await fetchCsrfToken();
+    const res = await api().post("/api/login", values);
+    localStorage.setItem("bearer_token", res.data.data.token);
+    setRole(res.data.data.user.role);
+    setUser(res.data.data.user);
   };
 
-  const logout = async (inputs) => {
-    await axios.post("/logout");
-    setCurrentUser(null);
+  const fetchCsrfToken = async () => {
+    const response = await api().get("/api/csrf-token");
+    const csrfToken = response.data.data.csrf_token;
+    localStorage.setItem("csrf_token", csrfToken);
+    return csrfToken;
+  };
+
+  const logout = async () => {
+    try {
+      await api().post("/api/logout");
+      setUser(null);
+      setUser(null);
+      // window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
-  }, [currentUser]);
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, role, fetchCsrfToken }}>
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

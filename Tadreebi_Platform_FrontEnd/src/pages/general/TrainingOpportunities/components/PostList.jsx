@@ -4,29 +4,11 @@ import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 import Spinner from "../../../../components/ui/Spinner/Spinner.jsx";
 import NoData from "../../../../components/ui/NoData/NoData.jsx";
-import { useFetch } from "../../../../data/API.js";
+import { getPosts, useFetch } from "../../../../data/API.js";
+import axios from 'axios';
 
-const PostList = () => {
+const PostList = ({posts}) => {
   const [page, setPage] = useState(1);
-  // const { data, loading, error } = useFetch(`http://localhost:8000/api/posts?page=${page}`);
-  const { data, loading, error } = useFetch(`http://localhost:8000/posts`);
-  useEffect(()=>{console.log('Change');},[page])
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  // if (!data) {
-  //   return <NoData text="لا توجد فرص تدريب حاليا" />;
-  // }
-
-  const {
-    data: { data: posts },
-  } = data;
 
   return (
     <List

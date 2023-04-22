@@ -3,10 +3,10 @@ import RegisterationMenu from "./RegisterationMenu";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "antd";
 import UserInfo from "./UserInfo";
-import { AuthContext } from "../../../auth/useContext.js";
+import { AuthContext, useAuth } from "../../../auth/useContext.js";
 
 const AppMenu = ({ isInline = false }) => {
-  const { currentUser } = useContext(AuthContext);
+  const auth = useAuth();
 
   const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ const AppMenu = ({ isInline = false }) => {
         items={itemsMenu}
       ></Menu>
 
-      {currentUser ? <UserInfo /> : <RegisterationMenu />}
+      {auth.user ? <UserInfo /> : <RegisterationMenu />}
     </div>
   );
 };

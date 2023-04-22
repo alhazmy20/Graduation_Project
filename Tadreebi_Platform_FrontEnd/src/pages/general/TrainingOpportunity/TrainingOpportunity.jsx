@@ -1,14 +1,19 @@
 import { Button, Image, Space, notification } from "antd";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useRouteError } from "react-router-dom";
 import sdaia from "../../../assets/images/image14.png";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import "./TrainingOpportunity.scss";
-import {  useFetch } from "../../../data/API";
-import Spinner from "../../../components/ui/Spinner/Spinner";
+import { getPost } from "../../../util/api";
 
 const TrainingOpportunity = () => {
-  const { data, error, loading } = useFetch(`http://localhost:8000/post`);
+  const error = useRouteError();
+  const postData = useLoaderData();
+  const {
+    data: { data: post },
+  } = postData;
+
+  console.log(post);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState(null);
@@ -16,54 +21,61 @@ const TrainingOpportunity = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:8000/apply', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/apply", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ postId: data.id })
+        body: JSON.stringify({ postId: post.id }),
       });
       if (!response.ok) {
-        throw new Error('Failed to apply to training opportunity.');
+        throw new Error("Failed to apply to training opportunity.");
       }
       setIsSubmitting(false);
-      notification.success({ message: 'تم التقديم بنجاح.' });
+      notification.success({ message: "تم التقديم بنجاح." });
     } catch (error) {
       setIsSubmitting(false);
       setSubmissionError(error.message);
-      notification.error({ message: 'حدث خطأ أثناء تقديم الطلب.' });
+      notification.error({ message: "حدث خطأ أثناء تقديم الطلب." });
     }
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   if (error) {
-    return notification.error(error);
+    return <h1>{error}</h1>;
   }
-
-  const { data: post } = data;
 
   return (
     <div className="training-opportunity">
-      <h1>{post.title}</h1>
-      <Space wrap size={5}>
-        <div>
-          <Image
-            src={sdaia}
-            shape="circle"
-            preview={false}
-            className='institution-img'
-          />
-          <Link to="/">سدايا</Link>
-        </div>
-      </Space>
+      <div className="container">
+        <Image
+          src={
+            "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"
+          }
+          shape="circle"
+          preview={false}
+          className="institution-img"
+        />
+        <Space size={5} direction="vertical" className="space">
+          <h1>{post.title}</h1>
+          <span>سدايا</span>
+        </Space>
+      </div>
       <p>{post.content}</p>
       <PostDetailsTable data={post} />
-      <Button type="primary" className='form-btn' onClick={handleSubmit} loading={isSubmitting}>تقديم</Button>
-      {submissionError && <div>{submissionError}</div>}
+      <Button
+        type="primary"
+        className="form-btn"
+        onClick={handleSubmit}
+        loading={isSubmitting}
+      >
+        تقديم
+      </Button>
     </div>
   );
 };
 export default TrainingOpportunity;
+
+export const opportunityLoader = ({ params }) => {
+  const postId = params.id;
+  return getPost(postId);
+};

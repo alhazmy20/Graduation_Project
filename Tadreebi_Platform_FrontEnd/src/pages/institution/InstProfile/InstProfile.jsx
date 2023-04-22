@@ -1,5 +1,5 @@
 import { Button, Form, notification } from "antd";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./InstProfile.scss";
 import InstFormInputs from "../../../components/form/InstFormInputs";
@@ -7,34 +7,20 @@ import InstManagerFormInputs from "../../../components/form/InstManagerFormInput
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import { useFetch } from "../../../data/API";
-import { useParams } from "react-router-dom";
+import { Await, defer, useLoaderData, useParams } from "react-router-dom";
+import api from "../../../data/axiosConfig";
+import { getInstitution } from "../../../util/api";
+import { useAuth } from "../../../auth/useContext";
+import loca from "react-secure-storage";
 
 const InstProfile = ({ isAdmin }) => {
-  const [form] = Form.useForm();
+  const { id } = useParams();
+  const auth = useAuth();
+  const institutionData = useLoaderData();
 
   const [formData, setFormData] = useState(null);
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // const { data, loading, error } = useFetch("http://localhost:8000/institution");
-  const { id } = useParams() ;
-  const { data, loading, error } = useFetch(
-    isAdmin
-      ? `http://165.227.159.49/api/institutions/${id}`
-      : `http://localhost:8000/institution`
-  );
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  //NOTE extracts the data property from an object and assigns it to a new variable called `institutionData`
-  const { data: institutionData } = data;
+  const [loading, setLoading] = useState(false);
 
   const onFormValuesChange = (changedValues, allValues) => {
     setFormData((prevState) => ({
@@ -50,42 +36,73 @@ const InstProfile = ({ isAdmin }) => {
   };
 
   const onFinish = async (values) => {
-    console.log(values);
-    setIsSubmitting(true);
-
-    // message.success("تم تحديث البيانات بنجاح");
+    try {
+      setLoading(true);
+      await api().put(`api/institutions/${id || auth.user.id}`, values);
+      notification.success({ message: "تم تحديث البيانات بنجاح" });
+      setLoading(false);
+      setIsFormChanged(false);
+    } catch (error) {
+      notification.error({ message: "فشل تحديث البيانات" });
+    }
   };
 
   return (
     <div className="institution-profile">
-      <div className="profileImage">
-        <ProfileImage name={institutionData.institutionName} />
-      </div>
-      <FormCard className="card">
-        <Form
-          form={form}
-          onFinish={onFinish}
-          className="form"
-          initialValues={institutionData}
-          onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
+      <Suspense fallback={<Spinner />}>
+        <Await
+          resolve={institutionData?.institution}
+          errorElement={<p>Error loading the data.</p>}
         >
-          <h1 className="green-underline">بيانات المنشأة</h1>
-          <InstFormInputs region={institutionData.region} />
-          <h1 className="green-underline">بيانات المسؤول</h1>
-          <InstManagerFormInputs />
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="form-btn"
-            disabled={!isFormChanged} // Disable button if the form is not changed
-          >
-            {isSubmitting ? "جاري الحفظ..." : "حفظ"}
-          </Button>
-        </Form>
-      </FormCard>
-      {!isAdmin && <ResetPassword />}
+          {(loadedData) => (
+            <>
+              <div className="profileImage">
+                <ProfileImage
+                  name={loadedData.institutionName}
+                  personalPicture_url={loadedData.logo?.logo_url}
+                  id={id}
+                  userType="institutions"
+                />
+              </div>
+              <FormCard className="card">
+                <Form
+                  onFinish={onFinish}
+                  className="form"
+                  initialValues={loadedData}
+                  onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
+                >
+                  <h1 className="green-underline">بيانات المنشأة</h1>
+                  <InstFormInputs region={loadedData.region} />
+                  <h1 className="green-underline">بيانات المسؤول</h1>
+                  <InstManagerFormInputs />
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="form-btn"
+                    disabled={!isFormChanged} // Disable button if the form is not changed
+                    loading={loading}
+                  >
+                    {loading ? "جاري الحفظ..." : "حفظ"}
+                  </Button>
+                </Form>
+              </FormCard>
+              {!isAdmin && <ResetPassword />}
+            </>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 };
 
 export default InstProfile;
+
+export const institutionLoaderWithId = ({ params }) => {
+  const instId = params.id;
+  return defer({ institution: getInstitution(instId) });
+};
+
+export const institutionLoader = () => {
+  const institution = JSON.parse(localStorage.getItem("user"));
+  return defer({ institution: getInstitution(institution.id) });
+};

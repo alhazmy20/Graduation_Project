@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const createAxiosInstance = () => {
   const instance = axios.create({
-    baseURL:'http://165.227.159.49',
+    baseURL:'https://tadreebi-platform.com',
     withCredentials: true,
     headers: {
       'Accept': 'application/json',

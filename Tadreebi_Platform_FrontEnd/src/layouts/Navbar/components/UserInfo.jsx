@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import userimg from "../../../assets/images/MaleUser.png";
 import { Link } from "react-router-dom";
 import { Dropdown, Space } from "antd";
-import { AuthContext } from "../../../auth/useContext.js";
+import { AuthContext, useAuth } from "../../../auth/useContext.js";
 
 const UserInfo = () => {
-  const { currentUser, logout } = useContext(AuthContext);
+  const auth = useAuth();
 
   const items = [
     {
@@ -18,12 +18,12 @@ const UserInfo = () => {
     },
     {
       key: "3",
-      label: <Link onClick={logout}>تسجيل الخروج</Link>,
+      label: <Link onClick={()=>auth.logout()}>تسجيل الخروج</Link>,
     },
   ];
   return (
     <div className="register">
-      <div>
+      <div> 
         <Dropdown
           menu={{
             items,
@@ -42,13 +42,13 @@ const UserInfo = () => {
                 }}
               >
                 <p className="username" style={{ color: "white" }}>
-                  {currentUser.username}
+                  {/*auth.user.institution.institutionName*/}
                 </p>
                 <img
                   className="userimg"
-                  src={userimg}
-                  style={{ width: "50px", objectFit: "cover" }}
-                  alt=''
+                  src={"https://www11.0zz0.com/2023/04/16/20/498484281.png"}
+                  style={{ width: "40px", height:'40px', objectFit: "cover", borderRadius:'50%', background:"#fff", padding:"2px" }}
+                  alt=""
                 />
               </div>
             </Space>

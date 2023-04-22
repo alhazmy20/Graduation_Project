@@ -1,46 +1,40 @@
-import React from 'react'
-import {useParams } from 'react-router-dom'
-import { Card,Image, notification } from 'antd';
-import Title from 'antd/es/typography/Title';
-import './NewsDetails.scss'
-import { GetNewsId } from '../../../../data/API';
-import NotFound from '../../NotFound/NotFound';
-import Spinner from '../../../../components/ui/Spinner/Spinner';
-import NoData from '../../../../components/ui/NoData/NoData';
-
-const { Meta } = Card;
+import React from "react";
+import { useLoaderData, useRouteError } from "react-router-dom";
+import { Image, Space } from "antd";
+import "./NewsDetails.scss";
+import { getNews } from "../../../../util/api";
 
 const NewsDetails = () => {
-  const {id} = useParams();
+  const error = useRouteError();
+  const newsData = useLoaderData();
+  console.log(newsData);
 
- const {data,error,loading} = GetNewsId(`http://localhost:8000/news/${id}`);
-
- 
- if (loading) {
-  return <Spinner />
-}
-
-if (error) {
-  return notification.error(error);
-}
-
-if (!data) {
-  return <NoData text="لا توجد اخبار حاليا"/>
-}
+  const {
+    data: { data: news },
+  } = newsData;
 
   return (
-          <Card
-         className='newsDetailsCard'
-         cover={ <Image className='newsDetailsImage' preview={false} src={data?.avatar}/>}
-       >
-         <Meta 
-         title={
-           <Title className='newsDetailsTitle'>{data?.title}</Title>
-         } description={
-           <Title className='newsDetailsDescription'>{data?.description}</Title>
-         }></Meta>
-       </Card>
-  )
-}
+    <div className="new-details">
+      <div className="container">
+        <Image
+          src={news.logo?.logo_url}
+          shape="circle"
+          preview={false}
+          className="institution-img"
+        />
+        <Space size={5} direction="vertical" className="space">
+          <h1>{news?.title}</h1>
+          <span>سدايا</span>
+        </Space>
+      </div>
+      <p>{news?.title}</p>
+    </div>
+  );
+};
 
-export default NewsDetails
+export default NewsDetails;
+
+export const newsDetailsloader = ({ params }) => {
+  const postId = params.id;
+  return getNews(postId);
+};

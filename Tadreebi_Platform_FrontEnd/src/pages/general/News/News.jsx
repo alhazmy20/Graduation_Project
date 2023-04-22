@@ -1,39 +1,28 @@
 import React from "react";
-import { Button, Card, Image, List, notification } from "antd";
+import { Button, Card, Image, List } from "antd";
 import Title from "antd/es/typography/Title";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss";
-import { useFetch } from "../../../data/API";
 import { itemRender } from "../../../components/ui/Pagination";
-import { useNavigate } from "react-router-dom";
-import Spinner from "../../../components/ui/Spinner/Spinner";
+import { useLoaderData, useNavigate, useRouteError } from "react-router-dom";
 import NoData from "../../../components/ui/NoData/NoData";
+import { getAllNews } from "../../../util/api";
 
 const { Meta } = Card;
 
 const News = () => {
   const navigate = useNavigate();
-  const { data,loading,error } = useFetch("http://localhost:8000/news");
+  const error = useRouteError();
+  const newsData = useLoaderData();
+  console.log(newsData.data.data.data);
 
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  if (!data) {
-    return <NoData text="لا توجد أخبار حاليا"/>
-  }
- 
   return (
     <List
       className="listContainer"
       itemLayout="vertical"
       size="middle"
-      locale={{emptyText: (<NoData text="لا توجد أخبار حاليا"/>)}}
+      locale={{ emptyText: <NoData text="لا توجد أخبار حاليا" /> }}
       pagination={{
         onChange: (page) => {
           console.log(page);
@@ -44,7 +33,7 @@ const News = () => {
         align: "center",
         pageSize: 7,
       }}
-      dataSource={data}
+      dataSource={newsData.data.data.data}
       renderItem={(news) => (
         <List.Item className="listItemContainer">
           <Card size="small" className="newsCard">
@@ -83,3 +72,7 @@ const News = () => {
 };
 
 export default News;
+
+export const loader = () => {
+  return getAllNews();
+};

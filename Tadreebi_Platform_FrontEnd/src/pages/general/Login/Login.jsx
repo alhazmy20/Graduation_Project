@@ -1,28 +1,39 @@
 import "./Login.scss";
-import { Button, Col, Form, Row, message, notification } from "antd";
-import React from "react";
+import { Button, Col, Form, Row, notification } from "antd";
+import React, { useEffect } from "react";
 import Container from "../../../layouts/Container/Container";
 import { Link, useNavigate } from "react-router-dom";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import FormInput from "../../../components/form/FormInput";
 import { emailValidationRules, passwordRules } from "../../../Validation/rules";
-import api from "../../../data/axiosConfig";
+import { useState } from "react";
+import { useAuth } from "../../../auth/useContext";
 
-const Login = () => {
+const Login = ({ isAdmin }) => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+  const auth = useAuth();
+
   const handleSubmit = async (values) => {
+    setLoading(true);
     try {
-      await api().get("/api/csrf-token");
-      const res = await api().post("/api/login/", values);
-      console.log(res.data);
-      localStorage.setItem("bearer_token", res.data.token);
-      navigate("/");
+      await auth.login(values);
     } catch (error) {
-      message.error("خطأ في تسجيل الدخول. يرجى التحقق من صحة البريد الإلكتروني وكلمة المرور.");
+      setLoading(false);
+      const errorMessage = error.response?.data?.message;
+      notification.error({
+        message: "خطأ في تسجيل الدخول",
+        description: errorMessage,
+      });
     }
   };
-  
+
+  useEffect(() => {
+    if (auth.user) {
+      navigate(auth.user.role === 'Admin' ? "/admin" : "/");
+    }
+  }, [auth, navigate, isAdmin]);
 
   return (
     <Container className="login-container">
@@ -53,7 +64,12 @@ const Login = () => {
                 rules={passwordRules}
               />
 
-              <Button type="primary" htmlType="submit" className="form-btn">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="form-btn"
+                disabled={loading}
+              >
                 دخول
               </Button>
               <span className="login-register">

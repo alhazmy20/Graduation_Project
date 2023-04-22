@@ -6,22 +6,28 @@ import StatisticTable from "./components/StatisticTable";
 import { useFetch } from "../../../data/API";
 import "./Home.scss";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import { useAuth } from "../../../auth/useContext";
+import { Navigate } from "react-router-dom";
 const Home = () => {
-  const { data, loading, error } = useFetch(`http://localhost:8000/adminStat`);
+  // const { data, loading, error } = useFetch(`http://localhost:8000/adminStat`);
+  
+  // if (loading) {
+  //   return <Spinner />;
+  // }
 
-  if (loading) {
-    return <Spinner />;
-  }
+  // if (error) {
+  //   return notification.error(error);
+  // }
 
-  if (error) {
-    return notification.error(error);
-  }
+  // if (!data) {
+  //   return <Spinner />;
+  // }
 
-  const { data: cardStatInfo } = data;
+  // const { data: cardStatInfo } = data;
 
   return (
     <div className="AdminHomeContiner">
-      <Col>
+      {/*<Col>
         <Row className="rowStyleStat" gutter={16}>
           <StatisticCard
             title="عدد الطلاب"
@@ -75,7 +81,8 @@ const Home = () => {
             <StatisticTable />
           </Col>
         </Row>
-      </Col>
+  </Col>*/}
+      admin home
     </div>
   );
 };

@@ -1,43 +1,29 @@
 import "./InstitutionsTable.scss";
-import { useState } from "react";
-import { Button, notification } from "antd";
+import { Suspense, useState } from "react";
+import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { useFetch } from "../../../data/API";
-import NoData from "../../../components/ui/NoData/NoData";
-import { Delete, Edit, StatusText } from "../../../components/ui/Table/TableFilter";
+import {
+  Delete,
+  Edit,
+  StatusText,
+} from "../../../components/ui/Table/TableFilter";
 import InstitutionsModal from "./components/InstitutionsModal";
+import { Await, defer, useLoaderData } from "react-router-dom";
+import { getAllInstitutions } from "../../../util/api";
 
 const InstitutionsTable = () => {
-  const { data, loading, error } = useFetch(
-    "http://localhost:8000/institutions"
-  );
+  const institutionsData = useLoaderData();
 
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  if (!data) {
-    return <NoData text="لا توجد مؤسسات حاليا" />;
-  }
-
-  const {
-    data: { data: InstData },
-  } = data;
-
-  const filteredDataSource = statusFilter
-    ? InstData.filter((application) => application.status === statusFilter)
-    : InstData;
+  // const filteredDataSource = statusFilter
+  //   ? InstData.filter((application) => application.status === statusFilter)
+  //   : InstData;
 
   const columns = [
     {
@@ -57,21 +43,28 @@ const InstitutionsTable = () => {
     },
     {
       title: "الحالة",
-      dataIndex: "status",
+      dataIndex: "isActive",
       align: "center",
-      render: StatusText
+      render: StatusText,
     },
     {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record} endPoint_1={"admin"} endPoint_2={"manage-institutions"}/>
-         <Delete attr={record.institutionName} modal={InstitutionsModal}/></>
+        return (
+          <>
+            <Edit
+              record={record}
+              endPoint_1={"admin"}
+              endPoint_2={"manage-institutions"}
+            />
+            <Delete attr={record.institutionName} modal={InstitutionsModal} />
+          </>
+        );
       },
     },
   ];
-
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
@@ -79,7 +72,7 @@ const InstitutionsTable = () => {
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, InstData.length);
+    const end = Math.min(start + pageSize - 1, institutionsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -112,18 +105,29 @@ const InstitutionsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {InstData.length}{" "}
-        سجل
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {institutionsData.length} سجل
       </p>
-      <Table
-        col={columns}
-        data={filteredDataSource}
-        Size={pageSize}
-        handleChange={handlePaginationChange}
-        emptyText="لا توجد بيانات"
-      />
+      <Suspense fallback={<Spinner />}>
+        <Await
+          resolve={institutionsData?.institutions}
+          errorElement={<p>Error loading blog posts.</p>}
+        >
+          {(loadedData) => <Table
+            col={columns}
+            data={loadedData}
+            Size={pageSize}
+            handleChange={handlePaginationChange}
+            emptyText="لا توجد بيانات"
+          />}
+        </Await>
+      </Suspense>
+      
     </div>
   );
 };
 
 export default InstitutionsTable;
+
+export const institutionsLoader = () => {
+  return defer({ institutions: getAllInstitutions() });
+};

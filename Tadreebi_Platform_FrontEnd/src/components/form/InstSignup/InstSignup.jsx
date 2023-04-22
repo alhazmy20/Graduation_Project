@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./InstSignup.scss";
-import { Steps, Form, Button, message } from "antd";
+import { Steps, Form, Button, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import InstFormInputs from "../InstFormInputs";
 import InstManagerFormInputs from "../InstManagerFormInputs";
@@ -60,7 +60,7 @@ const InstSignup = () => {
             const errorMessages = Object.keys(errors).map((key) => {
               return errors[key][0];
             });
-            message.error(errorMessages.join(", "));
+            notification.error(errorMessages.join(", "));
             console.log(errors);
           });
           

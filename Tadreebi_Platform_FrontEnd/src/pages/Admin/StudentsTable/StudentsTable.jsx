@@ -1,5 +1,5 @@
 import "./StudentsTable.scss";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Button, notification } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
@@ -7,34 +7,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { useFetch } from "../../../data/API";
 import NoData from "../../../components/ui/NoData/NoData";
-import { AdminStudentTable, Delete, Edit, StudentDelete } from "../../../components/ui/Table/TableFilter";
+import {
+  AdminStudentTable,
+  Delete,
+  Edit,
+  StudentDelete,
+} from "../../../components/ui/Table/TableFilter";
 import StudentsModal from "./components/StudentsModal";
+import { Await, defer, useLoaderData } from "react-router-dom";
+import { getAllStudents } from "../../../util/api";
 
 const StudentsTable = () => {
-  const { data, loading, error } = useFetch("http://localhost:8000/students");
+  const studentsData = useLoaderData();
+
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  if (!data) {
-    return <NoData text="لا يوجد طلاب حاليا" />;
-  }
-
-  const {
-    data: { data: studentsData },
-  } = data;
-
-  const filteredDataSource = statusFilter
-    ? studentsData.filter((application) => application.status === statusFilter)
-    : studentsData;
+  // const filteredDataSource = statusFilter
+  //   ? studentsData.filter((application) => application.status === statusFilter)
+  //   : studentsData;
 
   const columns = [
     {
@@ -56,19 +48,26 @@ const StudentsTable = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: AdminStudentTable
+      render: AdminStudentTable,
     },
     {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record} endPoint_1={"admin"} endPoint_2={"manage-students"}/>
-        <Delete attr={record.fullName} modal={StudentsModal}/></>
+        return (
+          <>
+            <Edit
+              record={record}
+              endPoint_1={"admin"}
+              endPoint_2={"manage-students"}
+            />
+            <Delete attr={record.fullName} modal={StudentsModal} />
+          </>
+        );
       },
     },
   ];
-
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
@@ -112,15 +111,28 @@ const StudentsTable = () => {
         عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
         سجل
       </p>
-      <Table
-        col={columns}
-        data={filteredDataSource}
-        Size={pageSize}
-        handleChange={handlePaginationChange}
-        emptyText="لا توجد بيانات"
-      />
+      <Suspense fallback={<Spinner />}>
+        <Await
+          resolve={studentsData?.students}
+          errorElement={<p>Error loading blog posts.</p>}
+        >
+          {(loadedData) => (
+            <Table
+              col={columns}
+              data={loadedData}
+              Size={pageSize}
+              handleChange={handlePaginationChange}
+              emptyText="لا توجد بيانات"
+            />
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 };
 
 export default StudentsTable;
+
+export const studentsLoader = () => {
+  return defer({ students: getAllStudents() });
+};

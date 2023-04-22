@@ -7,10 +7,13 @@ import {
   faXmark,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
-import { Dropdown, Image, Modal } from "antd";
-import axios from "axios";
+import { Dropdown, Image, Modal, notification } from "antd";
+import api from "../../../data/axiosConfig";
+import { useAuth } from "../../../auth/useContext";
 
-const ProfileImage = ({name, personalPicture_url}) => {
+const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
+  const auth = useAuth();
+  const formData = new FormData();
   const [imageSrc, setImageSrc] = useState(personalPicture_url);
   const [deleted, setDeleted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,22 +27,26 @@ const ProfileImage = ({name, personalPicture_url}) => {
       console.log(file);
 
       // Create a new FormData object
-    //   const formData = new FormData();
-    //   formData.append("image", file);
+      formData.append(
+        userType === "institutions" ? "logo" : "personalPicture",
+        file
+      );
 
       // Send the image to the API using Axios
-    //   axios
-    //     .post("https://example.com/upload-image", formData, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     })
-    //     .then((response) => {
-    //       console.log(response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
+      try {
+        api().post(
+          `api/${userType}/${id || auth.user.id}/upload?_method=PUT`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        notification.success({ message: "تم تحديث الصورة الشخصية بنجاح" });
+      } catch (error) {
+        notification.success({ message: "لم يتم تحديث الصورة الشخصية" });
+      }
     };
     reader.readAsDataURL(file);
   };
@@ -48,11 +55,20 @@ const ProfileImage = ({name, personalPicture_url}) => {
     setIsModalVisible(true);
   };
 
-  const handleModalOk = () => {
-    setImageSrc(null);
-    setDeleted(false);
-    setIsModalVisible(false);
-    // Send the deleted image to the API here
+  const handleModalOk = async () => {
+    try {
+      const res = await api().put(
+        `api/institutions/${id || auth.user.id}/upload`,
+        { deleteInstitutionLogo: "1" }
+      );
+      console.log(res);
+      setImageSrc(null);
+      setDeleted(false);
+      setIsModalVisible(false);
+      notification.success({ message: "تم حذف الصورة الشخصية بنجاح" });
+    } catch (error) {
+      notification.error({ message: "لم يتم حذف الصورة الشخصية" });
+    }
   };
 
   const handleModalCancel = () => {

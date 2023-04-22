@@ -7,17 +7,36 @@
   margin-top: 1rem;
   padding: 1rem;
 
-  h1 {
-    font-size: 28px;
-    font-weight: bolder;
-  }
+  .container {
+    display: flex;
 
-  a {
-    font-size: 17px;
-    font-weight: bolder;
-    color: #555;
-  }
+    h1 {
+      font-size: 28px;
+      font-weight: bolder;
 
+      @include breakpoint-down(small) {
+        font-size: 20px;
+      }
+    }
+
+    .space {
+      margin-right: 1rem;
+    }
+    .institution-img {
+      background-color: #fff;
+      padding: 2px;
+      border: 1px solid #e9f3f8;
+      border-radius: 50%;
+      width: 80px;
+      object-fit: contain;
+      height: 80px;
+
+      @include breakpoint-down(small) {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
   p {
     margin-top: 1rem;
     font-size: 17px;
@@ -26,11 +45,5 @@
     color: #333;
     text-align: justify;
     font-weight: 400;
-  }
-
-  .institution-img {
-    width: 100px;
-    height: 50px;
-    object-fit: contain;
   }
 }

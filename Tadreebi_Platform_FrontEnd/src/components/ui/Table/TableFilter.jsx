@@ -2,14 +2,9 @@ import { Button } from "antd";
 import React, { useState } from "react";
 import ConditionModal from "../../../pages/institution/InstPostDetails/components/conditionModal";
 import StudentModal from "../../../pages/institution/InstPostDetails/components/StudentModal";
-import PostsModal from "../../../pages/Admin/PostsTable/components/PostsModal";
-import { faPenToSquare, faTrash, faPen, faFileCsv } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import NewsModal from "../../../pages/Admin/NewsTable/components/NewsModal";
 import { Link } from "react-router-dom";
-import InstitutionsModal from "../../../pages/Admin/InstitutionsTable/components/InstitutionsModal";
-import StudentsModal from "../../../pages/Admin/StudentsTable/components/StudentsModal";
-import InstModal from "../../../pages/institution/InstApplications/components/InstModal";
 
 
 
@@ -27,9 +22,9 @@ export const TableText = (text) => {
 
 export const StatusText = (record) => {
   let buttons = {};
-  if (record === "نشط") {
+  if (record === 1) {
     buttons = <Button className="activeBtn">نشط</Button>;
-  } else if (record === "غير نشط")
+  } else if (record === 0)
     buttons = <Button className="inactiveBtn">غير نشط</Button>;
   return buttons;
 };

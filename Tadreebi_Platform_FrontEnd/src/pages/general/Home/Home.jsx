@@ -1,19 +1,35 @@
-import React from "react";
+import React, { Suspense, useState } from "react";
 import "../Home/Home.scss";
 import StartUp from "./components/StartUp";
 import About from "./components/About";
 import NewestPost from "./components/NewestPost";
 import PlatformWrok from "./components/PlatformWrok";
+import { Await, defer, useLoaderData } from 'react-router-dom';
+import { getPosts } from '../../../util/api';
+import Spinner from '../../../components/ui/Spinner/Spinner';
 // import NewestPost from "./components/NewestPost";
 const Home = () => {
+  const [postsData, setPostsData] = useState(useLoaderData());
+
   return (
     <div className="home">
       <StartUp />
       <About />
-      <NewestPost />
+      <Suspense fallback={<Spinner />}>
+            <Await
+              resolve={postsData?.posts}
+              errorElement={<p>Error loading blog posts.</p>}
+            >
+              {(loadedPosts) => <NewestPost posts={loadedPosts} />}
+            </Await>
+          </Suspense>
       <PlatformWrok />
     </div>
   );
 };
 
 export default Home;
+
+export const homeLoader = () => {
+  return defer({ posts: getPosts() });
+};

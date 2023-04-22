@@ -4,24 +4,14 @@ import { List, notification } from "antd";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 import { data } from "../../../../data/TestData.js";
 import { Link } from "react-router-dom";
-import { useFetch } from '../../../../data/API';
-import Spinner from '../../../../components/ui/Spinner/Spinner';
+import { useFetch } from "../../../../data/API";
+import Spinner from "../../../../components/ui/Spinner/Spinner";
 
-const NewestPost = () => {
+const NewestPost = ({posts}) => {
+console.log(posts);
 
-  const { data, error, loading } = useFetch(`http://localhost:8000/posts`);
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  const {data: {data: posts}} = data;
   return (
-    <div style={{ margin: "40px 0" }}>
+    <div style={{ margin: "40px 0" }} className="newest-posts">
       <div className="title">احدث فرص التدريب</div>
 
       <div className="NewestPostMain">

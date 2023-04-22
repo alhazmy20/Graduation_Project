@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ data }) => {
   const navigate = useNavigate();
-  
+
   return (
     <Card
       title={<h2 className="card-title">{data.title}</h2>}
@@ -33,7 +33,7 @@ const PostCard = ({ data }) => {
             <span className="data">{data.city}</span>
           </div>
           <div className="detail">
-          <FontAwesomeIcon className="icon" icon={faVenusMars} />
+            <FontAwesomeIcon className="icon" icon={faVenusMars} />
             <span className="label">الجنس:</span>
             <span className="data">{data.gender}</span>
           </div>

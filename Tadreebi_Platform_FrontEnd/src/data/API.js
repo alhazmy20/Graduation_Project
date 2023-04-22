@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
+import { useAuth } from "../auth/useContext";
 
 export function GetAllNews(url) {
   const [data, setData] = useState([]);
@@ -89,7 +90,7 @@ export const useFetchMajorsAndCities = () => {
   return { majors, cities };
 };
 
-export function useFetch(url) {
+export async function useFetch(url, dep= null) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -105,7 +106,10 @@ export function useFetch(url) {
         setError(error);
         setLoading(false);
       });
-  }, [url]);
+  }, [url, dep]);
 
   return { data, loading, error };
 }
+
+
+

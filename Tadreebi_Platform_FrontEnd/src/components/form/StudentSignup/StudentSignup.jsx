@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./StudentSignup.scss";
-import { Button, Form, Select } from "antd";
+import { Button, Form, Select, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import { UNIVERSITIES } from "../../../data/StudentData.js";
 import FormInput from "../FormInput";
@@ -11,27 +11,43 @@ import {
   emailValidationRules,
 } from "../../../Validation/rules.js";
 import { data as saudiClassificationData } from "../../../data/SaudiClassification";
+import api from '../../../data/axiosConfig'
 
 const StudentSignup = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    password_confirmation: "",
-    university: "",
-    major: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  //   password_confirmation: "",
+  //   university: "",
+  //   major: "",
+  // });
 
-  const handleFormChange = (allValues) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      ...allValues,
-    }));
-  };
+  // const handleFormChange = (allValues) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     ...allValues,
+  //   }));
+  // };
 
   const onFinish = (values) => {
-    console.log(formData);
-    navigate("/verify-account");
+    api()
+      .get("/api/csrf-token")
+      .then((response) => {
+        const csrfToken = response.data.data.csrf_token;
+        localStorage.setItem("csrf_token", csrfToken);
+      })
+      .then(() => {
+        api()
+          .post("/api/students", values)
+          .then(() => {
+            navigate("/verify-account");
+          })
+          .catch((error) => {
+            const errorMessages = error.response.data.message;
+            notification.error({ message: errorMessages });
+          });
+      });
   };
 
   const majorOptions = saudiClassificationData.flatMap(({ majors }) =>
@@ -43,7 +59,7 @@ const StudentSignup = () => {
       <Form
         name="basic"
         className="form-wrapper"
-        onValuesChange={handleFormChange}
+        // onValuesChange={handleFormChange}
         onFinish={onFinish}
       >
         <FormInput
@@ -72,7 +88,7 @@ const StudentSignup = () => {
           ))}
         </FormSelect>
 
-        <FormSelect label="التخصص" name="major" options={majorOptions} />
+        <FormSelect label="التخصص" name="SCC" options={majorOptions} />
 
         <div className="btn-wrapper">
           <Button type="primary" htmlType="submit" className="form-btn">
