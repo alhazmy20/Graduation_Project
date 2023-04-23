@@ -9,6 +9,8 @@ const AppMenu = ({ isInline = false }) => {
   const auth = useAuth();
 
   const navigate = useNavigate();
+  const InstitutionMenu = auth.user?.role === "Institution";
+  const StudentMenu = auth.user?.role !== "Institution";
 
   const itemsMenu = [
     {
@@ -16,22 +18,20 @@ const AppMenu = ({ isInline = false }) => {
       key: "/",
       style: { fontSize: 20 },
     },
-
-    {
+    StudentMenu && {
       label: "فرص التدريب",
       key: "/training-opportunities",
     },
+
     {
       label: "شركائنا",
       key: "/InstitutionInfo",
     },
-    auth.user?.role ==="Institution" &&
-    {
-      label: "البرامج التدريبية",
-      key: "/InstitutionInfo",
+    InstitutionMenu && {
+      label: "برامج التدريبة ",
+      key: "/institution/posts",
     },
-
-    {
+    StudentMenu && {
       label: "اخبار التدريب",
       key: "/news",
     },

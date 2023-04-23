@@ -25,6 +25,10 @@ const InstPostForm = () => {
     majors: [],
   });
 
+  const formatDate = (dateValue) => {
+    return moment(dateValue).format("YYYY-MM-DD");
+  };
+
   const handleFormChange = (changedValues, allValues) => {
     const formattedValues = Object.entries(allValues).reduce(
       (acc, [key, value]) => ({
@@ -38,9 +42,6 @@ const InstPostForm = () => {
       ...formattedValues,
     }));
   };
-  const formatDate = (dateValue) => {
-    return moment(dateValue).format("YYYY-MM-DD");
-  };
 
   const onFinish = async (values) => {
     //api code
@@ -51,6 +52,9 @@ const InstPostForm = () => {
   const handleEditorChange = (content) => {
     handleInputChange("content", content);
   };
+
+  const isSubmitDisabled =
+    formPostData.content.replace(/<(.|\n)*?>/g, "").trim().length === 0;
 
   const handleInputChange = (name, value) => {
     if (name === "majors") {
@@ -222,7 +226,12 @@ const InstPostForm = () => {
             </Row>
           </Row>
           <div className="addbuttonContainer">
-            <Button type="primary" htmlType="submit" className="add-button">
+            <Button
+              disabled={isSubmitDisabled}
+              type="primary"
+              htmlType="submit"
+              className="add-button"
+            >
               إضافة
             </Button>
           </div>

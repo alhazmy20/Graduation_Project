@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, Space } from "antd";
-import {  useAuth } from "../../../auth/useContext.js";
+import { useAuth } from "../../../auth/useContext.js";
 
 const UserInfo = () => {
   const auth = useAuth();
-
+  const MenuPath =
+    auth.user?.role === "Institution"
+      ? "/institution/profile"
+      : "/student/profile";
   const items = [
     {
       key: "1",
@@ -13,22 +16,22 @@ const UserInfo = () => {
     },
     {
       key: "2",
-      label: <Link to="">الملف الشخصي</Link>,
+      label: <Link to={MenuPath}>الملف الشخصي</Link>,
     },
     {
       key: "3",
-      label: <Link onClick={()=>auth.logout()}>تسجيل الخروج</Link>,
+      label: <Link onClick={() => auth.logout()}>تسجيل الخروج</Link>,
     },
   ];
   return (
     <div className="register">
-      <div> 
+      <div>
         <Dropdown
           menu={{
             items,
           }}
         >
-          <a onClick={(e) => e.preventDefault()} >
+          <a onClick={(e) => e.preventDefault()}>
             <Space>
               <div
                 className="userinfoContainer"
@@ -45,8 +48,17 @@ const UserInfo = () => {
                 </p>
                 <img
                   className="userimg"
-                  src={"http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"}
-                  style={{ width: "40px", height:'40px', objectFit: "cover", borderRadius:'50%', background:"#e2e5e9", padding:"2px" }}
+                  src={
+                    "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"
+                  }
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                    background: "#e2e5e9",
+                    padding: "2px",
+                  }}
                   alt=""
                 />
               </div>
