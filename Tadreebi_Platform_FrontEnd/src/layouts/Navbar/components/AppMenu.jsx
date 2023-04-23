@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import RegisterationMenu from "./RegisterationMenu";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "antd";
 import UserInfo from "./UserInfo";
-import { AuthContext, useAuth } from "../../../auth/useContext.js";
-
+import { useAuth } from "../../../auth/useContext.js";
+import "./AppMenu.scss";
 const AppMenu = ({ isInline = false }) => {
   const auth = useAuth();
 

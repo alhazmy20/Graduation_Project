@@ -1,0 +1,20 @@
+.userinfoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  .userimg {
+    width: 40px;
+    height: 40px;
+    object-fit: fill;
+    background-color: #e2e5e9;
+    padding: 2px;
+    border-radius: 50%;
+  }
+
+  .username {
+    color: white;
+  }
+}

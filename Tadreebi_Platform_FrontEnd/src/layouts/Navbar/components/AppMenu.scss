@@ -1,0 +1,19 @@
+@import "../../../index.scss";
+.appMenuContainer {
+  display: flex;
+  align-items: center;
+  background-color: $Green;
+}
+@include breakpoint-down(small) {
+  .appMenuContainer {
+    flex-direction: column;
+  }
+}
+
+@include breakpoint-down(small) {
+  .navBarMenu {
+    span {
+      color: rgb(0, 0, 0);
+    }
+  }
+}

@@ -3,7 +3,7 @@ import "../Navbar/Navbar.scss";
 import { Drawer } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import AppMenu from "./components/AppMenu";
-const Navbar = (props) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
