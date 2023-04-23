@@ -22,7 +22,7 @@ export async function getPosts(region = "", city = "", major = "") {
 export async function getPost(id) {
   try {
     const res = await api().get(`api/posts/${id}`);
-    return res;
+    return res.data.data;
   } catch (err) {
     const error = err.response.data;
 
@@ -99,5 +99,16 @@ export const getStudent = async (id) => {
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
+  }
+};
+
+export const getAllAdmins = async () => {
+  try {
+    const res = await api().get(`api/admins`);
+    console.log(res.data.data);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };

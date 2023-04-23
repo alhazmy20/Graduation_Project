@@ -25,6 +25,11 @@ const AppMenu = ({ isInline = false }) => {
       label: "شركائنا",
       key: "/InstitutionInfo",
     },
+    auth.user?.role ==="Institution" &&
+    {
+      label: "البرامج التدريبية",
+      key: "/InstitutionInfo",
+    },
 
     {
       label: "اخبار التدريب",

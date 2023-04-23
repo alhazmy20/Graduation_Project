@@ -28,6 +28,7 @@ const AdminProfile = () => {
   };
 
   const onFinish = async (values) => {
+    console.log(auth.user.id);
     try {
       setLoading(true);
       await api().put(`api/admins/${id || auth.user.id}`, values);

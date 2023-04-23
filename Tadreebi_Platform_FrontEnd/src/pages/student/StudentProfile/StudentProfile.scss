@@ -2,20 +2,15 @@
 
 .student-profile {
   padding: 1rem;
-  
-  .card {
 
-    h1{
+  .card {
+    h1 {
       font-size: 19px;
       font-weight: 600;
     }
 
-    form{
-        .upload-file{
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+    form {
+      
     }
   }
 }

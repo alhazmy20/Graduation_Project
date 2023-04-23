@@ -136,7 +136,6 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
           <input
             type="file"
             id="image-upload"
-            // ref={deleted ? React.createRef() : null}
             style={{ display: "none" }}
             accept="image/*"
             onChange={handleImageUpload}

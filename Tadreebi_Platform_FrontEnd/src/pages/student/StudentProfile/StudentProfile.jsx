@@ -25,13 +25,12 @@ const StudentProfile = ({ isAdmin }) => {
   const { id } = useParams();
   const auth = useAuth();
 
-  let formData = new FormData();
   const [form] = Form.useForm();
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
-    console.log(values);
+    let formData = new FormData();
     for (const key in values) {
       if (Object.hasOwnProperty.call(values, key)) {
         if (
@@ -40,16 +39,17 @@ const StudentProfile = ({ isAdmin }) => {
           key === "nationalID" ||
           key === "CV"
         ) {
-          formData.append(key, values[key]?.file);
+          if (values[key]?.file) {
+            formData.append(key, values[key]?.file);
+          }
         } else {
           formData.append(key, values[key]);
         }
       }
     }
-
     try {
       await api().post(
-        `api/students/${id || auth.user.id}/upload?_method=PUT`,
+        `api/students/${id || auth.user.id}?_method=PUT`,
         formData,
         {
           headers: {
@@ -64,7 +64,6 @@ const StudentProfile = ({ isAdmin }) => {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
     }
-
     formData = new FormData();
   };
 
@@ -84,165 +83,163 @@ const StudentProfile = ({ isAdmin }) => {
   };
 
   return (
-    <div className="student-profile">
-      <Suspense fallback={<Spinner />}>
-        <Await
-          resolve={studentData?.student}
-          errorElement={<p>Error loading the data.</p>}
-        >
-          {(loadedData) => (
-            <>
-              <div className="profileImage">
-                <ProfileImage
-                  name={extractName(loadedData.fullName)}
-                  personalPicture_url={
-                    loadedData.studentFiles.personalPicture_url
-                  }
-                  userType="students"
-                />
-              </div>
-              <FormCard className="card">
-                <Form
-                  form={form}
-                  onFinish={onFinish}
-                  onValuesChange={onFormValuesChange}
-                  className="form"
-                  encType="multipart/form-data"
-                  initialValues={loadedData}
+    <Suspense fallback={<Spinner />}>
+      <Await
+        resolve={studentData?.student}
+        errorElement={<p>Error loading the data.</p>}
+      >
+        {(loadedData) => (
+          <div className="student-profile">
+            <div className="profileImage">
+              <ProfileImage
+                name={extractName(loadedData.fullName)}
+                personalPicture_url={
+                  loadedData.studentFiles.personalPicture_url
+                }
+                userType="students"
+              />
+            </div>
+            <FormCard className="card">
+              <Form
+                form={form}
+                onFinish={onFinish}
+                onValuesChange={onFormValuesChange}
+                className="form"
+                encType="multipart/form-data"
+                initialValues={loadedData}
+              >
+                <h1 className="green-underline">البيانات الأساسية</h1>
+                <Row gutter={[16, 0]}>
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="الإسم الرباعي"
+                      labelCol={{ span: 24 }}
+                      name="fullName"
+                      disabled={!isAdmin}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="البريد الإلكتروني"
+                      labelCol={{ span: 24 }}
+                      name="email"
+                      disabled={!isAdmin}
+                      rules={emailValidationRules}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="رقم الهوية"
+                      labelCol={{ span: 24 }}
+                      name="national_ID"
+                      inputType="number"
+                      disabled={!isAdmin}
+                      rules={nationalIdRules}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="رقم الجوال"
+                      labelCol={{ span: 24 }}
+                      name="phone"
+                      inputType="number"
+                      rules={phoneRules}
+                    />
+                  </Col>
+
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="الجنس"
+                      labelCol={{ span: 24 }}
+                      name="gender"
+                      disabled={!isAdmin}
+                    />
+                  </Col>
+
+                  <Col xs={24} sm={12}>
+                    <InputFile
+                      label="السيرة الذاتية"
+                      name="CV"
+                      fileName={loadedData.studentFiles.CV_filename}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <InputFile
+                      name="nationalID"
+                      label="الهوية الوطنية"
+                      fileName={loadedData.studentFiles.nationalID_filename}
+                    />
+                  </Col>
+                </Row>
+                <h1 className="green-underline">البيانات الأكاديمية</h1>
+                <Row gutter={[16, 0]}>
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="اسم الجامعة"
+                      labelCol={{ span: 24 }}
+                      name="university"
+                      disabled={!isAdmin}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <FormInput
+                      label="التخصص"
+                      labelCol={{ span: 24 }}
+                      name="major"
+                      disabled={!isAdmin}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <Space>
+                      <FormInput
+                        label="المعدل التراكمي"
+                        labelCol={{ span: 24 }}
+                        name="GPA"
+                        inputType="number"
+                        rules={inputGpaRules(loadedData.GPA_Type)}
+                      />
+                      <FormInput
+                        label="من"
+                        labelCol={{ span: 24 }}
+                        name="GPA_Type"
+                        disabled={!isAdmin}
+                      />
+                    </Space>
+                  </Col>
+
+                  <Col xs={24} sm={12}>
+                    <InputFile
+                      name="internshipLetter"
+                      label="خطاب التدريب"
+                      fileName={
+                        loadedData.studentFiles.internshipLetter_filename
+                      }
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <InputFile
+                      name="transcript"
+                      label="السجل الأكاديمي"
+                      fileName={loadedData.studentFiles.transcript_filename}
+                    />
+                  </Col>
+                </Row>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="form-btn"
+                  disabled={!isFormChanged} // Disable button if the form is not changed
+                  loading={loading}
                 >
-                  <h1 className="green-underline">البيانات الأساسية</h1>
-                  <Row gutter={[16, 0]}>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="الإسم الرباعي"
-                        labelCol={{ span: 24 }}
-                        name="fullName"
-                        disabled={!isAdmin}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="البريد الإلكتروني"
-                        labelCol={{ span: 24 }}
-                        name="email"
-                        disabled={!isAdmin}
-                        rules={emailValidationRules}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="رقم الهوية"
-                        labelCol={{ span: 24 }}
-                        name="national_ID"
-                        inputType="number"
-                        disabled={!isAdmin}
-                        rules={nationalIdRules}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="رقم الجوال"
-                        labelCol={{ span: 24 }}
-                        name="phone"
-                        inputType="number"
-                        rules={phoneRules}
-                      />
-                    </Col>
-
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="الجنس"
-                        labelCol={{ span: 24 }}
-                        name="gender"
-                        disabled={!isAdmin}
-                      />
-                    </Col>
-
-                    <Col xs={24} sm={12}>
-                      <InputFile
-                        label="السيرة الذاتية"
-                        name="cv"
-                        fileName={loadedData.studentFiles.CV_filename}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <InputFile
-                        name="nationalIdentity"
-                        label="الهوية الوطنية"
-                        fileName={loadedData.studentFiles.nationalID_filename}
-                      />
-                    </Col>
-                  </Row>
-                  <h1 className="green-underline">البيانات الأكاديمية</h1>
-                  <Row gutter={[16, 0]}>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="اسم الجامعة"
-                        labelCol={{ span: 24 }}
-                        name="university"
-                        disabled={!isAdmin}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="التخصص"
-                        labelCol={{ span: 24 }}
-                        name="major"
-                        disabled={!isAdmin}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <Space>
-                        <FormInput
-                          label="المعدل التراكمي"
-                          labelCol={{ span: 24 }}
-                          name="GPA"
-                          inputType="number"
-                          rules={inputGpaRules(loadedData.GPA_Type)}
-                        />
-                        <FormInput
-                          label="من"
-                          labelCol={{ span: 24 }}
-                          name="GPA_Type"
-                          disabled={!isAdmin}
-                        />
-                      </Space>
-                    </Col>
-
-                    <Col xs={24} sm={12}>
-                      <InputFile
-                        name="internshipLetter"
-                        label="خطاب التدريب"
-                        fileName={
-                          loadedData.studentFiles.internshipLetter_filename
-                        }
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <InputFile
-                        name="collegeTranscript"
-                        label="السجل الأكاديمي"
-                        fileName={loadedData.studentFiles.transcript_filename}
-                      />
-                    </Col>
-                  </Row>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="form-btn"
-                    disabled={!isFormChanged} // Disable button if the form is not changed
-                    loading={loading}
-                  >
-                    {loading ? "جاري الحفظ..." : "حفظ"}
-                  </Button>
-                </Form>
-              </FormCard>
-              {!isAdmin && <ResetPassword />}
-            </>
-          )}
-        </Await>
-      </Suspense>
-    </div>
+                  {loading ? "جاري الحفظ..." : "حفظ"}
+                </Button>
+              </Form>
+            </FormCard>
+            {!isAdmin && <ResetPassword id={loadedData.id} />}
+          </div>
+        )}
+      </Await>
+    </Suspense>
   );
 };
 

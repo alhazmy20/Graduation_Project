@@ -1,30 +1,28 @@
 import React from "react";
-import { Button, Card, Space } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCity } from "@fortawesome/free-solid-svg-icons";
-import "../../../../components/ui/PostCard/PostCard.scss";
-import { useNavigate } from "react-router-dom";
-import testimg from "../../../../assets/images/samiadvancedel.png";
+import { Card, Image, Space } from "antd";
+import './InfoCard.scss'
 
-const InfoCard = (props) => {
-  const { item } = props;
-  const navigate = useNavigate();
+const InfoCard = ({ item }) => {
+  console.log(item);
 
   return (
     <Card
-      title={<h2 className="card-title">{item.title}</h2>}
-      className="post-card"
+      title={<h2 className="card-title">{item.institutionName}</h2>}
+      className="info-card"
     >
-      <Space direction="vertical" size="large" style={{ display: "flex" }}>
-        <div className="details-container">
-          <div className="detail" style={{ width: "100%" }}>
-            <img
-              style={{ objectFit: "cover", width: "100%" }}
-              src={testimg}
-            ></img>
+          <div className="img-container" style={{ width: "100%" }}>
+          <Image
+          preview={''}
+          src={
+            item.logo.logo_url ||
+            "https://www9.0zz0.com/2023/04/22/07/971570307.png"
+          }
+          alt=""
+          width={100}
+          height={100}
+          loading="lazy"
+        />
           </div>
-        </div>
-      </Space>
     </Card>
   );
 };

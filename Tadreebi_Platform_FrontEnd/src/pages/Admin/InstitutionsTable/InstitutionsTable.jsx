@@ -77,52 +77,54 @@ const InstitutionsTable = () => {
     setPageSize(pageSize);
   };
   return (
-    <div className="tableContainer">
-      <div className="excelContainer">
-        <Button className="excelBtn">
-          <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
-          <strong>Excel</strong>
-        </Button>
-      </div>
-      <div className="filterTable">
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("")}
-        >
-          الكل
-        </Button>
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("نشط")}
-        >
-          المؤسسات النشطة
-        </Button>
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("غير نشط")}
-        >
-          المؤسسات الغير نشطة
-        </Button>
-      </div>
-      <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {institutionsData.length} سجل
-      </p>
-      <Suspense fallback={<Spinner />}>
-        <Await
-          resolve={institutionsData?.institutions}
-          errorElement={<p>Error loading blog posts.</p>}
-        >
-          {(loadedData) => <Table
-            col={columns}
-            data={loadedData}
-            Size={pageSize}
-            handleChange={handlePaginationChange}
-            emptyText="لا توجد بيانات"
-          />}
-        </Await>
-      </Suspense>
-      
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <Await
+        resolve={institutionsData?.institutions}
+        errorElement={<p>Error loading institutions data.</p>}
+      >
+        {(loadedData) => (
+          <div className="tableContainer">
+            <div className="excelContainer">
+              <Button className="excelBtn">
+                <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
+                <strong>Excel</strong>
+              </Button>
+            </div>
+            <div className="filterTable">
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("")}
+              >
+                الكل
+              </Button>
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("نشط")}
+              >
+                المؤسسات النشطة
+              </Button>
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("غير نشط")}
+              >
+                المؤسسات الغير نشطة
+              </Button>
+            </div>
+            <p className="rangeText">
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
+              {institutionsData.length} سجل
+            </p>
+            <Table
+              col={columns}
+              data={loadedData}
+              Size={pageSize}
+              handleChange={handlePaginationChange}
+              emptyText="لا توجد بيانات"
+            />
+          </div>
+        )}
+      </Await>
+    </Suspense>
   );
 };
 

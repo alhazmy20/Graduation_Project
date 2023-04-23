@@ -43,6 +43,7 @@ const InstProfile = ({ isAdmin }) => {
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
+      setLoading(false)
       notification.error({ message: "فشل تحديث البيانات" });
     }
   };

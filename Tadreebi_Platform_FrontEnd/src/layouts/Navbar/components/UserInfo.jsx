@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import userimg from "../../../assets/images/MaleUser.png";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, Space } from "antd";
-import { AuthContext, useAuth } from "../../../auth/useContext.js";
+import {  useAuth } from "../../../auth/useContext.js";
 
 const UserInfo = () => {
   const auth = useAuth();
@@ -29,7 +28,7 @@ const UserInfo = () => {
             items,
           }}
         >
-          <a onClick={(e) => e.preventDefault()}>
+          <a onClick={(e) => e.preventDefault()} >
             <Space>
               <div
                 className="userinfoContainer"
@@ -42,12 +41,12 @@ const UserInfo = () => {
                 }}
               >
                 <p className="username" style={{ color: "white" }}>
-                  {/*auth.user.institution.institutionName*/}
+                  {auth.user.name}
                 </p>
                 <img
                   className="userimg"
-                  src={"https://www11.0zz0.com/2023/04/16/20/498484281.png"}
-                  style={{ width: "40px", height:'40px', objectFit: "cover", borderRadius:'50%', background:"#fff", padding:"2px" }}
+                  src={"http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"}
+                  style={{ width: "40px", height:'40px', objectFit: "cover", borderRadius:'50%', background:"#e2e5e9", padding:"2px" }}
                   alt=""
                 />
               </div>
