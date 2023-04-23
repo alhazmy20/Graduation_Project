@@ -6,7 +6,7 @@ import "./RegisterationMenu.scss";
 const RegisterationMenu = () => {
   return (
     <div className="register">
-      <Link className="signUpNavBar" type="link">
+      <Link className="signUpNavBar" to="/signup">
         إنشاء حساب
       </Link>
       <Link className="loginNavBar" to="/login">
