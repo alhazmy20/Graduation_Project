@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Select } from "antd";
-import { data } from "../../../../data/SaudiClassification";
+import "./MultiSelect.scss";
 const MultiSelect = ({ name, label, options, handleInputChange }) => {
   const [value, setValue] = useState([]);
 

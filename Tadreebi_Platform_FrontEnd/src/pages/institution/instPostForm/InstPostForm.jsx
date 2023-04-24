@@ -126,11 +126,7 @@ const InstPostForm = () => {
             <Col className="InputsContainer">
               <Row className="RowDivElment">
                 <label className="label">نوع البرنامج التدريبي: </label>
-                <ReactRadio
-                  name="t_type"
-                  rules={[{ required: true, message: "الرجاء الاختيار" }]}
-                  options={radioOptionsType}
-                />
+                <ReactRadio name="t_type" options={radioOptionsType} />
               </Row>
 
               <Row className="RowDivElment">
@@ -158,11 +154,7 @@ const InstPostForm = () => {
             <Col className="InputsContainer">
               <Row className="RowDivElment">
                 <label className="label">مكافأة: </label>
-                <ReactRadio
-                  name="reward"
-                  rules={[{ required: true, message: "الرجاء الاختيار" }]}
-                  options={radioOptionsReward}
-                />
+                <ReactRadio name="reward" options={radioOptionsReward} />
               </Row>
 
               <Row className="RowDivElment">
@@ -207,11 +199,7 @@ const InstPostForm = () => {
 
               <Row className="RowDivElment">
                 <label className="label">الجنس: </label>
-                <ReactRadio
-                  name="gender"
-                  rules={[{ required: true, message: "الرجاء الاختيار" }]}
-                  options={radioOptionsGender}
-                />
+                <ReactRadio name="gender" options={radioOptionsGender} />
               </Row>
             </Col>
 
