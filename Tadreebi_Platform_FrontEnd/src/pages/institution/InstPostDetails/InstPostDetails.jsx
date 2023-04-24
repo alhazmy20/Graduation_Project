@@ -32,7 +32,7 @@ const InstPostDetails = () => {
       dataIndex: "fullName",
       align: "center",
       render: (text, record) => {
-        return <StudentDetails name={text} studentData={record} />;
+        return <StudentDetails name={text}  data={record}/>;
       },
     },
     {
@@ -155,7 +155,7 @@ const InstPostDetails = () => {
             <Table
               col={columns}
               data={loadedData.applicants.data.data.map((item) => item.student)}
-              emptyText="لا توجد بيانات"
+              emptyText="لا يوجد اي متقدمين حاليا"
             />
           </div>
         )}

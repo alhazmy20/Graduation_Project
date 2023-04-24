@@ -1,20 +1,10 @@
-import {
-  Avatar,
-  Button,
-  Col,
-  Modal,
-  Row,
-  Space,
-  notification,
-} from "antd";
+import { Avatar, Button, Col, Modal, Row, Space } from "antd";
 import React from "react";
 import "./StudentModal.scss";
-import { useFetch } from "../../../../data/API";
 import { UserOutlined } from "@ant-design/icons";
 
-const StudentModal = ({ detailsOpen, setDetailsOpen, studentData }) => {
-  console.log(studentData);
-  const { data } = studentData;
+const StudentModal = ({ detailsOpen, setDetailsOpen, data }) => {
+
   const { studentFiles: files } = data;
 
   return (

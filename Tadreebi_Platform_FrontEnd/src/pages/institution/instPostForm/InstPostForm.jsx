@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Col, Row, Form } from "antd";
+import { Button, Input, Col, Row, Form, notification } from "antd";
 import { RegionData } from "../../../data/TestData.js";
 import { data } from "../../../data/SaudiClassification";
 import ReactTextArea from "./components/ReactTextArea";
@@ -10,8 +10,11 @@ import CustomDatePicker from "./components/CustomDatePicker.jsx";
 import moment from "moment";
 import SelectRegion from "./components/SelectRegion.jsx";
 import SelectCity from "./components/SelectCity.jsx";
+import api from "../../../data/axiosConfig";
+
 const InstPostForm = () => {
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
   const [formPostData, setFormPostData] = useState({
     title: "",
     content: "",
@@ -46,8 +49,14 @@ const InstPostForm = () => {
 
   const onFinish = async (values) => {
     //api code
-
-    console.log(formPostData);
+    try {
+      await api().post(`api/posts`, formPostData);
+      notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      notification.error({ message: "فشل تحديث البيانات" });
+    }
   };
 
   const isSubmitDisabled =
@@ -187,12 +196,13 @@ const InstPostForm = () => {
           </Row>
           <div className="addbuttonContainer">
             <Button
-              disabled={isSubmitDisabled}
               type="primary"
               htmlType="submit"
               className="add-button"
+              disabled={isSubmitDisabled} 
+              loading={loading}
             >
-              إضافة
+            {loading ? "جاري الإضافة..." : "اضافة"}
             </Button>
           </div>
         </Form>

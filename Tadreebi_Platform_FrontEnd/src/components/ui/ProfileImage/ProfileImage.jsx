@@ -34,7 +34,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
 
       // Send the image to the API using Axios
       try {
-       const res = await api().put(
+        await api().post(
           `api/${userType}/${id || auth.user.id}/uploadImage?_method=PUT`,
           formData,
           {
@@ -43,7 +43,6 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
             },
           }
         );
-        console.log(...formData);
         notification.success({ message: "تم تحديث الصورة الشخصية بنجاح" });
       } catch (error) {
         console.log(error);
@@ -58,10 +57,14 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   };
 
   const handleModalOk = async () => {
+    const action =
+      userType === "institutions"
+        ? { deleteInstitutionLogo: "1" }
+        : { deletePersonalPicture: "1" };
     try {
       const res = await api().put(
-        `api/institutions/${id || auth.user.id}/upload`,
-        { deleteInstitutionLogo: "1" }
+        `api/${userType}/${id || auth.user.id}/uploadImage`,
+        action
       );
       console.log(res);
       setImageSrc(null);
