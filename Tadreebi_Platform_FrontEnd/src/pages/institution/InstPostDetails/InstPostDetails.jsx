@@ -12,9 +12,6 @@ import "./InstPostDetails.scss";
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import ConditionModal from "./components/conditionModal";
-import StudentModal from "./components/StudentModal";
-import NoData from "../../../components/ui/NoData/NoData";
 import { getPostApplicants } from "../../../util/api";
 
 const InstPostDetails = () => {
@@ -22,9 +19,31 @@ const InstPostDetails = () => {
 
   const [statusFilter, setStatusFilter] = useState(null);
 
-  // const filteredDataSource = statusFilter
-  //   ? students?.filter((application) => application.status === statusFilter)
-  //   : students;
+  const filterData = (studentsData) => {
+    const filteredDataSource = statusFilter
+      ? studentsData?.filter(
+          (application) => application.status === statusFilter
+        )
+      : studentsData;
+    return filteredDataSource;
+  };
+
+  const formattedResponse = (data) => {
+    const applicantData = data.map((item) => ({
+      applicant_id: item.id,
+      applicant_status: item.status,
+      created_at: item.created_at,
+      ...item.student,
+    }));
+
+    const filteredDataSource = statusFilter
+      ? applicantData?.filter(
+          (application) => application.applicant_status === statusFilter
+        )
+      : applicantData;
+
+    return filteredDataSource;
+  };
 
   const columns = [
     {
@@ -32,7 +51,7 @@ const InstPostDetails = () => {
       dataIndex: "fullName",
       align: "center",
       render: (text, record) => {
-        return <StudentDetails name={text}  data={record}/>;
+        return <StudentDetails name={text} data={record} />;
       },
     },
     {
@@ -52,15 +71,15 @@ const InstPostDetails = () => {
     },
     {
       title: "الحالة",
-      dataIndex: "status",
+      dataIndex: "applicant_status",
       align: "center",
       render: TableText,
     },
     {
       title: "الإجراء",
-      dataIndex: "accept",
+      dataIndex: "applicant_status",
       align: "center",
-      render: (text, row) => <InstitutionAccept row={row} />,
+      render: (text, row) => <InstitutionAccept status={text} />,
     },
   ];
 
@@ -110,7 +129,7 @@ const InstPostDetails = () => {
                 <strong>طلبات تقديم الطلاب</strong>
               </span>
               <Button className="excelBtn">
-                <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
+                <FontAwesomeIcon className="icon" icon={faFileCsv} />
                 <span className="excelSpan">
                   <strong>Excel</strong>
                 </span>
@@ -154,7 +173,7 @@ const InstPostDetails = () => {
             </div>
             <Table
               col={columns}
-              data={loadedData.applicants.data.data.map((item) => item.student)}
+              data={formattedResponse(loadedData.applicants.data.data)}
               emptyText="لا يوجد اي متقدمين حاليا"
             />
           </div>

@@ -31,6 +31,8 @@ const StudentSignup = () => {
   // };
 
   const onFinish = (values) => {
+    
+    values.SCC = values.SCC.substring(0, 2);// Extract the first two characters of the SCC value
     api()
       .get("/api/csrf-token")
       .then((response) => {
@@ -50,9 +52,13 @@ const StudentSignup = () => {
       });
   };
 
+  // const majorOptions = saudiClassificationData.flatMap(({ majors }) =>
+  //   majors.map(({ id, title: label }) => ({ id, value: label }))
+  // );
+  
   const majorOptions = saudiClassificationData.flatMap(({ majors }) =>
-    majors.map(({ id, title: label }) => ({ label, value: label }))
-  );
+  majors.map(({ id, title: label }) => ({ label, value: id }))
+);
 
   return (
     <div className="student-signup">

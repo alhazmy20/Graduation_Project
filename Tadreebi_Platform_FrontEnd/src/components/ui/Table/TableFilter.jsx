@@ -49,11 +49,11 @@ export const InstPostsText = (text) => {
   return <span style={style}>{text}</span>;
 };
 
-export function InstitutionAccept({ row }) {
+export function InstitutionAccept({ status }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [condition, setCondition] = useState("");
 
-  if (row.status === "بإنتظار موافقة المنشأة") {
+  if (status === "بإنتظار موافقة المنشأة") {
     return (
       <span className="btnContainer">
         <Button
