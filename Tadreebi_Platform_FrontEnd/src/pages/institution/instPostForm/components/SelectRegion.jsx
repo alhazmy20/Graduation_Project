@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Select } from "antd";
+import "./SelectRegion.scss";
 const SelectRegion = ({ name, options }) => {
   return (
     <Form.Item

@@ -9,6 +9,7 @@ import MultiSelect from "./components/MultiSelect .jsx";
 import CustomDatePicker from "./components/CustomDatePicker.jsx";
 import moment from "moment";
 import SelectRegion from "./components/SelectRegion.jsx";
+import SelectCity from "./components/SelectCity.jsx";
 const InstPostForm = () => {
   const [form] = Form.useForm();
   const [formPostData, setFormPostData] = useState({
@@ -159,33 +160,7 @@ const InstPostForm = () => {
 
               <Row className="RowDivElment">
                 <label className="label">المدينة: </label>
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: "الرجاء إختيار المدينة",
-                    },
-                  ]}
-                  name="city"
-                  className="formItemStyle"
-                >
-                  <Select
-                    style={{ flexGrow: "2" }}
-                    defaultValue="اختر المدينة"
-                    showSearch
-                  >
-                    <Select.Option key="*" value="كل المدن" />
-                    {RegionData.filter(
-                      (r) => r.region === formPostData.region
-                    ).map((region) =>
-                      region.cities.map((city) => (
-                        <Select.Option key={city.id} value={city.city}>
-                          {city.city}
-                        </Select.Option>
-                      ))
-                    )}
-                  </Select>
-                </Form.Item>
+                <SelectCity data={RegionData} formDate={formPostData} />
               </Row>
 
               <Row className="RowDivElment">
