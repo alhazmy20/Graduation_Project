@@ -30,7 +30,8 @@ const InstPostForm = () => {
   });
 
   const formatDate = (dateValue) => {
-    return moment(dateValue).format("YYYY-MM-DD");
+    return new Date(dateValue).toISOString().slice(0, 10);
+    //return moment(dateValue).format("YYYY-MM-DD");
   };
 
   const handleFormChange = (changedValues, allValues) => {
@@ -57,6 +58,7 @@ const InstPostForm = () => {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
     }
+  
   };
 
   const isSubmitDisabled =
@@ -199,10 +201,10 @@ const InstPostForm = () => {
               type="primary"
               htmlType="submit"
               className="add-button"
-              disabled={isSubmitDisabled} 
+              disabled={isSubmitDisabled}
               loading={loading}
             >
-            {loading ? "جاري الإضافة..." : "اضافة"}
+              {loading ? "جاري الإضافة..." : "اضافة"}
             </Button>
           </div>
         </Form>
