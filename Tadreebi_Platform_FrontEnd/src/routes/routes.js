@@ -47,13 +47,14 @@ import {
   studentLoaderWithId,
 } from "../pages/student/StudentProfile/StudentProfile";
 import { instPostsLoader } from '../pages/institution/InstApplications/InstPosts';
+import { applicantsPostLoader } from '../pages/institution/InstPostDetails/InstPostDetails';
 
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">
     <Route index element={<h1>Institution home page</h1>} />
     <Route path="posts" element={<InstPosts />} loader={instPostsLoader}/>
-    <Route path="posts/:id" element={<InstPostDetails />} />
+    <Route path="posts/:id" element={<InstPostDetails />} loader={applicantsPostLoader}/>
     <Route
       path="profile"
       element={<InstProfile />}

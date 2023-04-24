@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { cloneElement, useState } from "react";
 import "./ProfileImage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,7 +21,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.onload = async () => {
       setImageSrc(reader.result);
       setDeleted(true);
       console.log(file);
@@ -34,8 +34,8 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
 
       // Send the image to the API using Axios
       try {
-        api().post(
-          `api/${userType}/${id || auth.user.id}/upload?_method=PUT`,
+       const res = await api().put(
+          `api/${userType}/${id || auth.user.id}/uploadImage?_method=PUT`,
           formData,
           {
             headers: {
@@ -43,9 +43,11 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
             },
           }
         );
+        console.log(...formData);
         notification.success({ message: "تم تحديث الصورة الشخصية بنجاح" });
       } catch (error) {
-        notification.success({ message: "لم يتم تحديث الصورة الشخصية" });
+        console.log(error);
+        notification.error({ message: "لم يتم تحديث الصورة الشخصية" });
       }
     };
     reader.readAsDataURL(file);

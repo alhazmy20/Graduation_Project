@@ -4,6 +4,7 @@ import { itemRender } from "../../../components/ui/Pagination";
 import "./Table.scss"
 
 const TableUI = ({col,data,handleChange,Size, emptyText}) => {
+  console.log(data);
   return (
     <Table
         classname="Table"

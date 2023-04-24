@@ -105,10 +105,23 @@ export const getStudent = async (id) => {
 export const getAllAdmins = async () => {
   try {
     const res = await api().get(`api/admins`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (error) {
     console.log(error);
     throw error;
+  }
+};
+
+export const getPostApplicants = async (postId) => {
+  try {
+    const [postRes, applicantsRes] = await Promise.all([
+      // api().get('api/admins'),
+      getPost(postId),
+      api().get(`api/posts/${postId}/applicants`)
+    ]);
+    return { post: postRes, applicants: applicantsRes };
+  } catch (error) {
+    console.log(error);
+    throw { message: 'error.message', status: '400 '};
   }
 };

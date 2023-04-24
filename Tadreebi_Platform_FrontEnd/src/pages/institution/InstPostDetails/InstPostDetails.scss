@@ -3,6 +3,7 @@
 
 .postDetailsContainer {
     margin-top: 2rem;
+    padding: 10px;
 
     @include breakpoint-down(small){
         margin: 1rem auto 1rem auto

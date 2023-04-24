@@ -19,7 +19,6 @@ const TrainingOpportunity = () => {
 
   const id = useParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submissionError, setSubmissionError] = useState(null);
 
   const handleSubmit = async () => {
     const {id: post_id} = id;
@@ -32,8 +31,7 @@ const TrainingOpportunity = () => {
     } catch (error) {
       console.log(error);
       setIsSubmitting(false);
-      setSubmissionError(error.message);
-      notification.error({ message: "حدث خطأ أثناء تقديم الطلب." });
+      notification.error({ message: error.response.data.message });
     }
   };
 
@@ -65,7 +63,7 @@ const TrainingOpportunity = () => {
                 <span>سدايا</span>
               </Space>
             </div>
-            <p>{loadedData.content}</p>
+            <p dangerouslySetInnerHTML={{__html: loadedData.content}}></p>
             <PostDetailsTable data={loadedData} />
             <Button
               type="primary"

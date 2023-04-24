@@ -86,7 +86,7 @@ export function InstitutionAccept({ row }) {
   }
 }
 
-export function StudentDetails({ name, id }) {
+export function StudentDetails({ name, studentData }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   return (
     <span>
@@ -100,8 +100,8 @@ export function StudentDetails({ name, id }) {
         >
           {name}
         </Button>
-      }{/*I ADD This */}
-       {detailsOpen && <StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen} id={id}/>}
+      }
+       {detailsOpen && <StudentModal setDetailsOpen={setDetailsOpen} detailsOpen={detailsOpen} studentData={studentData}/>}
     </span>
   );
 }

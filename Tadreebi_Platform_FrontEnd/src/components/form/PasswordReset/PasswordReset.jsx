@@ -5,24 +5,18 @@ import "./PasswordReset.scss";
 import { passwordRules, confirmPasswordRules } from "../../../Validation/rules";
 import FormCard from "../../ui/FormCard/FormCard";
 import api from "../../../data/axiosConfig";
+import { useAuth } from "../../../auth/useContext";
 
-const ResetPassword = ({ id }) => {
-  // const [formData, setFormData] = useState(null);
+const ResetPassword = () => {
+  const auth = useAuth();
 
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // const handleFormChange = (changedValues, allValues) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     ...allValues,
-  //   }));
-  // };
-
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      await api().post(`api/user/${id}/change-password`, values);
+      await api().post(`api/user/${auth.user.id}/change-password`, values);
       notification.success({ message: "تم تحديث كلمة السر بنجاح" });
       setLoading(false);
       setIsFormChanged(false);

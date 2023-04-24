@@ -235,7 +235,7 @@ const StudentProfile = ({ isAdmin }) => {
                 </Button>
               </Form>
             </FormCard>
-            {!isAdmin && <ResetPassword id={loadedData.id} />}
+            {!isAdmin && <ResetPassword />}
           </div>
         )}
       </Await>

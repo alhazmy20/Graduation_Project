@@ -49,13 +49,13 @@ const AdminProfile = () => {
           resolve={adminData?.admin}
           errorElement={<p>Error loading the data.</p>}
         >
-          {(loadData) => (
+          {(loaderData) => (
             <>
               <FormCard className="card">
                 <h1 className="green-underline">بيانات المشرف</h1>
                 <Form
                   onFinish={onFinish}
-                  initialValues={loadData}
+                  initialValues={loaderData}
                   onValuesChange={onFormValuesChange}
                 >
                   <Row gutter={[16, 2]}>
@@ -103,7 +103,7 @@ const AdminProfile = () => {
                   </Button>
                 </Form>
               </FormCard>
-              <ResetPassword />
+              <ResetPassword id={loaderData.id}/>
             </>
           )}
         </Await>
