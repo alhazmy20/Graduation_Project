@@ -50,10 +50,6 @@ const InstPostForm = () => {
     console.log(formPostData);
   };
 
-  const handleEditorChange = (content) => {
-    handleInputChange("content", content);
-  };
-
   const isSubmitDisabled =
     formPostData.content.replace(/<(.|\n)*?>/g, "").trim().length === 0;
 
@@ -100,7 +96,7 @@ const InstPostForm = () => {
   return (
     <div className="institution-NewPostCont">
       <div className="pagePostTitle">
-        <span className="name"> إضافة فرصة تدريبية</span>
+        <span className="TitleName"> إضافة فرصة تدريبية</span>
       </div>
       <div className="postfromConteiner">
         <Form
@@ -119,8 +115,9 @@ const InstPostForm = () => {
           </Col>
           <Col style={{ textAlign: "left" }}>
             <ReactTextArea
+              name="content"
               formdata={formPostData.content}
-              formfun={handleEditorChange}
+              handleInputChange={handleInputChange}
             />
           </Col>
           <Row className="formInputContainer">

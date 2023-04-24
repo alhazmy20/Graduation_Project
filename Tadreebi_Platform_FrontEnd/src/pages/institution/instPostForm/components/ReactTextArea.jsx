@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../InstPostForm.scss";
-const ReactTextArea = (props) => {
+const ReactTextArea = ({ formdata, handleInputChange, name }) => {
+  const [value, setValue] = useState("");
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -35,11 +36,16 @@ const ReactTextArea = (props) => {
     "formula",
   ];
 
+  const handleChange = (value) => {
+    setValue(value);
+    handleInputChange(name, value);
+  };
+
   return (
     <ReactQuill
       placeholder="تفاصيل فرصة التدريب ... "
-      value={props.formdata}
-      onChange={props.formfun}
+      value={formdata}
+      onChange={handleChange}
       modules={modules}
       formats={formats}
     />
