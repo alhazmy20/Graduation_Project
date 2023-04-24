@@ -1,8 +1,13 @@
 import React from "react";
-import { Form, DatePicker } from "antd";
-import moment from "moment";
+import { Form } from "antd";
+import dateFnsGenerateConfig from "rc-picker/lib/generate/dateFns";
+import generatePicker from "antd/es/date-picker/generatePicker";
+import { parse } from "date-fns";
+import "./CustomDatePicker.scss";
+const CustomDatePicker = ({ name, label, initValue }) => {
+  console.log(initValue);
+  const DatePicker = generatePicker(dateFnsGenerateConfig);
 
-const CustomDatePicker = ({ name, label }) => {
   return (
     <Form.Item
       name={name}
@@ -14,7 +19,11 @@ const CustomDatePicker = ({ name, label }) => {
       ]}
       className="formItemStyle"
     >
-      <DatePicker placeholder={`اختر ${label}`} style={{ width: "100%" }} />
+      <DatePicker
+        placeholder={`اختر ${label}`}
+        style={{ width: "100%" }}
+        defaultValue={parse(initValue, "yyyy-mm-dd", new Date())}
+      />
     </Form.Item>
   );
 };

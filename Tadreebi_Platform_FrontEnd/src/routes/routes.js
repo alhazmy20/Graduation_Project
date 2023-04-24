@@ -4,7 +4,9 @@ import {
   Route,
 } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
-import InstitutionInfo, { institutionsLoader1 } from "../pages/general/institutionInfo/InstitutionInfo";
+import InstitutionInfo, {
+  institutionsLoader1,
+} from "../pages/general/institutionInfo/InstitutionInfo";
 import {
   Home,
   Applications,
@@ -29,7 +31,9 @@ import {
   Signup,
   TrainingOpportunities,
 } from "../pages/index";
-import AdminsTable, { adminsLoader } from "../pages/Admin/AdminsTable/AdminsTable";
+import AdminsTable, {
+  adminsLoader,
+} from "../pages/Admin/AdminsTable/AdminsTable";
 import { postsLoader } from "../pages/general/TrainingOpportunities/TrainingOpportunities";
 import { opportunityLoader } from "../pages/general/TrainingOpportunity/TrainingOpportunity";
 import { loader as allNewsLoader, loader } from "../pages/general/News/News";
@@ -46,22 +50,30 @@ import {
   studentLoader,
   studentLoaderWithId,
 } from "../pages/student/StudentProfile/StudentProfile";
-import { instPostsLoader } from '../pages/institution/InstApplications/InstPosts';
-import { applicantsPostLoader } from '../pages/institution/InstPostDetails/InstPostDetails';
-
+import { instPostsLoader } from "../pages/institution/InstApplications/InstPosts";
+import { applicantsPostLoader } from "../pages/institution/InstPostDetails/InstPostDetails";
+import { opportunityDataLoader } from "../pages/institution/instPostForm/InstPostForm";
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">
     <Route index element={<h1>Institution home page</h1>} />
-    <Route path="posts" element={<InstPosts />} loader={instPostsLoader}/>
-    <Route path="posts/:id" element={<InstPostDetails />} loader={applicantsPostLoader}/>
+    <Route path="posts" element={<InstPosts />} loader={instPostsLoader} />
+    <Route
+      path="posts/:id"
+      element={<InstPostDetails />}
+      loader={applicantsPostLoader}
+    />
     <Route
       path="profile"
       element={<InstProfile />}
       loader={institutionLoader}
     />
     <Route path="newPost" element={<InstPostForm />} />
-    <Route path="newPost/:id" element={<InstPostForm />} />
+    <Route
+      path="newPost/:id"
+      element={<InstPostForm />}
+      loader={opportunityDataLoader}
+    />
   </Route>
 );
 
@@ -99,7 +111,11 @@ const adminRoutes = (
       element={<StudentProfile isAdmin={true} />}
       loader={studentLoaderWithId}
     />
-    <Route path="manage-admins" element={<AdminsTable />} loader={adminsLoader}/>
+    <Route
+      path="manage-admins"
+      element={<AdminsTable />}
+      loader={adminsLoader}
+    />
     <Route path="manage-admins/:id" element={<AdminProfile isAdmin={true} />} />
     <Route
       path="profile"
@@ -134,7 +150,11 @@ export const routes = createBrowserRouter(
           element={<NewsDetails />}
           loader={newsDetailsloader}
         />
-        <Route path="InstitutionInfo" element={<InstitutionInfo />} loader={institutionsLoader1}/>
+        <Route
+          path="InstitutionInfo"
+          element={<InstitutionInfo />}
+          loader={institutionsLoader1}
+        />
         {studentRoutes}
 
         {institutionRoutes}

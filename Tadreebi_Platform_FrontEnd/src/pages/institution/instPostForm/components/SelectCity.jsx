@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Select } from "antd";
 import "./SelectCity.scss";
-const SelectCity = ({ data, formDate }) => {
+const SelectCity = ({ data, formDate, initValue }) => {
   return (
     <Form.Item
       rules={[
@@ -13,7 +13,11 @@ const SelectCity = ({ data, formDate }) => {
       name="city"
       className="formItemStyle"
     >
-      <Select style={{ flexGrow: "2" }} defaultValue="اختر المدينة" showSearch>
+      <Select
+        style={{ flexGrow: "2" }}
+        defaultValue={initValue || "اختر المدينة"}
+        showSearch
+      >
         <Select.Option key="*" value="كل المدن" />
         {data
           .filter((r) => r.region === formDate.region)

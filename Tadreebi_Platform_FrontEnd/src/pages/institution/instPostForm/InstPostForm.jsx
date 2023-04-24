@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Button, Input, Col, Row, Form, notification } from "antd";
 import { RegionData } from "../../../data/TestData.js";
 import { data } from "../../../data/SaudiClassification";
@@ -7,12 +7,17 @@ import "../instPostForm/InstPostForm.scss";
 import ReactRadio from "./components/ReactRadio.jsx";
 import MultiSelect from "./components/MultiSelect .jsx";
 import CustomDatePicker from "./components/CustomDatePicker.jsx";
-import moment from "moment";
+
 import SelectRegion from "./components/SelectRegion.jsx";
 import SelectCity from "./components/SelectCity.jsx";
 import api from "../../../data/axiosConfig";
+import { Await, defer, useLoaderData } from "react-router-dom";
+import { getPost } from "../../../util/api.js";
+import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
 
 const InstPostForm = () => {
+  const opportunityData = useLoaderData();
+
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [formPostData, setFormPostData] = useState({
@@ -31,7 +36,6 @@ const InstPostForm = () => {
 
   const formatDate = (dateValue) => {
     return new Date(dateValue).toISOString().slice(0, 10);
-    //return moment(dateValue).format("YYYY-MM-DD");
   };
 
   const handleFormChange = (changedValues, allValues) => {
@@ -58,7 +62,6 @@ const InstPostForm = () => {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
     }
-  
   };
 
   const isSubmitDisabled =
@@ -105,112 +108,141 @@ const InstPostForm = () => {
   ];
 
   return (
-    <div className="institution-NewPostCont">
-      <div className="pagePostTitle">
-        <span className="TitleName"> إضافة فرصة تدريبية</span>
-      </div>
-      <div className="postfromConteiner">
-        <Form
-          onValuesChange={handleFormChange}
-          onFinish={onFinish}
-          className="form"
-          form={form}
-        >
-          <Col>
-            <Form.Item
-              name="title"
-              rules={[{ required: true, message: "الرجاء ادخال العنوان" }]}
-            >
-              <Input placeholder="عنوان فرصة التدريب ..." />
-            </Form.Item>
-          </Col>
-          <Col style={{ textAlign: "left" }}>
-            <ReactTextArea
-              name="content"
-              formdata={formPostData.content}
-              handleInputChange={handleInputChange}
-            />
-          </Col>
-          <Row className="formInputContainer">
-            <Col className="InputsContainer">
-              <Row className="RowDivElment">
-                <label className="label">نوع البرنامج التدريبي: </label>
-                <ReactRadio name="t_type" options={radioOptionsType} />
-              </Row>
+    <Suspense fallback={<Spinner />}>
+      <Await
+        resolve={opportunityData?.post}
+        errorElement={<p>Error loading blog posts.</p>}
+      >
+        {(loadedPost) => (
+          <div className="institution-NewPostCont">
+            <div className="pagePostTitle">
+              <span className="TitleName"> إضافة فرصة تدريبية</span>
+            </div>
+            <div className="postfromConteiner">
+              <Form
+                onValuesChange={handleFormChange}
+                onFinish={onFinish}
+                className="form"
+                form={form}
+              >
+                <Col>
+                  <Form.Item
+                    name="title"
+                    rules={[
+                      { required: true, message: "الرجاء ادخال العنوان" },
+                    ]}
+                    initialValue={loadedPost?.title}
+                  >
+                    <Input placeholder="عنوان فرصة التدريب ..." />
+                  </Form.Item>
+                </Col>
+                <Col style={{ textAlign: "left" }}>
+                  <ReactTextArea
+                    name="content"
+                    formdata={formPostData.content || loadedPost?.content}
+                    handleInputChange={handleInputChange}
+                  />
+                </Col>
+                <Row className="formInputContainer">
+                  <Col className="InputsContainer">
+                    <Row className="RowDivElment">
+                      <label className="label">نوع البرنامج التدريبي: </label>
+                      <ReactRadio name="t_type" options={radioOptionsType} />
+                    </Row>
 
-              <Row className="RowDivElment">
-                <label className="label">المنطقة: </label>
-                <SelectRegion name="region" options={RegionData} />
-              </Row>
-              <Row className="RowDivElment">
-                <label className="label">تاريخ البدء: </label>
-                <CustomDatePicker
-                  name="t_startDate"
-                  label="تاريخ بدء التدريب"
-                  required={true}
-                />
-              </Row>
-              <Row className="RowDivElment">
-                <label className="label">تاريخ انتهاء الإعلان: </label>
-                <CustomDatePicker
-                  name="p_endDate"
-                  label="تاريخ انتهاء الإعلان"
-                  required={true}
-                />
-              </Row>
-            </Col>
+                    <Row className="RowDivElment">
+                      <label className="label">المنطقة: </label>
+                      <SelectRegion
+                        name="region"
+                        options={RegionData}
+                        initValue={loadedPost?.region}
+                      />
+                    </Row>
+                    <Row className="RowDivElment">
+                      <label className="label">تاريخ البدء: </label>
+                      <CustomDatePicker
+                        name="t_startDate"
+                        label="تاريخ بدء التدريب"
+                        required={true}
+                        initValue={loadedPost?.t_startDate}
+                      />
+                    </Row>
+                    <Row className="RowDivElment">
+                      <label className="label">تاريخ انتهاء الإعلان: </label>
+                      <CustomDatePicker
+                        name="p_endDate"
+                        label="تاريخ انتهاء الإعلان"
+                        required={true}
+                        initValue={loadedPost?.p_endDate}
+                      />
+                    </Row>
+                  </Col>
 
-            <Col className="InputsContainer">
-              <Row className="RowDivElment">
-                <label className="label">مكافأة: </label>
-                <ReactRadio name="reward" options={radioOptionsReward} />
-              </Row>
+                  <Col className="InputsContainer">
+                    <Row className="RowDivElment">
+                      <label className="label">مكافأة: </label>
+                      <ReactRadio name="reward" options={radioOptionsReward} />
+                    </Row>
 
-              <Row className="RowDivElment">
-                <label className="label">المدينة: </label>
-                <SelectCity data={RegionData} formDate={formPostData} />
-              </Row>
+                    <Row className="RowDivElment">
+                      <label className="label">المدينة: </label>
+                      <SelectCity
+                        data={RegionData}
+                        formDate={formPostData}
+                        initValue={loadedPost?.city}
+                      />
+                    </Row>
 
-              <Row className="RowDivElment">
-                <label className="label">تاريخ الإنتهاء: </label>
-                <CustomDatePicker
-                  name="t_endDate"
-                  label="تاريخ إنتهاء التدريب"
-                  required={true}
-                />
-              </Row>
+                    <Row className="RowDivElment">
+                      <label className="label">تاريخ الإنتهاء: </label>
+                      <CustomDatePicker
+                        name="t_endDate"
+                        label="تاريخ إنتهاء التدريب"
+                        required={true}
+                        initValue={loadedPost?.t_endDate}
+                      />
+                    </Row>
 
-              <Row className="RowDivElment">
-                <label className="label">الجنس: </label>
-                <ReactRadio name="gender" options={radioOptionsGender} />
-              </Row>
-            </Col>
+                    <Row className="RowDivElment">
+                      <label className="label">الجنس: </label>
+                      <ReactRadio name="gender" options={radioOptionsGender} />
+                    </Row>
+                  </Col>
 
-            <Row className="RowDivElment">
-              <label className="label">التخصص: </label>
-              <MultiSelect
-                name="majors"
-                label="التخصصات"
-                handleInputChange={handleInputChange}
-                options={options}
-              />
-            </Row>
-          </Row>
-          <div className="addbuttonContainer">
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="add-button"
-              disabled={isSubmitDisabled}
-              loading={loading}
-            >
-              {loading ? "جاري الإضافة..." : "اضافة"}
-            </Button>
+                  <Row className="RowDivElment">
+                    <label className="label">التخصص: </label>
+                    <MultiSelect
+                      name="majors"
+                      label="التخصصات"
+                      handleInputChange={handleInputChange}
+                      options={options}
+                      initValue={loadedPost?.post_majors.major}
+                    />
+                  </Row>
+                </Row>
+                <div className="addbuttonContainer">
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="add-button"
+                    disabled={isSubmitDisabled}
+                    loading={loading}
+                  >
+                    {loading ? "جاري الإضافة..." : "اضافة"}
+                  </Button>
+                </div>
+              </Form>
+            </div>
           </div>
-        </Form>
-      </div>
-    </div>
+        )}
+      </Await>
+    </Suspense>
   );
 };
 
 export default InstPostForm;
+
+export const opportunityDataLoader = ({ params }) => {
+  const postId = params.id;
+  return defer({ post: getPost(postId) });
+};

@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Form, Select } from "antd";
 import "./MultiSelect.scss";
-const MultiSelect = ({ name, label, options, handleInputChange }) => {
+const MultiSelect = ({
+  name,
+  label,
+  options,
+  handleInputChange,
+  initValue,
+}) => {
   const [value, setValue] = useState([]);
 
   const handleChange = (value) => {
     setValue(value);
     handleInputChange(name, value);
   };
+ 
 
   return (
     <Form.Item
@@ -19,6 +26,7 @@ const MultiSelect = ({ name, label, options, handleInputChange }) => {
         },
       ]}
       className="formItemStyle"
+      // initialValue={ initValue }
     >
       <Select
         mode="multiple"
@@ -27,6 +35,7 @@ const MultiSelect = ({ name, label, options, handleInputChange }) => {
         value={value}
         onChange={handleChange}
         options={options}
+        defaultValue={initValue }
         style={{ flexGrow: "2" }}
       />
     </Form.Item>

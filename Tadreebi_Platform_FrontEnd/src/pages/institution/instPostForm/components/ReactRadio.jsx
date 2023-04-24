@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Radio } from "antd";
-const ReactRadio = ({ name, options }) => {
+const ReactRadio = ({ name, options, initValue }) => {
   return (
     <Form.Item
       name={name}
@@ -9,7 +9,11 @@ const ReactRadio = ({ name, options }) => {
     >
       <Radio.Group>
         {options.map((option) => (
-          <Radio key={option.value} value={option.value}>
+          <Radio
+            key={option.value }
+            value={option.value}
+      
+          >
             {option.label}
           </Radio>
         ))}
