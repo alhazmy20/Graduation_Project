@@ -228,7 +228,7 @@ const InstPostForm = () => {
                             ? 0
                             : loadedPost?.gender === "انثى"
                             ? 1
-                            : loadedPost?.gender === "غير محدد"
+                            : loadedPost?.gender === "الكل"
                             ? 2
                             : undefined
                         }
