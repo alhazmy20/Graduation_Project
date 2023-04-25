@@ -188,7 +188,14 @@ const InstPostForm = () => {
                       <ReactRadio
                         name="reward"
                         options={radioOptionsReward}
-                        initValue={loadedPost?.reward === "يوجد" ? 1 : 0}
+                        // initValue={loadedPost?.reward === "يوجد" ? 1 : 0}
+                        initValue={
+                          loadedPost?.reward === "يوجد"
+                            ? 1
+                            : loadedPost?.reward === "لا يوجد"
+                            ? 0
+                            : undefined
+                        }
                       />
                     </Row>
 
@@ -221,7 +228,9 @@ const InstPostForm = () => {
                             ? 0
                             : loadedPost?.gender === "انثى"
                             ? 1
-                            : 2
+                            : loadedPost?.gender === "غير محدد"
+                            ? 2
+                            : undefined
                         }
                       />
                     </Row>
@@ -234,7 +243,11 @@ const InstPostForm = () => {
                       label="التخصصات"
                       handleInputChange={handleInputChange}
                       options={options}
-                      initValue={loadedPost?.post_majors.major}
+                      initValue={options.filter((option) =>
+                        loadedPost?.post_majors.some(
+                          (postMajor) => postMajor.major === option.label
+                        )
+                      )}
                     />
                   </Row>
                 </Row>

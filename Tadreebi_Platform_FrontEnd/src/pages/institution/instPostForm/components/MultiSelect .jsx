@@ -15,6 +15,7 @@ const MultiSelect = ({
     handleInputChange(name, value);
   };
  
+  console.log(initValue);
 
   return (
     <Form.Item
@@ -26,7 +27,7 @@ const MultiSelect = ({
         },
       ]}
       className="formItemStyle"
-      // initialValue={ initValue }
+      initialValue={ initValue }
     >
       <Select
         mode="multiple"
@@ -35,7 +36,7 @@ const MultiSelect = ({
         value={value}
         onChange={handleChange}
         options={options}
-        defaultValue={initValue }
+        // defaultValue={initValue }
         style={{ flexGrow: "2" }}
       />
     </Form.Item>
