@@ -104,7 +104,7 @@ const InstPostForm = () => {
   const radioOptionsGender = [
     { label: "ذكر", value: 0 },
     { label: "انثى", value: 1 },
-    { label: "كليهما", value: 2 },
+    { label: "الكل", value: 2 },
   ];
 
   return (
@@ -147,7 +147,11 @@ const InstPostForm = () => {
                   <Col className="InputsContainer">
                     <Row className="RowDivElment">
                       <label className="label">نوع البرنامج التدريبي: </label>
-                      <ReactRadio name="t_type" options={radioOptionsType} />
+                      <ReactRadio
+                        name="t_type"
+                        options={radioOptionsType}
+                        initValue={loadedPost?.t_type}
+                      />
                     </Row>
 
                     <Row className="RowDivElment">
@@ -181,7 +185,11 @@ const InstPostForm = () => {
                   <Col className="InputsContainer">
                     <Row className="RowDivElment">
                       <label className="label">مكافأة: </label>
-                      <ReactRadio name="reward" options={radioOptionsReward} />
+                      <ReactRadio
+                        name="reward"
+                        options={radioOptionsReward}
+                        initValue={loadedPost?.reward === "يوجد" ? 1 : 0}
+                      />
                     </Row>
 
                     <Row className="RowDivElment">
@@ -205,7 +213,17 @@ const InstPostForm = () => {
 
                     <Row className="RowDivElment">
                       <label className="label">الجنس: </label>
-                      <ReactRadio name="gender" options={radioOptionsGender} />
+                      <ReactRadio
+                        name="gender"
+                        options={radioOptionsGender}
+                        initValue={
+                          loadedPost?.gender === "ذكر"
+                            ? 0
+                            : loadedPost?.gender === "انثى"
+                            ? 1
+                            : 2
+                        }
+                      />
                     </Row>
                   </Col>
 

@@ -7,12 +7,12 @@ const ReactRadio = ({ name, options, initValue }) => {
       rules={[{ required: true, message: "الرجاء الاختيار" }]}
       className="formItemStyle"
     >
-      <Radio.Group>
+      <Radio.Group  defaultValue={initValue}>
         {options.map((option) => (
           <Radio
             key={option.value }
             value={option.value}
-      
+            
           >
             {option.label}
           </Radio>

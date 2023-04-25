@@ -5,7 +5,7 @@ import generatePicker from "antd/es/date-picker/generatePicker";
 import { parse } from "date-fns";
 import "./CustomDatePicker.scss";
 const CustomDatePicker = ({ name, label, initValue }) => {
-  console.log(initValue);
+
   const DatePicker = generatePicker(dateFnsGenerateConfig);
 
   return (
