@@ -25,9 +25,9 @@ const CustomDatePicker = ({ name, label, initValue }) => {
         placeholder={`اختر ${label}`}
         style={{ width: "100%" }}
         defaultValue={
-          initValue ? parse(initValue, dateFormat, new Date()) : null
+          initValue ? parse(initValue, dateFormat, new Date()) : undefined
         }
-        format={dateFormat}
+        format={initValue ? dateFormat : undefined}
       />
     </Form.Item>
   );
