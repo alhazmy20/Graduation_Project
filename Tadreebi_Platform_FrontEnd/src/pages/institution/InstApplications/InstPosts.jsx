@@ -106,6 +106,7 @@ const InstPosts = () => {
               data={loadedPosts}
               Size={10}
               handleChange={handlePaginationChange}
+              emptyText={'لم تتم اضافة اي فرص حتى الآن'}
             />
           </div>
         )}

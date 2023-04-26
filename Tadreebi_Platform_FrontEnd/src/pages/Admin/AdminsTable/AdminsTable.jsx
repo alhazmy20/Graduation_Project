@@ -18,28 +18,12 @@ import { getAllAdmins } from "../../../util/api";
 
 const AdminsTable = () => {
   const adminsData = useLoaderData();
-  const {fName} = adminsData;
+  const { fName } = adminsData;
   console.log(fName);
 
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
-
-  // if (loading) {
-  //   return <Spinner />;
-  // }
-
-  // if (error) {
-  //   return notification.error(error);
-  // }
-
-  // if (!data) {
-  //   return <NoData text="لا يوجد مشرفين حاليا" />;
-  // }
-
-  // const {
-  //   data: { data: adminsData },
-  // } = data;
 
   // const filteredDataSource = statusFilter
   //   ? adminsData.filter((application) => application.status === statusFilter)
@@ -50,6 +34,9 @@ const AdminsTable = () => {
       title: "اسم المشرف",
       dataIndex: "fName lName",
       align: "center",
+      render: (text, row) => (
+        <span>{`${row.fName} ${row.lName}`}</span>
+        ),
     },
     {
       title: "البريد الالكتروني",

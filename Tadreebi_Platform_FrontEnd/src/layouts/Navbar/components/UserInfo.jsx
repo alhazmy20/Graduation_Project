@@ -10,9 +10,10 @@ const UserInfo = () => {
       ? "/institution/profile"
       : "/student/profile";
   const items = [
+    auth.user?.role === "Student" &&
     {
       key: "1",
-      label: <Link to="/Login">طلباتي</Link>,
+      label: <Link to="student/applications">طلباتي</Link>,
     },
     {
       key: "2",

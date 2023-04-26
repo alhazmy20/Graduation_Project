@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from "react";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import Table from "../../../components/ui/Table/Table";
@@ -13,20 +13,13 @@ import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { getPostApplicants } from "../../../util/api";
+import api from "../../../data/axiosConfig";
 
 const InstPostDetails = () => {
   const applicants_post = useLoaderData();
+  const { id } = useParams();
 
   const [statusFilter, setStatusFilter] = useState(null);
-
-  const filterData = (studentsData) => {
-    const filteredDataSource = statusFilter
-      ? studentsData?.filter(
-          (application) => application.status === statusFilter
-        )
-      : studentsData;
-    return filteredDataSource;
-  };
 
   const formattedResponse = (data) => {
     const applicantData = data.map((item) => ({
@@ -68,18 +61,23 @@ const InstPostDetails = () => {
       title: "التخصص",
       dataIndex: "major",
       align: "center",
+      render: (text, record) => {
+        return text;
+      },
     },
     {
       title: "الحالة",
       dataIndex: "applicant_status",
       align: "center",
-      render: TableText,
+      render: (text, row) => <TableText text={text} />,
     },
     {
       title: "الإجراء",
       dataIndex: "applicant_status",
       align: "center",
-      render: (text, row) => <InstitutionAccept status={text} />,
+      render: (text, row) => (
+        <InstitutionAccept status={text} applicant_id={row.applicant_id} />
+      ),
     },
   ];
 
@@ -87,7 +85,15 @@ const InstPostDetails = () => {
     setStatusFilter(status);
   };
 
-  // console.log(filteredDataSource)
+  const exportExcelFile = async () => {
+    try {
+      const res = await api().get(`api/posts/${id}/applicants/export`);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -128,7 +134,7 @@ const InstPostDetails = () => {
               <span className="studentApplications">
                 <strong>طلبات تقديم الطلاب</strong>
               </span>
-              <Button className="excelBtn">
+              <Button className="excelBtn" onClick={exportExcelFile}>
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />
                 <span className="excelSpan">
                   <strong>Excel</strong>

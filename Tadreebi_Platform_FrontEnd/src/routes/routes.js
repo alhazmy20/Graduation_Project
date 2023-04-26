@@ -44,7 +44,10 @@ import {
   institutionLoader,
   institutionLoaderWithId,
 } from "../pages/institution/InstProfile/InstProfile";
-import { adminProfileLoader } from "../pages/Admin/AdminProfile/AdminProfile";
+import {
+  adminLoaderWithId,
+  adminProfileLoader,
+} from "../pages/Admin/AdminProfile/AdminProfile";
 import { studentsLoader } from "../pages/Admin/StudentsTable/StudentsTable";
 import {
   studentLoader,
@@ -53,6 +56,9 @@ import {
 import { instPostsLoader } from "../pages/institution/InstApplications/InstPosts";
 import { applicantsPostLoader } from "../pages/institution/InstPostDetails/InstPostDetails";
 import { opportunityDataLoader } from "../pages/institution/instPostForm/InstPostForm";
+
+import { applicationsLoader } from "../pages/student/Applications/Application";
+
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">
@@ -81,7 +87,11 @@ const institutionRoutes = (
 const studentRoutes = (
   <Route path="student">
     <Route path="profile" element={<StudentProfile />} loader={studentLoader} />
-    <Route path="applications" element={<Applications />} />
+    <Route
+      path="applications"
+      element={<Applications />}
+      loader={applicationsLoader}
+    />
   </Route>
 );
 
@@ -116,7 +126,11 @@ const adminRoutes = (
       element={<AdminsTable />}
       loader={adminsLoader}
     />
-    <Route path="manage-admins/:id" element={<AdminProfile isAdmin={true} />} />
+    <Route
+      path="manage-admins/:id"
+      element={<AdminProfile isAdmin={true} />}
+      loader={adminLoaderWithId}
+    />
     <Route
       path="profile"
       element={<AdminProfile />}

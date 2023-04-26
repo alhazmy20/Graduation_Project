@@ -118,3 +118,8 @@ export const adminProfileLoader = () => {
   const admin = JSON.parse(localStorage.getItem("user"));
   return defer({ admin: getAdmin(admin.id) });
 };
+
+export const adminLoaderWithId = ({ params }) => {
+  const adminId = params.id;
+  return defer({ admin: getAdmin(adminId) });
+};

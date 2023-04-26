@@ -127,3 +127,15 @@ export const getPostApplicants = async (postId) => {
     throw { message: 'error.message', status: '400 '};
   }
 };
+
+export const getStudentApplications = async () => {
+  try {
+    const res = await api().get(`api/applications`);
+    console.log(res.data.data);
+    return res.data.data;
+  } catch (err) {
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
+  }
+};

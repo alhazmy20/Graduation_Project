@@ -1,20 +1,41 @@
-import { Button, Modal } from "antd";
-import React from "react";
+import { Button, Modal, notification } from "antd";
+import React, { useEffect, useState } from "react";
 import "./conditionModal.scss";
+import api from "../../../../data/axiosConfig";
 
-const ConditionModal = ({ modalOpen, setModalOpen, condition }) => {
+const ConditionModal = ({
+  modalOpen,
+  setModalOpen,
+  statusId,
+  applicant_id,
+  onOk,
+}) => {
+  const handleStatus = () => {
+    try {
+      api().put(`api/applications/${applicant_id}`, {
+        status_id: statusId,
+      });
+      setModalOpen(false);
+      onOk();
+      const appStateAfterAction =
+        statusId === "2" ? "بإنتظار تأكيد الطالب" : "مرفوض";
+      notification.success({ message: "تم التقديم بنجاح." });
+    } catch (error) {
+      console.log(error);
+      notification.error({ message: error.response.data.message });
+    }
+  };
   return (
     <Modal
       title="تنبيه:"
       className="modalContainer"
       open={modalOpen}
-      onOk={() => setModalOpen(false)}
+      onOk={handleStatus}
       onCancel={() => setModalOpen(false)}
-      footer={[]}
     >
       <div className="modalDetailsContainer">
         {(() => {
-          if (condition === "accept") {
+          if (statusId === "2") {
             return (
               <span className="modalDetails">
                 <strong>
@@ -27,7 +48,6 @@ const ConditionModal = ({ modalOpen, setModalOpen, condition }) => {
             return (
               <span className="modalDetails">
                 <strong>
-                  {" "}
                   في حال رفضك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
                   اشعار الطالب بالرفض.
                 </strong>
@@ -37,14 +57,6 @@ const ConditionModal = ({ modalOpen, setModalOpen, condition }) => {
         })()}
         <br />
         <br />
-        <div className="btnsContainer">
-          <Button className="Accept">
-            <strong>تأكيد</strong>
-          </Button>
-          <Button className="Reject">
-            <strong>الغاء</strong>
-          </Button>
-        </div>
       </div>
     </Modal>
   );
