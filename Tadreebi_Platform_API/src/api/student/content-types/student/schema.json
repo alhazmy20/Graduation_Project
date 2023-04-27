@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "students",
+  "info": {
+    "singularName": "student",
+    "pluralName": "students",
+    "displayName": "Student",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fName": {
+      "type": "string"
+    },
+    "sName": {
+      "type": "string"
+    },
+    "tName": {
+      "type": "string"
+    },
+    "lName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "national_ID": {
+      "type": "integer"
+    },
+    "major": {
+      "type": "string"
+    },
+    "GPA": {
+      "type": "decimal"
+    },
+    "GPA_Type": {
+      "type": "integer"
+    },
+    "gender": {
+      "type": "integer"
+    }
+  }
+}
