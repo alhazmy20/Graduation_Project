@@ -22,7 +22,6 @@ export async function getPosts(region = "", city = "", major = "") {
 export async function getPost(id) {
   try {
     const res = await api().get(`api/posts/${id}`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -70,10 +69,13 @@ export const getInstitution = async (id) => {
 };
 
 export const getAdmin = async (id) => {
+  console.log(id);
   try {
     const res = await api().get(`api/admins/${id}`);
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
+    console.log(err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
@@ -83,7 +85,6 @@ export const getAdmin = async (id) => {
 export const getAllStudents = async () => {
   try {
     const res = await api().get(`api/students`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -119,12 +120,12 @@ export const getPostApplicants = async (postId) => {
     const [postRes, applicantsRes] = await Promise.all([
       // api().get('api/admins'),
       getPost(postId),
-      api().get(`api/posts/${postId}/applicants`)
+      api().get(`api/posts/${postId}/applicants`),
     ]);
     return { post: postRes, applicants: applicantsRes };
   } catch (error) {
     console.log(error);
-    throw { message: 'error.message', status: '400 '};
+    throw { message: "error.message", status: "400 " };
   }
 };
 
@@ -137,5 +138,47 @@ export const getStudentApplications = async () => {
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
+  }
+};
+
+export const exportExcelFile = async (
+  export_who,
+  post_id = null,
+  post_title = null
+) => {
+  let export_url = "";
+  let fileName = "";
+
+  switch (export_who) {
+    case "Post Applicants":
+      export_url = `api/posts/${post_id}/applicants/export`;
+      fileName = post_title;
+      break;
+    case "All Institution":
+      export_url = `api/institutions/export`;
+      fileName = "بيانات المؤسسات";
+      break;
+    case "All Student":
+      export_url = `api/students/export`;
+      fileName = "بيانات الطلاب";
+      break;
+    default:
+      throw new Error(`Invalid export option: ${export_who}`);
+  }
+
+  try {
+    const res = await api().get(export_url, {
+      responseType: "blob",
+    });
+    const downloadUrl = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    const today = new Date().toISOString().slice(0, 10);
+    link.setAttribute("download", `${fileName} ${today}.xlsx`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (error) {
+    console.log(error);
   }
 };

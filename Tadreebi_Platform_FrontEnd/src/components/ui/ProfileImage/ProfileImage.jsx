@@ -7,7 +7,7 @@ import {
   faXmark,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
-import { Dropdown, Image, Modal, notification } from "antd";
+import { Dropdown, Image, Modal, message, notification } from "antd";
 import api from "../../../data/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
 
@@ -17,6 +17,14 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   const [imageSrc, setImageSrc] = useState(personalPicture_url);
   const [deleted, setDeleted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const displayMessage = (type, contenet) => {
+    messageApi.open({
+      type: type,
+      content: contenet,
+    });
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -43,10 +51,10 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
             },
           }
         );
-        notification.success({ message: "تم تحديث الصورة الشخصية بنجاح" });
+        displayMessage('success', 'تم تحديث الصورة الشخصية')
       } catch (error) {
         console.log(error);
-        notification.error({ message: "لم يتم تحديث الصورة الشخصية" });
+        displayMessage('error', 'لم يتم تحديث الصورة الشخصية')
       }
     };
     reader.readAsDataURL(file);
@@ -70,9 +78,9 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
       setImageSrc(null);
       setDeleted(false);
       setIsModalVisible(false);
-      notification.success({ message: "تم حذف الصورة الشخصية بنجاح" });
+      displayMessage('success', 'تم حذف الصورة الشخصية')
     } catch (error) {
-      notification.error({ message: "لم يتم حذف الصورة الشخصية" });
+      displayMessage('error',  ' لم يتم حذف الصورة الشخصية')
     }
   };
 
@@ -121,6 +129,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   ];
   return (
     <div className="profile-image">
+      {contextHolder}
       <div className="container">
         <div className="circle">
           <Image

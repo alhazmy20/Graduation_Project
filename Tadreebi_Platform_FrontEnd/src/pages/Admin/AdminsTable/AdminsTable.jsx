@@ -1,19 +1,17 @@
 import "./AdminsTable.scss";
 import { Suspense, useState } from "react";
-import { Button, notification } from "antd";
+import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useFetch } from "../../../data/API";
-import NoData from "../../../components/ui/NoData/NoData";
 import {
   AdminStudentTable,
   Delete,
   Edit,
 } from "../../../components/ui/Table/TableFilter";
 import AdminsModal from "./components/AdminsModal";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, Link, defer, useLoaderData } from "react-router-dom";
 import { getAllAdmins } from "../../../util/api";
 
 const AdminsTable = () => {
@@ -22,21 +20,26 @@ const AdminsTable = () => {
   console.log(fName);
 
   const [statusFilter, setStatusFilter] = useState(null);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  // const filteredDataSource = statusFilter
-  //   ? adminsData.filter((application) => application.status === statusFilter)
-  //   : adminsData;
+  const filterData = (dataSource) => {
+    const filteredDataSource = statusFilter
+      ? dataSource?.filter(
+          (admin) => admin.status === statusFilter
+        )
+      : dataSource;
+      console.log(statusFilter);
+
+    return filteredDataSource;
+  };
 
   const columns = [
     {
       title: "اسم المشرف",
       dataIndex: "fName lName",
       align: "center",
-      render: (text, row) => (
-        <span>{`${row.fName} ${row.lName}`}</span>
-        ),
+      render: (text, row) => <span>{`${row.fName} ${row.lName}`}</span>,
     },
     {
       title: "البريد الالكتروني",
@@ -71,7 +74,7 @@ const AdminsTable = () => {
               endPoint_1={"admin"}
               endPoint_2={"manage-admins"}
             />
-            <Delete attr={record.managerEmail} modal={AdminsModal} />
+            <Delete attr={`${record.fName} ${record.lName}`} modal={AdminsModal} />
           </>
         );
       },
@@ -80,6 +83,7 @@ const AdminsTable = () => {
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
+    console.log(status);
   };
 
   const handlePaginationChange = (page, pageSize) => {
@@ -98,12 +102,10 @@ const AdminsTable = () => {
           <div className="tableContainer">
             <div className="excelContainer">
               <Button className="excelBtn">
-                <FontAwesomeIcon className="icon" icon={faPlusCircle} />
-                <strong>اضافة مشرف</strong>
-              </Button>
-              <Button className="excelBtn">
-                <FontAwesomeIcon className="icon" icon={faFileCsv} />
-                <strong>Excel</strong>
+                <Link to="/admin/add-admin">
+                  <FontAwesomeIcon className="icon" icon={faPlusCircle} />
+                  <strong>اضافة مشرف</strong>
+                </Link>
               </Button>
             </div>
             <div className="filterTable">
@@ -128,11 +130,11 @@ const AdminsTable = () => {
             </div>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل
-              {adminsData.length} سجل
+               {loadedData.length}  سجل
             </p>
             <Table
               col={columns}
-              data={loadedData}
+              data={filterData(loadedData)}
               Size={pageSize}
               handleChange={handlePaginationChange}
               emptyText="لا توجد بيانات"

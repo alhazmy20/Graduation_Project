@@ -10,6 +10,7 @@ import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import { getAdmin } from "../../../util/api";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import api from "../../../data/axiosConfig";
+import AdminFormInputs from "../../../components/form/AdminFormInputs";
 
 const AdminProfile = () => {
   const adminData = useLoaderData();
@@ -37,7 +38,7 @@ const AdminProfile = () => {
       setIsFormChanged(false);
     } catch (error) {
       console.error(error);
-      setLoading(false)
+      setLoading(false);
       notification.error({ message: "فشل تحديث البيانات" });
     }
   };
@@ -59,38 +60,7 @@ const AdminProfile = () => {
                   onValuesChange={onFormValuesChange}
                 >
                   <Row gutter={[16, 2]}>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="الإسم الأول"
-                        labelCol={{ span: 24 }}
-                        name="fName"
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="الإسم الأخير"
-                        labelCol={{ span: 24 }}
-                        name="lName"
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="البريد الإلكتروني"
-                        labelCol={{ span: 24 }}
-                        name="email"
-                        rules={emailValidationRules}
-                      />
-                    </Col>
-                    <Col xs={24} sm={12}>
-                      <FormInput
-                        label="رقم الجوال"
-                        labelCol={{ span: 24 }}
-                        name="phone"
-                        inputType="number"
-                        placeholder="05XXXXXXXX"
-                        rules={phoneRules}
-                      />
-                    </Col>
+                    <AdminFormInputs />
                   </Row>
                   <Button
                     type="primary"
@@ -103,7 +73,7 @@ const AdminProfile = () => {
                   </Button>
                 </Form>
               </FormCard>
-              <ResetPassword id={loaderData.id}/>
+              <ResetPassword id={loaderData.id} />
             </>
           )}
         </Await>

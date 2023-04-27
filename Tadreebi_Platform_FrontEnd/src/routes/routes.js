@@ -58,6 +58,7 @@ import { applicantsPostLoader } from "../pages/institution/InstPostDetails/InstP
 import { opportunityDataLoader } from "../pages/institution/instPostForm/InstPostForm";
 
 import { applicationsLoader } from "../pages/student/Applications/Application";
+import AddAdmin from "../pages/Admin/AddAdmin/AddAdmin";
 
 //Institution Routes
 const institutionRoutes = (
@@ -131,6 +132,8 @@ const adminRoutes = (
       element={<AdminProfile isAdmin={true} />}
       loader={adminLoaderWithId}
     />
+    <Route path="add-admin" element={<AddAdmin />} />
+
     <Route
       path="profile"
       element={<AdminProfile />}

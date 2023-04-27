@@ -14,7 +14,7 @@ const AdminsModal = ({ modalOpen, setModalOpen, name }) => {
       className="mod"
     >
 
-      <div className="delText">هل أنت متأكد من حذف المشرف صاحب الإيميل {name}؟</div>
+      <div className="delText">هل أنت متأكد من حذف المشرف "{name}" ؟</div>
       <span className="smallDelText">*في حال قمت بالحذف لن يمكنك استرجاع حساب المشرف</span>
       <div className="StudentsModal">
             <Button className="delButton">حذف</Button>

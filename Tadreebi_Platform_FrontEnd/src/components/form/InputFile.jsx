@@ -10,9 +10,18 @@ const InputFile = (props) => {
     return false;
   };
   const [file, setFile] = useState(fileName);
+  const fileNameDisplay = file
+    ? file.length > 20
+      ? file.slice(0, 20) + "..."
+      : file
+    : fileName
+    ? fileName.length > 20
+      ? fileName.slice(0, 20) + "..."
+      : fileName
+    : "ارفاق ملف";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column"}}>
       <label
         style={{
           color: "#808080",
@@ -23,22 +32,23 @@ const InputFile = (props) => {
       >
         {label}
       </label>
-      <Form.Item
-        {...others}
-        // rules={!fileName && [{ required: true, message: `الرجاء ارفاق ${label}` }]}
-      >
+      <Form.Item {...others}>
         <Upload
           showUploadList={true}
           beforeUpload={handleBeforeUpload}
           multiple={false}
-          fileList={ []}
-          accept=".pdf"//NOTE only pdf file
+          fileList={[]}
+          accept=".pdf" //NOTE only pdf file
           onChange={(e) => {
             setFile(e.file.name);
           }}
+          
         >
-          <Button icon={<UploadOutlined />} style={{ minWidth: "200px", maxWidth:'fitContent' }}>
-            {file ? file : fileName ? fileName : 'ارفاق ملف'}
+          <Button
+            icon={<UploadOutlined />}
+            title={fileName}
+          >
+            {fileNameDisplay}
           </Button>
         </Upload>
       </Form.Item>

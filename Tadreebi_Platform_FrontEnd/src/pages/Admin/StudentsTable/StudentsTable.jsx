@@ -15,7 +15,8 @@ import {
 } from "../../../components/ui/Table/TableFilter";
 import StudentsModal from "./components/StudentsModal";
 import { Await, defer, useLoaderData } from "react-router-dom";
-import { getAllStudents } from "../../../util/api";
+import { exportExcelFile, getAllStudents } from "../../../util/api";
+import api from "../../../data/axiosConfig";
 
 const StudentsTable = () => {
   const studentsData = useLoaderData();
@@ -79,11 +80,15 @@ const StudentsTable = () => {
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
+
   return (
     <div className="tableContainer">
       <div className="excelContainer">
-        <Button className="excelBtn">
-          <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
+        <Button
+          className="excelBtn"
+          onClick={() => exportExcelFile("All Student")}
+        >
+          <FontAwesomeIcon className="icon" icon={faFileCsv} />
           <strong>Excel</strong>
         </Button>
       </div>
@@ -108,7 +113,7 @@ const StudentsTable = () => {
         </Button>
       </div>
       <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}{" "}
+        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {studentsData.length}
         سجل
       </p>
       <Suspense fallback={<Spinner />}>

@@ -1,0 +1,33 @@
+@import "../../../../index.scss";
+
+
+  .student-accept-modal {
+    .ant-modal-header {
+      display: flex;
+      justify-content: center;
+
+      .ant-modal-title {
+        color: #f46a61;
+
+        @include breakpoint-up(xlarge) {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .modalDetailsContainer {
+      display: flex;
+      flex-direction: column;
+
+      .modalDetails {
+        @include breakpoint-up(xlarge) {
+          font-size: 1rem;
+        }
+      }
+
+      .dont-show-checkbox{
+        margin-top: 10px;
+      }
+    }
+  }
+

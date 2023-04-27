@@ -5,15 +5,15 @@ import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetail
 import Table from "../../../components/ui/Table/Table";
 import {
   TableText,
-  InstitutionAccept,
   StudentDetails,
 } from "../../../components/ui/Table/TableFilter";
 import "./InstPostDetails.scss";
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { getPostApplicants } from "../../../util/api";
+import { exportExcelFile, getPostApplicants } from "../../../util/api";
 import api from "../../../data/axiosConfig";
+import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
 
 const InstPostDetails = () => {
   const applicants_post = useLoaderData();
@@ -76,7 +76,7 @@ const InstPostDetails = () => {
       dataIndex: "applicant_status",
       align: "center",
       render: (text, row) => (
-        <InstitutionAccept status={text} applicant_id={row.applicant_id} />
+        <StudentAcceptProcedure status={text} applicant_id={row.applicant_id} />
       ),
     },
   ];
@@ -85,15 +85,25 @@ const InstPostDetails = () => {
     setStatusFilter(status);
   };
 
-  const exportExcelFile = async () => {
-    try {
-      const res = await api().get(`api/posts/${id}/applicants/export`);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
+  // const exportExcelFile = async (post_title) => {
+  //   try {
+  //     const res = await api().get(`api/posts/${id}/applicants/export`, {
+  //       responseType: "blob",
+  //     });
+  //     console.log(res);
+  //     const downloadUrl = window.URL.createObjectURL(new Blob([res.data]));
+  //     const link = document.createElement("a");
+  //     link.href = downloadUrl;
+  //     const today = new Date().toISOString().slice(0, 10);
+  //     link.setAttribute("download", `${post_title} ${today}.xlsx`);
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     link.remove();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -134,7 +144,12 @@ const InstPostDetails = () => {
               <span className="studentApplications">
                 <strong>طلبات تقديم الطلاب</strong>
               </span>
-              <Button className="excelBtn" onClick={exportExcelFile}>
+              <Button
+                className="excelBtn"
+                onClick={() =>
+                  exportExcelFile("Post Applicants", id, loadedData.post.title)
+                }
+              >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />
                 <span className="excelSpan">
                   <strong>Excel</strong>

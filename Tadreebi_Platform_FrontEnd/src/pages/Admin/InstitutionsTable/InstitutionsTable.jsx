@@ -12,7 +12,7 @@ import {
 } from "../../../components/ui/Table/TableFilter";
 import InstitutionsModal from "./components/InstitutionsModal";
 import { Await, defer, useLoaderData } from "react-router-dom";
-import { getAllInstitutions } from "../../../util/api";
+import { exportExcelFile, getAllInstitutions } from "../../../util/api";
 
 const InstitutionsTable = () => {
   const institutionsData = useLoaderData();
@@ -85,7 +85,10 @@ const InstitutionsTable = () => {
         {(loadedData) => (
           <div className="tableContainer">
             <div className="excelContainer">
-              <Button className="excelBtn">
+              <Button
+                className="excelBtn"
+                onClick={() => exportExcelFile("All Institution")}
+              >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
                 <strong>Excel</strong>
               </Button>
