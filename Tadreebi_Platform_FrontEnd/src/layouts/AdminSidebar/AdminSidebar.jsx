@@ -26,13 +26,6 @@ const AdminSidebar = () => {
   const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
     useProSidebar();
 
-  if (!auth.user) {
-    return <Navigate to="/login" />;
-  }
-  if (auth.user?.role !== "Admin") {
-    return <Navigate to="/" />;
-  }
-
   return (
     <>
       <aside className="SideBarContainer">
@@ -105,7 +98,7 @@ const AdminSidebar = () => {
                     to={"/admin/manage-admins"}
                     end
                   >
-                    {auth.user?.id === 1 && auth.user?.role === "Admin" && (
+                    {auth.user?.role === "SuperAdmin" && (
                       <MenuItem> ادارة المشرفين </MenuItem>
                     )}
                   </NavLink>
@@ -167,7 +160,7 @@ const AdminSidebar = () => {
                 </MenuItem>
               )}
             </NavLink>
-            <NavLink to={"/admin/logout"} end>
+            <NavLink onClick={() => auth.logout()} end>
               {({ isActive }) => (
                 <MenuItem
                   className={

@@ -10,6 +10,7 @@ import {
 import { Dropdown, Image, Modal, message, notification } from "antd";
 import api from "../../../data/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
+import { displayMessage } from '../../../util/helpers';
 
 const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   const auth = useAuth();
@@ -18,13 +19,6 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   const [deleted, setDeleted] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-
-  const displayMessage = (type, contenet) => {
-    messageApi.open({
-      type: type,
-      content: contenet,
-    });
-  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];

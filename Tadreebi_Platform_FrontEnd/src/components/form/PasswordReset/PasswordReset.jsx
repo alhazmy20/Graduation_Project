@@ -71,7 +71,6 @@ const ResetPassword = () => {
           >
             {loading ? "جاري الحفظ..." : "حفظ"}
           </Button>
-          <span className="error-message">لقد حدث خطأ</span>
         </Form>
       </FormCard>
     </div>

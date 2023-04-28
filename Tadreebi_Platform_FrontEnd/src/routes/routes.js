@@ -36,7 +36,7 @@ import AdminsTable, {
 } from "../pages/Admin/AdminsTable/AdminsTable";
 import { postsLoader } from "../pages/general/TrainingOpportunities/TrainingOpportunities";
 import { opportunityLoader } from "../pages/general/TrainingOpportunity/TrainingOpportunity";
-import { loader as allNewsLoader, loader } from "../pages/general/News/News";
+import { loader as allNewsLoader } from "../pages/general/News/News";
 import { newsDetailsloader } from "../pages/general/News/NewsDetails/NewsDetails";
 import { homeLoader } from "../pages/general/Home/Home";
 import { institutionsLoader } from "../pages/Admin/InstitutionsTable/InstitutionsTable";
@@ -59,6 +59,7 @@ import { opportunityDataLoader } from "../pages/institution/instPostForm/InstPos
 
 import { applicationsLoader } from "../pages/student/Applications/Application";
 import AddAdmin from "../pages/Admin/AddAdmin/AddAdmin";
+import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
 
 //Institution Routes
 const institutionRoutes = (
@@ -139,7 +140,16 @@ const adminRoutes = (
       element={<AdminProfile />}
       loader={adminProfileLoader}
     />
-    <Route path="manage-posts" element={<PostsTable />} />
+    <Route
+      path="manage-posts"
+      element={<PostsTable />}
+      loader={AdminPostsLoader}
+    />
+    <Route
+      path="manage-posts/:id"
+      element={<TrainingOpportunity />}
+      loader={opportunityLoader}
+    />
     <Route path="manage-news" element={<NewsTable />} />
   </Route>
 );
@@ -157,7 +167,7 @@ export const routes = createBrowserRouter(
         />
         <Route
           path="training-opportunities/:id"
-          element={<TrainingOpportunity />}
+          element={<TrainingOpportunity withApply={true}/>}
           loader={opportunityLoader}
           errorElement={<NotFound />}
         />

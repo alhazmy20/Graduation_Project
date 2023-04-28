@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ data }) => {
   const navigate = useNavigate();
+  const MAX_DISPLAY = 5;
 
   return (
     <Card
@@ -20,12 +21,18 @@ const PostCard = ({ data }) => {
     >
       <Space direction="vertical" size="large" className="space-tag">
         <div className="majors">
-          {data.post_majors?.map((major, index) => (
+          {data.post_majors?.slice(0, MAX_DISPLAY).map((major, index) => (
             <span key={index} className="major">
               {major.major}
             </span>
           ))}
+          {data.post_majors?.length > MAX_DISPLAY && (
+            <span className="major">
+              +{data.post_majors.length - MAX_DISPLAY}
+            </span>
+          )}
         </div>
+
         <div className="details-container">
           <div className="detail">
             <FontAwesomeIcon className="icon" icon={faCity} />

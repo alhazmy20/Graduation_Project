@@ -12,7 +12,7 @@ const InfoCard = ({ item }) => {
     >
           <div className="img-container" style={{ width: "100%" }}>
           <Image
-          preview={''}
+          preview={false}
           src={
             item.logo.logo_url ||
             "https://www9.0zz0.com/2023/04/22/07/971570307.png"

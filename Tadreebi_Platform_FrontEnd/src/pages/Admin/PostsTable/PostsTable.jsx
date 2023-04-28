@@ -1,54 +1,40 @@
-import React from 'react'
+import React, { Suspense } from "react";
 import { useState } from "react";
-import { Button, notification } from "antd";
+import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { useFetch } from "../../../data/API";
-import NoData from "../../../components/ui/NoData/NoData";
-import { Delete, StatusText} from "../../../components/ui/Table/TableFilter";
-import PostsModal from './components/PostsModal';
-
+import { Delete } from "../../../components/ui/Table/TableFilter";
+import PostsModal from "./components/PostsModal";
+import { Await, Link, defer, useLoaderData } from "react-router-dom";
+import { getPosts } from "../../../util/api";
 
 const PostsTable = () => {
-  const { data, loading, error } = useFetch(
-    "http://localhost:8000/adminPosts"
-  );
+  const postsData = useLoaderData();
+
   const [statusFilter, setStatusFilter] = useState(null);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(7);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  if (!data) {
-    return <NoData text="لا توجد اعلانات حاليا" />;
-  }
-
-  const {
-    data: { data: PostData },
-  } = data;
-
-  const filteredDataSource = statusFilter
-    ? PostData.filter((application) => application.postStatus === statusFilter)
-    : PostData;
+  // const filteredDataSource = statusFilter
+  //   ? PostData.filter((application) => application.postStatus === statusFilter)
+  //   : PostData;
 
   const columns = [
+    {
+      title: "عنوان فرصة التدريب",
+      dataIndex: "title",
+      align: "center",
+      render: (text, row) =>{
+        return <Link to={`${row.id}`}>{text}</Link>
+      }
+    },
     {
       title: "اسم المؤسسة",
       dataIndex: "inst",
       align: "center",
-    },
-    {
-      title: "اسم الاعلان",
-      dataIndex: "title",
-      align: "center",
+      render: (text, row)=>{
+        return <span>{row.institution.institutionName}</span>
+      }
     },
     {
       title: "تاريخ النشر",
@@ -59,18 +45,17 @@ const PostsTable = () => {
       title: "الحالة",
       dataIndex: "postStatus",
       align: "center",
-      render: StatusText
+      // render: (status) => StatusText(status),
     },
     {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
-      render: (text, record) => {
-         return <Delete attr={record.title} modal={PostsModal}/>
+      render: (text, row) => {
+        return <Delete attr={row.title} modal={PostsModal} />;
       },
     },
   ];
-
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
@@ -78,51 +63,59 @@ const PostsTable = () => {
 
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, PostData.length);
+    const end = Math.min(start + pageSize - 1, postsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
   return (
-    <div className="tableContainer">
-    <div className="excelContainer">
-      <Button className="excelBtn">
-        <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
-        <strong>Excel</strong>
-      </Button>
-    </div>
-    <div className="filterTable">
-      <Button
-        className="button-filter"
-        onClick={() => handleStatusFilterChange("")}
+    <Suspense fallback={<Spinner />}>
+      <Await
+        resolve={postsData?.posts}
+        errorElement={<p>Error loading blog posts.</p>}
       >
-        الكل
-      </Button>
-      <Button
-        className="button-filter"
-        onClick={() => handleStatusFilterChange("نشط")}
-      >
-        الاعلانات النشطة
-      </Button>
-      <Button
-        className="button-filter"
-        onClick={() => handleStatusFilterChange("غير نشط")}
-      >
-        الاعلانات الغير نشطة
-      </Button>
-    </div>
-    <p className="rangeText">
-      عرض {currentRange[0]} إلى {currentRange[1]} من أصل {PostData.length}{" "}
-      سجل
-    </p>
-    <Table
-      col={columns}
-      data={filteredDataSource}
-      Size={pageSize}
-      handleChange={handlePaginationChange}
-      emptyText="لا توجد بيانات"
-    />
-  </div>
-  )
-}
+        {(loadedPosts) => (
+          <div className="tableContainer">
+            <div className="excelContainer"></div>
+            <div className="filterTable">
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("")}
+              >
+                الكل
+              </Button>
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("نشط")}
+              >
+                الاعلانات النشطة
+              </Button>
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("غير نشط")}
+              >
+                الاعلانات الغير نشطة
+              </Button>
+            </div>
+            <p className="rangeText">
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل
+              {loadedPosts.length} سجل
+            </p>
+            <Table
+              col={columns}
+              data={loadedPosts}
+              Size={pageSize}
+              handleChange={handlePaginationChange}
+              emptyText="لا توجد بيانات"
+            />
+          </div>
+        )}
+      </Await>
+    </Suspense>
+  );
+};
 
-export default PostsTable
+export default PostsTable;
+
+export function AdminPostsLoader() {
+  return defer({ posts: getPosts() });
+}

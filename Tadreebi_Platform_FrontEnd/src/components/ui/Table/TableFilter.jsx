@@ -1,10 +1,10 @@
 import { Button, Modal, notification } from "antd";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import StudentModal from "../../../pages/institution/InstPostDetails/components/StudentModal";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import api from '../../../data/axiosConfig'
+import api from "../../../data/axiosConfig";
 
 export const TableText = ({ text }) => {
   let style = {};
@@ -47,91 +47,91 @@ export const InstPostsText = (text) => {
   return <span style={style}>{text}</span>;
 };
 
-export const InstitutionAccept = ({ status, applicant_id }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [statusId, setStatusId] = useState("");
-  const [showBtnContainer, setShowBtnContainer] = useState(true);
+// export const InstitutionAccept = ({ status, applicant_id }) => {
+//   const [modalOpen, setModalOpen] = useState(false);
+//   const [statusId, setStatusId] = useState("");
+//   const [showBtnContainer, setShowBtnContainer] = useState(true);
 
-  const handleStatus = async () => {
-    try {
-      await api().put(`api/applications/${applicant_id}`, {
-        status_id: statusId,
-      });
-      setModalOpen(false);
-      setShowBtnContainer(false);
-      notification.success({
-        message: "تم قبول الطالب و سيتم اشعاره بذلك.",
-        description: 'اصبحت حالة الطلب الآن "بإنتظار تأكيد الطالب"',
-      });
-    } catch (error) {
-      console.log(error);
-      notification.error({ message: error.response.data.message });
-    }
-  };
+//   const handleStatus = async () => {
+//     try {
+//       await api().put(`api/applications/${applicant_id}`, {
+//         status_id: statusId,
+//       });
+//       setModalOpen(false);
+//       setShowBtnContainer(false);
+//       notification.success({
+//         message: "تم قبول الطالب و سيتم اشعاره بذلك.",
+//         description: 'اصبحت حالة الطلب الآن "بإنتظار تأكيد الطالب"',
+//       });
+//     } catch (error) {
+//       console.log(error);
+//       notification.error({ message: error.response.data.message });
+//     }
+//   };
 
-  return (
-    <>
-      {status === "بإنتظار موافقة المنشأة" && showBtnContainer && (
-        <span className="btnContainer">
-          <Button
-            className="acceptBtn"
-            onClick={() => {
-              setModalOpen(true);
-              setStatusId("2");
-            }}
-            disabled={!showBtnContainer}
-          >
-            قبول
-          </Button>
-          <Button
-            className="rejectBtn"
-            onClick={() => {
-              setModalOpen(true);
-              setStatusId("4");
-            }}
-            disabled={!showBtnContainer}
-          >
-            رفض
-          </Button>
-        </span>
-      )}
+//   return (
+//     <>
+//       {status === "بإنتظار موافقة المنشأة" && showBtnContainer && (
+//         <span className="btnContainer">
+//           <Button
+//             className="acceptBtn"
+//             onClick={() => {
+//               setModalOpen(true);
+//               setStatusId("2");
+//             }}
+//             disabled={!showBtnContainer}
+//           >
+//             قبول
+//           </Button>
+//           <Button
+//             className="rejectBtn"
+//             onClick={() => {
+//               setModalOpen(true);
+//               setStatusId("4");
+//             }}
+//             disabled={!showBtnContainer}
+//           >
+//             رفض
+//           </Button>
+//         </span>
+//       )}
 
-      <Modal
-        title="تنبيه:"
-        className="modalContainer"
-        open={modalOpen}
-        onOk={handleStatus}
-        onCancel={() => setModalOpen(false)}
-      >
-        <div className="modalDetailsContainer">
-          {(() => {
-            if (statusId === "2") {
-              return (
-                <span className="modalDetails">
-                  <strong>
-                    في حال قبولك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
-                    اشعار الطالب بالقبول.
-                  </strong>
-                </span>
-              );
-            } else {
-              return (
-                <span className="modalDetails">
-                  <strong>
-                    في حال رفضك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
-                    اشعار الطالب بالرفض.
-                  </strong>
-                </span>
-              );
-            }
-          })()}
-          <br />
-          <br />
-        </div>
-      </Modal>
-    </>
-  );
-};
+//       <Modal
+//         title="تنبيه:"
+//         className="modalContainer"
+//         open={modalOpen}
+//         onOk={handleStatus}
+//         onCancel={() => setModalOpen(false)}
+//       >
+//         <div className="modalDetailsContainer">
+//           {(() => {
+//             if (statusId === "2") {
+//               return (
+//                 <span className="modalDetails">
+//                   <strong>
+//                     في حال قبولك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
+//                     اشعار الطالب بالقبول.
+//                   </strong>
+//                 </span>
+//               );
+//             } else {
+//               return (
+//                 <span className="modalDetails">
+//                   <strong>
+//                     في حال رفضك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
+//                     اشعار الطالب بالرفض.
+//                   </strong>
+//                 </span>
+//               );
+//             }
+//           })()}
+//           <br />
+//           <br />
+//         </div>
+//       </Modal>
+//     </>
+//   );
+// };
 
 export function StudentDetails({ name, data }) {
   console.log(data);
@@ -161,7 +161,7 @@ export function StudentDetails({ name, data }) {
   );
 }
 
-export function Delete({ attr, modal: Modal }) {
+export function Delete({ name, modal: Modal, adminId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -172,7 +172,7 @@ export function Delete({ attr, modal: Modal }) {
 
   return (
     <span>
-      <span onClick={() => handleDelete(`${attr}`)}>
+      <span onClick={() => handleDelete(`${name}`)}>
         {
           <FontAwesomeIcon
             icon={faTrash}
@@ -181,15 +181,11 @@ export function Delete({ attr, modal: Modal }) {
         }
       </span>
       {selected && (
-        // <NewsModal
-        //   modalOpen={isModalOpen}
-        //   setModalOpen={setIsModalOpen}
-        //   name={selectedNews}
-        // />
         <Modal
           modalOpen={isModalOpen}
           setModalOpen={setIsModalOpen}
           name={selected}
+          adminId={adminId}
         />
       )}
     </span>

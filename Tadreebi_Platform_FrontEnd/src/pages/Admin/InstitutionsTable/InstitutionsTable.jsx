@@ -8,11 +8,11 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import {
   Delete,
   Edit,
-  StatusText,
 } from "../../../components/ui/Table/TableFilter";
 import InstitutionsModal from "./components/InstitutionsModal";
 import { Await, defer, useLoaderData } from "react-router-dom";
 import { exportExcelFile, getAllInstitutions } from "../../../util/api";
+import ActivateInstitAccount from "./components/ActivateInstitAccount";
 
 const InstitutionsTable = () => {
   const institutionsData = useLoaderData();
@@ -45,7 +45,9 @@ const InstitutionsTable = () => {
       title: "الحالة",
       dataIndex: "isActive",
       align: "center",
-      render: StatusText,
+      render: (text, record) => {
+        return <ActivateInstitAccount record={record}/>;
+      },
     },
     {
       title: "الإجراء",

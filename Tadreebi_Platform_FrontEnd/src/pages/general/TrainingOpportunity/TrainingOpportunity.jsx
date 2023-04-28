@@ -12,25 +12,39 @@ import "./TrainingOpportunity.scss";
 import { getPost } from "../../../util/api";
 import api from "../../../data/axiosConfig";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import { useAuth } from "../../../auth/useContext";
+import { displayMessage } from "../../../util/helpers";
 
-const TrainingOpportunity = () => {
+const TrainingOpportunity = ({ withApply }) => {
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
   const error = useRouteError();
   const postData = useLoaderData();
+  const auth = useAuth();
 
   const id = useParams();
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
-    const {id: post_id} = id;
+    if (!auth.user) {
+      return displayMessage("warning", "يجب تسجيل الدخول");
+    }
+    if (auth.user?.role !== "Student") {
+      return displayMessage(
+        "warning",
+        "يمكن للطلاب فقط التقديم على الفرص التدريبية"
+      );
+    }
+    const { id: post_id } = id;
     console.log(post_id);
-    setIsSubmitting(true);
     try {
+      setLoading(true);
       await api().post(`/api/applications?post_id=${post_id}`);
-      setIsSubmitting(false);
+      setLoading(false);
+      setDisable(true);
       notification.success({ message: "تم التقديم بنجاح." });
     } catch (error) {
       console.log(error);
-      setIsSubmitting(false);
+      setLoading(false);
       notification.error({ message: error.response.data.message });
     }
   };
@@ -60,19 +74,24 @@ const TrainingOpportunity = () => {
               />
               <Space size={5} direction="vertical" className="space">
                 <h1>{loadedData.title}</h1>
-                <span>سدايا</span>
+                <span className="institution-name">
+                  {loadedData.institution.institutionName}
+                </span>
               </Space>
             </div>
-            <p dangerouslySetInnerHTML={{__html: loadedData.content}}></p>
+            <p dangerouslySetInnerHTML={{ __html: loadedData.content }}></p>
             <PostDetailsTable data={loadedData} />
-            <Button
-              type="primary"
-              className="form-btn"
-              onClick={handleSubmit}
-              loading={isSubmitting}
-            >
-              تقديم
-            </Button>
+            {withApply && (
+              <Button
+                type="primary"
+                className="form-btn"
+                onClick={handleSubmit}
+                loading={loading}
+                disabled={disable}
+              >
+                تقديم
+              </Button>
+            )}
           </div>
         )}
       </Await>

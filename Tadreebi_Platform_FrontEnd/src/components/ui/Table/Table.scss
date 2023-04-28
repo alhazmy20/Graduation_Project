@@ -2,37 +2,37 @@
 @import "../../../index.scss";
 
 .ant-table {
-  .row-title{
-    color: #00B1E7;
+  .row-title {
+    color: #00b1e7;
     font-weight: 600;
   }
-    border: 0.847884px solid #CCCCCC;
-    .ant-table-container {
-      .ant-table-content {
-        table {
-          .ant-table-thead {
-            tr {
-              .ant-table-cell {
-                background-color: #008374 !important;
-                text-align: center;
-                opacity: 70%;
-                color: white !important;
-                font-size: 1rem;
+  border: 0.847884px solid #cccccc;
+  .ant-table-container {
+    .ant-table-content {
+      table {
+        .ant-table-thead {
+          tr {
+            .ant-table-cell {
+              background-color: #008374 !important;
+              text-align: center;
+              opacity: 70%;
+              color: white !important;
+              font-size: 1rem;
 
-                @include breakpoint-down(small){
-                  padding: 0;
-                }
+              @include breakpoint-down(small) {
+                padding: 0;
               }
             }
           }
+        }
 
-          .ant-table-thead, .ant-table-tbody{
-            tr{
-              font-family: $font-inter-regular;
-              .ant-table-cell{
-                @include breakpoint-down(small){
-                  padding: 0;
-                }
+        .ant-table-thead,
+        .ant-table-tbody {
+          tr {
+            font-family: $font-inter-regular;
+            .ant-table-cell {
+              @include breakpoint-down(small) {
+                padding: 0;
               }
             }
           }
@@ -40,14 +40,14 @@
       }
     }
   }
+}
 
-  
 .tableContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 2rem;
-  @include breakpoint-down(small){
+  @include breakpoint-down(small) {
     align-items: center;
     margin: 0.75rem auto;
     width: 95%;
@@ -58,16 +58,24 @@
   }
 
   .inactiveBtn {
-    background-color: #F46A61;
+    background-color: #f46a61;
     color: white;
     font-weight: 600;
     font-size: 1rem;
+
+    &:hover {
+      color: #fff !important;
+    }
   }
   .activeBtn {
     background-color: $Green;
     color: white;
     font-weight: 600;
     font-size: 1rem;
+
+    &:hover {
+      color: #fff !important;
+    }
   }
 
   .rangeText {
@@ -76,47 +84,47 @@
     margin-bottom: 1rem;
     font-weight: 500;
   }
- 
-    .newBtn {
-      background-color: #01AD7E;
-      color: white;
-      font-size: 15px;
-      font-weight: 500;
-      width: fit-content;
-      margin-bottom: 1rem;
+
+  .newBtn {
+    background-color: #01ad7e;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    width: fit-content;
+    margin-bottom: 1rem;
+  }
+
+  .icon {
+    margin-left: 1rem;
+  }
+  .excelContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    @include breakpoint-down(small) {
+      flex-direction: column;
     }
 
-    .icon {
-      margin-left: 1rem;
-    }
-    .excelContainer{
+    .excelBtn {
+      margin-right: 1rem;
       display: flex;
-      flex-direction: row;
-      margin-bottom: 1rem;
+      justify-content: center;
       align-items: center;
+      background-color: #008374;
+      color: #fff;
 
-      @include breakpoint-down(small){
-          flex-direction: column;
+      .excelSpan {
+        padding-right: 0.5rem;
       }
 
-      .excelBtn{
-          margin-right: 1rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: #008374;
-          color: #fff;
-
-          .excelSpan{
-              padding-right: 0.5rem;
-          }
-
-          @include breakpoint-down(small){
-              margin: 0;
-              width: 100%;
-              justify-content: center;
-              align-items: center;
-          }
+      @include breakpoint-down(small) {
+        margin: 0;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
       }
+    }
   }
 }

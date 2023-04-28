@@ -74,7 +74,7 @@ const AdminsTable = () => {
               endPoint_1={"admin"}
               endPoint_2={"manage-admins"}
             />
-            <Delete attr={`${record.fName} ${record.lName}`} modal={AdminsModal} />
+            <Delete name={`${record.fName} ${record.lName}`} modal={AdminsModal} adminId={record.id}/>
           </>
         );
       },

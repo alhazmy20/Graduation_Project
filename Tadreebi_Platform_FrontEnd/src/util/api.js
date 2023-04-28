@@ -2,7 +2,7 @@ import { notification } from "antd";
 import axios from "axios";
 import api from "../data/axiosConfig";
 
-export async function getPosts(region = "", city = "", major = "") {
+export const getPosts = async(region = "", city = "", major = "") => {
   try {
     const res = await api().get(
       `api/posts?filter[region]=${region}&filter[city]=${city}&filter[major]=${major}`
@@ -19,18 +19,20 @@ export async function getPosts(region = "", city = "", major = "") {
   }
 }
 
-export async function getPost(id) {
+export const getPost = async (id) => {
   try {
     const res = await api().get(`api/posts/${id}`);
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
+    console.log(err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
   }
 }
 
-export async function getAllNews() {
+export const getAllNews = async ()=> {
   const res = await api().get("api/news");
   if (!res) {
     throw { message: "Field to fetch posts.", status: 500 };
@@ -38,13 +40,13 @@ export async function getAllNews() {
   return res;
 }
 
-export async function getNews(id) {
+export const getNews = async (id) => {
   const res = await api().get(`api/news/${id}`);
   if (!res) {
     throw { message: "Field to fetch posts.", status: 500 };
   }
   return res;
-}
+};
 
 export const getAllInstitutions = async () => {
   try {

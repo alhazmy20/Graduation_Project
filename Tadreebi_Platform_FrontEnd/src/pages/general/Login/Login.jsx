@@ -31,7 +31,7 @@ const Login = ({ isAdmin }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigate(auth.user.role === 'Admin' ? "/admin" : "/");
+      navigate(auth.user.role === 'Admin' || 'SuperAdmin' ? "/admin" : "/");
     }
   }, [auth, navigate, isAdmin]);
 

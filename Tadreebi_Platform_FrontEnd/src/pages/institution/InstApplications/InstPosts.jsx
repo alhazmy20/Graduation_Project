@@ -46,8 +46,8 @@ const InstPosts = () => {
       align: "center",
     },
     {
-      title: "التاريخ",
-      dataIndex: "t_startDate",
+      title: "وقت النشر",
+      dataIndex: "created_at",
       align: "center",
     },
     {
