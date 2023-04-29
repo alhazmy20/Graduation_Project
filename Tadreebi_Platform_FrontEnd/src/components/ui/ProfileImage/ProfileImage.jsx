@@ -1,4 +1,4 @@
-import React, { cloneElement, useState } from "react";
+import React, {  useState } from "react";
 import "./ProfileImage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,7 +7,7 @@ import {
   faXmark,
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
-import { Dropdown, Image, Modal, message, notification } from "antd";
+import { Dropdown, Image, Modal, message } from "antd";
 import api from "../../../data/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
 import { displayMessage } from '../../../util/helpers';

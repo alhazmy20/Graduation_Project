@@ -1,22 +1,16 @@
-import { Button, Col, Form, Row, Space, notification } from "antd";
+import { Button, Form } from "antd";
 import React, { useState, Suspense } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import FormInput from "../../../components/form/FormInput";
-import {
-  emailValidationRules,
-  inputGpaRules,
-  nationalIdRules,
-  phoneRules,
-} from "../../../Validation/rules";
-import InputFile from "../../../components/form/InputFile";
 import { useAuth } from "../../../auth/useContext";
 import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import { getStudent } from "../../../util/api";
 import api from "../../../data/axiosConfig";
+import StudentProfileInputs from "../../../components/form/StudentProfileInputs";
+import { displayMessage } from '../../../util/helpers';
 
 const StudentProfile = ({ isAdmin }) => {
   const studentData = useLoaderData();
@@ -30,6 +24,10 @@ const StudentProfile = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
+    const { fullName, ...others } = values;
+    const name = extractFullName(fullName);
+    values = { ...name, ...others };
+
     let formData = new FormData();
     for (const key in values) {
       if (Object.hasOwnProperty.call(values, key)) {
@@ -57,12 +55,12 @@ const StudentProfile = ({ isAdmin }) => {
           },
         }
       );
-      notification.success({ message: "تم تحديث البيانات بنجاح" });
+      displayMessage('success', 'تم تحديث البيانات')
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
       console.log(error);
-      notification.error({ message: "فشل تحديث البيانات" });
+      displayMessage('error', 'لم يتم تحديث البيانات')
     }
     formData = new FormData();
   };
@@ -80,6 +78,17 @@ const StudentProfile = ({ isAdmin }) => {
     const firstName = nameParts[0];
     const lastName = nameParts[nameParts.length - 1];
     return `${firstName} ${lastName}`;
+  };
+
+  const extractFullName = (fullName) => {
+    const nameParts = fullName.split(" ");
+    const individualNames = {
+      fName: nameParts[0],
+      sName: nameParts[1],
+      tName: nameParts[2],
+      lName: nameParts[3],
+    };
+    return individualNames;
   };
 
   return (
@@ -108,122 +117,10 @@ const StudentProfile = ({ isAdmin }) => {
                 encType="multipart/form-data"
                 initialValues={loadedData}
               >
-                <h1 className="green-underline">البيانات الأساسية</h1>
-                <Row gutter={[16, 0]}>
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="الإسم الرباعي"
-                      labelCol={{ span: 24 }}
-                      name="fullName"
-                      disabled={!isAdmin}
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="البريد الإلكتروني"
-                      labelCol={{ span: 24 }}
-                      name="email"
-                      disabled={!isAdmin}
-                      rules={emailValidationRules}
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="رقم الهوية"
-                      labelCol={{ span: 24 }}
-                      name="national_ID"
-                      inputType="number"
-                      disabled={!isAdmin}
-                      rules={nationalIdRules}
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="رقم الجوال"
-                      labelCol={{ span: 24 }}
-                      name="phone"
-                      inputType="number"
-                      rules={phoneRules}
-                    />
-                  </Col>
-
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="الجنس"
-                      labelCol={{ span: 24 }}
-                      name="gender"
-                      disabled={!isAdmin}
-                    />
-                  </Col>
-
-                  <Col xs={24} sm={12}>
-                    <InputFile
-                      label="السيرة الذاتية"
-                      name="CV"
-                      fileName={loadedData.studentFiles.CV_filename}
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <InputFile
-                      name="nationalID"
-                      label="الهوية الوطنية"
-                      fileName={loadedData.studentFiles.nationalID_filename}
-                    />
-                  </Col>
-                </Row>
-                <h1 className="green-underline">البيانات الأكاديمية</h1>
-                <Row gutter={[16, 0]}>
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="اسم الجامعة"
-                      labelCol={{ span: 24 }}
-                      name="university"
-                      disabled={!isAdmin}
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <FormInput
-                      label="التخصص"
-                      labelCol={{ span: 24 }}
-                      name="major"
-                      disabled={!isAdmin}
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <Space>
-                      <FormInput
-                        label="المعدل التراكمي"
-                        labelCol={{ span: 24 }}
-                        name="GPA"
-                        inputType="number"
-                        rules={inputGpaRules(loadedData.GPA_Type)}
-                      />
-                      <FormInput
-                        label="من"
-                        labelCol={{ span: 24 }}
-                        name="GPA_Type"
-                        disabled={!isAdmin}
-                      />
-                    </Space>
-                  </Col>
-
-                  <Col xs={24} sm={12}>
-                    <InputFile
-                      name="internshipLetter"
-                      label="خطاب التدريب"
-                      fileName={
-                        loadedData.studentFiles.internshipLetter_filename
-                      }
-                    />
-                  </Col>
-                  <Col xs={24} sm={12}>
-                    <InputFile
-                      name="transcript"
-                      label="السجل الأكاديمي"
-                      fileName={loadedData.studentFiles.transcript_filename}
-                    />
-                  </Col>
-                </Row>
+                <StudentProfileInputs
+                  isAdmin={isAdmin}
+                  loadedData={loadedData}
+                />
                 <Button
                   type="primary"
                   htmlType="submit"

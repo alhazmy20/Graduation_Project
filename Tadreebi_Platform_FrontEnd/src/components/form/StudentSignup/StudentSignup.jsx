@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./StudentSignup.scss";
 import { Button, Form, Select, notification } from "antd";
 import { useNavigate } from "react-router-dom";
