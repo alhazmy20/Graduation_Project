@@ -20,7 +20,6 @@ const StatisticCard = (props) => {
           <span className="spStyle">{lable}</span>
         </div>
         <div>
-          {" "}
           <span
             style={{ color: handleColorChnage(), marginLeft: "10px" }}
             dir="ltr"

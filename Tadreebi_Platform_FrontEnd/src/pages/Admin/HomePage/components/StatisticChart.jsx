@@ -1,27 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import { Select, notification } from "antd";
 import "./StatisticChart.scss";
 import Spinner from "../../../../components/ui/Spinner/Spinner";
-import { useFetch } from "../../../../data/API";
-const StatisticChart = () => {
-  const { data, loading, error } = useFetch(
-    `http://localhost:8000/getAllStudentsData`
-  );
-  const currentYear = new Date().getFullYear();
-  const [selectedYear, setSelectedYear] = useState(currentYear);
-  const [years, setYears] = useState(() => {
-    const yearsArr = [];
-    for (let year = currentYear; year >= 2023; year--) {
-      yearsArr.push(year);
-    }
-    return yearsArr;
-  });
+import { useAdminDashboard } from "../../../../util/api";
+import { useYearState } from "../../../../util/helpers";
 
-  const handleYearChange = (value) => {
-    setSelectedYear(value);
-  };
+const StatisticChart = ({ years, currentYear }) => {
+  const { data, loading, error } = useAdminDashboard("chart", years);
+  const { handleYearChange } = useYearState();
 
   if (loading) {
     return <Spinner />;
@@ -31,9 +19,7 @@ const StatisticChart = () => {
     return notification.error(error);
   }
 
-  const { data: mainData } = data;
-
-  const chartData = mainData.map(({ university, total_applications }) => ({
+  const chartData = data.map(({ university, total_applications }) => ({
     name: university,
     value: total_applications,
   }));

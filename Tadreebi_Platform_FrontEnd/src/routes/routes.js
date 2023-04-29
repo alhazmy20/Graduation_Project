@@ -61,6 +61,8 @@ import { applicationsLoader } from "../pages/student/Applications/Application";
 import AddAdmin from "../pages/Admin/AddAdmin/AddAdmin";
 import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
 
+
+
 //Institution Routes
 const institutionRoutes = (
   <Route path="/institution">
@@ -100,8 +102,9 @@ const studentRoutes = (
 //Admin Routes
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
-    <Route index element={<AdminHomePage />} />
-    <Route index element={<h1>الصفحة الرئيسية</h1>} />
+  
+    <Route  index element={<AdminHomePage />}  />
+    
 
     <Route
       path="manage-institutions"
@@ -167,7 +170,7 @@ export const routes = createBrowserRouter(
         />
         <Route
           path="training-opportunities/:id"
-          element={<TrainingOpportunity withApply={true}/>}
+          element={<TrainingOpportunity withApply={true} />}
           loader={opportunityLoader}
           errorElement={<NotFound />}
         />

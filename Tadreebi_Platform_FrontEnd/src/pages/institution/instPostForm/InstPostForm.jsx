@@ -188,7 +188,6 @@ const InstPostForm = () => {
                       <ReactRadio
                         name="reward"
                         options={radioOptionsReward}
-                        // initValue={loadedPost?.reward === "يوجد" ? 1 : 0}
                         initValue={
                           loadedPost?.reward === "يوجد"
                             ? 1

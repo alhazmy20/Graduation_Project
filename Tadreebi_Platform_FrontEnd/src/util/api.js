@@ -1,8 +1,9 @@
 import { notification } from "antd";
 import axios from "axios";
+import React, { useState, useEffect } from "react";
 import api from "../data/axiosConfig";
 
-export const getPosts = async(region = "", city = "", major = "") => {
+export const getPosts = async (region = "", city = "", major = "") => {
   try {
     const res = await api().get(
       `api/posts?filter[region]=${region}&filter[city]=${city}&filter[major]=${major}`
@@ -17,7 +18,7 @@ export const getPosts = async(region = "", city = "", major = "") => {
     });
     throw error;
   }
-}
+};
 
 export const getPost = async (id) => {
   try {
@@ -30,15 +31,15 @@ export const getPost = async (id) => {
 
     throw { message: error.message, status: error.status };
   }
-}
+};
 
-export const getAllNews = async ()=> {
+export const getAllNews = async () => {
   const res = await api().get("api/news");
   if (!res) {
     throw { message: "Field to fetch posts.", status: 500 };
   }
   return res;
-}
+};
 
 export const getNews = async (id) => {
   const res = await api().get(`api/news/${id}`);
@@ -183,4 +184,52 @@ export const exportExcelFile = async (
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getAdminDashboardCards = async () => {
+  try {
+    const res = await api().get(`api/dashboard/cards`);
+    return res.data.data;
+  } catch (err) {
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
+  }
+};
+
+export const getAdminDashboardChart = async (year) => {
+  try {
+    const res = await api().get(`api/dashboard/chart?year=${year}`);
+    return res.data.data;
+  } catch (err) {
+    const error = err.response.data;
+    throw { message: error.message, status: error.status };
+  }
+};
+
+export const useAdminDashboard = (endpoint, year) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let data;
+        if (endpoint === "cards") {
+          data = await getAdminDashboardCards();
+        } else if (endpoint === "chart") {
+          data = await getAdminDashboardChart(year);
+        }
+        setData(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [endpoint, year]);
+
+  return { data, loading, error };
 };
