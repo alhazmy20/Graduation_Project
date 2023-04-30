@@ -42,7 +42,7 @@ const NewsTable = () => {
         return (
           <>
             <Edit record={record} />
-            <Delete attr={record.title} modal={NewsModal} />
+            <Delete name={record.title} modal={NewsModal} newsId={record.id} />
           </>
         );
       },

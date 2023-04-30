@@ -79,7 +79,7 @@ export function StudentDetails({ name, data }) {
   );
 }
 
-export function Delete({ name, modal: Modal, adminId, institutionId, studentId }) {
+export function Delete({ name, modal: Modal, adminId, institutionId, studentId, newsId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -106,6 +106,7 @@ export function Delete({ name, modal: Modal, adminId, institutionId, studentId }
           adminId={adminId}
           institutionId={institutionId}
           studentId={studentId}
+          newsId={newsId}
         />
       )}
     </span>
