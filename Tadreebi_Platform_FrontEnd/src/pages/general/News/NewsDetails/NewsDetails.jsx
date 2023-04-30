@@ -24,7 +24,6 @@ const NewsDetails = () => {
         />
         <Space size={5} direction="vertical" className="space">
           <h1>{news?.title}</h1>
-          <span>سدايا</span>
         </Space>
       </div>
       <p>{news?.title}</p>

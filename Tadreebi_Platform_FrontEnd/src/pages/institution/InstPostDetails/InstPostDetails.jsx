@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
@@ -12,11 +12,12 @@ import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile, getPostApplicants } from "../../../util/api";
-import api from "../../../data/axiosConfig";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
 
 const InstPostDetails = () => {
   const applicants_post = useLoaderData();
+  // const [status, setStatus] = useState(null);
+  // const [applicantId, setApplicantId] = useState(null);
   const { id } = useParams();
 
   const [statusFilter, setStatusFilter] = useState(null);
@@ -38,6 +39,11 @@ const InstPostDetails = () => {
     return filteredDataSource;
   };
 
+  // useEffect(() => {
+  //   setStatus(status);
+  //   setApplicantId(applicantId)
+  // }, [status, applicantId]);
+
   const columns = [
     {
       title: "الاسم",
@@ -56,6 +62,9 @@ const InstPostDetails = () => {
       title: "المعدل",
       dataIndex: "GPA",
       align: "center",
+      render: (text, row)=>{
+        return <span>{`${row.GPA}/${row.GPA_Type}`}</span>
+      }
     },
     {
       title: "التخصص",
@@ -69,14 +78,19 @@ const InstPostDetails = () => {
       title: "الحالة",
       dataIndex: "applicant_status",
       align: "center",
-      render: (text, row) => <TableText text={text} />,
+      render: (text, row) => {
+        return <TableText text={text} />;
+      },
     },
     {
       title: "الإجراء",
       dataIndex: "applicant_status",
       align: "center",
       render: (text, row) => (
-        <StudentAcceptProcedure status={text} applicant_id={row.applicant_id} />
+        <StudentAcceptProcedure
+          status={text}
+          applicant_id={row.applicant_id}
+        />
       ),
     },
   ];
@@ -84,25 +98,6 @@ const InstPostDetails = () => {
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
   };
-
-  // const exportExcelFile = async (post_title) => {
-  //   try {
-  //     const res = await api().get(`api/posts/${id}/applicants/export`, {
-  //       responseType: "blob",
-  //     });
-  //     console.log(res);
-  //     const downloadUrl = window.URL.createObjectURL(new Blob([res.data]));
-  //     const link = document.createElement("a");
-  //     link.href = downloadUrl;
-  //     const today = new Date().toISOString().slice(0, 10);
-  //     link.setAttribute("download", `${post_title} ${today}.xlsx`);
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     link.remove();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -174,10 +169,10 @@ const InstPostDetails = () => {
               <Button
                 className="button-filter"
                 onClick={() =>
-                  handleStatusFilterChange("بإنتظار موافقة الطالب")
+                  handleStatusFilterChange("بإنتظار تأكيد الطالب")
                 }
               >
-                بإنتظار موافقة الطالب
+                بإنتظار تأكيد الطالب
               </Button>
               <Button
                 className="button-filter"
@@ -187,9 +182,9 @@ const InstPostDetails = () => {
               </Button>
               <Button
                 className="button-filter"
-                onClick={() => handleStatusFilterChange("مرفوض")}
+                onClick={() => handleStatusFilterChange("تم الرفض من قبل المنشأة")}
               >
-                مرفوض
+              تم الرفض من قبل المنشأة
               </Button>
             </div>
             <Table

@@ -80,7 +80,7 @@ const AdminSidebar = () => {
                     to={"/admin/manage-institutions"}
                     end
                   >
-                    <MenuItem> ادارة المؤسسات </MenuItem>
+                    <MenuItem> ادارة المنشآت </MenuItem>
                   </NavLink>
                   <NavLink
                     className={({ isActive }) =>

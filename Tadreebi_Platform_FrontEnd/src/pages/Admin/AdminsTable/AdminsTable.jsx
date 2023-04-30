@@ -4,13 +4,13 @@ import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileCsv, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   AdminStudentTable,
   Delete,
   Edit,
 } from "../../../components/ui/Table/TableFilter";
-import AdminsModal from "./components/AdminsModal";
+import AdminDeleteModal from "./components/AdminDeleteModal";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
 import { getAllAdmins } from "../../../util/api";
 
@@ -25,12 +25,8 @@ const AdminsTable = () => {
 
   const filterData = (dataSource) => {
     const filteredDataSource = statusFilter
-      ? dataSource?.filter(
-          (admin) => admin.status === statusFilter
-        )
+      ? dataSource?.filter((admin) => admin.status === statusFilter)
       : dataSource;
-      console.log(statusFilter);
-
     return filteredDataSource;
   };
 
@@ -39,7 +35,9 @@ const AdminsTable = () => {
       title: "اسم المشرف",
       dataIndex: "fName lName",
       align: "center",
-      render: (text, row) => <span>{`${row.fName} ${row.lName}`}</span>,
+      render: (text, record) => (
+        <span>{`${record.fName} ${record.lName}`}</span>
+      ),
     },
     {
       title: "البريد الالكتروني",
@@ -74,7 +72,11 @@ const AdminsTable = () => {
               endPoint_1={"admin"}
               endPoint_2={"manage-admins"}
             />
-            <Delete name={`${record.fName} ${record.lName}`} modal={AdminsModal} adminId={record.id}/>
+            <Delete
+              name={`${record.fName} ${record.lName}`}
+              modal={AdminDeleteModal}
+              adminId={record.id}
+            />
           </>
         );
       },
@@ -130,7 +132,7 @@ const AdminsTable = () => {
             </div>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل
-               {loadedData.length}  سجل
+              {loadedData.length} سجل
             </p>
             <Table
               col={columns}

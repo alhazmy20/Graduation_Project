@@ -1,11 +1,16 @@
-import { Col, Row, Select, Space } from 'antd';
+import { Col, Row, Select, Space } from "antd";
 import React from "react";
-import FormInput from './FormInput';
-import { emailValidationRules, inputGpaRules, nationalIdRules, phoneRules } from '../../Validation/rules';
-import FormSelect from './FormSelect';
-import InputFile from './InputFile';
+import FormInput from "./FormInput";
+import {
+  emailValidationRules,
+  inputGpaRules,
+  nationalIdRules,
+  phoneRules,
+} from "../../Validation/rules";
+import FormSelect from "./FormSelect";
+import InputFile from "./InputFile";
 
-const StudentProfileInputs = ({isAdmin, loadedData}) => {
+const StudentProfileInputs = ({ isAdmin, loadedData }) => {
   return (
     <div>
       <h1 className="green-underline">البيانات الأساسية</h1>
@@ -48,13 +53,9 @@ const StudentProfileInputs = ({isAdmin, loadedData}) => {
         </Col>
 
         <Col xs={24} sm={12}>
-          <FormSelect label="الجنس" name="gender">
-            <Select.Option key={0} value={0}>
-              ذكر
-            </Select.Option>
-            <Select.Option key={1} value={1}>
-              انثى
-            </Select.Option>
+          <FormSelect label="الجنس" name="gender" disabled={!isAdmin}>
+            <Select.Option value="0">ذكر</Select.Option>
+            <Select.Option value="1">انثى</Select.Option>
           </FormSelect>
         </Col>
 
@@ -63,6 +64,7 @@ const StudentProfileInputs = ({isAdmin, loadedData}) => {
             label="السيرة الذاتية"
             name="CV"
             fileName={loadedData.studentFiles.CV_filename}
+            accept=".pdf"
           />
         </Col>
         <Col xs={24} sm={12}>
@@ -70,6 +72,7 @@ const StudentProfileInputs = ({isAdmin, loadedData}) => {
             name="nationalID"
             label="الهوية الوطنية"
             fileName={loadedData.studentFiles.nationalID_filename}
+            accept=".pdf"
           />
         </Col>
       </Row>
@@ -114,6 +117,7 @@ const StudentProfileInputs = ({isAdmin, loadedData}) => {
             name="internshipLetter"
             label="خطاب التدريب"
             fileName={loadedData.studentFiles.internshipLetter_filename}
+            accept=".pdf"
           />
         </Col>
         <Col xs={24} sm={12}>
@@ -121,6 +125,7 @@ const StudentProfileInputs = ({isAdmin, loadedData}) => {
             name="transcript"
             label="السجل الأكاديمي"
             fileName={loadedData.studentFiles.transcript_filename}
+            accept=".pdf"
           />
         </Col>
       </Row>

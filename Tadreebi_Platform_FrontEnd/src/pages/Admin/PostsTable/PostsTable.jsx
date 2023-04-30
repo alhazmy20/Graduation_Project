@@ -15,9 +15,14 @@ const PostsTable = () => {
   const [pageSize, setPageSize] = useState(7);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  // const filteredDataSource = statusFilter
-  //   ? PostData.filter((application) => application.postStatus === statusFilter)
-  //   : PostData;
+  const filterData = (dataSource) => {
+    const filteredDataSource = statusFilter
+      ? dataSource?.filter(
+          (post) => post.postStatus === statusFilter
+        )
+      : dataSource;
+    return filteredDataSource;
+  };
 
   const columns = [
     {
@@ -25,7 +30,7 @@ const PostsTable = () => {
       dataIndex: "title",
       align: "center",
       render: (text, row) =>{
-        return <Link to={`${row.id}`}>{text}</Link>
+        return <Link className='row-title' to={`${row.id}`}>{text}</Link>
       }
     },
     {
@@ -52,7 +57,7 @@ const PostsTable = () => {
       dataIndex: "edit",
       align: "center",
       render: (text, row) => {
-        return <Delete attr={row.title} modal={PostsModal} />;
+        return <Delete name={row.title} modal={PostsModal} />;
       },
     },
   ];
@@ -102,7 +107,7 @@ const PostsTable = () => {
             </p>
             <Table
               col={columns}
-              data={loadedPosts}
+              data={filterData(loadedPosts)}
               Size={pageSize}
               handleChange={handlePaginationChange}
               emptyText="لا توجد بيانات"

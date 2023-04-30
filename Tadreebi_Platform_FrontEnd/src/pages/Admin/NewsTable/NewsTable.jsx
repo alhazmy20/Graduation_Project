@@ -1,132 +1,95 @@
-import React from 'react'
+import React, { Suspense } from "react";
 import { useState } from "react";
-import { Button, notification } from "antd";
+import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useFetch } from "../../../data/API";
-import NoData from "../../../components/ui/NoData/NoData";
-import { Delete, Edit, StatusText} from "../../../components/ui/Table/TableFilter";
-import NewsModal from './components/NewsModal';
-
+import { Delete, Edit } from "../../../components/ui/Table/TableFilter";
+import NewsModal from "./components/NewsModal";
+import { Await, useLoaderData } from "react-router-dom";
 
 const NewsTable = () => {
-  const { data, loading, error } = useFetch(
-    "http://localhost:8000/newsAdmin"
-  );
+  const newsData = useLoaderData();
+
   const [statusFilter, setStatusFilter] = useState(null);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  if (loading) {
-    return <Spinner />;
-  }
+  // const filterData = (dataSource) => {
+  //   const filteredDataSource = statusFilter
+  //     ? dataSource?.filter((news) => news.status === statusFilter)
+  //     : dataSource;
 
-  if (error) {
-    return notification.error(error);
-  }
-
-  if (!data) {
-    return <NoData text="لا توجد اخبار حاليا" />;
-  }
-
-  const {
-    data: { data: NewsData },
-  } = data;
-
-  const filteredDataSource = statusFilter
-    ? NewsData.filter((application) => application.postStatus === statusFilter)
-    : NewsData;
-
+  //   return filteredDataSource;
+  // };
   const columns = [
     {
-      title: "اسم المشرف",
-      dataIndex: "auth",
-      align: "center",
-    },
-    {
-      title: "اسم خبر التدريب",
+      title: "عنوان الخبر",
       dataIndex: "title",
       align: "center",
     },
+
     {
       title: "تاريخ النشر",
       dataIndex: "created_at",
       align: "center",
     },
     {
-      title: "الحالة",
-      dataIndex: "postStatus",
-      align: "center",
-      render: StatusText
-    },
-    {
       title: "الإجراء",
-      dataIndex: "edit",
       align: "center",
       render: (text, record) => {
-        return <><Edit record={record}/>
-         <Delete attr={record.title} modal={NewsModal}/></>
+        return (
+          <>
+            <Edit record={record} />
+            <Delete attr={record.title} modal={NewsModal} />
+          </>
+        );
       },
     },
   ];
 
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
-
   const handlePaginationChange = (page, pageSize) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, NewsData.length);
+    const end = Math.min(start + pageSize - 1, newsData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
   return (
-    <div className="tableContainer">
-      <div className="excelContainer">
-      <Button className="excelBtn">
-      <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
-          <strong>اضافة مشرف</strong>
-        </Button>
-        <Button className="excelBtn">
-          <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
-          <strong>Excel</strong>
-        </Button>
-      </div>
-      <div className="filterTable">
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("")}
-        >
-          الكل
-        </Button>
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("نشط")}
-        >
-          الاخبار النشطة
-        </Button>
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("غير نشط")}
-        >
-          الاخبار الغير نشطة
-        </Button>
-      </div>
-      <p className="rangeText">
-        عرض {currentRange[0]} إلى {currentRange[1]} من أصل {NewsData.length}{" "}
-        سجل
-      </p>
-      <Table
-        col={columns}
-        data={filteredDataSource}
-        Size={pageSize}
-        handleChange={handlePaginationChange}
-        emptyText="لا توجد بيانات"
-      />
-    </div>
-  )
-}
+    <Suspense fallback={<Spinner />}>
+      <Await
+        resolve={newsData?.news}
+        errorElement={<p>Error loading institutions data.</p>}
+      >
+        {(loadedData) => (
+          <div className="tableContainer">
+            <div className="excelContainer">
+              <Button className="excelBtn">
+                <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
+                <strong>اضافة مشرف</strong>
+              </Button>
+              <Button className="excelBtn">
+                <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
+                <strong>Excel</strong>
+              </Button>
+            </div>
 
-export default NewsTable
+            <p className="rangeText">
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
+              {loadedData.length} سجل
+            </p>
+            <Table
+              col={columns}
+              data={loadedData}
+              Size={pageSize}
+              handleChange={handlePaginationChange}
+              emptyText="لا توجد بيانات"
+            />
+          </div>
+        )}
+      </Await>
+    </Suspense>
+  );
+};
+
+export default NewsTable;

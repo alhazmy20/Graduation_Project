@@ -23,7 +23,6 @@ export const getPosts = async (region = "", city = "", major = "") => {
 export const getPost = async (id) => {
   try {
     const res = await api().get(`api/posts/${id}`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -34,11 +33,15 @@ export const getPost = async (id) => {
 };
 
 export const getAllNews = async () => {
-  const res = await api().get("api/news");
-  if (!res) {
-    throw { message: "Field to fetch posts.", status: 500 };
+  try {
+    const res = await api().get("api/news");
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
   }
-  return res;
 };
 
 export const getNews = async (id) => {

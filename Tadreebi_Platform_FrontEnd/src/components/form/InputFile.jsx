@@ -3,7 +3,7 @@ import { Button, Form, Upload } from "antd";
 import { useState } from "react";
 
 const InputFile = (props) => {
-  let { inputType, placeholder, label, fileName, ...others } = props;
+  let { inputType, placeholder, label, fileName,accept, ...others } = props;
   const handleBeforeUpload = (file) => {
     // Clear fileList and only add the current file
     props.onChange([file]);
@@ -38,7 +38,7 @@ const InputFile = (props) => {
           beforeUpload={handleBeforeUpload}
           multiple={false}
           fileList={[]}
-          accept=".pdf" //NOTE only pdf file
+          accept={accept} 
           onChange={(e) => {
             setFile(e.file.name);
           }}

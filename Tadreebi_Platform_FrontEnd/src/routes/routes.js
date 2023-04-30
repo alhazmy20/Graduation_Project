@@ -153,7 +153,7 @@ const adminRoutes = (
       element={<TrainingOpportunity />}
       loader={opportunityLoader}
     />
-    <Route path="manage-news" element={<NewsTable />} />
+    <Route path="manage-news" element={<NewsTable />} loader={allNewsLoader}/>
   </Route>
 );
 
