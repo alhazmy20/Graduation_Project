@@ -1,12 +1,14 @@
-import "./AdminsModal.scss";
+import "./AdminDeleteModal.scss";
 import { Modal } from "antd";
 import React, { useState } from "react";
 import { Button } from "antd";
 import api from "../../../../data/axiosConfig";
 import { displayMessage } from "../../../../util/helpers";
+import { useRevalidator } from "react-router-dom";
 
-const AdminsModal = ({ modalOpen, setModalOpen, name, adminId }) => {
+const AdminDeleteModal = ({ modalOpen, setModalOpen, name, adminId }) => {
   const [loading, setLoading] = useState(false);
+  let revalidator = useRevalidator();
 
   const handleDeleteAdmin = async () => {
     try {
@@ -14,7 +16,8 @@ const AdminsModal = ({ modalOpen, setModalOpen, name, adminId }) => {
       await api().delete(`api/admins/${adminId}`);
       setLoading(false);
       setModalOpen(false);
-      displayMessage("success", `تم حذف المشرف ${name}`);
+      revalidator.revalidate(); //revalidate the data
+      displayMessage("success", `تم حذف المشرف "${name}"`);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -33,20 +36,20 @@ const AdminsModal = ({ modalOpen, setModalOpen, name, adminId }) => {
       <span className="smallDelText">
         *في حال قمت بالحذف لن يمكنك استرجاع حساب المشرف
       </span>
-      <div className="StudentsModal">
+      <div className="btnContainer">
         <Button
-          className="delButton"
+          className="redBtn"
           onClick={handleDeleteAdmin}
           loading={loading}
           disabled={loading}
         >
           حذف
         </Button>
-        <Button className="cancelButton" onClick={() => setModalOpen(false)}>
+        <Button className="greenBtn" onClick={() => setModalOpen(false)}>
           الغاء
         </Button>
       </div>
     </Modal>
   );
 };
-export default AdminsModal;
+export default AdminDeleteModal;

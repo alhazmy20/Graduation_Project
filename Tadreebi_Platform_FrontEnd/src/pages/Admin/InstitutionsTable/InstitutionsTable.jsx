@@ -5,11 +5,8 @@ import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import {
-  Delete,
-  Edit,
-} from "../../../components/ui/Table/TableFilter";
-import InstitutionsModal from "./components/InstitutionsModal";
+import { Delete, Edit } from "../../../components/ui/Table/TableFilter";
+import InstitutionDeleteModal from "./components/InstitutionDeleteModal";
 import { Await, defer, useLoaderData } from "react-router-dom";
 import { exportExcelFile, getAllInstitutions } from "../../../util/api";
 import ActivateInstitAccount from "./components/ActivateInstitAccount";
@@ -21,13 +18,17 @@ const InstitutionsTable = () => {
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  // const filteredDataSource = statusFilter
-  //   ? InstData.filter((application) => application.status === statusFilter)
-  //   : InstData;
+  const filterData = (dataSource) => {
+    const filteredDataSource = statusFilter
+      ? dataSource?.filter((institution) => institution.status === statusFilter)
+      : dataSource;
+
+    return filteredDataSource;
+  };
 
   const columns = [
     {
-      title: "اسم المؤسسة",
+      title: "اسم المنشأة",
       dataIndex: "institutionName",
       align: "center",
     },
@@ -46,7 +47,7 @@ const InstitutionsTable = () => {
       dataIndex: "isActive",
       align: "center",
       render: (text, record) => {
-        return <ActivateInstitAccount record={record}/>;
+        return <ActivateInstitAccount record={record} />;
       },
     },
     {
@@ -61,7 +62,7 @@ const InstitutionsTable = () => {
               endPoint_1={"admin"}
               endPoint_2={"manage-institutions"}
             />
-            <Delete attr={record.institutionName} modal={InstitutionsModal} />
+            <Delete name={record.institutionName} modal={InstitutionDeleteModal} institutionId={record.id}/>
           </>
         );
       },
@@ -106,13 +107,13 @@ const InstitutionsTable = () => {
                 className="button-filter"
                 onClick={() => handleStatusFilterChange("نشط")}
               >
-                المؤسسات النشطة
+                المنشآت النشطة
               </Button>
               <Button
                 className="button-filter"
                 onClick={() => handleStatusFilterChange("غير نشط")}
               >
-                المؤسسات الغير نشطة
+                المنشآت الغير نشطة
               </Button>
             </div>
             <p className="rangeText">
@@ -121,7 +122,7 @@ const InstitutionsTable = () => {
             </p>
             <Table
               col={columns}
-              data={loadedData}
+              data={filterData(loadedData)}
               Size={pageSize}
               handleChange={handlePaginationChange}
               emptyText="لا توجد بيانات"

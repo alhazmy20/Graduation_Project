@@ -46,14 +46,15 @@ body {
 }
 
 .btnContainer {
-  .acceptBtn {
+  margin-top: 1rem;
+  .greenBtn {
     background-color: #01ad7e;
     color: white;
     font-size: 15px;
     font-weight: 500;
   }
 
-  .rejectBtn {
+  .redBtn {
     background-color: #f46a61;
     color: white;
     font-size: 15px;

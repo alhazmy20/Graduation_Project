@@ -1,5 +1,5 @@
 import "./Application.scss";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import {
@@ -12,6 +12,13 @@ import { Await, defer, useLoaderData } from "react-router-dom";
 
 const Application = () => {
   const applicationsData = useLoaderData();
+  const [status, setStatus] = useState(null);
+  const [applicantId, setApplicantId] = useState(null);
+
+  useEffect(() => {
+    setStatus(status);
+    setApplicantId(applicantId)
+  }, [status, applicantId]);
 
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(6);
@@ -47,8 +54,9 @@ const Application = () => {
       title: "الحالة",
       dataIndex: "status",
       align: "center",
-      render: (text, row)=>{
-        return <TableText text={text}/>
+      render: (text, row) => {
+        setStatus(text);
+        return <TableText status={status} text={text} id={row.applicant_id} applicantId={applicantId}/>;
       },
     },
     {

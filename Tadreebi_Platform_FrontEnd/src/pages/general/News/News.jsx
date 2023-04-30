@@ -1,13 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Button, Card, Image, List } from "antd";
 import Title from "antd/es/typography/Title";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss";
 import { itemRender } from "../../../components/ui/Pagination";
-import { useLoaderData, useNavigate, useRouteError } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigate, useRouteError } from "react-router-dom";
 import NoData from "../../../components/ui/NoData/NoData";
 import { getAllNews } from "../../../util/api";
+import Spinner from '../../../components/ui/Spinner/Spinner';
 
 const { Meta } = Card;
 
@@ -15,9 +16,15 @@ const News = () => {
   const navigate = useNavigate();
   const error = useRouteError();
   const newsData = useLoaderData();
-  console.log(newsData.data.data.data);
+  console.log(newsData);
 
   return (
+    <Suspense fallback={<Spinner />}>
+    <Await
+      resolve={newsData?.news}
+      errorElement={<p>Error loading blog news.</p>}
+    >
+      {(loadedNews) => (
     <List
       className="listContainer"
       itemLayout="vertical"
@@ -33,7 +40,7 @@ const News = () => {
         align: "center",
         pageSize: 7,
       }}
-      dataSource={newsData.data.data.data}
+      dataSource={loadedNews}
       renderItem={(news) => (
         <List.Item className="listItemContainer">
           <Card size="small" className="newsCard">
@@ -67,12 +74,14 @@ const News = () => {
           </Card>
         </List.Item>
       )}
-    ></List>
+    ></List>)}
+    </Await>
+  </Suspense>
   );
 };
 
 export default News;
 
 export const loader = () => {
-  return getAllNews();
+  return defer({ news: getAllNews() });
 };

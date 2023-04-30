@@ -1,16 +1,22 @@
-import { Button, Modal, notification } from "antd";
+import { Button } from "antd";
 import React, { useState } from "react";
 import StudentModal from "../../../pages/institution/InstPostDetails/components/StudentModal";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import api from "../../../data/axiosConfig";
 
 export const TableText = ({ text }) => {
   let style = {};
-  if (text === "بإنتظار موافقة الطالب" || text === "بإنتظار موافقة المنشأة") {
+  if (
+    text === "بإنتظار موافقة الطالب" ||
+    text === "بإنتظار موافقة المنشأة" ||
+    "بإنتظار موافقة المشرف الجامعي"
+  ) {
     style.color = "#F9C068";
-  } else if (text === "مرفوض") {
+  } else if (
+    text === "تم الرفض من قبل المنشأة" ||
+    "تم الرفض من قبل المشرف الجامعي"
+  ) {
     style.color = "red";
   } else if (text === "مقبول") {
     style.color = "#008374b2";
@@ -47,94 +53,7 @@ export const InstPostsText = (text) => {
   return <span style={style}>{text}</span>;
 };
 
-// export const InstitutionAccept = ({ status, applicant_id }) => {
-//   const [modalOpen, setModalOpen] = useState(false);
-//   const [statusId, setStatusId] = useState("");
-//   const [showBtnContainer, setShowBtnContainer] = useState(true);
-
-//   const handleStatus = async () => {
-//     try {
-//       await api().put(`api/applications/${applicant_id}`, {
-//         status_id: statusId,
-//       });
-//       setModalOpen(false);
-//       setShowBtnContainer(false);
-//       notification.success({
-//         message: "تم قبول الطالب و سيتم اشعاره بذلك.",
-//         description: 'اصبحت حالة الطلب الآن "بإنتظار تأكيد الطالب"',
-//       });
-//     } catch (error) {
-//       console.log(error);
-//       notification.error({ message: error.response.data.message });
-//     }
-//   };
-
-//   return (
-//     <>
-//       {status === "بإنتظار موافقة المنشأة" && showBtnContainer && (
-//         <span className="btnContainer">
-//           <Button
-//             className="acceptBtn"
-//             onClick={() => {
-//               setModalOpen(true);
-//               setStatusId("2");
-//             }}
-//             disabled={!showBtnContainer}
-//           >
-//             قبول
-//           </Button>
-//           <Button
-//             className="rejectBtn"
-//             onClick={() => {
-//               setModalOpen(true);
-//               setStatusId("4");
-//             }}
-//             disabled={!showBtnContainer}
-//           >
-//             رفض
-//           </Button>
-//         </span>
-//       )}
-
-//       <Modal
-//         title="تنبيه:"
-//         className="modalContainer"
-//         open={modalOpen}
-//         onOk={handleStatus}
-//         onCancel={() => setModalOpen(false)}
-//       >
-//         <div className="modalDetailsContainer">
-//           {(() => {
-//             if (statusId === "2") {
-//               return (
-//                 <span className="modalDetails">
-//                   <strong>
-//                     في حال قبولك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
-//                     اشعار الطالب بالقبول.
-//                   </strong>
-//                 </span>
-//               );
-//             } else {
-//               return (
-//                 <span className="modalDetails">
-//                   <strong>
-//                     في حال رفضك الطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
-//                     اشعار الطالب بالرفض.
-//                   </strong>
-//                 </span>
-//               );
-//             }
-//           })()}
-//           <br />
-//           <br />
-//         </div>
-//       </Modal>
-//     </>
-//   );
-// };
-
 export function StudentDetails({ name, data }) {
-  console.log(data);
   const [detailsOpen, setDetailsOpen] = useState(false);
   return (
     <span>
@@ -149,7 +68,6 @@ export function StudentDetails({ name, data }) {
           {name}
         </Button>
       }
-      {/*I ADD This */}
       {detailsOpen && (
         <StudentModal
           setDetailsOpen={setDetailsOpen}
@@ -161,7 +79,7 @@ export function StudentDetails({ name, data }) {
   );
 }
 
-export function Delete({ name, modal: Modal, adminId }) {
+export function Delete({ name, modal: Modal, adminId, institutionId, studentId, newsId }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -186,6 +104,9 @@ export function Delete({ name, modal: Modal, adminId }) {
           setModalOpen={setIsModalOpen}
           name={selected}
           adminId={adminId}
+          institutionId={institutionId}
+          studentId={studentId}
+          newsId={newsId}
         />
       )}
     </span>
@@ -218,7 +139,7 @@ export function InstTitle({ text, record }) {
   );
 }
 
-export function StudentAccept({ status }) {
+export const StudentAccept = ({ status }) => {
   if (status === "بإنتظار تأكيد الطالب") {
     return (
       <span className="btnContainer">
@@ -227,4 +148,4 @@ export function StudentAccept({ status }) {
       </span>
     );
   } else return <span>-</span>;
-}
+};

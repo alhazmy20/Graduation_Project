@@ -10,7 +10,7 @@ import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import { getStudent } from "../../../util/api";
 import api from "../../../data/axiosConfig";
 import StudentProfileInputs from "../../../components/form/StudentProfileInputs";
-import { displayMessage } from '../../../util/helpers';
+import { displayMessage } from "../../../util/helpers";
 
 const StudentProfile = ({ isAdmin }) => {
   const studentData = useLoaderData();
@@ -24,9 +24,14 @@ const StudentProfile = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
-    const { fullName, ...others } = values;
+    // console.log(values);
+    let { fullName, gender, ...others } = values;
+    if (gender === ("ذكر" || "أنثى")) {
+      gender = gender === "ذكر" ? 0 : 1;
+    }
     const name = extractFullName(fullName);
-    values = { ...name, ...others };
+    values = { gender, ...name, ...others };
+    console.log(values);
 
     let formData = new FormData();
     for (const key in values) {
@@ -46,6 +51,7 @@ const StudentProfile = ({ isAdmin }) => {
       }
     }
     try {
+      setLoading(true);
       await api().post(
         `api/students/${id || auth.user.id}?_method=PUT`,
         formData,
@@ -55,12 +61,12 @@ const StudentProfile = ({ isAdmin }) => {
           },
         }
       );
-      displayMessage('success', 'تم تحديث البيانات')
+      displayMessage("success", "تم تحديث البيانات");
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
       console.log(error);
-      displayMessage('error', 'لم يتم تحديث البيانات')
+      displayMessage("error", "لم يتم تحديث البيانات");
     }
     formData = new FormData();
   };

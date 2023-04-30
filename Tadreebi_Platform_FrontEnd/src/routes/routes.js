@@ -60,6 +60,7 @@ import { opportunityDataLoader } from "../pages/institution/instPostForm/InstPos
 import { applicationsLoader } from "../pages/student/Applications/Application";
 import AddAdmin from "../pages/Admin/AddAdmin/AddAdmin";
 import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
+import AddNews, { addNewsDataLoader } from "../pages/Admin/AddNews/AddNews";
 
 
 
@@ -153,7 +154,13 @@ const adminRoutes = (
       element={<TrainingOpportunity />}
       loader={opportunityLoader}
     />
-    <Route path="manage-news" element={<NewsTable />} />
+    <Route path="manage-news" element={<NewsTable />} loader={allNewsLoader}/>
+    <Route path="add-news" element={<AddNews />} />
+    <Route
+      path="add-news/:id"
+      element={<AddNews />}
+      loader={addNewsDataLoader}
+    />
   </Route>
 );
 

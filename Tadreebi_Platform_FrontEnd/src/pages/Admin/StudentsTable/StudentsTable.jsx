@@ -5,18 +5,14 @@ import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { useFetch } from "../../../data/API";
-import NoData from "../../../components/ui/NoData/NoData";
 import {
   AdminStudentTable,
   Delete,
   Edit,
-  StudentDelete,
 } from "../../../components/ui/Table/TableFilter";
-import StudentsModal from "./components/StudentsModal";
+import StudentDeleteModal from "./components/StudentDeleteModal";
 import { Await, defer, useLoaderData } from "react-router-dom";
 import { exportExcelFile, getAllStudents } from "../../../util/api";
-import api from "../../../data/axiosConfig";
 
 const StudentsTable = () => {
   const studentsData = useLoaderData();
@@ -25,9 +21,12 @@ const StudentsTable = () => {
   const [pageSize, setPageSize] = useState(3);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  // const filteredDataSource = statusFilter
-  //   ? studentsData.filter((application) => application.status === statusFilter)
-  //   : studentsData;
+  const filterData = (dataSource) => {
+    const filteredDataSource = statusFilter
+      ? dataSource?.filter((student) => student.status === statusFilter)
+      : dataSource;
+    return filteredDataSource;
+  };
 
   const columns = [
     {
@@ -63,7 +62,11 @@ const StudentsTable = () => {
               endPoint_1={"admin"}
               endPoint_2={"manage-students"}
             />
-            <Delete attr={record.fullName} modal={StudentsModal} />
+            <Delete
+              name={record.fullName}
+              modal={StudentDeleteModal}
+              studentId={record.id}
+            />
           </>
         );
       },
@@ -124,7 +127,7 @@ const StudentsTable = () => {
           {(loadedData) => (
             <Table
               col={columns}
-              data={loadedData}
+              data={filterData(loadedData)}
               Size={pageSize}
               handleChange={handlePaginationChange}
               emptyText="لا توجد بيانات"
