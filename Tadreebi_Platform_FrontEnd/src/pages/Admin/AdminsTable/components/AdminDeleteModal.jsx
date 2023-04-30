@@ -36,16 +36,16 @@ const AdminDeleteModal = ({ modalOpen, setModalOpen, name, adminId }) => {
       <span className="smallDelText">
         *في حال قمت بالحذف لن يمكنك استرجاع حساب المشرف
       </span>
-      <div className="StudentsModal">
+      <div className="btnContainer">
         <Button
-          className="delButton"
+          className="redBtn"
           onClick={handleDeleteAdmin}
           loading={loading}
           disabled={loading}
         >
           حذف
         </Button>
-        <Button className="cancelButton" onClick={() => setModalOpen(false)}>
+        <Button className="greenBtn" onClick={() => setModalOpen(false)}>
           الغاء
         </Button>
       </div>

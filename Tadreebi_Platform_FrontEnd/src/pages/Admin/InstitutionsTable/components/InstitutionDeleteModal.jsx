@@ -42,16 +42,16 @@ const InstitutionDeleteModal = ({
       <span className="smallDelText">
         *في حال قمت بالحذف لن يمكنك استرجاع حساب المنشأة
       </span>
-      <div className="StudentsModal">
+      <div className="btnContainer">
         <Button
-          className="delButton"
+          className="redBtn"
           onClick={handleDeleteInstitution}
           loading={loading}
           disabled={loading}
         >
           حذف
         </Button>{" "}
-        <Button className="cancelButton" onClick={() => setModalOpen(false)}>
+        <Button className="greenBtn" onClick={() => setModalOpen(false)}>
           الغاء
         </Button>
       </div>

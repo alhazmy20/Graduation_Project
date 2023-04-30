@@ -35,13 +35,13 @@ const NewsModal = ({ modalOpen, setModalOpen, name, newsId }) => {
 
     <div className="delText">هل أنت متأكد من حذف الخبر: {name}؟</div>
     <span className="smallDelText">*في حال قمت بالحذف لن يمكنك استرجاع الخبر</span>
-    <div className="StudentsModal">
-          <Button className="delButton"
+    <div className="btnContainer">
+          <Button className="redBtn"
           onClick={handleDeleteNews}
           loading={loading}
           disabled={loading}
           >حذف</Button>
-          <Button className="cancelButton" onClick={() => setModalOpen(false)}>الغاء</Button>
+          <Button className="greenBtn" onClick={() => setModalOpen(false)}>الغاء</Button>
     </div>
   </Modal>
   )

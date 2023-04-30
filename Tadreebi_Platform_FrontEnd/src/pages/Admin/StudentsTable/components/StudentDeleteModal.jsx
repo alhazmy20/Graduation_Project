@@ -36,16 +36,16 @@ const StudentDeleteModal = ({ modalOpen, setModalOpen, name, studentId }) => {
       <span className="smallDelText">
         *في حال قمت بالحذف لن يمكنك استرجاع حساب الطالب
       </span>
-      <div className="buttons-container">
+      <div className="btnContainer">
         <Button
-          className="delButton"
+          className="redBtn"
           onClick={handleDeleteStudent}
           loading={loading}
           disabled={loading}
         >
           حذف
         </Button>
-        <Button className="cancelButton" onClick={() => setModalOpen(false)}>
+        <Button className="greenBtn" onClick={() => setModalOpen(false)}>
           الغاء
         </Button>
       </div>
