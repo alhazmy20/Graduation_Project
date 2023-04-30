@@ -12,19 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "fName": {
-      "type": "string"
-    },
-    "lName": {
-      "type": "string"
-    },
     "email": {
       "type": "email"
     },
-    "major": {
+    "college": {
       "type": "string"
     },
-    "phone": {
+    "department": {
       "type": "string"
     }
   }

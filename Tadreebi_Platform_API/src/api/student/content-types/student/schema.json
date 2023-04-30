@@ -44,6 +44,12 @@
     },
     "gender": {
       "type": "integer"
+    },
+    "college": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
     }
   }
 }
