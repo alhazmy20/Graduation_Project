@@ -66,7 +66,7 @@ const NewsTable = () => {
             <div className="excelContainer">
               <Button className="excelBtn">
                 <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
-                <strong>اضافة مشرف</strong>
+                <strong>اضافة خبر</strong>
               </Button>
               <Button className="excelBtn">
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
