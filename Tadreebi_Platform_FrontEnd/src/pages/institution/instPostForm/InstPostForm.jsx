@@ -11,13 +11,14 @@ import CustomDatePicker from "./components/CustomDatePicker.jsx";
 import SelectRegion from "./components/SelectRegion.jsx";
 import SelectCity from "./components/SelectCity.jsx";
 import api from "../../../data/axiosConfig";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
+
 import { getPost } from "../../../util/api.js";
 import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
 
 const InstPostForm = () => {
   const opportunityData = useLoaderData();
-
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [formPostData, setFormPostData] = useState({
@@ -52,12 +53,13 @@ const InstPostForm = () => {
     }));
   };
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     //api code
     try {
       await api().post(`api/posts`, formPostData);
       notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
       setLoading(false);
+      navigate("/institution/posts");
     } catch (error) {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
