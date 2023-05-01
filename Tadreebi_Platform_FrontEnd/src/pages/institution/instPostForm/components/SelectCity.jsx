@@ -12,12 +12,9 @@ const SelectCity = ({ data, formDate, initValue }) => {
       ]}
       name="city"
       className="formItemStyle"
+      initialValue={initValue || "اختر المدينة"}
     >
-      <Select
-        style={{ flexGrow: "2" }}
-        defaultValue={initValue || "اختر المدينة"}
-        showSearch
-      >
+      <Select style={{ flexGrow: "2" }} showSearch>
         <Select.Option key="*" value="كل المدن" />
         {data
           .filter((r) => r.region === formDate.region)

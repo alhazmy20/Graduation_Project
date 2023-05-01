@@ -12,12 +12,9 @@ const SelectRegion = ({ name, options, initValue }) => {
         },
       ]}
       className="formItemStyle"
+      initialValue={initValue || "اختر المنطقة"}
     >
-      <Select
-        style={{ flexGrow: "2" }}
-        defaultValue={initValue || "اختر المنطقة"}
-        showSearch
-      >
+      <Select style={{ flexGrow: "2" }} showSearch>
         <Select.Option key="*" value="كل المناطق" />
         {options.map((region) => (
           <Select.Option key={region.id} value={region.region}>

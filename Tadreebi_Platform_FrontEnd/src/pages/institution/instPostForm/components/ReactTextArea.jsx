@@ -3,7 +3,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../InstPostForm.scss";
 const ReactTextArea = ({ formdata, handleInputChange, name }) => {
-  const [value, setValue] = useState("");
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -37,12 +36,13 @@ const ReactTextArea = ({ formdata, handleInputChange, name }) => {
   ];
 
   const handleChange = (value) => {
-    setValue(value);
     handleInputChange(name, value);
   };
 
+  // console.log(formdata);
   return (
     <ReactQuill
+      name={name}
       placeholder="تفاصيل فرصة التدريب ... "
       value={formdata}
       onChange={handleChange}
