@@ -68,7 +68,7 @@ const InstPosts = () => {
               endPoint_2={"newPost"}
               record={record}
             />
-            <Delete attr={record.title} modal={InstModal} />
+            <Delete name={record.title} modal={InstModal} />
           </>
         );
       },
