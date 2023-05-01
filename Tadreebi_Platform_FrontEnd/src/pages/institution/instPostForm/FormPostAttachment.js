@@ -21,17 +21,30 @@ export const useFormPostData = () => {
 export const formatDate = (dateValue) => {
   return new Date(dateValue).toISOString().slice(0, 10);
 };
-export const formatFormValues = (allValues, name) => {
+// export const formatFormValues = (allValues) => {
+//   return Object.entries(allValues).reduce((acc, [key, value]) => {
+//     if (key.endsWith("Date") && value) {
+//       acc[key] = formatDate(value);
+//     } else {
+//       acc[key] = value;
+//     }
+//     return acc;
+//   }, {});
+// };
+
+export const formatFormValues = (allValues) => {
   return Object.entries(allValues).reduce((acc, [key, value]) => {
-    if (key.endsWith(name) && value) {
+    if (key.endsWith("Date") && value) {
       acc[key] = formatDate(value);
+    } else if (key === "majors" && value) {
+      const majorsArr = value.map((majorStr) => JSON.parse(majorStr));
+      acc[key] = majorsArr;
     } else {
       acc[key] = value;
     }
     return acc;
   }, {});
 };
-
 export const radioOptionsType = [
   { label: "حضوري", value: "حضوري" },
   { label: "عن بعد", value: "عن بعد" },
@@ -49,10 +62,15 @@ export const radioOptionsGender = [
 ];
 
 export const options = data
-  .map((major) => {
-    return major.majors.map((majorName) => ({
-      label: majorName.title,
-      value: majorName.id,
-    }));
-  })
+  .map((m) =>
+    m.majors.map((majorName) => ({
+      SSC: majorName.id,
+      major: majorName.title,
+    }))
+  )
   .flat();
+console.log(options);
+
+// const isSubmitDisabled =
+//   formPostData?.content?.replace(/<(.|\n)*?>/g, "").trim().length === 0;
+//  { SSC: majorName.id, major: majorName.title }

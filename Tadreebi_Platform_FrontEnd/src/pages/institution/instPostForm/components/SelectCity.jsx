@@ -17,7 +17,7 @@ const SelectCity = ({ data, formDate, initValue }) => {
       <Select style={{ flexGrow: "2" }} showSearch>
         <Select.Option key="*" value="كل المدن" />
         {data
-          .filter((r) => r.region === formDate.region)
+          .filter((r) => r.region === formDate)
           .map((region) =>
             region.cities.map((city) => (
               <Select.Option key={city.id} value={city.city}>
