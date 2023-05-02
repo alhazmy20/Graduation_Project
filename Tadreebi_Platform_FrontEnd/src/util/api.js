@@ -8,7 +8,7 @@ export const getPosts = async (region = "", city = "", major = "") => {
     const res = await api().get(
       `api/posts?filter[region]=${region}&filter[city]=${city}&filter[major]=${major}`
     );
-    // console.log(res.data.data.data);
+    console.log(res.data.data.data);
     return res.data.data || {};
   } catch (error) {
     const message = error.response.data.message;
@@ -23,6 +23,7 @@ export const getPosts = async (region = "", city = "", major = "") => {
 export const getPost = async (id) => {
   try {
     const res = await api().get(`api/posts/${id}`);
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);

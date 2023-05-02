@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Form, Select } from "antd";
 import "./MultiSelect.scss";
 const MultiSelect = ({ name, label, options, initValue }) => {
+  console.log(initValue);
   return (
     <Form.Item
       name={name}

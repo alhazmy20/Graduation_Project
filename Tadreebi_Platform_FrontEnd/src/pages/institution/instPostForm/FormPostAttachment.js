@@ -54,8 +54,8 @@ export const radioOptionsGender = [
 export const options = data
   .map((m) =>
     m.majors.map((majorName) => ({
-      SSC: majorName.id,
       major: majorName.title,
+      SSC: majorName.id,
     }))
   )
   .flat();

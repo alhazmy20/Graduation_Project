@@ -23,7 +23,7 @@ import {
   formatDate,
 } from "./FormPostAttachment.js";
 import ReactInput from "./components/ReactInput.jsx";
-import { data } from "../../../data/SaudiClassification.js";
+// import { data } from "../../../data/SaudiClassification.js";
 const InstPostForm = () => {
   const opportunityData = useLoaderData();
   const [selectedRegion, setSelectedRegion] = useState("");
@@ -47,12 +47,12 @@ const InstPostForm = () => {
     //api code
 
     try {
-      await api().post(`api/posts`, formPostData);
-      notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
-      setLoading(false);
-      navigate("/institution/posts");
+      // await api().post(`api/posts`, formPostData);
+      // notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+      // setLoading(false);
+      // navigate("/institution/posts");
       console.log(formPostData);
-      console.log(formPostData);
+      console.log(value.t_startDate);
     } catch (error) {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
