@@ -89,15 +89,6 @@ const AddNews = () => {
         <InputFile fileName={loadedNews?.logo?.logo_filename} name="newsLogo" label="اضافة صورة" accept="image/*" />
         </Col>
          <Col>
-         {/* <Form.Item
-         name="title"
-         rules={[
-          {required: true, message: "يرجى ادخال عنوان الخبر"},
-         ]}
-         >
-          <Input placeholder='عنوان الخبر'/>
-         </Form.Item> */}
-
          <FormInput label="عنوان الخبر" placeholder="اضف عنوان الخبر" name="title"/>
          </Col>
          <Col style={{textAlign: "left"}}>
@@ -107,11 +98,11 @@ const AddNews = () => {
           handleInputChange={handleInputChange}
           />
          </Col>
-         <div className="addNewsButton">
+         <div className="addNewsButton btnContainer">
                   <Button
                     type="primary"
                     htmlType="submit"
-                    className="add-button"
+                    className="add-button greenBtn"
                     disabled={isSubmitDisabled}
                     loading={loading}
                   >

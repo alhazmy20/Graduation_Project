@@ -52,6 +52,14 @@ body {
     color: white;
     font-size: 15px;
     font-weight: 500;
+
+    &:disabled{
+      opacity: 40%;
+    }
+
+    &:hover{
+      background-color: #01ad7e;
+    }
   }
 
   .redBtn {
