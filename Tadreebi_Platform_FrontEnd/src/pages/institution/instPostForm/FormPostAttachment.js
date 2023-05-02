@@ -21,16 +21,6 @@ export const useFormPostData = () => {
 export const formatDate = (dateValue) => {
   return new Date(dateValue).toISOString().slice(0, 10);
 };
-// export const formatFormValues = (allValues) => {
-//   return Object.entries(allValues).reduce((acc, [key, value]) => {
-//     if (key.endsWith("Date") && value) {
-//       acc[key] = formatDate(value);
-//     } else {
-//       acc[key] = value;
-//     }
-//     return acc;
-//   }, {});
-// };
 
 export const formatFormValues = (allValues) => {
   return Object.entries(allValues).reduce((acc, [key, value]) => {
@@ -69,7 +59,6 @@ export const options = data
     }))
   )
   .flat();
-console.log(options);
 
 // const isSubmitDisabled =
 //   formPostData?.content?.replace(/<(.|\n)*?>/g, "").trim().length === 0;

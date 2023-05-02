@@ -2,10 +2,6 @@ import { useState } from "react";
 import { Form, Select } from "antd";
 import "./MultiSelect.scss";
 const MultiSelect = ({ name, label, options, initValue }) => {
-  
-
-
-
   return (
     <Form.Item
       name={name}
@@ -16,7 +12,7 @@ const MultiSelect = ({ name, label, options, initValue }) => {
         },
       ]}
       className="formItemStyle"
-      initialValue={initValue}
+      initialValue={initValue.map((m) => JSON.stringify(m))}
     >
       <Select
         mode="multiple"
@@ -35,12 +31,3 @@ const MultiSelect = ({ name, label, options, initValue }) => {
 };
 
 export default MultiSelect;
-// how to make the select value submit  like [{ SCC: id ,major: name  }]
-// onst options = data
-//   .map((m) =>
-//     m.majors.map((majorName) => ({
-//       label: majorName.title,
-//       value: majorName.id,
-//     }))
-//   )
-//   .flat();

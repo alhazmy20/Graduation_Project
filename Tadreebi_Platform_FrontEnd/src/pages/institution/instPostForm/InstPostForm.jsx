@@ -47,11 +47,11 @@ const InstPostForm = () => {
     //api code
 
     try {
-      // await api().post(`api/posts`, formPostData);
-      // notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
-      // setLoading(false);
-      // navigate("/institution/posts");
-      // console.log(formPostData);
+      await api().post(`api/posts`, formPostData);
+      notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+      setLoading(false);
+      navigate("/institution/posts");
+      console.log(formPostData);
       console.log(formPostData);
     } catch (error) {
       console.log(error);
@@ -187,7 +187,7 @@ const InstPostForm = () => {
                       options={options}
                       initValue={options.filter((option) =>
                         loadedPost?.post_majors.some(
-                          (postMajor) => postMajor.major === option.label
+                          (postMajor) => postMajor.major === option.major
                         )
                       )}
                     />
