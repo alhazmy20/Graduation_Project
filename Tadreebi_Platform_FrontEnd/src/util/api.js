@@ -45,11 +45,15 @@ export const getAllNews = async () => {
 };
 
 export const getNews = async (id) => {
-  const res = await api().get(`api/news/${id}`);
-  if (!res) {
-    throw { message: "Field to fetch posts.", status: 500 };
+  try {
+    const res = await api().get(`api/news/${id}`);
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
   }
-  return res;
 };
 
 export const getAllInstitutions = async () => {

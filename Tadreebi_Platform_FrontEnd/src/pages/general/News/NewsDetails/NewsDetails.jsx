@@ -1,33 +1,43 @@
-import React from "react";
-import { useLoaderData, useRouteError } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Await, useLoaderData, useRouteError } from "react-router-dom";
 import { Image, Space } from "antd";
 import "./NewsDetails.scss";
 import { getNews } from "../../../../util/api";
+import Spinner from "../../../../components/ui/Spinner/Spinner";
+import ReactQuill from "react-quill";
 
 const NewsDetails = () => {
   const error = useRouteError();
   const newsData = useLoaderData();
-  console.log(newsData);
-
-  const {
-    data: { data: news },
-  } = newsData;
-
+  
+  console.log(newsData)
+  
   return (
-    <div className="new-details">
+    <Suspense fallback={<Spinner/>}>
+      <Await
+      resolve={newsData}
+      errorElement={<p>Error</p>}
+      >
+      <div className="new-details">
       <div className="container">
         <Image
-          src={news.logo?.logo_url}
+          src={newsData?.logo?.logo_url}
           shape="circle"
           preview={false}
           className="institution-img"
         />
         <Space size={5} direction="vertical" className="space">
-          <h1>{news?.title}</h1>
+          <h1>{newsData?.title}</h1>
         </Space>
       </div>
-      <p>{news?.title}</p>
+      <ReactQuill
+      value={newsData?.content}
+      readOnly={true}
+      theme={"bubble"}
+      />
     </div>
+      </Await>
+    </Suspense>
   );
 };
 
