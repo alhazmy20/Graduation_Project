@@ -55,7 +55,7 @@ export const options = data
   .map((m) =>
     m.majors.map((majorName) => ({
       major: majorName.title,
-      SSC: majorName.id,
+      SCC: majorName.id,
     }))
   )
   .flat();

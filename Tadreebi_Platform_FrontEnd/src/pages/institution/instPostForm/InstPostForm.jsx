@@ -47,10 +47,10 @@ const InstPostForm = () => {
     //api code
 
     try {
-      // await api().post(`api/posts`, formPostData);
-      // notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
-      // setLoading(false);
-      // navigate("/institution/posts");
+      await api().post(`api/posts`, formPostData);
+      notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+      setLoading(false);
+      navigate("/institution/posts");
       console.log(formPostData);
       console.log(value.t_startDate);
     } catch (error) {
