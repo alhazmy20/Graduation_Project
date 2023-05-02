@@ -23,7 +23,6 @@ export const getPosts = async (region = "", city = "", major = "") => {
 export const getPost = async (id) => {
   try {
     const res = await api().get(`api/posts/${id}`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);

@@ -1,7 +1,6 @@
 import { Form, Select } from "antd";
 import "./MultiSelect.scss";
 const MultiSelect = ({ name, label, options, initValue }) => {
-  console.log(initValue);
   return (
     <Form.Item
       name={name}
@@ -21,7 +20,7 @@ const MultiSelect = ({ name, label, options, initValue }) => {
         style={{ flexGrow: "2" }}
       >
         {options.map((m) => (
-          <Select.Option key={m.SSC} value={JSON.stringify(m)}>
+          <Select.Option key={m.SCC} value={JSON.stringify(m)}>
             {m.major}
           </Select.Option>
         ))}

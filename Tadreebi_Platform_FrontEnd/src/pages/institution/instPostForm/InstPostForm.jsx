@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from "react";
-import { Button, Input, Col, Row, Form, notification } from "antd";
+import { Button, Col, Row, Form, notification } from "antd";
 import { RegionData } from "../../../data/TestData.js";
 
 import ReactTextArea from "./components/ReactTextArea";
@@ -10,7 +10,13 @@ import CustomDatePicker from "./components/CustomDatePicker.jsx";
 import SelectRegion from "./components/SelectRegion.jsx";
 import SelectCity from "./components/SelectCity.jsx";
 import api from "../../../data/axiosConfig";
-import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
+import {
+  Await,
+  defer,
+  useLoaderData,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { getPost } from "../../../util/api.js";
 import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
 import {
@@ -20,11 +26,11 @@ import {
   radioOptionsReward,
   radioOptionsGender,
   options,
-  formatDate,
 } from "./FormPostAttachment.js";
 import ReactInput from "./components/ReactInput.jsx";
-// import { data } from "../../../data/SaudiClassification.js";
+
 const InstPostForm = () => {
+  const { id } = useParams();
   const opportunityData = useLoaderData();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [formPostData, setFormPostData] = useFormPostData();
@@ -34,6 +40,7 @@ const InstPostForm = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [isFormChanged, setIsFormChanged] = useState(false);
 
   const handleFormChange = (changedValues, allValues) => {
     const formattedValues = formatFormValues(allValues);
@@ -41,18 +48,29 @@ const InstPostForm = () => {
       ...prevState,
       ...formattedValues,
     }));
+   setIsFormChanged(
+     Object?.keys(changedValues).some(
+       (key) => allValues[key] !== (opportunityData?.[key] || "")
+     )
+   );
   };
 
   const onFinish = async (value) => {
     //api code
 
     try {
-      await api().post(`api/posts`, formPostData);
-      notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+      if (id) {
+        // if ID exists, update the post
+        await api().put(`api/posts/${id}`, formPostData);
+        notification.success({ message: "تم تحديث الفرصة بنجاح" });
+        setIsFormChanged(false);
+      } else {
+        await api().post(`api/posts`, formPostData);
+        notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+        setIsFormChanged(false);
+      }
       setLoading(false);
       navigate("/institution/posts");
-      console.log(formPostData);
-      console.log(value.t_startDate);
     } catch (error) {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
@@ -198,8 +216,7 @@ const InstPostForm = () => {
                     type="primary"
                     htmlType="submit"
                     className="add-button"
-                    // disabled={isSubmitDisabled}
-
+                    disabled={!isFormChanged}
                     loading={loading}
                   >
                     {loading ? "جاري الإضافة..." : "اضافة"}
