@@ -1,10 +1,10 @@
+
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
-import { Form } from "antd";
-
 import "react-quill/dist/quill.snow.css";
-import "../InstPostForm.scss";
-const ReactTextArea = ({ name, initialValue }) => {
+
+const NewsContentArea = ({ formdata, handleInputChange, name }) => {
+  const [value, setValue] = useState("");
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -37,26 +37,20 @@ const ReactTextArea = ({ name, initialValue }) => {
     "formula",
   ];
 
-  // console.log(formdata);
+  const handleChange = (value) => {
+    setValue(value);
+    handleInputChange(name, value);
+  };
+
   return (
-    <Form.Item
-      name={name}
-      rules={[
-        {
-          required: true,
-          message: "الرجاء ادخل وصف التدريب",
-        },
-      ]}
-      initialValue={initialValue}
-    >
-      <ReactQuill
-        name={name}
-        placeholder="تفاصيل فرصة التدريب ... "
-        modules={modules}
-        formats={formats}
-      />
-    </Form.Item>
+    <ReactQuill
+      placeholder="تفاصيل الخبر "
+      value={formdata}
+      onChange={handleChange}
+      modules={modules}
+      formats={formats}
+    />
   );
 };
 
-export default ReactTextArea;
+export default NewsContentArea;

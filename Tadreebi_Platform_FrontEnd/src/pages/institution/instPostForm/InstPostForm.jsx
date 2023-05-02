@@ -20,56 +20,42 @@ import {
   radioOptionsReward,
   radioOptionsGender,
   options,
+  formatDate,
 } from "./FormPostAttachment.js";
 import ReactInput from "./components/ReactInput.jsx";
+import { data } from "../../../data/SaudiClassification.js";
 const InstPostForm = () => {
   const opportunityData = useLoaderData();
-
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [formPostData, setFormPostData] = useFormPostData();
+  const handleRegionChange = (value) => {
+    setSelectedRegion(value);
+  };
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [formPostData, setFormPostData] = useFormPostData();
 
   const handleFormChange = (changedValues, allValues) => {
-    const formattedValues = formatFormValues(allValues, "Date");
+    const formattedValues = formatFormValues(allValues);
     setFormPostData((prevState) => ({
       ...prevState,
       ...formattedValues,
     }));
   };
 
-  const onFinish = async () => {
+  const onFinish = async (value) => {
     //api code
+
     try {
       // await api().post(`api/posts`, formPostData);
       // notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
       // setLoading(false);
       // navigate("/institution/posts");
+      // console.log(formPostData);
       console.log(formPostData);
     } catch (error) {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
-    }
-  };
-
-  // const isSubmitDisabled =
-  //   formPostData?.content?.replace(/<(.|\n)*?>/g, "").trim().length === 0;
-
-  const handleInputChange = (name, value) => {
-    if (name === "majors") {
-      const majors = value.map((id) => ({
-        SCC: id,
-        major: options.find((option) => option.value === id)?.label || "",
-      }));
-      setFormPostData((prevState) => ({
-        ...prevState,
-        [name]: majors,
-      }));
-    } else {
-      setFormPostData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
     }
   };
 
@@ -92,16 +78,12 @@ const InstPostForm = () => {
                 form={form}
               >
                 <Col>
-                  <ReactInput
-                    name="title"
-                    initialValue={formPostData.title || loadedPost?.title}
-                  />
+                  <ReactInput name="title" initialValue={loadedPost?.title} />
                 </Col>
                 <Col style={{ textAlign: "left" }}>
                   <ReactTextArea
                     name="content"
-                    formdata={formPostData.content || loadedPost?.content}
-                    handleInputChange={handleInputChange}
+                    initialValue={loadedPost?.content}
                   />
                 </Col>
                 <Row className="formInputContainer">
@@ -121,6 +103,7 @@ const InstPostForm = () => {
                         name="region"
                         options={RegionData}
                         initValue={loadedPost?.region}
+                        valueChnage={handleRegionChange}
                       />
                     </Row>
                     <Row className="RowDivElment">
@@ -163,7 +146,7 @@ const InstPostForm = () => {
                       <label className="label">المدينة: </label>
                       <SelectCity
                         data={RegionData}
-                        formDate={formPostData}
+                        formDate={selectedRegion}
                         initValue={loadedPost?.city}
                       />
                     </Row>
@@ -201,7 +184,6 @@ const InstPostForm = () => {
                     <MultiSelect
                       name="majors"
                       label="التخصصات"
-                      handleInputChange={handleInputChange}
                       options={options}
                       initValue={options.filter((option) =>
                         loadedPost?.post_majors.some(

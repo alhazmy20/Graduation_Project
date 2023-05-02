@@ -1,19 +1,10 @@
 import { useState } from "react";
 import { Form, Select } from "antd";
 import "./MultiSelect.scss";
-const MultiSelect = ({
-  name,
-  label,
-  options,
-  handleInputChange,
-  initValue,
-}) => {
-  const [value, setValue] = useState([]);
+const MultiSelect = ({ name, label, options, initValue }) => {
+  
 
-  const handleChange = (value) => {
-    setValue(value);
-    handleInputChange(name, value);
-  };
+
 
   return (
     <Form.Item
@@ -31,13 +22,25 @@ const MultiSelect = ({
         mode="multiple"
         allowClear
         placeholder={`اختر ${label}`}
-        value={value}
-        onChange={handleChange}
-        options={options}
         style={{ flexGrow: "2" }}
-      />
+      >
+        {options.map((m) => (
+          <Select.Option key={m.SSC} value={JSON.stringify(m)}>
+            {m.major}
+          </Select.Option>
+        ))}
+      </Select>
     </Form.Item>
   );
 };
 
 export default MultiSelect;
+// how to make the select value submit  like [{ SCC: id ,major: name  }]
+// onst options = data
+//   .map((m) =>
+//     m.majors.map((majorName) => ({
+//       label: majorName.title,
+//       value: majorName.id,
+//     }))
+//   )
+//   .flat();

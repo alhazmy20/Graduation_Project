@@ -155,7 +155,7 @@ const adminRoutes = (
     <Route path="manage-news" element={<NewsTable />} loader={allNewsLoader} />
     <Route path="add-news" element={<AddNews />} />
     <Route
-      path="add-news/:id"
+      path="manage-news/:id"
       element={<AddNews />}
       loader={addNewsDataLoader}
     />

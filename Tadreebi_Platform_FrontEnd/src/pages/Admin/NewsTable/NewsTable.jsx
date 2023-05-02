@@ -4,15 +4,14 @@ import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileCsv, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Delete, Edit } from "../../../components/ui/Table/TableFilter";
 import NewsModal from "./components/NewsModal";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData } from "react-router-dom";
 
 const NewsTable = () => {
   const newsData = useLoaderData();
 
-  const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
@@ -41,7 +40,8 @@ const NewsTable = () => {
       render: (text, record) => {
         return (
           <>
-            <Edit record={record} />
+            <Edit record={record} endPoint_1={"admin"}
+              endPoint_2={"manage-news"} />
             <Delete name={record.title} modal={NewsModal} newsId={record.id} />
           </>
         );
@@ -65,12 +65,10 @@ const NewsTable = () => {
           <div className="tableContainer">
             <div className="excelContainer">
               <Button className="excelBtn">
+                <Link to="/admin/add-news">
                 <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
                 <strong>اضافة خبر</strong>
-              </Button>
-              <Button className="excelBtn">
-                <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
-                <strong>Excel</strong>
+                </Link>
               </Button>
             </div>
 
