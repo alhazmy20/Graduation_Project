@@ -1,29 +1,28 @@
 import React, { Suspense, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import api from "../../../data/axiosConfig";
-import ReactQuill from 'react-quill';
-import {Button, Input, Col,Row,Form,notification} from "antd"
-import { Await, Navigate, defer, useLoaderData, useParams } from 'react-router-dom';
+import {Button, Col,Form, notification} from "antd"
+import { Await, defer, useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../../components/ui/Spinner/Spinner';
-import ReactTextArea from '../../institution/instPostForm/components/ReactTextArea';
 import "./AddNews.scss"
 import { getNews } from '../../../util/api';
 import InputFile from '../../../components/form/InputFile';
 import FormInput from '../../../components/form/FormInput';
 import NewsContentArea from './components/NewsContentArea';
 
+
 const AddNews = () => {
   
     const newsLoader = useLoaderData();
     const { id } = useParams();
-
+    const navigate = useNavigate();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [newsContent,setNewsContent] = useState({
       content: ""
     })
 
-
+    
 
     const isSubmitDisabled =
     newsContent?.content?.replace(/<(.|\n)*?>/g, "").trim().length === 0;
@@ -38,41 +37,33 @@ const AddNews = () => {
 
     const onFinish = async (values) => {
       //api code
-      let formData = new FormData();
-      formData.append("newsLogo",values.newsLogo?.file)
-      formData.append("title",values.title)
-      formData.append("content",newsContent.content)
-      
-      let PUT = formData
-      PUT.append("_method","PUT")
-
+      const formData = new FormData();
+      formData.append("newsLogo", values.newsLogo?.file);
+      formData.append("title", values.title);
+      formData.append("content", newsContent.content);
+      if (id) {
+        formData.append("_method", "PUT");
+      }
+  
+      const URL = id ? `api/news/${id}` : `api/news`;
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+  
       try {
-        if(window.location.pathname === `/admin/add-news`){
-          setLoading(true)
-          await api().post(`api/news`, formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-          );
-          notification.success({ message: "تمت إضافة الخبر  بنجاح" });
-          setLoading(false);
-        } else if(window.location.pathname === `/admin/manage-news/${id}`){
-          setLoading(true)
-          await api().post(`api/news/${id}`, PUT,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-          );
-          notification.success({ message: "تم تحديث الخبر بنجاح" });
-          setLoading(false);
-        }
+        setLoading(true);
+        await api().post(URL, formData, {
+          headers,
+        });
+        notification.success({
+          message: `تمت ${id ? "تحديث" : "اضافة"} الخبر  بنجاح`,
+        });
+        setLoading(false);
+        navigate('/admin/manage-news')
       } catch (error) {
         console.log(error);
         notification.error({ message: "فشل تحديث البيانات" });
+        setLoading(false);
       }
     };
 
