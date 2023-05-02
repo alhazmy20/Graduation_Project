@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Select } from "antd";
 import "./SelectRegion.scss";
-const SelectRegion = ({ name, options, initValue }) => {
+const SelectRegion = ({ name, options, initValue, valueChnage }) => {
   return (
     <Form.Item
       name={name}
@@ -12,12 +12,9 @@ const SelectRegion = ({ name, options, initValue }) => {
         },
       ]}
       className="formItemStyle"
+      initialValue={initValue || "اختر المنطقة"}
     >
-      <Select
-        style={{ flexGrow: "2" }}
-        defaultValue={initValue || "اختر المنطقة"}
-        showSearch
-      >
+      <Select style={{ flexGrow: "2" }} showSearch onChange={valueChnage}>
         <Select.Option key="*" value="كل المناطق" />
         {options.map((region) => (
           <Select.Option key={region.id} value={region.region}>

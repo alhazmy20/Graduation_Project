@@ -1,111 +1,63 @@
 import React, { Suspense, useState } from "react";
 import { Button, Input, Col, Row, Form, notification } from "antd";
 import { RegionData } from "../../../data/TestData.js";
-import { data } from "../../../data/SaudiClassification";
+
 import ReactTextArea from "./components/ReactTextArea";
 import "../instPostForm/InstPostForm.scss";
 import ReactRadio from "./components/ReactRadio.jsx";
 import MultiSelect from "./components/MultiSelect .jsx";
 import CustomDatePicker from "./components/CustomDatePicker.jsx";
-
 import SelectRegion from "./components/SelectRegion.jsx";
 import SelectCity from "./components/SelectCity.jsx";
 import api from "../../../data/axiosConfig";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
 import { getPost } from "../../../util/api.js";
 import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
-
+import {
+  useFormPostData,
+  formatFormValues,
+  radioOptionsType,
+  radioOptionsReward,
+  radioOptionsGender,
+  options,
+  formatDate,
+} from "./FormPostAttachment.js";
+import ReactInput from "./components/ReactInput.jsx";
+import { data } from "../../../data/SaudiClassification.js";
 const InstPostForm = () => {
   const opportunityData = useLoaderData();
-
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [formPostData, setFormPostData] = useFormPostData();
+  const handleRegionChange = (value) => {
+    setSelectedRegion(value);
+  };
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [formPostData, setFormPostData] = useState({
-    title: "",
-    content: "",
-    t_type: "",
-    reward: "",
-    gender: "",
-    region: "",
-    city: "",
-    t_startDate: "",
-    t_endDate: "",
-    p_endDate: "",
-    majors: [],
-  });
-
-  const formatDate = (dateValue) => {
-    return new Date(dateValue).toISOString().slice(0, 10);
-  };
 
   const handleFormChange = (changedValues, allValues) => {
-    const formattedValues = Object.entries(allValues).reduce(
-      (acc, [key, value]) => ({
-        ...acc,
-        [key]: key.endsWith("Date") && value ? formatDate(value) : value,
-      }),
-      {}
-    );
+    const formattedValues = formatFormValues(allValues);
     setFormPostData((prevState) => ({
       ...prevState,
       ...formattedValues,
     }));
   };
 
-  const onFinish = async (values) => {
+  const onFinish = async (value) => {
     //api code
+
     try {
-      await api().post(`api/posts`, formPostData);
-      notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
-      setLoading(false);
+      // await api().post(`api/posts`, formPostData);
+      // notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
+      // setLoading(false);
+      // navigate("/institution/posts");
+      // console.log(formPostData);
+      console.log(formPostData);
     } catch (error) {
       console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
     }
   };
-
-  const isSubmitDisabled =
-    formPostData.content.replace(/<(.|\n)*?>/g, "").trim().length === 0;
-
-  const handleInputChange = (name, value) => {
-    if (name === "majors") {
-      const majors = value.map((id) => ({
-        SCC: id,
-        major: options.find((option) => option.value === id)?.label || "",
-      }));
-      setFormPostData((prevState) => ({
-        ...prevState,
-        [name]: majors,
-      }));
-    } else {
-      setFormPostData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
-    }
-  };
-  //for select tage
-  const options = data
-    .map((major) => {
-      return major.majors.map((majorName) => ({
-        label: majorName.title,
-        value: majorName.id,
-      }));
-    })
-    .flat();
-  const radioOptionsType = [
-    { label: "حضوري", value: "حضوري" },
-    { label: "عن بعد", value: "عن بعد" },
-  ];
-  const radioOptionsReward = [
-    { label: "نعم", value: 1 },
-    { label: "لا", value: 0 },
-  ];
-  const radioOptionsGender = [
-    { label: "ذكر", value: 0 },
-    { label: "انثى", value: 1 },
-    { label: "الكل", value: 2 },
-  ];
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -126,21 +78,12 @@ const InstPostForm = () => {
                 form={form}
               >
                 <Col>
-                  <Form.Item
-                    name="title"
-                    rules={[
-                      { required: true, message: "الرجاء ادخال العنوان" },
-                    ]}
-                    initialValue={loadedPost?.title}
-                  >
-                    <Input placeholder="عنوان فرصة التدريب ..." />
-                  </Form.Item>
+                  <ReactInput name="title" initialValue={loadedPost?.title} />
                 </Col>
                 <Col style={{ textAlign: "left" }}>
                   <ReactTextArea
                     name="content"
-                    formdata={formPostData.content || loadedPost?.content}
-                    handleInputChange={handleInputChange}
+                    initialValue={loadedPost?.content}
                   />
                 </Col>
                 <Row className="formInputContainer">
@@ -160,6 +103,7 @@ const InstPostForm = () => {
                         name="region"
                         options={RegionData}
                         initValue={loadedPost?.region}
+                        valueChnage={handleRegionChange}
                       />
                     </Row>
                     <Row className="RowDivElment">
@@ -202,7 +146,7 @@ const InstPostForm = () => {
                       <label className="label">المدينة: </label>
                       <SelectCity
                         data={RegionData}
-                        formDate={formPostData}
+                        formDate={selectedRegion}
                         initValue={loadedPost?.city}
                       />
                     </Row>
@@ -240,7 +184,6 @@ const InstPostForm = () => {
                     <MultiSelect
                       name="majors"
                       label="التخصصات"
-                      handleInputChange={handleInputChange}
                       options={options}
                       initValue={options.filter((option) =>
                         loadedPost?.post_majors.some(
@@ -255,7 +198,8 @@ const InstPostForm = () => {
                     type="primary"
                     htmlType="submit"
                     className="add-button"
-                    disabled={isSubmitDisabled}
+                    // disabled={isSubmitDisabled}
+
                     loading={loading}
                   >
                     {loading ? "جاري الإضافة..." : "اضافة"}
