@@ -61,12 +61,12 @@ import { applicationsLoader } from "../pages/student/Applications/Application";
 import AddAdmin from "../pages/Admin/AddAdmin/AddAdmin";
 import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
 import AddNews, { addNewsDataLoader } from "../pages/Admin/AddNews/AddNews";
-
-
+import InstitutionLayout from "../layouts/InstitutionLayout";
+import StudentLayout from "../layouts/StudentLayout";
 
 //Institution Routes
 const institutionRoutes = (
-  <Route path="/institution">
+  <Route path="/institution" element={<InstitutionLayout />}>
     <Route index element={<h1>Institution home page</h1>} />
     <Route path="posts" element={<InstPosts />} loader={instPostsLoader} />
     <Route
@@ -90,7 +90,7 @@ const institutionRoutes = (
 
 //Student Routes
 const studentRoutes = (
-  <Route path="student">
+  <Route path="student" element={<StudentLayout />}>
     <Route path="profile" element={<StudentProfile />} loader={studentLoader} />
     <Route
       path="applications"
@@ -103,9 +103,7 @@ const studentRoutes = (
 //Admin Routes
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
-  
-    <Route  index element={<AdminHomePage />}  />
-    
+    <Route index element={<AdminHomePage />} />
 
     <Route
       path="manage-institutions"
@@ -154,7 +152,7 @@ const adminRoutes = (
       element={<TrainingOpportunity />}
       loader={opportunityLoader}
     />
-    <Route path="manage-news" element={<NewsTable />} loader={allNewsLoader}/>
+    <Route path="manage-news" element={<NewsTable />} loader={allNewsLoader} />
     <Route path="add-news" element={<AddNews />} />
     <Route
       path="add-news/:id"
