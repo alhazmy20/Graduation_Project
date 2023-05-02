@@ -49,9 +49,9 @@ const NewsTable = () => {
     },
   ];
 
-  const handlePaginationChange = (page, pageSize) => {
+  const handlePaginationChange = (page, pageSize, loadedData) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, newsData.length);
+    const end = Math.min(start + pageSize - 1, loadedData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -73,14 +73,14 @@ const NewsTable = () => {
             </div>
 
             <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل {" "}
               {loadedData.length} سجل
             </p>
             <Table
               col={columns}
               data={loadedData}
               Size={pageSize}
-              handleChange={handlePaginationChange}
+              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
               emptyText="لا توجد بيانات"
             />
           </div>

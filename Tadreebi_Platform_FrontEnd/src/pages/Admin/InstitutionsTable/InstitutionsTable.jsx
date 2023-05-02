@@ -15,7 +15,7 @@ const InstitutionsTable = () => {
   const institutionsData = useLoaderData();
 
   const [statusFilter, setStatusFilter] = useState(null);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
   const filterData = (dataSource) => {
@@ -73,9 +73,9 @@ const InstitutionsTable = () => {
     setStatusFilter(status);
   };
 
-  const handlePaginationChange = (page, pageSize) => {
+  const handlePaginationChange = (page, pageSize, loadedData) => {
     const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, institutionsData.length);
+    const end = Math.min(start + pageSize - 1, loadedData.length);
     setCurrentRange([start, end]);
     setPageSize(pageSize);
   };
@@ -118,13 +118,13 @@ const InstitutionsTable = () => {
             </div>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
-              {institutionsData.length} سجل
+              {loadedData.length} سجل
             </p>
             <Table
               col={columns}
               data={filterData(loadedData)}
               Size={pageSize}
-              handleChange={handlePaginationChange}
+              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
               emptyText="لا توجد بيانات"
             />
           </div>
