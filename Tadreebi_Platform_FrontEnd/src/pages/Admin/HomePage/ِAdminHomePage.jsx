@@ -31,11 +31,7 @@ const Home = () => {
     <div className="AdminHomeContiner">
       <Col>
         <Row className="rowStyleStat" gutter={16}>
-          <StatisticCard
-            title="عدد الطلاب"
-            value={data?.total_users}
-            lable={"الطلاب"}
-          />
+          <StatisticCard title="عدد المستخدمين" value={data?.total_users} />
           <StatisticCard
             title="عدد الطلاب الجدد"
             value={data?.new_students.current_week_count}
@@ -45,7 +41,7 @@ const Home = () => {
           />
           <StatisticCard
             title="عدد تقديم الطلاب"
-            value={data?.new_applicationscurrent_week_count}
+            value={data?.new_applications.current_week_count}
             lable={"طلب"}
             indicators={data?.new_applications.percentage_difference}
             indicatorLable="منذ الاسبوع الماضي"
