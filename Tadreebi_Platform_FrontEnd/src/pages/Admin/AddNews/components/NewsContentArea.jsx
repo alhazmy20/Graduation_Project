@@ -1,10 +1,10 @@
 
+import { Form } from "antd";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const NewsContentArea = ({ formdata, handleInputChange, name }) => {
-  const [value, setValue] = useState("");
+const NewsContentArea = ({ initialValue, name }) => {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -37,19 +37,24 @@ const NewsContentArea = ({ formdata, handleInputChange, name }) => {
     "formula",
   ];
 
-  const handleChange = (value) => {
-    setValue(value);
-    handleInputChange(name, value);
-  };
-
   return (
-    <ReactQuill
+    <Form.Item
+    name={name}
+      rules={[
+        {
+          required: true,
+          message: "الرجاء ادخل وصف التدريب",
+        },
+      ]}
+      initialValue={initialValue}
+    >
+      <ReactQuill
+      name={name}
       placeholder="تفاصيل الخبر "
-      value={formdata}
-      onChange={handleChange}
       modules={modules}
       formats={formats}
     />
+    </Form.Item>
   );
 };
 
