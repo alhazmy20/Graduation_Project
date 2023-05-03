@@ -4,6 +4,7 @@ import dateFnsGenerateConfig from "rc-picker/lib/generate/dateFns";
 import generatePicker from "antd/es/date-picker/generatePicker";
 import { parse } from "date-fns";
 import arSA from "antd/lib/locale/ar_EG";
+import "../InstPostForm.scss";
 const DatePicker = generatePicker(dateFnsGenerateConfig);
 
 // const CustomDatePicker = ({ name, label, initValue }) => {

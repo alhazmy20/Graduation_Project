@@ -1,5 +1,5 @@
 import { Form, Select } from "antd";
-import "./MultiSelect.scss";
+import "../InstPostForm.scss";
 const MultiSelect = ({ name, label, options, initValue }) => {
   return (
     <Form.Item
