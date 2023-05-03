@@ -161,17 +161,17 @@ const AdminSidebar = () => {
               )}
             </NavLink>
             <NavLink onClick={() => auth.logout()} end>
-              {({ isActive }) => (
+              {
                 <MenuItem
                   className={
-                    isActive ? "activeMenu MenuItem" : "MenuItem notActive"
+                    "MenuItem notActive"
                   }
                   icon={<FontAwesomeIcon icon={faSignOut} />}
                 >
                   {" "}
                   تسجيل خروج{" "}
                 </MenuItem>
-              )}
+              }
             </NavLink>
           </Menu>
         </Sidebar>
