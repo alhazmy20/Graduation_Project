@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./AddAdmin.scss";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import { Button, Form, Row, notification } from "antd";
+import { Form, Row, notification } from "antd";
 import api from "../../../data/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import AdminFormInputs from "../../../components/form/AdminFormInputs";
+import SubmitButton from "../../../components/form/SubmitButton";
 
 const AddAdmin = () => {
   const [loading, setLoading] = useState(false);
@@ -32,15 +33,9 @@ const AddAdmin = () => {
           <Row gutter={[16, 2]}>
             <AdminFormInputs withPassword={true} />
           </Row>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="form-btn"
-            disabled={loading} // Disable button if the form is not changed
-            loading={loading}
-          >
+          <SubmitButton disabled={loading} loading={loading}>
             {loading ? "جاري الإضافة..." : "اضافة"}
-          </Button>
+          </SubmitButton>
         </Form>
       </FormCard>
     </div>

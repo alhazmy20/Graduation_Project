@@ -1,15 +1,15 @@
 import { Col, Row, Select } from "antd";
 import React, { useState } from "react";
-import { RegionData, SECTORS } from "../../data/TestData";
-import {
-  confirmPasswordRules,
-  emailValidationRules,
-  passwordRules,
-  phoneRules,
-} from "../../Validation/rules";
+import { SECTORS } from "../../data/TestData";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import { useFetchMajorsAndCities } from "../../data/API";
+import RegionSelect from "./RegionSelect";
+import CitySelect from "./CitySelect";
+import EmailInput from "./EmailInput";
+import PasswordInput from "./PasswordInput";
+import PasswordConfirInput from "./PasswordConfirInput";
+import PhoneInput from "./PhoneInput";
 
 const InstFormInputs = ({ withPassword, region }) => {
   const { majors } = useFetchMajorsAndCities();
@@ -22,18 +22,10 @@ const InstFormInputs = ({ withPassword, region }) => {
     <>
       <Row gutter={[16, 2]}>
         <Col xs={24} sm={12}>
-          <FormInput
-            label="إسم المنشأة"
-            labelCol={{ span: 24 }}
-            name="institutionName"
-          />
+          <FormInput label="إسم المنشأة" name="institutionName" />
         </Col>
         <Col xs={24} sm={12}>
-          <FormSelect
-            name="institutionSector"
-            label="القطاع"
-            labelCol={{ span: 24 }}
-          >
+          <FormSelect name="institutionSector" label="القطاع">
             {SECTORS.map((sector) => (
               <Select.Option key={sector.id} value={sector.name}>
                 {sector.name}
@@ -42,37 +34,18 @@ const InstFormInputs = ({ withPassword, region }) => {
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
-          <FormSelect
-            name="region"
-            label="المنطقة"
-            labelCol={{ span: 24 }}
-            onChange={handleRegionChange}
-          >
-            {RegionData.map((region) => (
-              <Select.Option key={region.id} value={region.region}>
-                {region.name}
-              </Select.Option>
-            ))}
-          </FormSelect>
+          <RegionSelect label="المنطقة" onChange={handleRegionChange} />
         </Col>
         <Col xs={24} sm={12}>
-          <FormSelect name="city" label="المدينة" labelCol={{ span: 24 }}>
-            {RegionData.find(
-              (r) => r.region === (selectedRegion || region)
-            )?.cities.map((city) => (
-              <Select.Option key={city.id} value={city.city}>
-                {city.city}
-              </Select.Option>
-            ))}
-          </FormSelect>
+          <CitySelect
+            selectedRegion={selectedRegion}
+            region={region}
+            label="المدينة"
+          />
         </Col>
 
         <Col xs={24} sm={12}>
-          <FormSelect
-            name="institutionField"
-            label="مجال العمل"
-            labelCol={{ span: 24 }}
-          >
+          <FormSelect name="institutionField" label="مجال العمل">
             {majors?.map((elm) => (
               <Select.Option key={elm._id} value={elm.specialistName}>
                 {elm.specialistName}
@@ -81,43 +54,21 @@ const InstFormInputs = ({ withPassword, region }) => {
           </FormSelect>
         </Col>
         <Col xs={24} sm={12}>
-          <FormInput
-            label="البريد الإلكتروني"
-            labelCol={{ span: 24 }}
-            name="email"
-            rules={emailValidationRules}
-          />
+          <EmailInput label={"البريد الإلكتروني"} />
         </Col>
         {withPassword && (
           <>
             <Col xs={24} sm={12}>
-              <FormInput
-                inputType="password"
-                label="كلمة السر"
-                labelCol={{ span: 24 }}
-                name="password"
-                rules={passwordRules}
-              />
+              <PasswordInput label="كلمة السر" />
             </Col>
 
             <Col xs={24} sm={12}>
-              <FormInput
-                inputType="password"
-                label="تأكيد كلمة السر"
-                labelCol={{ span: 24 }}
-                name="password_confirmation"
-                rules={confirmPasswordRules}
-              />
+              <PasswordConfirInput label="تأكيد كلمة السر" />
             </Col>
           </>
         )}
         <Col xs={24} sm={12}>
-          <FormInput
-            label="رقم الهاتف"
-            labelCol={{ span: 24 }}
-            name="institutionPhone"
-            inputType="number"
-          />
+          <PhoneInput label="رقم الهاتف" name="institutionPhone" />
         </Col>
       </Row>
     </>

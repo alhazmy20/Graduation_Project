@@ -16,7 +16,7 @@ const FormSelect = (props) => {
         {label}
       </label>
       <Form.Item rules={[{ required: true, message: `الرجاء اختيار ${label}` }]} {...others}>
-        <Select allowClear showSearch options={options} onChange={onChange} disabled={disabled}>
+        <Select showSearch options={options} onChange={onChange} disabled={disabled}>
           {children}
         </Select>
       </Form.Item>

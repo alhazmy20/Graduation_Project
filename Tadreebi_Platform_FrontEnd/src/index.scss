@@ -7,7 +7,6 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-
 }
 
 body {
@@ -15,7 +14,6 @@ body {
   min-height: 100%;
   min-width: 100%;
   overflow: overlay;
-
 }
 
 .filterTable {
@@ -53,11 +51,11 @@ body {
     font-size: 15px;
     font-weight: 500;
 
-    &:disabled{
+    &:disabled {
       opacity: 40%;
     }
 
-    &:hover{
+    &:hover {
       background-color: #01ad7e;
     }
   }
@@ -123,7 +121,19 @@ body {
   width: 120px;
   font-weight: 600;
 
-  &:hover{
-  background-color: #459389 !important;
+  &:hover {
+    background-color: #459389 !important;
   }
+}
+
+.ant-btn:hover {
+  color: #dadada !important;
+}
+
+.inactiveStat {
+  color: $coralRed;
+}
+
+.activeStat {
+  color: $Green;
 }

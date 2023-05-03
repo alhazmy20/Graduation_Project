@@ -1,4 +1,4 @@
-import { Button, Form } from "antd";
+import {  Form } from "antd";
 import React, { useState, Suspense } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
@@ -11,6 +11,7 @@ import { getStudent } from "../../../util/api";
 import api from "../../../data/axiosConfig";
 import StudentProfileInputs from "../../../components/form/StudentProfileInputs";
 import { displayMessage } from "../../../util/helpers";
+import SubmitButton from '../../../components/form/SubmitButton';
 
 const StudentProfile = ({ isAdmin }) => {
   const studentData = useLoaderData();
@@ -61,12 +62,12 @@ const StudentProfile = ({ isAdmin }) => {
           },
         }
       );
-      displayMessage("success", "تم تحديث البيانات");
+      displayMessage("success", "تم تحديث البيانات بنجاح");
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
       console.log(error);
-      displayMessage("error", "لم يتم تحديث البيانات");
+      displayMessage("error", "فشل تحديث البيانات");
     }
     formData = new FormData();
   };
@@ -127,15 +128,12 @@ const StudentProfile = ({ isAdmin }) => {
                   isAdmin={isAdmin}
                   loadedData={loadedData}
                 />
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="form-btn"
+                <SubmitButton
                   disabled={!isFormChanged} // Disable button if the form is not changed
                   loading={loading}
                 >
                   {loading ? "جاري الحفظ..." : "حفظ"}
-                </Button>
+                </SubmitButton>
               </Form>
             </FormCard>
             {!isAdmin && <ResetPassword />}

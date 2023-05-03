@@ -16,7 +16,7 @@
 
     .avatar {
       background-color: #afe1da;
-      border:2px solid $steelTeal;
+      border: 2px solid $steelTeal;
     }
 
     .avatar-name {
@@ -26,7 +26,8 @@
     }
   }
 
-  .first-row, .second-row {
+  .first-row,
+  .second-row {
     .col-one,
     .col-two {
       display: flex;
@@ -35,7 +36,6 @@
       padding: 5px;
     }
   }
-
 
   .space {
     display: flex;
@@ -51,8 +51,8 @@
       color: #808080;
     }
 
-    .nothing{
-        color: #F46A61;
+    .nothing {
+      color: $coralRed;
     }
 
     button {

@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { Delete } from "../../../components/ui/Table/TableFilter";
-import PostsModal from "./components/PostsModal";
+import { Delete, StatusText } from "../../../components/ui/Table/TableFilter";
+import PostDeleteModal from "./components/PostDeleteModal";
 import { Await, Link, defer, useLoaderData } from "react-router-dom";
 import { getPosts } from "../../../util/api";
 
@@ -17,9 +17,7 @@ const PostsTable = () => {
 
   const filterData = (dataSource) => {
     const filteredDataSource = statusFilter
-      ? dataSource?.filter(
-          (post) => post.postStatus === statusFilter
-        )
+      ? dataSource?.filter((post) => post.postStatus === statusFilter)
       : dataSource;
     return filteredDataSource;
   };
@@ -29,17 +27,21 @@ const PostsTable = () => {
       title: "عنوان فرصة التدريب",
       dataIndex: "title",
       align: "center",
-      render: (text, row) =>{
-        return <Link className='row-title' to={`${row.id}`}>{text}</Link>
-      }
+      render: (text, row) => {
+        return (
+          <Link className="row-title" to={`${row.id}`}>
+            {text}
+          </Link>
+        );
+      },
     },
     {
       title: "اسم المؤسسة",
       dataIndex: "inst",
       align: "center",
-      render: (text, row)=>{
-        return <span>{row.institution.institutionName}</span>
-      }
+      render: (text, row) => {
+        return <span>{row.institution.institutionName}</span>;
+      },
     },
     {
       title: "تاريخ النشر",
@@ -50,14 +52,16 @@ const PostsTable = () => {
       title: "الحالة",
       dataIndex: "postStatus",
       align: "center",
-      // render: (status) => StatusText(status),
+      render: (text) => StatusText(text),
     },
     {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
       render: (text, row) => {
-        return <Delete name={row.title} modal={PostsModal} />;
+        return (
+          <Delete name={row.title} modal={PostDeleteModal} postId={row.id} />
+        );
       },
     },
   ];
@@ -96,20 +100,22 @@ const PostsTable = () => {
               </Button>
               <Button
                 className="button-filter"
-                onClick={() => handleStatusFilterChange("غير نشط")}
+                onClick={() => handleStatusFilterChange("مغلق")}
               >
                 الاعلانات الغير نشطة
               </Button>
             </div>
             <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل {" "}
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedPosts.length} سجل
             </p>
             <Table
               col={columns}
               data={filterData(loadedPosts)}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedPosts)}
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(page, pageSize, loadedPosts)
+              }
               emptyText="لا توجد بيانات"
             />
           </div>

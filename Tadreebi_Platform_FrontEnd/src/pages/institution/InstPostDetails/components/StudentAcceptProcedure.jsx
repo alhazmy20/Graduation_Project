@@ -61,7 +61,7 @@ const StudentAcceptProcedure = ({ status, applicant_id }) => {
       {status === "بإنتظار موافقة المنشأة" && showBtnContainer && (
         <span className="btnContainer">
           <Button
-            className="acceptBtn"
+            className="greenBtn"
             onClick={() => {
               handleAcceptOrReject(ACCEPT_STATUS_ID);
             }}
@@ -71,7 +71,7 @@ const StudentAcceptProcedure = ({ status, applicant_id }) => {
             قبول
           </Button>
           <Button
-            className="rejectBtn"
+            className="redBtn"
             onClick={() => {
               handleAcceptOrReject(REJECT_STATUS_ID);
             }}

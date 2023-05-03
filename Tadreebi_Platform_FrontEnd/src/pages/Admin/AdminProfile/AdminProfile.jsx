@@ -2,15 +2,15 @@ import React, { Suspense, useState } from "react";
 import "./AdminProfile.scss";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
-import { Button, Col, Form, Row, notification } from "antd";
-import FormInput from "../../../components/form/FormInput";
-import { emailValidationRules, phoneRules } from "../../../Validation/rules";
+import { Form, Row } from "antd";
 import { useAuth } from "../../../auth/useContext";
 import { Await, defer, useLoaderData, useParams } from "react-router-dom";
 import { getAdmin } from "../../../util/api";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import api from "../../../data/axiosConfig";
 import AdminFormInputs from "../../../components/form/AdminFormInputs";
+import SubmitButton from "../../../components/form/SubmitButton";
+import { displayMessage } from "../../../util/helpers";
 
 const AdminProfile = () => {
   const adminData = useLoaderData();
@@ -29,17 +29,16 @@ const AdminProfile = () => {
   };
 
   const onFinish = async (values) => {
-    console.log(auth.user.id);
     try {
       setLoading(true);
       await api().put(`api/admins/${id || auth.user.id}`, values);
-      notification.success({ message: "تم تحديث البيانات بنجاح" });
+      displayMessage("success", "تم تحديث البيانات بنجاح");
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
-      notification.error({ message: "فشل تحديث البيانات" });
+      displayMessage("error", "فشل تحديث البيانات");
     }
   };
 
@@ -62,15 +61,13 @@ const AdminProfile = () => {
                   <Row gutter={[16, 2]}>
                     <AdminFormInputs />
                   </Row>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="form-btn"
+
+                  <SubmitButton
                     disabled={!isFormChanged} // Disable button if the form is not changed
                     loading={loading}
                   >
                     {loading ? "جاري الحفظ..." : "حفظ"}
-                  </Button>
+                  </SubmitButton>
                 </Form>
               </FormCard>
               <ResetPassword id={loaderData.id} />

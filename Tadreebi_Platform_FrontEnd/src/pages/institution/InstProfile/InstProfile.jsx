@@ -12,6 +12,7 @@ import api from "../../../data/axiosConfig";
 import { getInstitution } from "../../../util/api";
 import { useAuth } from "../../../auth/useContext";
 import loca from "react-secure-storage";
+import SubmitButton from "../../../components/form/SubmitButton";
 
 const InstProfile = ({ isAdmin }) => {
   const { id } = useParams();
@@ -43,7 +44,7 @@ const InstProfile = ({ isAdmin }) => {
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       notification.error({ message: "فشل تحديث البيانات" });
     }
   };
@@ -76,15 +77,13 @@ const InstProfile = ({ isAdmin }) => {
                   <InstFormInputs region={loadedData.region} />
                   <h1 className="green-underline">بيانات المسؤول</h1>
                   <InstManagerFormInputs />
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="form-btn"
+
+                  <SubmitButton
                     disabled={!isFormChanged} // Disable button if the form is not changed
                     loading={loading}
                   >
                     {loading ? "جاري الحفظ..." : "حفظ"}
-                  </Button>
+                  </SubmitButton>
                 </Form>
               </FormCard>
               {!isAdmin && <ResetPassword />}

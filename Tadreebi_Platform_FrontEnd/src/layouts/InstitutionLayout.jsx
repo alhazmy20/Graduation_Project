@@ -12,6 +12,7 @@ const InstitutionLayout = () => {
   if (auth.user?.role !== "Institution") {
     return <Navigate to="/" />;
   }
+  
   return (
     <div>
     <Outlet />

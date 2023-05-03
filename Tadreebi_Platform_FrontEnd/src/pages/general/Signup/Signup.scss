@@ -18,6 +18,10 @@
       align-items: center;
       min-width: 300px;
 
+      @media (max-width: 474px) {
+        display: block;
+      }
+
       /* Change the color of the line between radio buttons */
       .ant-radio-button-wrapper-checked:not(
           .ant-radio-button-wrapper-disabled
@@ -53,7 +57,7 @@
       }
 
       .students,
-      .institutions {
+      .institutions, .supervisor {
         flex: 1;
         font-size: 16px;
         border-radius: 2rem;

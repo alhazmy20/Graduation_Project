@@ -24,13 +24,12 @@ export const TableText = ({ text }) => {
   return <span style={style}>{text}</span>;
 };
 
-export const StatusText = (record) => {
-  let buttons = {};
-  if (record === 1) {
-    buttons = <Button className="activeBtn">نشط</Button>;
-  } else if (record === 0)
-    buttons = <Button className="inactiveBtn">غير نشط</Button>;
-  return buttons;
+export const StatusText = (text) => {
+  return (
+    <span className={text === "نشط" ? "activeStat" : "inactiveStat"}>
+      {text}
+    </span>
+  );
 };
 
 export const AdminStudentTable = (text) => {
@@ -79,7 +78,15 @@ export function StudentDetails({ name, data }) {
   );
 }
 
-export function Delete({ name, modal: Modal, adminId, institutionId, studentId, newsId }) {
+export function Delete({
+  name,
+  modal: Modal,
+  adminId,
+  institutionId,
+  studentId,
+  newsId,
+  postId,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -107,6 +114,7 @@ export function Delete({ name, modal: Modal, adminId, institutionId, studentId, 
           institutionId={institutionId}
           studentId={studentId}
           newsId={newsId}
+          postId={postId}
         />
       )}
     </span>

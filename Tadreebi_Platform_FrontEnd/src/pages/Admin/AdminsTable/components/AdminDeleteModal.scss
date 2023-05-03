@@ -5,7 +5,7 @@
   text-align: center;
 
   .ant-modal-title {
-    color: #f46a61;
+    color: $coralRed;
   }
 
   .delText {
@@ -16,7 +16,7 @@
   .smallDelText {
     font-weight: 400;
     font-size: 1rem;
-    color: #f46a61;
+    color: $coralRed;
   }
 
   .StudentsModal {
@@ -25,7 +25,7 @@
     margin-top: 2rem;
 
     .delButton {
-      background-color: #F46A61;
+      background-color: $coralRed;
       color: white;
       font-weight: 600;
       font-size: 1rem;

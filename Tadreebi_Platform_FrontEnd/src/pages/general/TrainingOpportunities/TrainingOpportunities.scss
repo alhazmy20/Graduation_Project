@@ -1,4 +1,4 @@
-@import '../../../index.scss';
+@import "../../../index.scss";
 
 .training-opportunities {
   margin-bottom: 1rem;
@@ -30,17 +30,27 @@
           width: 180px;
         }
 
-        @media (max-width: 720px) {
-          width: 100%;
+        @media (max-width: 777px) {
+          width: 150px;
         }
 
         label {
           font-weight: 500;
         }
       }
+
+      @media (max-width: 690px) {
+        .form-item {
+          width: 100%;
+          gap: 0;
+        }
+        & {
+          gap: 5px;
+        }
+      }
     }
 
-    .search-btn{
+    .search-btn {
       background-color: $Green;
       width: 100px;
       font-weight: 600;

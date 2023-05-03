@@ -3,14 +3,14 @@
 .student-profile {
   padding: 1rem;
 
+  .ant-select-arrow {
+    display: none;
+  }
+
   .card {
     h1 {
       font-size: 19px;
       font-weight: 600;
-    }
-
-    form {
-      
     }
   }
 }

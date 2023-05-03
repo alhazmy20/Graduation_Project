@@ -1,28 +1,21 @@
-import "./InstitutionDeleteModal.scss";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import React, { useState } from "react";
-import { Button } from "antd";
 import { useRevalidator } from "react-router-dom";
 import api from "../../../../data/axiosConfig";
 import { displayMessage } from "../../../../util/helpers";
 
-const InstitutionDeleteModal = ({
-  modalOpen,
-  setModalOpen,
-  name,
-  institutionId,
-}) => {
+const PostDeleteModal = ({ modalOpen, setModalOpen, name, postId }) => {
   const [loading, setLoading] = useState(false);
   let revalidator = useRevalidator();
 
-  const handleDeleteInstitution = async () => {
+  const handleDeletePost = async () => {
     try {
       setLoading(true);
-      await api().delete(`api/institutions/${institutionId}`);
+      await api().delete(`api/posts/${postId}`);
       setLoading(false);
       setModalOpen(false);
       revalidator.revalidate(); //revalidate the data
-      displayMessage("success", `تم حذف المنشأة "${name}"`);
+      displayMessage("success", `تم حذف الإعلان`);
     } catch (error) {
       setLoading(false);
       displayMessage("error", `هناك خطأ ما`);
@@ -38,14 +31,14 @@ const InstitutionDeleteModal = ({
       footer={[]}
       className="mod"
     >
-      <div className="delText">هل أنت متأكد من حذف "{name}"؟</div>
+      <div className="delText">هل أنت متأكد من حذف الاعلان: {name}؟</div>
       <span className="smallDelText">
-        *في حال قمت بالحذف لن يمكنك استرجاع حساب المنشأة
+        *في حال قمت بالحذف لن يمكنك استرجاع الاعلان
       </span>
       <div className="btnContainer">
         <Button
           className="redBtn"
-          onClick={handleDeleteInstitution}
+          onClick={handleDeletePost}
           loading={loading}
           disabled={loading}
         >
@@ -58,4 +51,5 @@ const InstitutionDeleteModal = ({
     </Modal>
   );
 };
-export default InstitutionDeleteModal;
+
+export default PostDeleteModal;

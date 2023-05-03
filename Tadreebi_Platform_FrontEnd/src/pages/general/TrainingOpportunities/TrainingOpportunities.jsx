@@ -1,13 +1,15 @@
-import { Button, Form, Select } from "antd";
-import React, { Suspense, useEffect, useState } from "react";
-import { RegionData } from "../../../data/TestData.js";
+import {  Form } from "antd";
+import React, { Suspense,  useState } from "react";
 import "./TrainingOpportunities.scss";
 import PostList from "./components/PostList.jsx";
 import { data as saudiClassificationData } from "../../../data/SaudiClassification";
 import { getPosts } from "../../../util/api.js";
 import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
 import { defer, useLoaderData, Await } from "react-router-dom";
-import axios from "axios";
+import MajorsSelect from "../../../components/form/MajorsSelect.jsx";
+import RegionSelect from "../../../components/form/RegionSelect.jsx";
+import CitySelect from "../../../components/form/CitySelect.jsx";
+import SubmitButton from '../../../components/form/SubmitButton.jsx';
 
 const TrainingOpportunities = () => {
   const [postsData, setPostsData] = useState(useLoaderData());
@@ -16,13 +18,6 @@ const TrainingOpportunities = () => {
 
   const [selectedRegion, setSelectedRegion] = useState("");
   const [form] = Form.useForm();
-
-  const majorOptions = [
-    { label: "كل التخصصات", value: "" },
-    ...saudiClassificationData.flatMap(({ majors }) =>
-      majors.map(({ id, title: label }) => ({ label, value: label }))
-    ),
-  ];
 
   const handleRegionChange = (value) => {
     setSelectedRegion(value);
@@ -62,41 +57,13 @@ const TrainingOpportunities = () => {
             major: "كل التخصصات",
           }}
         >
-          <Form.Item name="region" className="form-item">
-            <Select showSearch onChange={handleRegionChange}>
-              <Select.Option key="*" value="كل المناطق" />
-              {RegionData.map((region) => (
-                <Select.Option key={region.id} value={region.region}>
-                  {region.name}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-
-          <Form.Item className="form-item" name="city">
-            <Select showSearch>
-              <Select.Option key="*" value="كل المدن" />
-              {RegionData.find((r) => r.region === selectedRegion)?.cities.map(
-                (city) => (
-                  <Select.Option key={city.id} value={city.city}>
-                    {city.city}
-                  </Select.Option>
-                )
-              )}
-            </Select>
-          </Form.Item>
-
-          <Form.Item className="form-item" name="major">
-            <Select showSearch options={majorOptions} />
-          </Form.Item>
-
-          <Button
-            type="primary"
-            className="form-btn search-btn"
-            htmlType="submit"
-          >
-            بـحـث
-          </Button>
+          <RegionSelect
+            onChange={handleRegionChange}
+            className="form-item"
+          />
+          <CitySelect selectedRegion={selectedRegion} className="form-item" />
+          <MajorsSelect className="form-item" name="major" />
+          <SubmitButton className='search-btn'>بحث</SubmitButton>
         </Form>
       </header>
       <main>

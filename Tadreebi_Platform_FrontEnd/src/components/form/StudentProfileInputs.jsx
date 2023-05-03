@@ -1,14 +1,13 @@
 import { Col, Row, Select, Space } from "antd";
 import React from "react";
 import FormInput from "./FormInput";
-import {
-  emailValidationRules,
-  inputGpaRules,
-  nationalIdRules,
-  phoneRules,
-} from "../../Validation/rules";
+import { inputGpaRules, nationalIdRules } from "../../Validation/rules";
 import FormSelect from "./FormSelect";
 import InputFile from "./InputFile";
+import EmailInput from "./EmailInput";
+import PhoneInput from "./PhoneInput";
+import MajorsSelect from "./MajorsSelect";
+import UniversitySelect from "./UniversitySelect";
 
 const StudentProfileInputs = ({ isAdmin, loadedData }) => {
   return (
@@ -18,24 +17,16 @@ const StudentProfileInputs = ({ isAdmin, loadedData }) => {
         <Col xs={24} sm={12}>
           <FormInput
             label="الإسم الرباعي"
-            labelCol={{ span: 24 }}
             name="fullName"
             disabled={!isAdmin}
           />
         </Col>
         <Col xs={24} sm={12}>
-          <FormInput
-            label="البريد الإلكتروني"
-            labelCol={{ span: 24 }}
-            name="email"
-            disabled={!isAdmin}
-            rules={emailValidationRules}
-          />
+          <EmailInput label="البريد الجامعي" disabled={!isAdmin} />
         </Col>
         <Col xs={24} sm={12}>
           <FormInput
             label="رقم الهوية"
-            labelCol={{ span: 24 }}
             name="national_ID"
             inputType="number"
             disabled={!isAdmin}
@@ -43,13 +34,7 @@ const StudentProfileInputs = ({ isAdmin, loadedData }) => {
           />
         </Col>
         <Col xs={24} sm={12}>
-          <FormInput
-            label="رقم الجوال"
-            labelCol={{ span: 24 }}
-            name="phone"
-            inputType="number"
-            rules={phoneRules}
-          />
+          <PhoneInput label="رقم الجوال" />
         </Col>
 
         <Col xs={24} sm={12}>
@@ -79,36 +64,20 @@ const StudentProfileInputs = ({ isAdmin, loadedData }) => {
       <h1 className="green-underline">البيانات الأكاديمية</h1>
       <Row gutter={[16, 0]}>
         <Col xs={24} sm={12}>
-          <FormInput
-            label="اسم الجامعة"
-            labelCol={{ span: 24 }}
-            name="university"
-            disabled={!isAdmin}
-          />
+          <UniversitySelect label="اسم الجامعة" disabled={!isAdmin} />
         </Col>
         <Col xs={24} sm={12}>
-          <FormInput
-            label="التخصص"
-            labelCol={{ span: 24 }}
-            name="major"
-            disabled={!isAdmin}
-          />
+          <MajorsSelect label="التخصص" name="major" disabled={!isAdmin} />
         </Col>
         <Col xs={24} sm={12}>
           <Space>
             <FormInput
               label="المعدل التراكمي"
-              labelCol={{ span: 24 }}
               name="GPA"
               inputType="number"
               rules={inputGpaRules(loadedData.GPA_Type)}
             />
-            <FormInput
-              label="من"
-              labelCol={{ span: 24 }}
-              name="GPA_Type"
-              disabled={!isAdmin}
-            />
+            <FormInput label="من" name="GPA_Type" disabled={!isAdmin} />
           </Space>
         </Col>
 

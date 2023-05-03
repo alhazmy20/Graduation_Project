@@ -1,13 +1,14 @@
 import "./Login.scss";
-import { Button, Col, Form, Row, notification } from "antd";
+import { Col, Form, Row, notification } from "antd";
 import React, { useEffect } from "react";
 import Container from "../../../layouts/Container/Container";
 import { Link, useNavigate } from "react-router-dom";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import FormInput from "../../../components/form/FormInput";
-import { emailValidationRules, passwordRules } from "../../../Validation/rules";
 import { useState } from "react";
 import { useAuth } from "../../../auth/useContext";
+import SubmitButton from "../../../components/form/SubmitButton";
+import PasswordInput from "../../../components/form/PasswordInput";
+import EmailInput from "../../../components/form/EmailInput";
 
 const Login = ({ isAdmin }) => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Login = ({ isAdmin }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigate(auth.user.role === 'Admin' || 'SuperAdmin' ? "/admin" : "/");
+      navigate(auth.user.role === "Admin" || "SuperAdmin" ? "/admin" : "/");
     }
   }, [auth, navigate, isAdmin]);
 
@@ -49,29 +50,14 @@ const Login = ({ isAdmin }) => {
               style={{ height: "fit-content" }}
               validateTrigger="onSubmit" // Only validate on submit
             >
-              <FormInput
-                label="البريد الإلكتروني"
-                labelCol={{ span: 24 }}
-                name="email"
-                rules={emailValidationRules}
-              />
+              <EmailInput label="البريد الإلكتروني" />
 
-              <FormInput
-                inputType="password"
-                label="كلمة السر"
-                labelCol={{ span: 24 }}
-                name="password"
-                rules={passwordRules}
-              />
+              <PasswordInput label="كلمة السر" />
 
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="form-btn"
-                disabled={loading}
-              >
+              <SubmitButton disabled={loading} loading={loading}>
                 دخول
-              </Button>
+              </SubmitButton>
+
               <span className="login-register">
                 ليس لديك حساب؟
                 <Link to="/signup">تسجيل جديد</Link>

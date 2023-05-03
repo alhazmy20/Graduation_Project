@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./InstSignup.scss";
 import { Steps, Form, Button, notification } from "antd";
 import { useNavigate } from "react-router-dom";
-import InstFormInputs from "../InstFormInputs";
-import InstManagerFormInputs from "../InstManagerFormInputs";
+import InstFormInputs from "../../../components/form/InstFormInputs";
+import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
 import api from "../../../data/axiosConfig";
 
 const InstSignup = () => {
