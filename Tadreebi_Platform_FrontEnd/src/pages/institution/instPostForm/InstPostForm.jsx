@@ -28,6 +28,8 @@ import {
   options,
 } from "./FormPostAttachment.js";
 import ReactInput from "./components/ReactInput.jsx";
+import RegionSelect from "../../../components/form/RegionSelect.jsx";
+import CitySelect from "../../../components/form/CitySelect.jsx";
 
 const InstPostForm = () => {
   const { id } = useParams();
@@ -48,11 +50,11 @@ const InstPostForm = () => {
       ...prevState,
       ...formattedValues,
     }));
-   setIsFormChanged(
-     Object?.keys(changedValues).some(
-       (key) => allValues[key] !== (opportunityData?.[key] || "")
-     )
-   );
+    setIsFormChanged(
+      Object?.keys(changedValues).some(
+        (key) => allValues[key] !== (opportunityData?.[key] || "")
+      )
+    );
   };
 
   const onFinish = async (value) => {
@@ -117,11 +119,17 @@ const InstPostForm = () => {
 
                     <Row className="RowDivElment">
                       <label className="label">المنطقة: </label>
-                      <SelectRegion
+                      {/*<SelectRegion
                         name="region"
                         options={RegionData}
                         initValue={loadedPost?.region}
                         valueChnage={handleRegionChange}
+        />*/}
+                      <RegionSelect
+                        onChange={handleRegionChange}
+                        className="formItemStyle"
+                        placeholder='اختر المنطقة'
+                        initialValue={loadedPost?.region}
                       />
                     </Row>
                     <Row className="RowDivElment">
@@ -162,10 +170,17 @@ const InstPostForm = () => {
 
                     <Row className="RowDivElment">
                       <label className="label">المدينة: </label>
-                      <SelectCity
+                      {/*<SelectCity
                         data={RegionData}
                         formDate={selectedRegion}
                         initValue={loadedPost?.city}
+                      />*/}
+                      <CitySelect
+                        selectedRegion={selectedRegion}
+                        className="formItemStyle"
+                        placeholder='اختر المدينة'
+                        initialValue={loadedPost?.city}
+                        region={loadedPost?.region}
                       />
                     </Row>
 

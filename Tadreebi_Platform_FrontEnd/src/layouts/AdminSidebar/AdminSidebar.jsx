@@ -95,6 +95,15 @@ const AdminSidebar = () => {
                     className={({ isActive }) =>
                       isActive ? "SubMenu activeMenu" : "SubMenu notActive"
                     }
+                    to={"/admin/manage-supervisors"}
+                    end
+                  >
+                    <MenuItem> ادارة مشرفين الجامعات </MenuItem>
+                  </NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "SubMenu activeMenu" : "SubMenu notActive"
+                    }
                     to={"/admin/manage-admins"}
                     end
                   >
@@ -163,9 +172,7 @@ const AdminSidebar = () => {
             <NavLink onClick={() => auth.logout()} end>
               {
                 <MenuItem
-                  className={
-                    "MenuItem notActive"
-                  }
+                  className={"MenuItem notActive"}
                   icon={<FontAwesomeIcon icon={faSignOut} />}
                 >
                   {" "}

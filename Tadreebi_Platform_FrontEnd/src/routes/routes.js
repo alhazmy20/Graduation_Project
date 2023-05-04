@@ -100,6 +100,14 @@ const studentRoutes = (
   </Route>
 );
 
+//supervisor Routes
+const supervisorRoutes = (
+  <Route path="supervisor">
+    <Route path="all-students" element={<StudentProfile />} />
+   
+  </Route>
+);
+
 //Admin Routes
 const adminRoutes = (
   <Route path="admin" element={<AdminLayout />}>
@@ -156,6 +164,11 @@ const adminRoutes = (
     <Route path="add-news" element={<AddNews />} />
     <Route
       path="manage-news/:id"
+      element={<AddNews />}
+      loader={addNewsDataLoader}
+    />
+    <Route
+      path="manage-supervisors"
       element={<AddNews />}
       loader={addNewsDataLoader}
     />

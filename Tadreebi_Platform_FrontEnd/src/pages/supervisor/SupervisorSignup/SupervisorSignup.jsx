@@ -14,12 +14,28 @@ import EmailInput from "../../../components/form/EmailInput";
 import PasswordInput from "../../../components/form/PasswordInput";
 import PasswordConfirInput from "../../../components/form/PasswordConfirInput";
 import SubmitButton from "../../../components/form/SubmitButton";
+import UniversitySelect from "../../../components/form/UniversitySelect";
 
 const SupervisorSignup = () => {
   const navigate = useNavigate();
 
+  const options = [
+    {
+      value: "0",
+      label: "ذكور",
+    },
+    {
+      value: "1",
+      label: "الإناث",
+    },
+    {
+      value: "2",
+      label: "الكل",
+    },
+  ];
+
   const onFinish = (values) => {
-    values.SCC = values.SCC.substring(0, 2); // Extract the first two characters of the SCC value
+    console.log(values);
     api()
       .get("/api/csrf-token")
       .then((response) => {
@@ -28,11 +44,12 @@ const SupervisorSignup = () => {
       })
       .then(() => {
         api()
-          .post("/api/students", values)
+          .post("/api/supervisors", values)
           .then(() => {
             navigate("/verify-account");
           })
           .catch((error) => {
+            console.log(error);
             const errorMessages = error.response.data.message;
             notification.error({ message: errorMessages });
           });
@@ -43,6 +60,12 @@ const SupervisorSignup = () => {
     <div>
       <Form name="basic" className="form-wrapper" onFinish={onFinish}>
         <EmailInput label="البريد الجامعي" />
+        <FormSelect
+          label="مسؤول التدريب في شطر"
+          name="section"
+          options={options}
+        />
+        <UniversitySelect label="الجامعة" />
         <PasswordInput label="كلمة السر" />
         <PasswordConfirInput label="تأكيد كلمة السر" />
 
