@@ -19,28 +19,27 @@ const AddNews = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [newsContent,setNewsContent] = useState({
-      content: ""
     })
+    const [isFormChanged, setIsFormChanged] = useState(false);
 
     
-
-    const isSubmitDisabled =
-    newsContent?.content?.replace(/<(.|\n)*?>/g, "").trim().length === 0;
-    
-    const handleInputChange = (name, value) => {
-       setNewsContent((prevState) => ({
-          ...prevState,
-          [name]: value,
-        }));
-    }
-
+    const handleFormChange = (changedValues, allValues,name,value) => {
+      setNewsContent((prevState) => ({
+        ...prevState,
+      }));
+     setIsFormChanged(
+      Object.keys(changedValues).some(
+        (key) => allValues[key] !== newsLoader?.[key]
+      )
+     );
+    };
 
     const onFinish = async (values) => {
       //api code
       const formData = new FormData();
       formData.append("newsLogo", values.newsLogo?.file);
       formData.append("title", values.title);
-      formData.append("content", newsContent.content);
+      formData.append("content", values.content);
       if (id) {
         formData.append("_method", "PUT");
       }
@@ -84,6 +83,7 @@ const AddNews = () => {
          form={form}
          initialValues={loadedNews}
          onFinish={onFinish}
+         onValuesChange={handleFormChange}
          >
         <Col>
         <InputFile fileName={loadedNews?.logo?.logo_filename} name="newsLogo" label="اضافة صورة" accept="image/*" />
@@ -94,8 +94,7 @@ const AddNews = () => {
          <Col style={{textAlign: "left"}}>
           <NewsContentArea
           name="content"
-          formdata={newsContent.content || loadedNews?.content}
-          handleInputChange={handleInputChange}
+          initialValue={loadedNews?.content}
           />
          </Col>
          <div className="addNewsButton btnContainer">
@@ -103,7 +102,7 @@ const AddNews = () => {
                     type="primary"
                     htmlType="submit"
                     className="add-button greenBtn"
-                    disabled={isSubmitDisabled}
+                    disabled={!isFormChanged}
                     loading={loading}
                   >
                      {loading ? "جاري الحفظ..." : "حفظ"}

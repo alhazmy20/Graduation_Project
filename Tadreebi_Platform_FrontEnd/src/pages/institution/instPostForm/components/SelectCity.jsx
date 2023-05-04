@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Select } from "antd";
-import "./SelectCity.scss";
+import "../InstPostForm.scss";
 const SelectCity = ({ data, formDate, initValue }) => {
   return (
     <Form.Item

@@ -196,6 +196,7 @@ export const exportExcelFile = async (
 export const getAdminDashboardCards = async () => {
   try {
     const res = await api().get(`api/dashboard/cards`);
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;

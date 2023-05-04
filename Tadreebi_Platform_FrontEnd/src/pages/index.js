@@ -21,7 +21,7 @@ import StudentProfile from "./student/StudentProfile/StudentProfile";
 
 //Imports from admin folder
 import AdminLayout from "../layouts/AdminLayout";
-import AdminHomePage from "../pages/Admin/HomePage/Home";
+import AdminHomePage from "./Admin/HomePage/ِAdminHomePage";
 import AdminProfile from "./Admin/AdminProfile/AdminProfile";
 import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
 import InstitutionsTable from "../pages/Admin/InstitutionsTable/InstitutionsTable";

@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Radio } from "antd";
+import "../InstPostForm.scss";
 const ReactRadio = ({ name, options, initValue }) => {
   return (
     <Form.Item
