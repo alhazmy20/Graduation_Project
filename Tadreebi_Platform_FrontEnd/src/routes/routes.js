@@ -64,6 +64,7 @@ import AddNews, { addNewsDataLoader } from "../pages/Admin/AddNews/AddNews";
 import InstitutionLayout from "../layouts/InstitutionLayout";
 import StudentLayout from "../layouts/StudentLayout";
 import SupervisorsTable, { supervisorsLoader } from '../pages/Admin/SupervisorsTable/SupervisorsTable';
+import SupervisorLayout from "../layouts/SupervisorLayout";
 
 //Institution Routes
 const institutionRoutes = (
@@ -103,7 +104,7 @@ const studentRoutes = (
 
 //supervisor Routes
 const supervisorRoutes = (
-  <Route path="supervisor">
+  <Route path="supervisor" element={<SupervisorLayout/>}>
     <Route path="all-students" element={<StudentProfile />} />
    
   </Route>
@@ -211,6 +212,7 @@ export const routes = createBrowserRouter(
       </Route>
 
       {adminRoutes}
+      {supervisorRoutes}
 
       <Route path="signup" element={<Signup />} />
       <Route path="verify-account" element={<VerifyAccount />} />

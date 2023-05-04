@@ -32,7 +32,15 @@ const Login = ({ isAdmin }) => {
 
   useEffect(() => {
     if (auth.user) {
-      navigate(auth.user.role === "Admin" || "SuperAdmin" ? "/admin" : "/");
+      switch(auth.user.role){
+        case "Admin" : navigate("/admin")
+        break;
+        case "SuperAdmin": navigate("/admin")
+        break;
+        case "Supervisor": navigate("/supervisor")
+        break;
+        default: navigate("/")
+      }
     }
   }, [auth, navigate, isAdmin]);
 
