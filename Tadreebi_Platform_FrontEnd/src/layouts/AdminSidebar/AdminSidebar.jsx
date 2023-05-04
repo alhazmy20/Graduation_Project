@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./AdminSidebar.scss";
 import { NavLink, Navigate } from "react-router-dom";
 import {
   Sidebar,

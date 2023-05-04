@@ -137,3 +137,111 @@ body {
 .activeStat {
   color: $Green;
 }
+
+.SideBarContainer {
+  height: 100vh;
+  display: flex;
+  font-family: $font-inter-regular;
+  font-weight: 700;
+
+  .Sidebar {
+      border-left: 1px solid #4FD1C5;
+
+      .ps-sidebar-container {
+          background-color: white;
+      }
+
+      .platformContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-bottom: 2rem;
+
+
+          .Platform {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: #249283;
+              width: 5rem;
+              height: 3.5rem;
+              font-weight: 700;
+              font-size: 24px;
+              font-family: $font-inter-regular;
+              border-radius: 0px 0px 20px 20px;
+              color: white;
+          }
+
+          .Name {
+              padding-top: 13px;
+              padding-bottom: 10px;
+              color: #2D3748;
+          }
+
+          .hLine {
+              width: 185px;
+              background: linear-gradient(to right, #E0E1E2 0%, #E0E1E2 100%, #E0E1E2 15%);
+              height: 3px;
+              border: 0;
+              border-radius: 10px;
+
+          }
+      }
+
+      .MenuItem {
+          text-align: center;
+          width: 90%;
+          right: 10px;
+          color: #2D3748;
+          margin: 5px 0;
+          text-decoration: none;
+
+          .ps-menu-button {
+              border-radius: 11.25px;
+          }
+
+          .ps-menu-icon {
+              background-color: #f6f6f6;
+              color: #4FD1C5;
+              border-radius: 9px;
+              margin: 0;
+          }
+
+          .SubMenu {
+              text-align: right;
+              color: #2D3748;
+              margin-bottom: 5px;
+          }
+      }
+
+      .activeMenu {
+          .ps-menu-button {
+              background-color: #f6f6f6;
+              color: #2D3748;
+          }
+
+          .ps-menu-icon {
+              background-color: #4FD1C5;
+              color: $white;
+          }
+      }
+
+      .notActive {
+
+          .ps-menu-button {
+              color: #A0AEC0;
+          }
+      }
+  }
+}
+.barsMain{
+  height: fit-content;
+  margin: 1rem 1rem;
+  .barsDiv{
+      height: fit-content;
+      @include breakpoint-up(xlarge){
+          display: none;
+      }
+  }
+}
