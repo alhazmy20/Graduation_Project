@@ -241,3 +241,14 @@ export const useAdminDashboard = (endpoint, year) => {
 
   return { data, loading, error };
 };
+
+export const getAllSupervisors = async () => {
+  try {
+    const res = await api().get(`api/supervisors`);
+    console.log(res.data.data);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

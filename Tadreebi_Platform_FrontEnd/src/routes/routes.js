@@ -63,6 +63,7 @@ import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
 import AddNews, { addNewsDataLoader } from "../pages/Admin/AddNews/AddNews";
 import InstitutionLayout from "../layouts/InstitutionLayout";
 import StudentLayout from "../layouts/StudentLayout";
+import SupervisorsTable, { supervisorsLoader } from '../pages/Admin/SupervisorsTable/SupervisorsTable';
 
 //Institution Routes
 const institutionRoutes = (
@@ -169,8 +170,8 @@ const adminRoutes = (
     />
     <Route
       path="manage-supervisors"
-      element={<AddNews />}
-      loader={addNewsDataLoader}
+      element={<SupervisorsTable/>}
+      loader={supervisorsLoader}
     />
   </Route>
 );

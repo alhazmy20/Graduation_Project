@@ -22,11 +22,11 @@ const SupervisorSignup = () => {
   const options = [
     {
       value: "0",
-      label: "ذكور",
+      label: "الطلاب",
     },
     {
       value: "1",
-      label: "الإناث",
+      label: "الطالبات",
     },
     {
       value: "2",
