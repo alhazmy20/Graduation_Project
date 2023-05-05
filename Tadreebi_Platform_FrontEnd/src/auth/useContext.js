@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import api from "../data/axiosConfig";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 export const AuthContext = createContext(null);
 
@@ -10,7 +10,7 @@ export const AuthContexProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const [role, setRole] = useState(null);
-
+  const [redirectAfterLogout, setRedirectAfterLogout] = useState(false);
 
   const login = async (values) => {
     await fetchCsrfToken();
@@ -30,7 +30,9 @@ export const AuthContexProvider = ({ children }) => {
   const logout = async () => {
     try {
       await api().post("/api/logout");
+      localStorage.removeItem("user");
       setUser(null);
+      setRedirectAfterLogout(true);
     } catch (error) {
       console.log(error);
     }
@@ -40,8 +42,15 @@ export const AuthContexProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
+  useEffect(() => {
+    if (redirectAfterLogout) {
+      window.location.href = "/login";
+    }
+  }, [redirectAfterLogout]);
+
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, role, fetchCsrfToken }}>
+    <AuthContext.Provider value={{ user, login, logout, role, fetchCsrfToken,setRedirectAfterLogout }}>
       {children}
     </AuthContext.Provider>
   );
