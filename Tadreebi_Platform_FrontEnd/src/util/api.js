@@ -252,3 +252,16 @@ export const getAllSupervisors = async () => {
     throw error;
   }
 };
+
+export const getSupervisor = async (id) => {
+  try {
+    const res = await api().get(`api/supervisors/${id}`);
+    console.log(res);
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
+  }
+};

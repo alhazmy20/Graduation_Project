@@ -2,7 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import api from "../data/axiosConfig";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
@@ -10,9 +10,8 @@ export const AuthContexProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
-  console.log(user);
   const [role, setRole] = useState(null);
-  
+
 
   const login = async (values) => {
     await fetchCsrfToken();
@@ -32,7 +31,6 @@ export const AuthContexProvider = ({ children }) => {
   const logout = async () => {
     try {
       await api().post("/api/logout");
-      setUser(null);
       setUser(null);
     } catch (error) {
       console.log(error);

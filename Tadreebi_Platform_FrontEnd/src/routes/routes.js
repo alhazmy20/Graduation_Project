@@ -63,127 +63,142 @@ import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
 import AddNews, { addNewsDataLoader } from "../pages/Admin/AddNews/AddNews";
 import InstitutionLayout from "../layouts/InstitutionLayout";
 import StudentLayout from "../layouts/StudentLayout";
-import SupervisorsTable, { supervisorsLoader } from '../pages/Admin/SupervisorsTable/SupervisorsTable';
+import SupervisorsTable, {
+  supervisorsLoader,
+} from "../pages/Admin/SupervisorsTable/SupervisorsTable";
 import SupervisorLayout from "../layouts/SupervisorLayout";
 import RequireAuth from "../auth/RequireAuth";
 import Unauthorized from "../pages/general/Unauthorized/Unauthorized";
+import SupervisorProfile, { supervisorLoaderWithId } from '../pages/supervisor/SupervisorProfile/SupervisorProfile';
 
 //Institution Routes
 const institutionRoutes = (
-  <Route element={<RequireAuth allowedRoles={["institution"]}/>}>
-  <Route path="/institution" element={<InstitutionLayout />}>
-    <Route index element={<h1>Institution home page</h1>} />
-    <Route path="posts" element={<InstPosts />} loader={instPostsLoader} />
-    <Route
-      path="posts/:id"
-      element={<InstPostDetails />}
-      loader={applicantsPostLoader}
-    />
-    <Route
-      path="profile"
-      element={<InstProfile />}
-      loader={institutionLoader}
-    />
-    <Route path="newPost" element={<InstPostForm />} />
-    <Route
-      path="newPost/:id"
-      element={<InstPostForm />}
-      loader={opportunityDataLoader}
-    />
-  </Route>
+  <Route element={<RequireAuth allowedRoles={["institution"]} />}>
+    <Route path="/institution" element={<InstitutionLayout />}>
+      <Route index element={<h1>Institution home page</h1>} />
+      <Route path="posts" element={<InstPosts />} loader={instPostsLoader} />
+      <Route
+        path="posts/:id"
+        element={<InstPostDetails />}
+        loader={applicantsPostLoader}
+      />
+      <Route
+        path="profile"
+        element={<InstProfile />}
+        loader={institutionLoader}
+      />
+      <Route path="newPost" element={<InstPostForm />} />
+      <Route
+        path="newPost/:id"
+        element={<InstPostForm />}
+        loader={opportunityDataLoader}
+      />
+    </Route>
   </Route>
 );
 
 //Student Routes
 const studentRoutes = (
-  <Route element={<RequireAuth allowedRoles={["student"]}/>}>
-  <Route path="student" element={<StudentLayout />}>
-    <Route path="profile" element={<StudentProfile />} loader={studentLoader} />
-    <Route
-      path="applications"
-      element={<Applications />}
-      loader={applicationsLoader}
-    />
-  </Route>
+  <Route element={<RequireAuth allowedRoles={["student"]} />}>
+    <Route path="student" element={<StudentLayout />}>
+      <Route
+        path="profile"
+        element={<StudentProfile />}
+        loader={studentLoader}
+      />
+      <Route
+        path="applications"
+        element={<Applications />}
+        loader={applicationsLoader}
+      />
+    </Route>
   </Route>
 );
 
 //supervisor Routes
 const supervisorRoutes = (
-  <Route element={<RequireAuth allowedRoles={["Supervisor"]}/>}>
-<Route path="supervisor" element={<SupervisorLayout/>}>
-    <Route path="all-students" element={<StudentProfile />} />
+  <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
+    <Route path="supervisor" element={<SupervisorLayout />}>
+      <Route path="all-students" element={<StudentProfile />} />
+    </Route>
   </Route>
-  </Route>
-
 );
 
 //Admin Routes
 const adminRoutes = (
-  <Route element={<RequireAuth allowedRoles={["SuperAdmin" , "Admin"]}/>}>
-<Route path="admin" element={<AdminLayout />}>
-    <Route index element={<AdminHomePage />} />
+  <Route element={<RequireAuth allowedRoles={["SuperAdmin", "Admin"]} />}>
+    <Route path="admin" element={<AdminLayout />}>
+      <Route index element={<AdminHomePage />} />
 
-    <Route
-      path="manage-institutions"
-      element={<InstitutionsTable />}
-      loader={institutionsLoader}
-    />
-    <Route
-      path="manage-institutions/:id"
-      element={<InstProfile isAdmin={true} />}
-      loader={institutionLoaderWithId}
-    />
-    <Route
-      path="manage-students"
-      element={<StudentsTable />}
-      loader={studentsLoader}
-    />
-    <Route
-      path="manage-students/:id"
-      element={<StudentProfile isAdmin={true} />}
-      loader={studentLoaderWithId}
-    />
-    <Route
-      path="manage-admins"
-      element={<AdminsTable />}
-      loader={adminsLoader}
-    />
-    <Route
-      path="manage-admins/:id"
-      element={<AdminProfile isAdmin={true} />}
-      loader={adminLoaderWithId}
-    />
-    <Route path="add-admin" element={<AddAdmin />} />
+      <Route
+        path="manage-institutions"
+        element={<InstitutionsTable />}
+        loader={institutionsLoader}
+      />
+      <Route
+        path="manage-institutions/:id"
+        element={<InstProfile isAdmin={true} />}
+        loader={institutionLoaderWithId}
+      />
+      <Route
+        path="manage-students"
+        element={<StudentsTable />}
+        loader={studentsLoader}
+      />
+      <Route
+        path="manage-students/:id"
+        element={<StudentProfile isAdmin={true} />}
+        loader={studentLoaderWithId}
+      />
+      <Route
+        path="manage-admins"
+        element={<AdminsTable />}
+        loader={adminsLoader}
+      />
+      <Route
+        path="manage-admins/:id"
+        element={<AdminProfile isAdmin={true} />}
+        loader={adminLoaderWithId}
+      />
+      <Route path="add-admin" element={<AddAdmin />} />
 
-    <Route
-      path="profile"
-      element={<AdminProfile />}
-      loader={adminProfileLoader}
-    />
-    <Route
-      path="manage-posts"
-      element={<PostsTable />}
-      loader={AdminPostsLoader}
-    />
-    <Route
-      path="manage-posts/:id"
-      element={<TrainingOpportunity />}
-      loader={opportunityLoader}
-    />
-    <Route path="manage-news" element={<NewsTable />} loader={allNewsLoader} />
-    <Route path="add-news" element={<AddNews />} />
-    <Route
-      path="manage-news/:id"
-      element={<AddNews />}
-      loader={addNewsDataLoader}
-    />
-    <Route
-      path="manage-supervisors"
-      element={<SupervisorsTable/>}
-      loader={supervisorsLoader}
-    />
-  </Route>
+      <Route
+        path="profile"
+        element={<AdminProfile />}
+        loader={adminProfileLoader}
+      />
+      <Route
+        path="manage-posts"
+        element={<PostsTable />}
+        loader={AdminPostsLoader}
+      />
+      <Route
+        path="manage-posts/:id"
+        element={<TrainingOpportunity />}
+        loader={opportunityLoader}
+      />
+      <Route
+        path="manage-news"
+        element={<NewsTable />}
+        loader={allNewsLoader}
+      />
+      <Route path="add-news" element={<AddNews />} />
+      <Route
+        path="manage-news/:id"
+        element={<AddNews />}
+        loader={addNewsDataLoader}
+      />
+      <Route
+        path="manage-supervisors"
+        element={<SupervisorsTable />}
+        loader={supervisorsLoader}
+      />
+      <Route
+        path="manage-supervisors/:id"
+        element={<SupervisorProfile />}
+        loader={supervisorLoaderWithId}
+      />
+    </Route>
   </Route>
 );
 
@@ -224,7 +239,7 @@ export const routes = createBrowserRouter(
       {adminRoutes}
       {supervisorRoutes}
 
-      <Route path="unauthorized" element={<Unauthorized/>}/>
+      <Route path="unauthorized" element={<Unauthorized />} />
       <Route path="signup" element={<Signup />} />
       <Route path="verify-account" element={<VerifyAccount />} />
       <Route path="login" element={<Login />} />

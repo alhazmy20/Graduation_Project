@@ -1,6 +1,6 @@
 import "./StudentsTable.scss";
 import { Suspense, useState } from "react";
-import { Button, notification } from "antd";
+import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
