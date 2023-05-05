@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import React from "react";
+import { NavLink} from "react-router-dom";
 import {
   Sidebar,
-  SubMenu,
   Menu,
   MenuItem,
   useProSidebar,
@@ -22,7 +21,7 @@ import { useAuth } from "../../auth/useContext";
 const SupervisorSidebar = () => {
     const auth = useAuth();
 
-    const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
+    const { toggleSidebar } =
       useProSidebar();
   
   return (

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import React from "react";
+import { NavLink} from "react-router-dom";
 import {
   Sidebar,
   SubMenu,
@@ -22,7 +22,7 @@ import { useAuth } from "../../auth/useContext";
 const AdminSidebar = () => {
   const auth = useAuth();
 
-  const { collapseSidebar, toggleSidebar, collapsed, toggled, broken, rtl } =
+  const { toggleSidebar} =
     useProSidebar();
 
   return (
@@ -54,7 +54,8 @@ const AdminSidebar = () => {
               className={() =>
                 window.location.pathname === "/admin/manage-students" ||
                 window.location.pathname === "/admin/manage-institutions" ||
-                window.location.pathname === "/admin/manage-admin"
+                window.location.pathname === "/admin/manage-admins" ||
+                window.location.pathname === "/admin/manage-supervisors"
                   ? "MenuItem"
                   : "MenuItem notActive"
               }
@@ -63,7 +64,9 @@ const AdminSidebar = () => {
                 defaultOpen={
                   window.location.pathname === "/admin/manage-students" ||
                   window.location.pathname === "/admin/manage-institutions" ||
-                  window.location.pathname === "/admin/manage-admin"
+                  window.location.pathname === "/admin/manage-admins" ||
+                  window.location.pathname === "/admin/manage-supervisors" 
+
                     ? true
                     : false
                 }
@@ -106,7 +109,7 @@ const AdminSidebar = () => {
                     to={"/admin/manage-admins"}
                     end
                   >
-                    {auth.user?.role === "SuperAdmin" && (
+                    {auth?.user?.role === "SuperAdmin" && (
                       <MenuItem> ادارة المشرفين </MenuItem>
                     )}
                   </NavLink>
