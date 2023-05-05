@@ -119,7 +119,9 @@ const studentRoutes = (
 const supervisorRoutes = (
   <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
     <Route path="supervisor" element={<SupervisorLayout />}>
-      <Route path="all-students" element={<StudentProfile />} />
+      <Route path="manage-applications" element={<p>manage-applications</p>}/>
+      <Route path="all-students" element={<p>all-students</p>}/>
+      <Route path="profile" element={<p>supervisor profile</p>}/>
     </Route>
   </Route>
 );
