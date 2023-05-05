@@ -7,7 +7,7 @@ import InstManagerFormInputs from "../../../components/form/InstManagerFormInput
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import { Await, defer, useLoaderData, useParams } from "react-router-dom";
+import { Await, Navigate, defer, useLoaderData, useParams } from "react-router-dom";
 import api from "../../../data/axiosConfig";
 import { getInstitution } from "../../../util/api";
 import { useAuth } from "../../../auth/useContext";
@@ -104,5 +104,5 @@ export const institutionLoaderWithId = ({ params }) => {
 
 export const institutionLoader = () => {
   const institution = JSON.parse(localStorage.getItem("user"));
-  return defer({ institution: getInstitution(institution.id) });
+  return defer({ institution: getInstitution(institution?.id) });
 };

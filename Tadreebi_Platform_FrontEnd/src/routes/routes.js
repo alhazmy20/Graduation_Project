@@ -61,8 +61,6 @@ import { applicationsLoader } from "../pages/student/Applications/Application";
 import AddAdmin from "../pages/Admin/AddAdmin/AddAdmin";
 import { AdminPostsLoader } from "../pages/Admin/PostsTable/PostsTable";
 import AddNews, { addNewsDataLoader } from "../pages/Admin/AddNews/AddNews";
-import InstitutionLayout from "../layouts/InstitutionLayout";
-import StudentLayout from "../layouts/StudentLayout";
 import SupervisorsTable, { supervisorsLoader } from '../pages/Admin/SupervisorsTable/SupervisorsTable';
 import SupervisorLayout from "../layouts/SupervisorLayout";
 import RequireAuth from "../auth/RequireAuth";
@@ -70,8 +68,8 @@ import Unauthorized from "../pages/general/Unauthorized/Unauthorized";
 
 //Institution Routes
 const institutionRoutes = (
-  <Route element={<RequireAuth allowedRoles={["institution"]}/>}>
-  <Route path="/institution" element={<InstitutionLayout />}>
+  <Route element={<RequireAuth allowedRoles={["Institution"]}/>}>
+  <Route path="/institution">
     <Route index element={<h1>Institution home page</h1>} />
     <Route path="posts" element={<InstPosts />} loader={instPostsLoader} />
     <Route
@@ -96,8 +94,8 @@ const institutionRoutes = (
 
 //Student Routes
 const studentRoutes = (
-  <Route element={<RequireAuth allowedRoles={["student"]}/>}>
-  <Route path="student" element={<StudentLayout />}>
+  <Route element={<RequireAuth allowedRoles={["Student"]}/>}>
+  <Route path="student">
     <Route path="profile" element={<StudentProfile />} loader={studentLoader} />
     <Route
       path="applications"
