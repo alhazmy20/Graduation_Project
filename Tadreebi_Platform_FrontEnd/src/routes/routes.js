@@ -65,9 +65,12 @@ import InstitutionLayout from "../layouts/InstitutionLayout";
 import StudentLayout from "../layouts/StudentLayout";
 import SupervisorsTable, { supervisorsLoader } from '../pages/Admin/SupervisorsTable/SupervisorsTable';
 import SupervisorLayout from "../layouts/SupervisorLayout";
+import RequireAuth from "../auth/RequireAuth";
+import Unauthorized from "../pages/general/Unauthorized/Unauthorized";
 
 //Institution Routes
 const institutionRoutes = (
+  <Route element={<RequireAuth allowedRoles={["institution"]}/>}>
   <Route path="/institution" element={<InstitutionLayout />}>
     <Route index element={<h1>Institution home page</h1>} />
     <Route path="posts" element={<InstPosts />} loader={instPostsLoader} />
@@ -88,10 +91,12 @@ const institutionRoutes = (
       loader={opportunityDataLoader}
     />
   </Route>
+  </Route>
 );
 
 //Student Routes
 const studentRoutes = (
+  <Route element={<RequireAuth allowedRoles={["student"]}/>}>
   <Route path="student" element={<StudentLayout />}>
     <Route path="profile" element={<StudentProfile />} loader={studentLoader} />
     <Route
@@ -100,19 +105,23 @@ const studentRoutes = (
       loader={applicationsLoader}
     />
   </Route>
+  </Route>
 );
 
 //supervisor Routes
 const supervisorRoutes = (
-  <Route path="supervisor" element={<SupervisorLayout/>}>
+  <Route element={<RequireAuth allowedRoles={["supervisor"]}/>}>
+<Route path="supervisor" element={<SupervisorLayout/>}>
     <Route path="all-students" element={<StudentProfile />} />
-   
   </Route>
+  </Route>
+
 );
 
 //Admin Routes
 const adminRoutes = (
-  <Route path="admin" element={<AdminLayout />}>
+  <Route element={<RequireAuth allowedRoles={["SuperAdmin" , "Admin"]}/>}>
+<Route path="admin" element={<AdminLayout />}>
     <Route index element={<AdminHomePage />} />
 
     <Route
@@ -175,6 +184,7 @@ const adminRoutes = (
       loader={supervisorsLoader}
     />
   </Route>
+  </Route>
 );
 
 //This is an entire route for our app.
@@ -214,6 +224,7 @@ export const routes = createBrowserRouter(
       {adminRoutes}
       {supervisorRoutes}
 
+      <Route path="unauthorized" element={<Unauthorized/>}/>
       <Route path="signup" element={<Signup />} />
       <Route path="verify-account" element={<VerifyAccount />} />
       <Route path="login" element={<Login />} />
