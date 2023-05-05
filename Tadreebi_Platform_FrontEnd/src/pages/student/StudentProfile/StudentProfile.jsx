@@ -6,7 +6,7 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import { useAuth } from "../../../auth/useContext";
-import { Await, defer, useLoaderData, useParams } from "react-router-dom";
+import { Await, Navigate, defer, useLoaderData, useParams } from "react-router-dom";
 import { getStudent } from "../../../util/api";
 import api from "../../../data/axiosConfig";
 import StudentProfileInputs from "../../../components/form/StudentProfileInputs";
@@ -153,5 +153,5 @@ export const studentLoaderWithId = ({ params }) => {
 
 export const studentLoader = () => {
   const student = JSON.parse(localStorage.getItem("user"));
-  return defer({ student: getStudent(student.id) });
+  return defer({ student: getStudent(student?.id) });
 };

@@ -70,6 +70,9 @@ const Login = ({ isAdmin }) => {
                 ليس لديك حساب؟
                 <Link to="/signup">تسجيل جديد</Link>
               </span>
+              <span className="goHome">
+                <Link to="/">الذهاب الى الصفحة الرئيسية</Link>
+              </span>
             </Form>
           </FormCard>
         </Col>

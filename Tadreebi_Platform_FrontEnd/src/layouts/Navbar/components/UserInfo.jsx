@@ -5,11 +5,11 @@ import { useAuth } from "../../../auth/useContext.js";
 import "./UserInfo.scss";
 const UserInfo = () => {
   const auth = useAuth();
-  let role = auth.user?.role?.toLowerCase();
+
+  let role = auth?.user?.role?.toLowerCase();
   if(role === 'superadmin'){
     role = 'admin'
   }
-
   const items = [
     auth.user?.role === "Student" &&
     {
@@ -36,7 +36,7 @@ const UserInfo = () => {
           <div>
             <Space>
               <div className="userinfoContainer">
-                <p className="username">{auth.user.name}</p>
+                <p className="username">{auth?.user?.name}</p>
                 <img
                   className="userimg"
                   src={

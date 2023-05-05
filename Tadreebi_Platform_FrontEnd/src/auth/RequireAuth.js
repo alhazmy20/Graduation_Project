@@ -2,21 +2,23 @@ import React from "react";
 import { useAuth } from "./useContext";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
-const RequireAuth = ({ children,allowedRoles }) => {
+const RequireAuth = ({allowedRoles }) => {
   const auth = useAuth();
   const location = useLocation();
   if (!auth.user) {
-    return <Navigate to="/login" state={{ path: location.pathname }} />;
+    if(window.location.pathname === "/admin")
+    return <Navigate to="/admin/login" state={{path: location}} replace/>
+    else return <Navigate to="/login"  state={{ path: location}} replace/>;
   }
 
 
-  const isAuthorized = allowedRoles.includes(auth.user.role);
+  const isAuthorized = allowedRoles.includes(auth?.user?.role);
 
 return (
   isAuthorized
   ? <Outlet/>
-  : auth.user ? <Navigate to="/unauthorized" state={{ path: location.pathname }} />
-  : <Navigate to="/" state={{ path: location.pathname }}/>
+  : auth.user ? <Navigate to="/unauthorized" state={{ path: location}} replace/>
+  : <Navigate to="/" state={{ path: location }} replace/>
 )
 
 

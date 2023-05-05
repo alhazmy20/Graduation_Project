@@ -4,7 +4,7 @@ import FormCard from "../../../components/ui/FormCard/FormCard";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import { Form, Row } from "antd";
 import { useAuth } from "../../../auth/useContext";
-import { Await, defer, useLoaderData, useParams } from "react-router-dom";
+import { Await, Navigate, defer, useLoaderData, useParams } from "react-router-dom";
 import { getAdmin } from "../../../util/api";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import api from "../../../data/axiosConfig";
@@ -16,10 +16,10 @@ const AdminProfile = () => {
   const adminData = useLoaderData();
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const { id } = useParams();
   const auth = useAuth();
 
+  
   const onFormValuesChange = (changedValues, allValues) => {
     setIsFormChanged(
       Object.keys(changedValues).some(
@@ -83,7 +83,7 @@ export default AdminProfile;
 
 export const adminProfileLoader = () => {
   const admin = JSON.parse(localStorage.getItem("user"));
-  return defer({ admin: getAdmin(admin.id) });
+  return defer({ admin: getAdmin(admin?.id) });
 };
 
 export const adminLoaderWithId = ({ params }) => {

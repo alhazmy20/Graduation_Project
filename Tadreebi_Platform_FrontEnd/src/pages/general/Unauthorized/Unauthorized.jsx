@@ -10,7 +10,7 @@ const Unauthorized = () => {
     <div style={{display: "flex" , height: "100vh", flexDirection: "column", justifyContent: "center" , alignItems: "center"}}>
         <span style={{fontSize: "4rem"}}>ليس لديك صلاحية وصول للصفحة</span>
         <div className='btnContainer'>
-        <Button className='greenBtn' size='large'>رجوع للخلف</Button>
+        <Button className='greenBtn' size='large' onClick={() => {goBack(-1)}}>رجوع للخلف</Button>
         </div>
     </div>
   )

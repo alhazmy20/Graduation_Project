@@ -1,7 +1,6 @@
 import React from "react";
 import "../Navbar.scss";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
 import "./RegisterationMenu.scss";
 const RegisterationMenu = () => {
   return (
