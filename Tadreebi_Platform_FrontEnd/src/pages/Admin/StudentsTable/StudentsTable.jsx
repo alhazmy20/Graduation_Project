@@ -7,12 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import {
   AdminStudentTable,
-  Delete,
   Edit,
-} from "../../../components/ui/Table/TableFilter";
-import StudentDeleteModal from "./components/StudentDeleteModal";
-import { Await, defer, useLoaderData } from "react-router-dom";
-import { exportExcelFile, getAllStudents } from "../../../util/api";
+} from "../../../components/ui/Table/TableHelpers";
+import { Await, useLoaderData } from "react-router-dom";
+import { exportExcelFile } from "../../../util/api";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
+import { handlePaginationChange } from "../../../util/helpers";
 
 const StudentsTable = () => {
   const studentsData = useLoaderData();
@@ -45,29 +45,24 @@ const StudentsTable = () => {
       align: "center",
     },
     {
-      title: "الحالة",
-      dataIndex: "status",
-      align: "center",
-      render: AdminStudentTable,
-    },
-    {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
         return (
-          <>
+          <span>
             <Edit
               record={record}
               endPoint_1={"admin"}
               endPoint_2={"manage-students"}
             />
-            <Delete
+            <DeleteModal
               name={record.fullName}
-              modal={StudentDeleteModal}
-              studentId={record.id}
+              id={record.id}
+              endpoint="students"
+              deleteType="الطالب"
             />
-          </>
+          </span>
         );
       },
     },
@@ -77,73 +72,68 @@ const StudentsTable = () => {
     setStatusFilter(status);
   };
 
-  const handlePaginationChange = (page, pageSize, loadedData) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedData.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
-
   return (
     <Suspense fallback={<Spinner />}>
       <Await
         resolve={studentsData?.students}
         errorElement={<p>Error loading the data.</p>}
       >
-    {(loadedData) => (
-    <div className="tableContainer">
-      <div className="excelContainer">
-        <Button
-          className="excelBtn"
-          onClick={() => exportExcelFile("All Student")}
-        >
-          <FontAwesomeIcon className="icon" icon={faFileCsv} />
-          <strong>Excel</strong>
-        </Button>
-      </div>
-      <div className="filterTable">
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("")}
-        >
-          الكل
-        </Button>
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("نشط")}
-        >
-          الطلاب النشطين
-        </Button>
-        <Button
-          className="button-filter"
-          onClick={() => handleStatusFilterChange("غير نشط")}
-        >
-          الطلاب الغير نشطين
-        </Button>
-      </div>
-      <p className="rangeText">
-      عرض {currentRange[0]} إلى {currentRange[1]} من أصل {" "}
+        {(loadedData) => (
+          <div className="tableContainer">
+            <div className="excelContainer">
+              <Button
+                className="excelBtn"
+                onClick={() => exportExcelFile("All Student")}
+              >
+                <FontAwesomeIcon className="icon" icon={faFileCsv} />
+                <strong>Excel</strong>
+              </Button>
+            </div>
+            <div className="filterTable">
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("")}
+              >
+                الكل
+              </Button>
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("نشط")}
+              >
+                الطلاب النشطين
+              </Button>
+              <Button
+                className="button-filter"
+                onClick={() => handleStatusFilterChange("غير نشط")}
+              >
+                الطلاب الغير نشطين
+              </Button>
+            </div>
+            <p className="rangeText">
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
-      </p>
-      
-          
+            </p>
+
             <Table
               col={columns}
               data={filterData(loadedData)}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
+              }
               emptyText="لا توجد بيانات"
             />
-            </div>
-          )}
-        </Await>
-      </Suspense>
-    
+          </div>
+        )}
+      </Await>
+    </Suspense>
   );
 };
 
 export default StudentsTable;
-
-export const studentsLoader = () => {
-  return defer({ students: getAllStudents() });
-};

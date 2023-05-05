@@ -1,7 +1,7 @@
 import { Button, Modal } from "antd";
 import React, { useState } from "react";
 import { useRevalidator } from "react-router-dom";
-import api from "../../../../data/axiosConfig";
+import axiosConfig from "../../../../util/axiosConfig";
 import { displayMessage } from "../../../../util/helpers";
 
 const PostDeleteModal = ({ modalOpen, setModalOpen, name, postId }) => {
@@ -11,7 +11,7 @@ const PostDeleteModal = ({ modalOpen, setModalOpen, name, postId }) => {
   const handleDeletePost = async () => {
     try {
       setLoading(true);
-      await api().delete(`api/posts/${postId}`);
+      await axiosConfig().delete(`api/posts/${postId}`);
       setLoading(false);
       setModalOpen(false);
       revalidator.revalidate(); //revalidate the data

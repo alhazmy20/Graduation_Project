@@ -1,8 +1,8 @@
-import {  Col, Form, Row, notification } from "antd";
+import { Col, Form, Row, notification } from "antd";
 import React, { useState } from "react";
 import "./PasswordReset.scss";
 import FormCard from "../../ui/FormCard/FormCard";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
 import PasswordInput from "../PasswordInput";
 import PasswordConfirInput from "../PasswordConfirInput";
@@ -16,7 +16,10 @@ const ResetPassword = () => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      await api().post(`api/user/${auth.user.id}/change-password`, values);
+      await axiosConfig().post(
+        `api/user/${auth.user.id}/change-password`,
+        values
+      );
       notification.success({ message: "تم تحديث كلمة السر بنجاح" });
       setLoading(false);
     } catch (error) {
@@ -29,10 +32,7 @@ const ResetPassword = () => {
     <div className="reset-password">
       <FormCard className="card">
         <h1 className="green-underline">تحديث كلمة السر</h1>
-        <Form
-          onFinish={onFinish}
-          className="form"
-        >
+        <Form onFinish={onFinish} className="form">
           <Row gutter={[16, 0]}>
             <Col xs={24} sm={12}>
               <PasswordInput label="كلمة السر الحالية" name="old_password" />

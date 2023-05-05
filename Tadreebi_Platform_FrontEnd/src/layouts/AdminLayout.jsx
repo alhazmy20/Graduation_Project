@@ -1,9 +1,8 @@
 import React from "react";
 import AdminSidebar from "./AdminSidebar/AdminSidebar";
 import Container from "./Container/Container";
-import { Navigate, Outlet } from "react-router-dom";
+import {  Outlet } from "react-router-dom";
 import { ProSidebarProvider } from 'react-pro-sidebar';
-import { useAuth } from '../auth/useContext';
 
 const AdminLayout = () => {
 

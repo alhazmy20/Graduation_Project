@@ -2,7 +2,7 @@ import React from "react";
 import "./StudentSignup.scss";
 import { Form, notification } from "antd";
 import { useNavigate } from "react-router-dom";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 import EmailInput from "../../../components/form/EmailInput";
 import PasswordInput from "../../../components/form/PasswordInput";
 import PasswordConfirInput from "../../../components/form/PasswordConfirInput";
@@ -15,14 +15,14 @@ const StudentSignup = () => {
 
   const onFinish = (values) => {
     values.SCC = values.SCC.substring(0, 2); // Extract the first two characters of the SCC value
-    api()
+    axiosConfig()
       .get("/api/csrf-token")
       .then((response) => {
         const csrfToken = response.data.data.csrf_token;
         localStorage.setItem("csrf_token", csrfToken);
       })
       .then(() => {
-        api()
+        axiosConfig()
           .post("/api/students", values)
           .then(() => {
             navigate("/verify-account");

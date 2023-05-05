@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { Delete, StatusText } from "../../../components/ui/Table/TableFilter";
-import PostDeleteModal from "./components/PostDeleteModal";
-import { Await, Link, defer, useLoaderData } from "react-router-dom";
-import { getPosts } from "../../../util/api";
+import { StatusText } from "../../../components/ui/Table/TableHelpers";
+import { Await, Link, useLoaderData } from "react-router-dom";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
+import { handlePaginationChange } from "../../../util/helpers";
 
 const PostsTable = () => {
   const postsData = useLoaderData();
@@ -60,7 +60,12 @@ const PostsTable = () => {
       align: "center",
       render: (text, row) => {
         return (
-          <Delete name={row.title} modal={PostDeleteModal} postId={row.id} />
+          <DeleteModal
+            name={row.title}
+            id={row.id}
+            endpoint="posts"
+            deleteType="الإعلان"
+          />
         );
       },
     },
@@ -70,19 +75,13 @@ const PostsTable = () => {
     setStatusFilter(status);
   };
 
-  const handlePaginationChange = (page, pageSize, loadedPosts) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedPosts.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
   return (
     <Suspense fallback={<Spinner />}>
       <Await
         resolve={postsData?.posts}
         errorElement={<p>Error loading blog posts.</p>}
       >
-        {(loadedPosts) => (
+        {(loadedData) => (
           <div className="tableContainer">
             <div className="excelContainer"></div>
             <div className="filterTable">
@@ -107,14 +106,20 @@ const PostsTable = () => {
             </div>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
-              {loadedPosts.length} سجل
+              {loadedData.length} سجل
             </p>
             <Table
               col={columns}
-              data={filterData(loadedPosts)}
+              data={filterData(loadedData)}
               Size={pageSize}
               handleChange={(page, pageSize) =>
-                handlePaginationChange(page, pageSize, loadedPosts)
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
               }
               emptyText="لا توجد بيانات"
             />
@@ -126,7 +131,3 @@ const PostsTable = () => {
 };
 
 export default PostsTable;
-
-export function AdminPostsLoader() {
-  return defer({ posts: getPosts() });
-}

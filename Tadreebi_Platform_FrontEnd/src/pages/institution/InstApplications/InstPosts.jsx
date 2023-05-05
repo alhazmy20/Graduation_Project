@@ -1,28 +1,21 @@
 import "./InstPosts.scss";
 import { Suspense, useState } from "react";
-import { Button, notification } from "antd";
-import { Await, Link, defer, useLoaderData } from "react-router-dom";
+import { Button } from "antd";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
-import InstModal from "./components/InstModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPen,
-  faTrash,
-  faCirclePlus,
-} from "@fortawesome/free-solid-svg-icons";
-import { useFetch } from "../../../data/API";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import {
-  Delete,
   Edit,
   InstPostsText,
   InstTitle,
-} from "../../../components/ui/Table/TableFilter";
-import { getPosts } from "../../../util/api";
+} from "../../../components/ui/Table/TableHelpers";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
+import { handlePaginationChange } from "../../../util/helpers";
 
 const InstPosts = () => {
   const postsData = useLoaderData();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
@@ -33,11 +26,7 @@ const InstPosts = () => {
       dataIndex: "title",
       align: "center",
       render: (text, record) => {
-        return (
-          <>
-            <InstTitle record={record} text={text} />
-          </>
-        );
+        return <InstTitle record={record} text={text} />;
       },
     },
     {
@@ -62,25 +51,23 @@ const InstPosts = () => {
       align: "center",
       render: (text, record) => {
         return (
-          <>
+          <span>
             <Edit
               endPoint_1={"institution"}
               endPoint_2={"newPost"}
               record={record}
             />
-            <Delete name={record.title} modal={InstModal} />
-          </>
+            <DeleteModal
+              name={record.title}
+              id={record.id}
+              endpoint="posts"
+              deleteType="الإعلان"
+            />
+          </span>
         );
       },
     },
   ];
-
-  const handlePaginationChange = (page, pageSize, loadedPosts) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedPosts.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -98,15 +85,23 @@ const InstPosts = () => {
               </Button>
             </Link>
             <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل {loadedPosts.length}{" "}
-              سجل
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل
+              {loadedPosts.length} سجل
             </p>
             <Table
               col={columns}
               data={loadedPosts}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedPosts)}
-              emptyText={'لم تتم اضافة اي فرص حتى الآن'}
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedPosts,
+                  setCurrentRange,
+                  setPageSize
+                )
+              }
+              emptyText={"لم تتم اضافة اي فرص حتى الآن"}
             />
           </div>
         )}
@@ -116,7 +111,3 @@ const InstPosts = () => {
 };
 
 export default InstPosts;
-
-export function instPostsLoader() {
-  return defer({ posts: getPosts() });
-}

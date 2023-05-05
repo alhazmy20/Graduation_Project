@@ -2,15 +2,13 @@ import { Button, Image, Space, notification } from "antd";
 import React, { Suspense, useState } from "react";
 import {
   Await,
-  defer,
   useLoaderData,
   useParams,
   useRouteError,
 } from "react-router-dom";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import "./TrainingOpportunity.scss";
-import { getPost } from "../../../util/api";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { useAuth } from "../../../auth/useContext";
 import { displayMessage } from "../../../util/helpers";
@@ -38,7 +36,7 @@ const TrainingOpportunity = ({ withApply }) => {
     console.log(post_id);
     try {
       setLoading(true);
-      await api().post(`/api/applications?post_id=${post_id}`);
+      await axiosConfig().post(`/api/applications?post_id=${post_id}`);
       setLoading(false);
       setDisable(true);
       notification.success({ message: "تم التقديم بنجاح." });
@@ -99,8 +97,3 @@ const TrainingOpportunity = ({ withApply }) => {
   );
 };
 export default TrainingOpportunity;
-
-export const opportunityLoader = ({ params }) => {
-  const postId = params.id;
-  return defer({ post: getPost(postId) });
-};

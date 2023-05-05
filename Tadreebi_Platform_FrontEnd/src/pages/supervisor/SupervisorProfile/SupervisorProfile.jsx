@@ -1,29 +1,38 @@
 import React, { Suspense, useState } from "react";
 import "./SupervisorProfile.scss";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import {
-  Await,
-  defer,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import api from "../../../data/axiosConfig";
-import { displayMessage } from "../../../util/helpers";
+import { Await,  useLoaderData, useParams } from "react-router-dom";
 import { Col, Form, Row } from "antd";
 import { useAuth } from "../../../auth/useContext";
 import EmailInput from "../../../components/form/EmailInput";
 import UniversitySelect from "../../../components/form/UniversitySelect";
 import FormInput from "../../../components/form/FormInput";
-import { getSupervisor } from "../../../util/api";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import SubmitButton from '../../../components/form/SubmitButton';
+import SubmitButton from "../../../components/form/SubmitButton";
+import FormSelect from "../../../components/form/FormSelect";
+import axiosConfig from '../../../util/axiosConfig'
+import { displayMessage } from '../../../util/helpers';
 
 const SupervisorProfile = () => {
   const supervisorData = useLoaderData();
 
   const { id } = useParams();
   const auth = useAuth();
+
+  const options = [
+    {
+      value: "0",
+      label: "الطلاب",
+    },
+    {
+      value: "1",
+      label: "الطالبات",
+    },
+    {
+      value: "2",
+      label: "الكل",
+    },
+  ];
 
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,7 +48,7 @@ const SupervisorProfile = () => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      await api().put(`api/supervisors/${id || auth.user.id}`, values);
+      await axiosConfig().put(`api/supervisors/${id || auth.user.id}`, values);
       displayMessage("success", "تم تحديث البيانات بنجاح");
       setLoading(false);
       setIsFormChanged(false);
@@ -78,30 +87,27 @@ const SupervisorProfile = () => {
                   <Col xs={24} sm={12}>
                     <FormInput name="department" label="القسم" />
                   </Col>
+                  <Col xs={24} sm={12}>
+                    <FormSelect
+                      label="مسؤول التدريب في شطر"
+                      name="section"
+                      options={options}
+                    />
+                  </Col>
                 </Row>
                 <SubmitButton
-                disabled={!isFormChanged} // Disable button if the form is not changed
-                loading={loading}
-              >
-                {loading ? "جاري الحفظ..." : "حفظ"}
-              </SubmitButton>
+                  disabled={!isFormChanged} // Disable button if the form is not changed
+                  loading={loading}
+                >
+                  {loading ? "جاري الحفظ..." : "حفظ"}
+                </SubmitButton>
               </Form>
             </FormCard>
           </div>
-          )}
-          </Await>
-        </Suspense>
+        )}
+      </Await>
+    </Suspense>
   );
 };
 
 export default SupervisorProfile;
-
-export const supervisorProfileLoader = () => {
-  const supervisor = JSON.parse(localStorage.getItem("user"));
-  return defer({ supervisor: getSupervisor(supervisor.id) });
-};
-
-export const supervisorLoaderWithId = ({ params }) => {
-  const supervisorId = params.id;
-  return defer({ supervisor: getSupervisor(supervisorId) });
-};

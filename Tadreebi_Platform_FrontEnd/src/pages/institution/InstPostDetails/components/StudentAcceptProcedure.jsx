@@ -1,9 +1,8 @@
 import { Button, Checkbox, Modal, notification } from "antd";
-import React, {  useState } from "react";
-import api from "../../../../data/axiosConfig";
+import React, { useState } from "react";
+import axiosConfig from "../../../../util/axiosConfig";
 import "./StudentAcceptProcedure.scss";
 import { useRevalidator } from "react-router-dom";
-
 
 const StudentAcceptProcedure = ({ status, applicant_id }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -12,16 +11,14 @@ const StudentAcceptProcedure = ({ status, applicant_id }) => {
   const [loading, setLoading] = useState(false);
   let revalidator = useRevalidator();
 
-
   const ACCEPT_STATUS_ID = "2";
   const REJECT_STATUS_ID = "5";
-  
 
   const handleStatus = async (id) => {
     console.log(id || statusId);
     try {
       setLoading(true);
-      await api().put(`api/applications/${applicant_id}`, {
+      await axiosConfig().put(`api/applications/${applicant_id}`, {
         status_id: id || statusId,
       });
       setLoading(false);
@@ -30,7 +27,7 @@ const StudentAcceptProcedure = ({ status, applicant_id }) => {
       notification.success({
         message: `تم ${procedure} الطالب و سيتم اشعاره بذلك.`,
       });
-      revalidator.revalidate();//revalidate the data
+      revalidator.revalidate(); //revalidate the data
       setModalOpen(false); // close the modal after successful API call
     } catch (error) {
       notification.error({ message: error.response.data.message });

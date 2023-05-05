@@ -1,14 +1,8 @@
 import React from "react";
 import "./SupervisorSignup.scss";
 import { useNavigate } from "react-router-dom";
-import api from "../../../data/axiosConfig";
-import { Button, Form, notification } from "antd";
-import FormInput from "../../../components/form/FormInput";
-import {
-  confirmPasswordRules,
-  emailValidationRules,
-  passwordRules,
-} from "../../../Validation/rules";
+import axiosConfig from "../../../util/axiosConfig";
+import { Form, notification } from "antd";
 import FormSelect from "../../../components/form/FormSelect";
 import EmailInput from "../../../components/form/EmailInput";
 import PasswordInput from "../../../components/form/PasswordInput";
@@ -36,14 +30,14 @@ const SupervisorSignup = () => {
 
   const onFinish = (values) => {
     console.log(values);
-    api()
+    axiosConfig()
       .get("/api/csrf-token")
       .then((response) => {
         const csrfToken = response.data.data.csrf_token;
         localStorage.setItem("csrf_token", csrfToken);
       })
       .then(() => {
-        api()
+        axiosConfig()
           .post("/api/supervisors", values)
           .then(() => {
             navigate("/verify-account");

@@ -1,12 +1,14 @@
 import React, { Suspense, useState } from "react";
-import { Await, defer, useLoaderData } from "react-router-dom";
-import { Delete, Edit } from "../../../components/ui/Table/TableFilter";
+import { Await, useLoaderData } from "react-router-dom";
+import { Edit } from "../../../components/ui/Table/TableHelpers";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { exportExcelFile, getAllSupervisors } from "../../../util/api";
+import { exportExcelFile } from "../../../util/api";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import Table from "../../../components/ui/Table/Table";
+import { handlePaginationChange } from "../../../util/helpers";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
 
 const SupervisorsTable = () => {
   const supervisorsData = useLoaderData();
@@ -15,6 +17,11 @@ const SupervisorsTable = () => {
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
   const columns = [
+    {
+      title: "البريد الجامعي",
+      dataIndex: "email",
+      align: "center",
+    },
     {
       title: "القسم",
       dataIndex: "department",
@@ -40,25 +47,24 @@ const SupervisorsTable = () => {
       align: "center",
       render: (text, record) => {
         return (
-          <div>
+          <span>
             <Edit
               record={record}
               endPoint_1={"admin"}
               endPoint_2={"manage-supervisors"}
             />
-            <Delete name={record.department} />
-          </div>
+            <DeleteModal
+              name={record.department}
+              id={record.id}
+              endpoint="supervisors"
+              deleteType="مشرف الجامعة"
+            />
+          </span>
         );
       },
     },
   ];
 
-  const handlePaginationChange = (page, pageSize, loadedData) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedData.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -86,7 +92,13 @@ const SupervisorsTable = () => {
               data={loadedData}
               Size={pageSize}
               handleChange={(page, pageSize) =>
-                handlePaginationChange(page, pageSize, loadedData)
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
               }
               emptyText="لا توجد بيانات"
             />
@@ -98,7 +110,3 @@ const SupervisorsTable = () => {
 };
 
 export default SupervisorsTable;
-
-export const supervisorsLoader = () => {
-  return defer({ supervisors: getAllSupervisors() });
-};

@@ -5,9 +5,10 @@ import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { Delete, Edit } from "../../../components/ui/Table/TableFilter";
-import NewsModal from "./components/NewsModal";
+import { Edit } from "../../../components/ui/Table/TableHelpers";
 import { Await, Link, useLoaderData } from "react-router-dom";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
+import { handlePaginationChange } from "../../../util/helpers";
 
 const NewsTable = () => {
   const newsData = useLoaderData();
@@ -15,13 +16,6 @@ const NewsTable = () => {
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  // const filterData = (dataSource) => {
-  //   const filteredDataSource = statusFilter
-  //     ? dataSource?.filter((news) => news.status === statusFilter)
-  //     : dataSource;
-
-  //   return filteredDataSource;
-  // };
   const columns = [
     {
       title: "عنوان الخبر",
@@ -39,22 +33,24 @@ const NewsTable = () => {
       align: "center",
       render: (text, record) => {
         return (
-          <>
-            <Edit record={record} endPoint_1={"admin"}
-              endPoint_2={"manage-news"} />
-            <Delete name={record.title} modal={NewsModal} newsId={record.id} />
-          </>
+          <span>
+            <Edit
+              record={record}
+              endPoint_1={"admin"}
+              endPoint_2={"manage-news"}
+            />
+            <DeleteModal
+              name={record.title}
+              id={record.id}
+              endpoint="news"
+              deleteType="الخبر"
+            />
+          </span>
         );
       },
     },
   ];
 
-  const handlePaginationChange = (page, pageSize, loadedData) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedData.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -66,21 +62,29 @@ const NewsTable = () => {
             <div className="excelContainer">
               <Button className="excelBtn">
                 <Link to="/admin/add-news">
-                <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
-                <strong>اضافة خبر</strong>
+                  <FontAwesomeIcon className="icon" icon={faPlusCircle} />{" "}
+                  <strong>اضافة خبر</strong>
                 </Link>
               </Button>
             </div>
 
             <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل {" "}
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
             </p>
             <Table
               col={columns}
               data={loadedData}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
+              }
               emptyText="لا توجد بيانات"
             />
           </div>

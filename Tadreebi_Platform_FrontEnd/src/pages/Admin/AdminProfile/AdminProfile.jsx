@@ -4,10 +4,9 @@ import FormCard from "../../../components/ui/FormCard/FormCard";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import { Form, Row } from "antd";
 import { useAuth } from "../../../auth/useContext";
-import { Await, Navigate, defer, useLoaderData, useParams } from "react-router-dom";
-import { getAdmin } from "../../../util/api";
+import { Await, useLoaderData, useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 import AdminFormInputs from "../../../components/form/AdminFormInputs";
 import SubmitButton from "../../../components/form/SubmitButton";
 import { displayMessage } from "../../../util/helpers";
@@ -19,7 +18,6 @@ const AdminProfile = () => {
   const { id } = useParams();
   const auth = useAuth();
 
-  
   const onFormValuesChange = (changedValues, allValues) => {
     setIsFormChanged(
       Object.keys(changedValues).some(
@@ -31,7 +29,7 @@ const AdminProfile = () => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      await api().put(`api/admins/${id || auth.user.id}`, values);
+      await axiosConfig().put(`api/admins/${id || auth.user.id}`, values);
       displayMessage("success", "تم تحديث البيانات بنجاح");
       setLoading(false);
       setIsFormChanged(false);
@@ -80,13 +78,3 @@ const AdminProfile = () => {
 };
 
 export default AdminProfile;
-
-export const adminProfileLoader = () => {
-  const admin = JSON.parse(localStorage.getItem("user"));
-  return defer({ admin: getAdmin(admin?.id) });
-};
-
-export const adminLoaderWithId = ({ params }) => {
-  const adminId = params.id;
-  return defer({ admin: getAdmin(adminId) });
-};

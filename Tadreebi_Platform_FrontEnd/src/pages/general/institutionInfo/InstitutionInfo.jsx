@@ -2,8 +2,7 @@ import React, { Suspense } from "react";
 import { List } from "antd";
 import InfoCard from "./components/InfoCard";
 import { itemRender } from "../../../components/ui/Pagination";
-import { Await, defer, useLoaderData } from "react-router-dom";
-import { getAllInstitutions } from "../../../util/api";
+import { Await, useLoaderData } from "react-router-dom";
 import Spinner from '../../../components/ui/Spinner/Spinner';
 const InstitutionInfo = () => {
 
@@ -52,7 +51,3 @@ const InstitutionInfo = () => {
 };
 
 export default InstitutionInfo;
-
-export const institutionsLoader1 = () => {
-  return defer({ institutions: getAllInstitutions() });
-};

@@ -2,17 +2,19 @@
 import Home from "./general/Home/Home";
 import Login from "./general/Login/Login";
 import News from "./general/News/News";
-import NewsDetails from "../pages/general/News/NewsDetails/NewsDetails";
+import NewsDetails from "./general/News/NewsDetails/NewsDetails";
 import NotFound from "./general/NotFound/NotFound";
 import TrainingOpportunities from "./general/TrainingOpportunities/TrainingOpportunities";
 import TrainingOpportunity from "./general/TrainingOpportunity/TrainingOpportunity";
 import VerifyAccount from "./general/VerifyAccount/VerifyAccount";
-import Signup from './general/Signup/Signup';
+import Signup from "./general/Signup/Signup";
+import Unauthorized from "./general/Unauthorized/Unauthorized";
+import InstitutionInfo from "./general/institutionInfo/InstitutionInfo";
 
 // Imports from institution folder
 import InstProfile from "./institution/InstProfile/InstProfile";
-import InstPosts from "../pages/institution/InstApplications/InstPosts";
-import InstPostDetails from "../pages/institution/InstPostDetails/InstPostDetails";
+import InstPosts from "./institution/InstApplications/InstPosts";
+import InstPostDetails from "./institution/InstPostDetails/InstPostDetails";
 import InstPostForm from "./institution/instPostForm/InstPostForm";
 
 // Imports from student folder
@@ -20,13 +22,20 @@ import Applications from "./student/Applications/Application";
 import StudentProfile from "./student/StudentProfile/StudentProfile";
 
 //Imports from admin folder
-import AdminLayout from "../layouts/AdminLayout";
 import AdminHomePage from "./Admin/HomePage/ِAdminHomePage";
 import AdminProfile from "./Admin/AdminProfile/AdminProfile";
-import StudentsTable from "../pages/Admin/StudentsTable/StudentsTable";
-import InstitutionsTable from "../pages/Admin/InstitutionsTable/InstitutionsTable";
-import NewsTable from "../pages/Admin/NewsTable/NewsTable";
-import PostsTable from "../pages/Admin/PostsTable/PostsTable";
+import StudentsTable from "./Admin/StudentsTable/StudentsTable";
+import InstitutionsTable from "./Admin/InstitutionsTable/InstitutionsTable";
+import NewsTable from "./Admin/NewsTable/NewsTable";
+import PostsTable from "./Admin/PostsTable/PostsTable";
+import AdminsTable from "./Admin/AdminsTable/AdminsTable";
+import AddAdmin from "./Admin/AddAdmin/AddAdmin";
+import AddNews from "./Admin/AddNews/AddNews";
+import SupervisorsTable from "./Admin/SupervisorsTable/SupervisorsTable";
+
+//Imports from admin folder
+import SupervisorProfile from "./supervisor/SupervisorProfile/SupervisorProfile";
+
 //Export all pages
 export {
   Home,
@@ -43,12 +52,18 @@ export {
   InstPosts,
   InstPostDetails,
   InstPostForm,
-  AdminLayout,
   AdminHomePage,
   AdminProfile,
-  StudentsTable,
   InstitutionsTable,
   NewsTable,
   PostsTable,
-  Signup
+  Signup,
+  SupervisorProfile,
+  StudentsTable,
+  AddAdmin,
+  AddNews,
+  AdminsTable,
+  InstitutionInfo,
+  SupervisorsTable,
+  Unauthorized,
 };

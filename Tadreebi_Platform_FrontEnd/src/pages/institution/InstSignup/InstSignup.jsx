@@ -4,7 +4,7 @@ import { Steps, Form, Button, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import InstFormInputs from "../../../components/form/InstFormInputs";
 import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 
 const InstSignup = () => {
   const navigate = useNavigate();
@@ -45,12 +45,14 @@ const InstSignup = () => {
   };
 
   const onFinish = async (values) => {
-    api().get('/api/csrf-token').then((response) => {
-      const csrfToken = response.data.csrf_token;
-      localStorage.setItem('csrf_token', csrfToken);
-    })
+    axiosConfig()
+      .get("/api/csrf-token")
+      .then((response) => {
+        const csrfToken = response.data.csrf_token;
+        localStorage.setItem("csrf_token", csrfToken);
+      })
       .then(() => {
-        api()
+        axiosConfig()
           .post("/api/institutions", formData)
           .then((postResponse) => {
             navigate("/verify-account");
@@ -63,8 +65,7 @@ const InstSignup = () => {
             notification.error(errorMessages.join(", "));
             console.log(errors);
           });
-          
-    });
+      });
   };
 
   const isStepDisabled = (stepNumber) => {

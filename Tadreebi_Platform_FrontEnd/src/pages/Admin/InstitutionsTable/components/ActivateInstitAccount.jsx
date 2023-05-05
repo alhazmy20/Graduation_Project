@@ -1,9 +1,12 @@
 import { Button } from "antd";
 import React, { useState } from "react";
-import api from "../../../../data/axiosConfig";
+import axiosConfig from "../../../../util/axiosConfig";
 import { displayMessage } from "../../../../util/helpers";
+import { useRevalidator } from "react-router-dom";
 
 const ActivateInstitAccount = ({ record: { id, isActive } }) => {
+  let revalidator = useRevalidator();
+
   // destructuring
   const [status, setStatus] = useState(isActive);
   const [reverseStatus, setReverseStatus] = useState(status === 0 ? 1 : 0);
@@ -19,10 +22,11 @@ const ActivateInstitAccount = ({ record: { id, isActive } }) => {
       setLoading(true);
       // send PUT request to API to activate/inactivate institution account
       // use reverseStatus as the new value for isActive
-      await api().put(`api/institutions/${id}/activation`, {
+      await axiosConfig().put(`api/institutions/${id}/activation`, {
         isActive: reverseStatus,
       });
       setLoading(false);
+      revalidator.revalidate(); //revalidate the data
       displayMessage(
         "success",
         `تم ${message_text(reverseStatus)} حساب المؤسسة`
@@ -46,7 +50,7 @@ const ActivateInstitAccount = ({ record: { id, isActive } }) => {
         disabled={loading}
         loading={loading}
       >
-        {btn_text(status)}
+        {btn_text(isActive)}
       </Button>
     </div>
   );

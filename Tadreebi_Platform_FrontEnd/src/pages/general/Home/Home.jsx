@@ -4,8 +4,7 @@ import StartUp from "./components/StartUp";
 import About from "./components/About";
 import NewestPost from "./components/NewestPost";
 import PlatformWrok from "./components/PlatformWrok";
-import { Await, defer, useLoaderData } from 'react-router-dom';
-import { getPosts } from '../../../util/api';
+import { Await,  useLoaderData } from 'react-router-dom';
 import Spinner from '../../../components/ui/Spinner/Spinner';
 // import NewestPost from "./components/NewestPost";
 const Home = () => {
@@ -29,7 +28,3 @@ const Home = () => {
 };
 
 export default Home;
-
-export const homeLoader = () => {
-  return defer({ posts: getPosts() });
-};

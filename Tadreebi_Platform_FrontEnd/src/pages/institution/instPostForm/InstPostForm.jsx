@@ -1,23 +1,12 @@
 import React, { Suspense, useState } from "react";
 import { Button, Col, Row, Form, notification } from "antd";
-import { RegionData } from "../../../data/TestData.js";
-
 import ReactTextArea from "./components/ReactTextArea";
 import "../instPostForm/InstPostForm.scss";
 import ReactRadio from "./components/ReactRadio.jsx";
 import MultiSelect from "./components/MultiSelect .jsx";
 import CustomDatePicker from "./components/CustomDatePicker.jsx";
-import SelectRegion from "./components/SelectRegion.jsx";
-import SelectCity from "./components/SelectCity.jsx";
-import api from "../../../data/axiosConfig";
-import {
-  Await,
-  defer,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import { getPost } from "../../../util/api.js";
+import axiosConfig from "../../../util/axiosConfig.js";
+import { Await, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
 import {
   useFormPostData,
@@ -63,11 +52,11 @@ const InstPostForm = () => {
     try {
       if (id) {
         // if ID exists, update the post
-        await api().put(`api/posts/${id}`, formPostData);
+        await axiosConfig().put(`api/posts/${id}`, formPostData);
         notification.success({ message: "تم تحديث الفرصة بنجاح" });
         setIsFormChanged(false);
       } else {
-        await api().post(`api/posts`, formPostData);
+        await axiosConfig().post(`api/posts`, formPostData);
         notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
         setIsFormChanged(false);
       }
@@ -128,7 +117,7 @@ const InstPostForm = () => {
                       <RegionSelect
                         onChange={handleRegionChange}
                         className="formItemStyle"
-                        placeholder='اختر المنطقة'
+                        placeholder="اختر المنطقة"
                         initialValue={loadedPost?.region}
                       />
                     </Row>
@@ -178,7 +167,7 @@ const InstPostForm = () => {
                       <CitySelect
                         selectedRegion={selectedRegion}
                         className="formItemStyle"
-                        placeholder='اختر المدينة'
+                        placeholder="اختر المدينة"
                         initialValue={loadedPost?.city}
                         region={loadedPost?.region}
                       />
@@ -247,8 +236,3 @@ const InstPostForm = () => {
 };
 
 export default InstPostForm;
-
-export const opportunityDataLoader = ({ params }) => {
-  const postId = params.id;
-  return defer({ post: getPost(postId) });
-};

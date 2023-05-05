@@ -1,17 +1,17 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Await, defer, useLoaderData, useParams } from "react-router-dom";
+import React, { Suspense, useState } from "react";
+import { Await, useLoaderData, useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import PostDetailsTable from "../../../components/ui/PostDetailsTable/PostDetailsTable";
 import Table from "../../../components/ui/Table/Table";
 import {
   TableText,
   StudentDetails,
-} from "../../../components/ui/Table/TableFilter";
+} from "../../../components/ui/Table/TableHelpers";
 import "./InstPostDetails.scss";
 import { Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { exportExcelFile, getPostApplicants } from "../../../util/api";
+import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
 
 const InstPostDetails = () => {
@@ -62,9 +62,9 @@ const InstPostDetails = () => {
       title: "المعدل",
       dataIndex: "GPA",
       align: "center",
-      render: (text, row)=>{
-        return <span>{`${row.GPA}/${row.GPA_Type}`}</span>
-      }
+      render: (text, row) => {
+        return <span>{`${row.GPA}/${row.GPA_Type}`}</span>;
+      },
     },
     {
       title: "التخصص",
@@ -87,10 +87,7 @@ const InstPostDetails = () => {
       dataIndex: "applicant_status",
       align: "center",
       render: (text, row) => (
-        <StudentAcceptProcedure
-          status={text}
-          applicant_id={row.applicant_id}
-        />
+        <StudentAcceptProcedure status={text} applicant_id={row.applicant_id} />
       ),
     },
   ];
@@ -168,9 +165,7 @@ const InstPostDetails = () => {
               </Button>
               <Button
                 className="button-filter"
-                onClick={() =>
-                  handleStatusFilterChange("بإنتظار تأكيد الطالب")
-                }
+                onClick={() => handleStatusFilterChange("بإنتظار تأكيد الطالب")}
               >
                 بإنتظار تأكيد الطالب
               </Button>
@@ -182,9 +177,11 @@ const InstPostDetails = () => {
               </Button>
               <Button
                 className="button-filter"
-                onClick={() => handleStatusFilterChange("تم الرفض من قبل المنشأة")}
+                onClick={() =>
+                  handleStatusFilterChange("تم الرفض من قبل المنشأة")
+                }
               >
-              تم الرفض من قبل المنشأة
+                تم الرفض من قبل المنشأة
               </Button>
             </div>
             <Table
@@ -200,8 +197,3 @@ const InstPostDetails = () => {
 };
 
 export default InstPostDetails;
-
-export const applicantsPostLoader = ({ params }) => {
-  const instId = params.id;
-  return defer({ applicantsPost: getPostApplicants(instId) });
-};

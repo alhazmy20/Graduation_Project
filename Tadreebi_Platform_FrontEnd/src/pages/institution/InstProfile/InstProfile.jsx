@@ -1,4 +1,4 @@
-import { Button, Form, notification } from "antd";
+import { Form } from "antd";
 import React, { Suspense, useState } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./InstProfile.scss";
@@ -7,12 +7,11 @@ import InstManagerFormInputs from "../../../components/form/InstManagerFormInput
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import { Await, Navigate, defer, useLoaderData, useParams } from "react-router-dom";
-import api from "../../../data/axiosConfig";
-import { getInstitution } from "../../../util/api";
+import { Await, useLoaderData, useParams } from "react-router-dom";
+import axiosConfig from "../../../util/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
-import loca from "react-secure-storage";
 import SubmitButton from "../../../components/form/SubmitButton";
+import { displayMessage } from "../../../util/helpers";
 
 const InstProfile = ({ isAdmin }) => {
   const { id } = useParams();
@@ -39,13 +38,13 @@ const InstProfile = ({ isAdmin }) => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      await api().put(`api/institutions/${id || auth.user.id}`, values);
-      notification.success({ message: "تم تحديث البيانات بنجاح" });
+      await axiosConfig().put(`api/institutions/${id || auth.user.id}`, values);
+      displayMessage("success", "تم تحديث البيانات بنجاح");
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
       setLoading(false);
-      notification.error({ message: "فشل تحديث البيانات" });
+      displayMessage("error", "فشل تحديث البيانات");
     }
   };
 
@@ -96,13 +95,3 @@ const InstProfile = ({ isAdmin }) => {
 };
 
 export default InstProfile;
-
-export const institutionLoaderWithId = ({ params }) => {
-  const instId = params.id;
-  return defer({ institution: getInstitution(instId) });
-};
-
-export const institutionLoader = () => {
-  const institution = JSON.parse(localStorage.getItem("user"));
-  return defer({ institution: getInstitution(institution?.id) });
-};

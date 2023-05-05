@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import api from "../data/axiosConfig";
+import axiosConfig from "../util/axiosConfig";
 import { useContext } from "react";
-
 
 export const AuthContext = createContext(null);
 
@@ -9,19 +8,20 @@ export const AuthContexProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
+
   const [role, setRole] = useState(null);
   const [redirectAfterLogout, setRedirectAfterLogout] = useState(false);
 
   const login = async (values) => {
     await fetchCsrfToken();
-    const res = await api().post("/api/login", values);
+    const res = await axiosConfig().post("/api/login", values);
     localStorage.setItem("bearer_token", res.data.data.token);
     setRole(res.data.data.user.role);
     setUser(res.data.data.user);
   };
 
   const fetchCsrfToken = async () => {
-    const response = await api().get("/api/csrf-token");
+    const response = await axiosConfig().get("/api/csrf-token");
     const csrfToken = response.data.data.csrf_token;
     localStorage.setItem("csrf_token", csrfToken);
     return csrfToken;
@@ -29,7 +29,7 @@ export const AuthContexProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await api().post("/api/logout");
+      await axiosConfig().post("/api/logout");
       localStorage.removeItem("user");
       setUser(null);
       setRedirectAfterLogout(true);
@@ -48,9 +48,17 @@ export const AuthContexProvider = ({ children }) => {
     }
   }, [redirectAfterLogout]);
 
-
   return (
-    <AuthContext.Provider value={{ user, login, logout, role, fetchCsrfToken,setRedirectAfterLogout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        role,
+        fetchCsrfToken,
+        setRedirectAfterLogout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

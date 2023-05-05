@@ -1,14 +1,10 @@
 import React from "react";
 import "./NewestPost.scss";
-import { List, notification } from "antd";
+import { List } from "antd";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
-import { data } from "../../../../data/TestData.js";
 import { Link } from "react-router-dom";
-import { useFetch } from "../../../../data/API";
-import Spinner from "../../../../components/ui/Spinner/Spinner";
 
 const NewestPost = ({posts}) => {
-console.log(posts);
 
   return (
     <div style={{ margin: "40px 0" }} className="newest-posts">

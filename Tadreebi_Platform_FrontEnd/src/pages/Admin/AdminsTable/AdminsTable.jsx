@@ -7,12 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   AdminStudentTable,
-  Delete,
   Edit,
-} from "../../../components/ui/Table/TableFilter";
-import AdminDeleteModal from "./components/AdminDeleteModal";
-import { Await, Link, defer, useLoaderData } from "react-router-dom";
-import { getAllAdmins } from "../../../util/api";
+} from "../../../components/ui/Table/TableHelpers";
+import { Await, Link, useLoaderData } from "react-router-dom";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
+import { handlePaginationChange } from "../../../util/helpers";
 
 const AdminsTable = () => {
   const adminsData = useLoaderData();
@@ -55,29 +54,24 @@ const AdminsTable = () => {
       align: "center",
     },
     {
-      title: "الحالة",
-      dataIndex: "status",
-      align: "center",
-      render: AdminStudentTable,
-    },
-    {
       title: "الإجراء",
       dataIndex: "edit",
       align: "center",
       render: (text, record) => {
         return (
-          <>
+          <span>
             <Edit
               record={record}
               endPoint_1={"admin"}
               endPoint_2={"manage-admins"}
             />
-            <Delete
+            <DeleteModal
               name={`${record.fName} ${record.lName}`}
-              modal={AdminDeleteModal}
-              adminId={record.id}
+              id={record.id}
+              endpoint="admins"
+              deleteType="المشرف"
             />
-          </>
+          </span>
         );
       },
     },
@@ -88,12 +82,6 @@ const AdminsTable = () => {
     console.log(status);
   };
 
-  const handlePaginationChange = (page, pageSize, loadedData) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedData.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -131,15 +119,22 @@ const AdminsTable = () => {
               </Button>
             </div>
             <p className="rangeText">
-            عرض {currentRange[0]} إلى {currentRange[1]} من أصل {" "}
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
             </p>
             <Table
               col={columns}
               data={filterData(loadedData)}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
-
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
+              }
               emptyText="لا توجد بيانات"
             />
           </div>
@@ -150,7 +145,3 @@ const AdminsTable = () => {
 };
 
 export default AdminsTable;
-
-export const adminsLoader = () => {
-  return defer({ admins: getAllAdmins() });
-};

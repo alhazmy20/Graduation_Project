@@ -22,3 +22,24 @@ export const useYearState = () => {
 
   return { currentYear, selectedYear, years, handleYearChange };
 };
+
+export const handlePaginationChange = (
+  page,
+  pageSize,
+  loadedData,
+  setCurrentRange,
+  setPageSize
+) => {
+  const start = (page - 1) * pageSize + 1;
+  const end = Math.min(start + pageSize - 1, loadedData.length);
+  setCurrentRange([start, end]);
+  setPageSize(pageSize);
+};
+
+export const dataFiltering = (data, statusFilter) => {
+  const filteredDataSource = statusFilter
+    ? data.filter((data) => data.status === statusFilter)
+    : data;
+
+  return filteredDataSource;
+};

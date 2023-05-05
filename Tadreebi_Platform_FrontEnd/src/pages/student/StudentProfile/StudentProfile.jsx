@@ -1,4 +1,4 @@
-import {  Form } from "antd";
+import { Form } from "antd";
 import React, { useState, Suspense } from "react";
 import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 import "./StudentProfile.scss";
@@ -6,16 +6,14 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import { useAuth } from "../../../auth/useContext";
-import { Await, Navigate, defer, useLoaderData, useParams } from "react-router-dom";
-import { getStudent } from "../../../util/api";
-import api from "../../../data/axiosConfig";
+import { Await, useLoaderData, useParams } from "react-router-dom";
+import axiosConfig from "../../../util/axiosConfig";
 import StudentProfileInputs from "../../../components/form/StudentProfileInputs";
 import { displayMessage } from "../../../util/helpers";
-import SubmitButton from '../../../components/form/SubmitButton';
+import SubmitButton from "../../../components/form/SubmitButton";
 
 const StudentProfile = ({ isAdmin }) => {
   const studentData = useLoaderData();
-  console.log(studentData);
 
   const { id } = useParams();
   const auth = useAuth();
@@ -53,7 +51,7 @@ const StudentProfile = ({ isAdmin }) => {
     }
     try {
       setLoading(true);
-      await api().post(
+      await axiosConfig().post(
         `api/students/${id || auth.user.id}?_method=PUT`,
         formData,
         {
@@ -146,12 +144,12 @@ const StudentProfile = ({ isAdmin }) => {
 
 export default StudentProfile;
 
-export const studentLoaderWithId = ({ params }) => {
-  const instId = params.id;
-  return defer({ student: getStudent(instId) });
-};
+// export const studentLoaderWithId = ({ params }) => {
+//   const instId = params.id;
+//   return defer({ student: getStudent(instId) });
+// };
 
-export const studentLoader = () => {
-  const student = JSON.parse(localStorage.getItem("user"));
-  return defer({ student: getStudent(student?.id) });
-};
+// export const studentLoader = () => {
+//   const student = JSON.parse(localStorage.getItem("user"));
+//   return defer({ student: getStudent(student?.id) });
+// };

@@ -5,11 +5,12 @@ import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import { Delete, Edit } from "../../../components/ui/Table/TableFilter";
-import InstitutionDeleteModal from "./components/InstitutionDeleteModal";
-import { Await, defer, useLoaderData } from "react-router-dom";
-import { exportExcelFile, getAllInstitutions } from "../../../util/api";
+import { Edit } from "../../../components/ui/Table/TableHelpers";
+import { Await, useLoaderData } from "react-router-dom";
+import { exportExcelFile } from "../../../util/api";
 import ActivateInstitAccount from "./components/ActivateInstitAccount";
+import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
+import { handlePaginationChange } from "../../../util/helpers";
 
 const InstitutionsTable = () => {
   const institutionsData = useLoaderData();
@@ -20,7 +21,9 @@ const InstitutionsTable = () => {
 
   const filterData = (dataSource) => {
     const filteredDataSource = statusFilter
-      ? dataSource?.filter((institution) => institution.status === statusFilter)
+      ? dataSource?.filter(
+          (institution) => institution.isActive === statusFilter
+        )
       : dataSource;
 
     return filteredDataSource;
@@ -56,29 +59,24 @@ const InstitutionsTable = () => {
       align: "center",
       render: (text, record) => {
         return (
-          <>
+          <span>
             <Edit
               record={record}
               endPoint_1={"admin"}
               endPoint_2={"manage-institutions"}
             />
-            <Delete name={record.institutionName} modal={InstitutionDeleteModal} institutionId={record.id}/>
-          </>
+            <DeleteModal
+              name={record.institutionName}
+              id={record.id}
+              endpoint="institutions"
+              deleteType="المنشأة"
+            />
+          </span>
         );
       },
     },
   ];
 
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
-
-  const handlePaginationChange = (page, pageSize, loadedData) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedData.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
-  };
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -99,19 +97,19 @@ const InstitutionsTable = () => {
             <div className="filterTable">
               <Button
                 className="button-filter"
-                onClick={() => handleStatusFilterChange("")}
+                onClick={() => setStatusFilter("")}
               >
                 الكل
               </Button>
               <Button
                 className="button-filter"
-                onClick={() => handleStatusFilterChange("نشط")}
+                onClick={() => setStatusFilter(1)}
               >
                 المنشآت النشطة
               </Button>
               <Button
                 className="button-filter"
-                onClick={() => handleStatusFilterChange("غير نشط")}
+                onClick={() => setStatusFilter(0)}
               >
                 المنشآت الغير نشطة
               </Button>
@@ -124,7 +122,15 @@ const InstitutionsTable = () => {
               col={columns}
               data={filterData(loadedData)}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
+              }
               emptyText="لا توجد بيانات"
             />
           </div>
@@ -135,7 +141,3 @@ const InstitutionsTable = () => {
 };
 
 export default InstitutionsTable;
-
-export const institutionsLoader = () => {
-  return defer({ institutions: getAllInstitutions() });
-};

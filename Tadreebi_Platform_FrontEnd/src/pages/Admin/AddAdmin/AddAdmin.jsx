@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AddAdmin.scss";
 import FormCard from "../../../components/ui/FormCard/FormCard";
 import { Form, Row, notification } from "antd";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import AdminFormInputs from "../../../components/form/AdminFormInputs";
 import SubmitButton from "../../../components/form/SubmitButton";
@@ -15,7 +15,7 @@ const AddAdmin = () => {
     console.log(values);
     try {
       setLoading(true);
-      await api().post(`api/admins`, values);
+      await axiosConfig().post(`api/admins`, values);
       setLoading(false);
       navigate("/admin/manage-admins");
     } catch (error) {

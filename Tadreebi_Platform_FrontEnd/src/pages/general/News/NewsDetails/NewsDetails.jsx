@@ -2,7 +2,6 @@ import React, { Suspense } from "react";
 import { Await, useLoaderData, useRouteError } from "react-router-dom";
 import { Image, Space } from "antd";
 import "./NewsDetails.scss";
-import { getNews } from "../../../../util/api";
 import Spinner from "../../../../components/ui/Spinner/Spinner";
 import ReactQuill from "react-quill";
 
@@ -42,8 +41,3 @@ const NewsDetails = () => {
 };
 
 export default NewsDetails;
-
-export const newsDetailsloader = ({ params }) => {
-  const postId = params.id;
-  return getNews(postId);
-};

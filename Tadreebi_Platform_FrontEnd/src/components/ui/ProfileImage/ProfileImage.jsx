@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./ProfileImage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,9 +8,9 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { Dropdown, Image, Modal, message } from "antd";
-import api from "../../../data/axiosConfig";
+import axiosConfig from "../../../util/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
-import { displayMessage } from '../../../util/helpers';
+import { displayMessage } from "../../../util/helpers";
 
 const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
   const auth = useAuth();
@@ -36,7 +36,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
 
       // Send the image to the API using Axios
       try {
-        await api().post(
+        await axiosConfig().post(
           `api/${userType}/${id || auth.user.id}/uploadImage?_method=PUT`,
           formData,
           {
@@ -45,10 +45,10 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
             },
           }
         );
-        displayMessage('success', 'تم تحديث الصورة الشخصية')
+        displayMessage("success", "تم تحديث الصورة الشخصية");
       } catch (error) {
         console.log(error);
-        displayMessage('error', 'لم يتم تحديث الصورة الشخصية')
+        displayMessage("error", "لم يتم تحديث الصورة الشخصية");
       }
     };
     reader.readAsDataURL(file);
@@ -64,7 +64,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
         ? { deleteInstitutionLogo: "1" }
         : { deletePersonalPicture: "1" };
     try {
-      const res = await api().put(
+      const res = await axiosConfig().put(
         `api/${userType}/${id || auth.user.id}/uploadImage`,
         action
       );
@@ -72,9 +72,9 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
       setImageSrc(null);
       setDeleted(false);
       setIsModalVisible(false);
-      displayMessage('success', 'تم حذف الصورة الشخصية')
+      displayMessage("success", "تم حذف الصورة الشخصية");
     } catch (error) {
-      displayMessage('error',  ' لم يتم حذف الصورة الشخصية')
+      displayMessage("error", " لم يتم حذف الصورة الشخصية");
     }
   };
 

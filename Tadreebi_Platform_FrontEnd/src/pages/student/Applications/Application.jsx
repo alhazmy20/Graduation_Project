@@ -5,10 +5,10 @@ import Table from "../../../components/ui/Table/Table";
 import {
   StudentAccept,
   TableText,
-} from "../../../components/ui/Table/TableFilter";
+} from "../../../components/ui/Table/TableHelpers";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { getStudentApplications } from "../../../util/api";
-import { Await, defer, useLoaderData } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
+import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
 
 const Application = () => {
   const applicationsData = useLoaderData();
@@ -17,32 +17,22 @@ const Application = () => {
 
   useEffect(() => {
     setStatus(status);
-    setApplicantId(applicantId)
+    setApplicantId(applicantId);
   }, [status, applicantId]);
 
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  const filterApplications = (applications) => {
-    const filteredDataSource = statusFilter
-      ? applications.filter(
-          (application) => application.status === statusFilter
-        )
-      : applications;
-
-    return filteredDataSource;
-  };
-
   const columns = [
-    {
-      title: "اسم المؤسسة",
-      dataIndex: "instituion",
-      align: "center",
-    },
     {
       title: "الفرصة التدريبية",
       dataIndex: "post",
+      align: "center",
+    },
+    {
+      title: "اسم المؤسسة",
+      dataIndex: "instituion",
       align: "center",
     },
     {
@@ -56,7 +46,14 @@ const Application = () => {
       align: "center",
       render: (text, row) => {
         setStatus(text);
-        return <TableText status={status} text={text} id={row.applicant_id} applicantId={applicantId}/>;
+        return (
+          <TableText
+            status={status}
+            text={text}
+            id={row.applicant_id}
+            applicantId={applicantId}
+          />
+        );
       },
     },
     {
@@ -71,13 +68,6 @@ const Application = () => {
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
-  };
-
-  const handlePaginationChange = (page, pageSize, loadedData) => {
-    const start = (page - 1) * pageSize + 1;
-    const end = Math.min(start + pageSize - 1, loadedData.length);
-    setCurrentRange([start, end]);
-    setPageSize(pageSize);
   };
 
   return (
@@ -124,15 +114,23 @@ const Application = () => {
               </Button>
             </div>
             <p className="rangeText">
-            عرض {currentRange[0]} إلى {currentRange[1]} من أصل {loadedData.length}{" "}
-              سجل
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
+              {loadedData.length} سجل
             </p>
             <Table
               col={columns}
-              data={filterApplications(loadedData)}
+              data={dataFiltering(loadedData, statusFilter)}
               filter={statusFilter}
               Size={pageSize}
-              handleChange={(page, pageSize) => handlePaginationChange(page, pageSize, loadedData)}
+              handleChange={(page, pageSize) =>
+                handlePaginationChange(
+                  page,
+                  pageSize,
+                  loadedData,
+                  setCurrentRange,
+                  setPageSize
+                )
+              }
               emptyText="لا توجد بيانات"
             />
           </div>
@@ -143,7 +141,3 @@ const Application = () => {
 };
 
 export default Application;
-
-export const applicationsLoader = () => {
-  return defer({ applications: getStudentApplications() });
-};

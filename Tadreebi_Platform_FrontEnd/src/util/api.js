@@ -1,14 +1,13 @@
 import { notification } from "antd";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import api from "../data/axiosConfig";
+import { useState, useEffect } from "react";
+import axiosConfig from "./axiosConfig";
 
-export const getPosts = async (region = "", city = "", major = "") => {
+//---------------------------------------------------------------------------
+export const getAllPosts = async (region = "", city = "", major = "") => {
   try {
-    const res = await api().get(
+    const res = await axiosConfig().get(
       `api/posts?filter[region]=${region}&filter[city]=${city}&filter[major]=${major}`
     );
-    console.log(res.data.data.data);
     return res.data.data || {};
   } catch (error) {
     const message = error.response.data.message;
@@ -20,9 +19,9 @@ export const getPosts = async (region = "", city = "", major = "") => {
   }
 };
 
-export const getPost = async (id) => {
+export const getSinglePost = async (id) => {
   try {
-    const res = await api().get(`api/posts/${id}`);
+    const res = await axiosConfig().get(`api/posts/${id}`);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -31,10 +30,28 @@ export const getPost = async (id) => {
     throw { message: error.message, status: error.status };
   }
 };
+
+//---------------------------------------------------------------------------
+
+export const getPostApplicants = async (postId) => {
+  try {
+    const [postRes, applicantsRes] = await Promise.all([
+      // axiosConfig().get('api/admins'),
+      getSinglePost(postId),
+      axiosConfig().get(`api/posts/${postId}/applicants`),
+    ]);
+    return { post: postRes, applicants: applicantsRes };
+  } catch (error) {
+    console.log(error);
+    throw { message: "error.message", status: "400 " };
+  }
+};
+
+//---------------------------------------------------------------------------
 
 export const getAllNews = async () => {
   try {
-    const res = await api().get("api/news");
+    const res = await axiosConfig().get("api/news");
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -44,9 +61,9 @@ export const getAllNews = async () => {
   }
 };
 
-export const getNews = async (id) => {
+export const getSingleNews = async (id) => {
   try {
-    const res = await api().get(`api/news/${id}`);
+    const res = await axiosConfig().get(`api/news/${id}`);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -55,10 +72,12 @@ export const getNews = async (id) => {
     throw { message: error.message, status: error.status };
   }
 };
+
+//---------------------------------------------------------------------------
 
 export const getAllInstitutions = async () => {
   try {
-    const res = await api().get(`api/institutions`);
+    const res = await axiosConfig().get(`api/institutions`);
     return res.data.data;
   } catch (error) {
     console.log(error);
@@ -66,9 +85,9 @@ export const getAllInstitutions = async () => {
   }
 };
 
-export const getInstitution = async (id) => {
+export const getSingleInstitution = async (id) => {
   try {
-    const res = await api().get(`api/institutions/${id}`);
+    const res = await axiosConfig().get(`api/institutions/${id}`);
     // console.log(res.data.data);
     return res.data.data;
   } catch (err) {
@@ -78,10 +97,21 @@ export const getInstitution = async (id) => {
   }
 };
 
-export const getAdmin = async (id) => {
-  console.log(id);
+//---------------------------------------------------------------------------
+
+export const getAllAdmins = async () => {
   try {
-    const res = await api().get(`api/admins/${id}`);
+    const res = await axiosConfig().get(`api/admins`);
+    return res.data.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const getSingleAdmin = async (id) => {
+  try {
+    const res = await axiosConfig().get(`api/admins/${id}`);
     console.log(res.data.data);
     return res.data.data;
   } catch (err) {
@@ -92,20 +122,11 @@ export const getAdmin = async (id) => {
   }
 };
 
+//---------------------------------------------------------------------------
+
 export const getAllStudents = async () => {
   try {
-    const res = await api().get(`api/students`);
-    return res.data.data;
-  } catch (err) {
-    const error = err.response.data;
-
-    throw { message: error.message, status: error.status };
-  }
-};
-
-export const getStudent = async (id) => {
-  try {
-    const res = await api().get(`api/students/${id}`);
+    const res = await axiosConfig().get(`api/students`);
     console.log(res.data.data);
     return res.data.data;
   } catch (err) {
@@ -115,33 +136,22 @@ export const getStudent = async (id) => {
   }
 };
 
-export const getAllAdmins = async () => {
+export const getSingleStudent = async (id) => {
   try {
-    const res = await api().get(`api/admins`);
+    const res = await axiosConfig().get(`api/students/${id}`);
     return res.data.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
+  } catch (err) {
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
   }
 };
 
-export const getPostApplicants = async (postId) => {
-  try {
-    const [postRes, applicantsRes] = await Promise.all([
-      // api().get('api/admins'),
-      getPost(postId),
-      api().get(`api/posts/${postId}/applicants`),
-    ]);
-    return { post: postRes, applicants: applicantsRes };
-  } catch (error) {
-    console.log(error);
-    throw { message: "error.message", status: "400 " };
-  }
-};
+//---------------------------------------------------------------------------
 
 export const getStudentApplications = async () => {
   try {
-    const res = await api().get(`api/applications`);
+    const res = await axiosConfig().get(`api/applications`);
     console.log(res.data.data);
     return res.data.data;
   } catch (err) {
@@ -150,6 +160,8 @@ export const getStudentApplications = async () => {
     throw { message: error.message, status: error.status };
   }
 };
+
+//---------------------------------------------------------------------------
 
 export const exportExcelFile = async (
   export_who,
@@ -177,7 +189,7 @@ export const exportExcelFile = async (
   }
 
   try {
-    const res = await api().get(export_url, {
+    const res = await axiosConfig().get(export_url, {
       responseType: "blob",
     });
     const downloadUrl = window.URL.createObjectURL(new Blob([res.data]));
@@ -193,9 +205,11 @@ export const exportExcelFile = async (
   }
 };
 
+//---------------------------------------------------------------------------
+
 export const getAdminDashboardCards = async () => {
   try {
-    const res = await api().get(`api/dashboard/cards`);
+    const res = await axiosConfig().get(`api/dashboard/cards`);
     console.log(res.data.data);
     return res.data.data;
   } catch (err) {
@@ -207,7 +221,7 @@ export const getAdminDashboardCards = async () => {
 
 export const getAdminDashboardChart = async (year) => {
   try {
-    const res = await api().get(`api/dashboard/chart?year=${year}`);
+    const res = await axiosConfig().get(`api/dashboard/chart?year=${year}`);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -242,9 +256,11 @@ export const useAdminDashboard = (endpoint, year) => {
   return { data, loading, error };
 };
 
+//---------------------------------------------------------------------------
+
 export const getAllSupervisors = async () => {
   try {
-    const res = await api().get(`api/supervisors`);
+    const res = await axiosConfig().get(`api/supervisors`);
     console.log(res.data.data);
     return res.data.data;
   } catch (error) {
@@ -253,9 +269,9 @@ export const getAllSupervisors = async () => {
   }
 };
 
-export const getSupervisor = async (id) => {
+export const getSingleSupervisor = async (id) => {
   try {
-    const res = await api().get(`api/supervisors/${id}`);
+    const res = await axiosConfig().get(`api/supervisors/${id}`);
     console.log(res);
     return res.data.data;
   } catch (err) {
@@ -265,3 +281,5 @@ export const getSupervisor = async (id) => {
     throw { message: error.message, status: error.status };
   }
 };
+
+//---------------------------------------------------------------------------
