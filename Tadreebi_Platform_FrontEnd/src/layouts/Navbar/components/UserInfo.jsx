@@ -5,10 +5,10 @@ import { useAuth } from "../../../auth/useContext.js";
 import "./UserInfo.scss";
 const UserInfo = () => {
   const auth = useAuth();
-  const MenuPath =
-    auth.user?.role === "Institution"
-      ? "/institution/profile"
-      : "/student/profile";
+  let role = auth?.user?.role?.toLowerCase();
+  if(role === 'superadmin'){
+    role = 'admin'
+  }
   const items = [
     auth.user?.role === "Student" &&
     {
@@ -17,7 +17,7 @@ const UserInfo = () => {
     },
     {
       key: "2",
-      label: <Link to={MenuPath}>الملف الشخصي</Link>,
+      label: <Link to={`/${role}/profile`}>الملف الشخصي</Link>,
     },
     {
       key: "3",
@@ -35,7 +35,7 @@ const UserInfo = () => {
           <div>
             <Space>
               <div className="userinfoContainer">
-                <p className="username">{auth.user.name}</p>
+                <p className="username">{auth?.user?.name}</p>
                 <img
                   className="userimg"
                   src={
