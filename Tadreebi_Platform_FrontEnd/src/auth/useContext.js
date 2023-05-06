@@ -9,6 +9,7 @@ export const AuthContexProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
+  console.log(user);
   const [role, setRole] = useState(null);
   const [redirectAfterLogout, setRedirectAfterLogout] = useState(false);
 

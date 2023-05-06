@@ -1,5 +1,5 @@
 import React from "react";
-import { phoneRules } from "../../Validation/rules";
+import { phoneRules } from "../../validation/rules";
 import FormInput from "./FormInput";
 
 const PhoneInput = (props) => {

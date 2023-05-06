@@ -272,7 +272,7 @@ export const getAllSupervisors = async () => {
 export const getSingleSupervisor = async (id) => {
   try {
     const res = await axiosConfig().get(`api/supervisors/${id}`);
-    console.log(res);
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);

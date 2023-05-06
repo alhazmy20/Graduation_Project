@@ -12,8 +12,9 @@ import SubmitButton from "../../../components/form/SubmitButton";
 import FormSelect from "../../../components/form/FormSelect";
 import axiosConfig from '../../../util/axiosConfig'
 import { displayMessage } from '../../../util/helpers';
+import ResetPassword from '../../../components/form/PasswordReset/PasswordReset';
 
-const SupervisorProfile = () => {
+const SupervisorProfile = ({isAdmin}) => {
   const supervisorData = useLoaderData();
 
   const { id } = useParams();
@@ -89,7 +90,7 @@ const SupervisorProfile = () => {
                   </Col>
                   <Col xs={24} sm={12}>
                     <FormSelect
-                      label="مسؤول التدريب في شطر"
+                      label="الشطر"
                       name="section"
                       options={options}
                     />
@@ -103,6 +104,7 @@ const SupervisorProfile = () => {
                 </SubmitButton>
               </Form>
             </FormCard>
+            {!isAdmin && <ResetPassword />}
           </div>
         )}
       </Await>

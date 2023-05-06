@@ -11,7 +11,7 @@ import AdminFormInputs from "../../../components/form/AdminFormInputs";
 import SubmitButton from "../../../components/form/SubmitButton";
 import { displayMessage } from "../../../util/helpers";
 
-const AdminProfile = () => {
+const AdminProfile = ({isAdmin}) => {
   const adminData = useLoaderData();
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -68,7 +68,7 @@ const AdminProfile = () => {
                   </SubmitButton>
                 </Form>
               </FormCard>
-              <ResetPassword id={loaderData.id} />
+              {!isAdmin && <ResetPassword />}
             </>
           )}
         </Await>

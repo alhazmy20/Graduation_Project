@@ -1,7 +1,7 @@
 import { Col, Row, Select, Space } from "antd";
 import React from "react";
 import FormInput from "./FormInput";
-import { inputGpaRules, nationalIdRules } from "../../Validation/rules";
+import { inputGpaRules, nationalIdRules } from "../../validation/rules";
 import FormSelect from "./FormSelect";
 import InputFile from "./InputFile";
 import EmailInput from "./EmailInput";

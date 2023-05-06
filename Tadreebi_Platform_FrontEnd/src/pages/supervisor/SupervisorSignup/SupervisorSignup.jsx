@@ -55,7 +55,7 @@ const SupervisorSignup = () => {
       <Form name="basic" className="form-wrapper" onFinish={onFinish}>
         <EmailInput label="البريد الجامعي" />
         <FormSelect
-          label="مسؤول التدريب في شطر"
+          label="الشطر"
           name="section"
           options={options}
         />
