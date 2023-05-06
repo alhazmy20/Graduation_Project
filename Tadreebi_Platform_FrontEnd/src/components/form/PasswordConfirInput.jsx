@@ -1,6 +1,6 @@
 import React from "react";
 import FormInput from "./FormInput";
-import { confirmPasswordRules } from "../../validation/rules";
+import { confirmPasswordRules } from "../../Validation/rules";
 
 const PasswordConfirInput = ({ label, name }) => {
   return (

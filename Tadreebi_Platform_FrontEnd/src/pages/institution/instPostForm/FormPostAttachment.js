@@ -59,7 +59,3 @@ export const options = data
     }))
   )
   .flat();
-
-// const isSubmitDisabled =
-//   formPostData?.content?.replace(/<(.|\n)*?>/g, "").trim().length === 0;
-//  { SSC: majorName.id, major: majorName.title }

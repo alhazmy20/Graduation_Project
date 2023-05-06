@@ -48,7 +48,6 @@ const InstPostForm = () => {
 
   const onFinish = async (value) => {
     //api code
-
     try {
       if (id) {
         // if ID exists, update the post

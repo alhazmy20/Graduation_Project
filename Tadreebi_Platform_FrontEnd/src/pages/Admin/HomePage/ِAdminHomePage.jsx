@@ -29,6 +29,7 @@ const Home = () => {
 
   return (
     <div className="AdminHomeContiner">
+
       <Col>
         <Row className="rowStyleStat" gutter={16}>
           <StatisticCard title="عدد المستخدمين" value={data?.total_users} />
