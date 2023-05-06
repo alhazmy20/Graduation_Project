@@ -1,10 +1,8 @@
 import React from "react";
 import ReactQuill from "react-quill";
 import { Form } from "antd";
-
 import "react-quill/dist/quill.snow.css";
-import "../InstPostForm.scss";
-const ReactTextArea = ({ name, initialValue }) => {
+const ReactTextArea = ({ name, initialValue, lable, ...others }) => {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -37,17 +35,17 @@ const ReactTextArea = ({ name, initialValue }) => {
     "formula",
   ];
 
-  // console.log(formdata);
   return (
     <Form.Item
       name={name}
       rules={[
         {
           required: true,
-          message: "الرجاء ادخل وصف التدريب",
+          message: lable,
         },
       ]}
       initialValue={initialValue}
+      {...others}
     >
       <ReactQuill
         name={name}

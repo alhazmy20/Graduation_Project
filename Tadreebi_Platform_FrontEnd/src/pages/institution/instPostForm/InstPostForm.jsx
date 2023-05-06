@@ -1,10 +1,10 @@
 import React, { Suspense, useState } from "react";
 import { Button, Col, Row, Form, notification } from "antd";
-import ReactTextArea from "./components/ReactTextArea";
+import ReactTextArea from "../../../components/form/ReactTextArea";
 import "../instPostForm/InstPostForm.scss";
-import ReactRadio from "./components/ReactRadio.jsx";
+import ReactRadio from "../../../components/form/ReactRadio.jsx";
 import MultiSelect from "./components/MultiSelect .jsx";
-import CustomDatePicker from "./components/CustomDatePicker.jsx";
+import DatePickerInput from "../../../components/form/DatePickerInput.jsx";
 import axiosConfig from "../../../util/axiosConfig.js";
 import { Await, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner.jsx";
@@ -93,6 +93,7 @@ const InstPostForm = () => {
                   <ReactTextArea
                     name="content"
                     initialValue={loadedPost?.content}
+                    lable="الرجاء ادخل وصف التدريب"
                   />
                 </Col>
                 <Row className="formInputContainer">
@@ -102,6 +103,7 @@ const InstPostForm = () => {
                       <ReactRadio
                         name="t_type"
                         options={radioOptionsType}
+                        className="formItemStyle"
                         initValue={loadedPost?.t_type}
                       />
                     </Row>
@@ -123,20 +125,22 @@ const InstPostForm = () => {
                     </Row>
                     <Row className="RowDivElment">
                       <label className="label">تاريخ البدء: </label>
-                      <CustomDatePicker
+                      <DatePickerInput
                         name="t_startDate"
                         label="تاريخ بدء التدريب"
                         required={true}
                         initValue={loadedPost?.t_startDate}
+                        className="formItemStyle"
                       />
                     </Row>
                     <Row className="RowDivElment">
                       <label className="label">تاريخ انتهاء الإعلان: </label>
-                      <CustomDatePicker
+                      <DatePickerInput
                         name="p_endDate"
                         label="تاريخ انتهاء الإعلان"
                         required={true}
                         initValue={loadedPost?.p_endDate}
+                        className="formItemStyle"
                       />
                     </Row>
                   </Col>
@@ -147,6 +151,7 @@ const InstPostForm = () => {
                       <ReactRadio
                         name="reward"
                         options={radioOptionsReward}
+                        className="formItemStyle"
                         initValue={
                           loadedPost?.reward === "يوجد"
                             ? 1
@@ -175,11 +180,12 @@ const InstPostForm = () => {
 
                     <Row className="RowDivElment">
                       <label className="label">تاريخ الإنتهاء: </label>
-                      <CustomDatePicker
+                      <DatePickerInput
                         name="t_endDate"
                         label="تاريخ إنتهاء التدريب"
                         required={true}
                         initValue={loadedPost?.t_endDate}
+                        className="formItemStyle"
                       />
                     </Row>
 
@@ -188,6 +194,7 @@ const InstPostForm = () => {
                       <ReactRadio
                         name="gender"
                         options={radioOptionsGender}
+                        className="formItemStyle"
                         initValue={
                           loadedPost?.gender === "ذكر"
                             ? 0

@@ -1,12 +1,12 @@
 import React from "react";
 import { Form, Radio } from "antd";
-import "../InstPostForm.scss";
-const ReactRadio = ({ name, options, initValue }) => {
+
+const ReactRadio = ({ name, options, initValue, ...others }) => {
   return (
     <Form.Item
       name={name}
       rules={[{ required: true, message: "الرجاء الاختيار" }]}
-      className="formItemStyle"
+      {...others}
       initialValue={initValue}
     >
       <Radio.Group>
