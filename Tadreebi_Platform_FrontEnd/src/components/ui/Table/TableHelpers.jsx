@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import React, { useState } from "react";
-import StudentModal from "../../../pages/institution/InstPostDetails/components/StudentModal";
+import StudentModal from "../StudentModal/StudentModal";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
@@ -52,7 +52,7 @@ export const InstPostsText = (text) => {
   return <span style={style}>{text}</span>;
 };
 
-export function StudentDetails({ name, data }) {
+export function StudentDetails({ name, data,isSupervisor }) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   return (
     <span>
@@ -72,6 +72,7 @@ export function StudentDetails({ name, data }) {
           setDetailsOpen={setDetailsOpen}
           detailsOpen={detailsOpen}
           data={data}
+          isSupervisor={isSupervisor}
         />
       )}
     </span>

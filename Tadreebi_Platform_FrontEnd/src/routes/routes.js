@@ -57,6 +57,7 @@ import {
   allSupervisorsLoader,
   allStudentsLoader,
 } from "../util/loaders";
+import SupervisorStudentsApplications from "../pages/supervisor/SupervisorStudents/SupervisorStudentsApplications";
 
 //Institution Routes
 const institutionRoutes = (
@@ -98,6 +99,10 @@ const studentRoutes = (
         element={<Applications />}
         loader={applicationsLoader}
       />
+      <Route
+        path="applications/post/:id"
+        element={<TrainingOpportunity/>} loader={singlePostLoader}
+      />
     </Route>
   </Route>
 );
@@ -107,9 +112,10 @@ const supervisorRoutes = (
   <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
     <Route path="supervisor" element={<SupervisorLayout />}>
       <Route index element={<p>supervisor homepage</p>} />
-      <Route path="manage-applications" element={<p>manage-applications</p>} />
+      <Route path="manage-applications" element={<SupervisorStudentsApplications/>} loader={applicationsLoader} />
+      <Route path="manage-applications/post/:id" element={<TrainingOpportunity/>} loader={singlePostLoader} />
       <Route path="all-students" element={<p>all-students</p>} />
-      <Route path="profile" element={<p>supervisor profile</p>} />
+      <Route path="profile" element={<SupervisorProfile/>} />
     </Route>
   </Route>
 );

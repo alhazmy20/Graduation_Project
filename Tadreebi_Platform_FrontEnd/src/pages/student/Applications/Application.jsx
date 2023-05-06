@@ -7,7 +7,7 @@ import {
   TableText,
 } from "../../../components/ui/Table/TableHelpers";
 import Spinner from "../../../components/ui/Spinner/Spinner";
-import { Await, useLoaderData } from "react-router-dom";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
 
 const Application = () => {
@@ -29,6 +29,13 @@ const Application = () => {
       title: "الفرصة التدريبية",
       dataIndex: "post",
       align: "center",
+      render: (text, row) => {
+        return (
+          <Link className="row-title" to={`post/${row.id}`}>
+            {text}
+          </Link>
+        );
+      },
     },
     {
       title: "اسم المؤسسة",

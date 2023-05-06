@@ -92,6 +92,8 @@ const InstPostDetails = () => {
     },
   ];
 
+  console.log(applicants_post?.applicantsPost)
+
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
   };

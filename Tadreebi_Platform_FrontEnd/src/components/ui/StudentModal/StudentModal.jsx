@@ -3,7 +3,7 @@ import React from "react";
 import "./StudentModal.scss";
 import { UserOutlined } from "@ant-design/icons";
 
-const StudentModal = ({ detailsOpen, setDetailsOpen, data }) => {
+const StudentModal = ({ detailsOpen, setDetailsOpen, data, isSupervisor}) => {
 
   const { studentFiles: files } = data;
 
@@ -62,7 +62,9 @@ const StudentModal = ({ detailsOpen, setDetailsOpen, data }) => {
           </Col>
         </Row>
 
-        <Row gutter={[16, 0]} className="second-row">
+        {
+          !isSupervisor ? 
+          <Row gutter={[16, 0]} className="second-row">
           <Col xs={24} sm={14} md={16} className="col-one">
             <Space size={5} className="space">
               <span className="label">خطاب التدريب:</span>
@@ -86,7 +88,7 @@ const StudentModal = ({ detailsOpen, setDetailsOpen, data }) => {
                 <Button
                   type="primary"
                   onClick={() =>
-                    window.open(`${files.CV_url}`, "_blank", "noopener")
+                    window.open(`${files?.CV_url}`, "_blank", "noopener")
                   }
                 >
                   عرض
@@ -125,7 +127,10 @@ const StudentModal = ({ detailsOpen, setDetailsOpen, data }) => {
               )}
             </Space>
           </Col>
-        </Row>
+        </Row> 
+        :
+        <></>
+        }
       </div>
     </Modal>
   );
