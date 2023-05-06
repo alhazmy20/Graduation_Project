@@ -93,7 +93,7 @@ const InstPostForm = () => {
                   <ReactTextArea
                     name="content"
                     initialValue={loadedPost?.content}
-                    lable="الرجاء ادخل وصف التدريب"
+                    lable=" ادخل وصف التدريب"
                   />
                 </Col>
                 <Row className="formInputContainer">

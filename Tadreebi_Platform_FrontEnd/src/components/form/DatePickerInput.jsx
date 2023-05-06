@@ -6,7 +6,7 @@ import { parse } from "date-fns";
 import arSA from "antd/lib/locale/ar_EG";
 const DatePicker = generatePicker(dateFnsGenerateConfig);
 
-const CustomDatePicker = ({ name, label, initValue, ...others }) => {
+const DatePickerInput = ({ name, label, initValue, ...others }) => {
   const dateFormat = "yyyy-MM-dd";
   const lockedValue = initValue
     ? parse(initValue, dateFormat, new Date())
@@ -37,4 +37,4 @@ const CustomDatePicker = ({ name, label, initValue, ...others }) => {
   );
 };
 
-export default CustomDatePicker;
+export default DatePickerInput;

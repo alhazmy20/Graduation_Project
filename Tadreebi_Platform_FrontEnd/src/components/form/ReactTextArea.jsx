@@ -41,7 +41,7 @@ const ReactTextArea = ({ name, initialValue, lable, ...others }) => {
       rules={[
         {
           required: true,
-          message: lable,
+          message: `الرجاء ${lable}`,
         },
       ]}
       initialValue={initialValue}
