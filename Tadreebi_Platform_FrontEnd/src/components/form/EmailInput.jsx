@@ -1,6 +1,6 @@
 import React from "react";
 import FormInput from "./FormInput";
-import { emailValidationRules } from "../../validation/rules";
+import { emailValidationRules } from "../../Validation/rules";
 
 const EmailInput = (props) => {
   const { label, name, ...others } = props;
