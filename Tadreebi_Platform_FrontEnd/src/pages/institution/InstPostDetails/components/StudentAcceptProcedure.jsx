@@ -3,29 +3,38 @@ import React, { useState } from "react";
 import axiosConfig from "../../../../util/axiosConfig";
 import "./StudentAcceptProcedure.scss";
 import { useRevalidator } from "react-router-dom";
+import { useAuth } from "../../../../auth/useContext";
 
-const StudentAcceptProcedure = ({ status, applicant_id }) => {
+const StudentAcceptProcedure = ({ status, applicant_id, acceptStatusId, rejectStatusId }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [statusId, setStatusId] = useState(null);
-  const [showBtnContainer, setShowBtnContainer] = useState(true);
   const [loading, setLoading] = useState(false);
-  let revalidator = useRevalidator();
+  const revalidator = useRevalidator();
 
-  const ACCEPT_STATUS_ID = "2";
-  const REJECT_STATUS_ID = "5";
+  const auth = useAuth();
+  const role = auth.user?.role;
+
+  const ACCEPT_STATUS_ID = acceptStatusId;
+  const REJECT_STATUS_ID = rejectStatusId;
+
+
+  const showButton =
+    (role === "Supervisor" && status === "بإنتظار موافقة المشرف الجامعي") ||
+    (role === "Institution" && status === "بإنتظار موافقة المنشأة") ||
+    (role === "Student" && status === "بإنتظار تأكيد الطالب");
 
   const handleStatus = async (id) => {
-    console.log(id || statusId);
+    console.log(id, applicant_id);
     try {
       setLoading(true);
       await axiosConfig().put(`api/applications/${applicant_id}`, {
         status_id: id || statusId,
       });
       setLoading(false);
-      setShowBtnContainer(false);
       const procedure = (id || statusId) === ACCEPT_STATUS_ID ? "قبول" : "رفض";
       notification.success({
-        message: `تم ${procedure} الطالب و سيتم اشعاره بذلك.`,
+        message: `تم ${procedure} الطلب.`,
+        description:'و تم تحديث حالة الطلب'
       });
       revalidator.revalidate(); //revalidate the data
       setModalOpen(false); // close the modal after successful API call
@@ -55,7 +64,7 @@ const StudentAcceptProcedure = ({ status, applicant_id }) => {
 
   return (
     <div className="student-accept-procedure">
-      {status === "بإنتظار موافقة المنشأة" && showBtnContainer && (
+      {showButton && (
         <span className="btnContainer">
           <Button
             className="greenBtn"
@@ -91,27 +100,11 @@ const StudentAcceptProcedure = ({ status, applicant_id }) => {
         confirmLoading={loading} // Add confirmLoading prop to show loading state during API call
       >
         <div className="modalDetailsContainer">
-          {(() => {
-            if (statusId === ACCEPT_STATUS_ID) {
-              return (
                 <span className="modalDetails">
                   <strong>
-                    في حال قبولك للطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
-                    اشعار الطالب بالقبول.
+                    هل انت متأكد من {statusId === ACCEPT_STATUS_ID ? "قبولك" : "رفضك"} لهذا الطلب؟
                   </strong>
                 </span>
-              );
-            } else {
-              return (
-                <span className="modalDetails">
-                  <strong>
-                    في حال رفضك للطالب فأنه لا يمكنك ان تتراجع عن القرار و سيتم
-                    اشعار الطالب بالرفض.
-                  </strong>
-                </span>
-              );
-            }
-          })()}
           <Checkbox
             onChange={handleCheckboxChange}
             className="dont-show-checkbox"

@@ -115,8 +115,6 @@ const supervisorRoutes = (
       <Route path="manage-applications" element={<SupervisorStudentsApplications/>} loader={applicationsLoader} />
       <Route path="manage-applications/post/:id" element={<TrainingOpportunity/>} loader={singlePostLoader} />
       <Route path="all-students" element={<p>all-students</p>} />
-      <Route path="profile" element={<SupervisorProfile/>} />
-      <Route path="profile" element={<p>supervisor profile</p>} />
       <Route path="profile" element={<SupervisorProfile/>} loader={singleSupervisorLoader}/>
     </Route>
   </Route>

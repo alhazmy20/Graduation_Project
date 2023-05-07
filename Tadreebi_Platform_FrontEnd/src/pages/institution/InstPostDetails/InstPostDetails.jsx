@@ -13,11 +13,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
+import TableFilterButtons from '../../../components/ui/TableFilterButtons/TableFilterButtons';
 
 const InstPostDetails = () => {
   const applicants_post = useLoaderData();
-  // const [status, setStatus] = useState(null);
-  // const [applicantId, setApplicantId] = useState(null);
   const { id } = useParams();
 
   const [statusFilter, setStatusFilter] = useState(null);
@@ -38,11 +37,6 @@ const InstPostDetails = () => {
 
     return filteredDataSource;
   };
-
-  // useEffect(() => {
-  //   setStatus(status);
-  //   setApplicantId(applicantId)
-  // }, [status, applicantId]);
 
   const columns = [
     {
@@ -87,12 +81,17 @@ const InstPostDetails = () => {
       dataIndex: "applicant_status",
       align: "center",
       render: (text, row) => (
-        <StudentAcceptProcedure status={text} applicant_id={row.applicant_id} />
+        <StudentAcceptProcedure
+          status={text}
+          applicant_id={row.applicant_id}
+          acceptStatusId="2"
+          rejectStatusId="5"
+        />
       ),
     },
   ];
 
-  console.log(applicants_post?.applicantsPost)
+  console.log(applicants_post?.applicantsPost);
 
   const handleStatusFilterChange = (status) => {
     setStatusFilter(status);
@@ -109,29 +108,6 @@ const InstPostDetails = () => {
             <div className="detailsContainer">
               <div className="detailsTable">
                 <PostDetailsTable data={loadedData.post} />
-              </div>
-              <div className="contactContainer">
-                <strong className="header">
-                  <span>بيانات الاتصال للمنشأة</span>
-                </strong>
-                <div className="supervisor">
-                  <span>
-                    <strong>مسؤول الاتصال: </strong>
-                  </span>
-                  <span>ماهر الحربي</span>
-                </div>
-                <div className="phone">
-                  <span>
-                    <strong>رقم الجوال: </strong>
-                  </span>
-                  <span>+966545930921</span>
-                </div>
-                <div className="email">
-                  <span>
-                    <strong>البريد الإلكتروني: </strong>
-                  </span>
-                  <span>Y-22-02@coop.gov.sa</span>
-                </div>
               </div>
             </div>
             <div className="excelContainer">
@@ -150,42 +126,7 @@ const InstPostDetails = () => {
                 </span>
               </Button>
             </div>
-            <div className="filterTable">
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("")}
-              >
-                الكل
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() =>
-                  handleStatusFilterChange("بإنتظار موافقة المنشأة")
-                }
-              >
-                بإنتظار موافقة المنشأة
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("بإنتظار تأكيد الطالب")}
-              >
-                بإنتظار تأكيد الطالب
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("مقبول")}
-              >
-                مقبول
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() =>
-                  handleStatusFilterChange("تم الرفض من قبل المنشأة")
-                }
-              >
-                تم الرفض من قبل المنشأة
-              </Button>
-            </div>
+            <TableFilterButtons setStatusFilter={setStatusFilter}/>
             <Table
               col={columns}
               data={formattedResponse(loadedData.applicants.data.data)}

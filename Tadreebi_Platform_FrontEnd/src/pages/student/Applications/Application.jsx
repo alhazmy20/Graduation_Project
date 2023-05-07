@@ -2,13 +2,11 @@ import "./Application.scss";
 import { Suspense, useEffect, useState } from "react";
 import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
-import {
-  StudentAccept,
-  TableText,
-} from "../../../components/ui/Table/TableHelpers";
+import { TableText } from "../../../components/ui/Table/TableHelpers";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
+import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
 
 const Application = () => {
   const applicationsData = useLoaderData();
@@ -53,23 +51,21 @@ const Application = () => {
       align: "center",
       render: (text, row) => {
         setStatus(text);
-        return (
-          <TableText
-            status={status}
-            text={text}
-            id={row.applicant_id}
-            applicantId={applicantId}
-          />
-        );
+        return <TableText text={status} />;
       },
     },
     {
       title: "الإجراء",
       dataIndex: "status",
       align: "center",
-      render: (text, row) => {
-        return <StudentAccept status={text} />;
-      },
+      render: (text, row) => (
+        <StudentAcceptProcedure
+          status={text}
+          applicant_id={row.id}
+          acceptStatusId="4"
+          rejectStatusId="7"
+        />
+      ),
     },
   ];
 

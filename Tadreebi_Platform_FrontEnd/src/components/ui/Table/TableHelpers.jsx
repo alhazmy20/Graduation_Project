@@ -8,14 +8,15 @@ import { Link } from "react-router-dom";
 export const TableText = ({ text }) => {
   let style = {};
   if (
-    text === "بإنتظار موافقة الطالب" ||
+    text === "بإنتظار تأكيد الطالب" ||
     text === "بإنتظار موافقة المنشأة" ||
-    "بإنتظار موافقة المشرف الجامعي"
+    text === "بإنتظار موافقة المشرف الجامعي"
   ) {
     style.color = "#F9C068";
   } else if (
     text === "تم الرفض من قبل المنشأة" ||
-    "تم الرفض من قبل المشرف الجامعي"
+    text === "تم الرفض من قبل المشرف الجامعي" ||
+    text === 'تم الغاء الطلب'
   ) {
     style.color = "red";
   } else if (text === "مقبول") {
@@ -23,6 +24,7 @@ export const TableText = ({ text }) => {
   }
   return <span style={style}>{text}</span>;
 };
+
 
 export const StatusText = (text) => {
   return (
