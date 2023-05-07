@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
-import TableFilterButtons from '../../../components/ui/TableFilterButtons/TableFilterButtons';
+import TableFilterButtons from '../../../components/ui/TableFilterSelect/TableFilterSelect';
 
 const InstPostDetails = () => {
   const applicants_post = useLoaderData();
