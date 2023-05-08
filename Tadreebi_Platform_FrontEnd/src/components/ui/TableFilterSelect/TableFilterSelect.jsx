@@ -1,9 +1,8 @@
 import React from "react";
 import "./TableFilterButtons.scss";
-import { Button, Select } from "antd";
-import FormSelect from "../../form/FormSelect";
+import { Select } from "antd";
 
-const TableFilterButtons = ({ setStatusFilter }) => {
+const TableFilterButtons = ({ setStatusFilter, isSupervisor }) => {
   const handleStatusFilterChange = (status) => {
     if (status === "الكل") {
       status = "";
@@ -12,12 +11,17 @@ const TableFilterButtons = ({ setStatusFilter }) => {
   };
 
   const options = [
-    {
-      value: "الكل",
-    },
-    {
-      value: "بإنتظار موافقة المنشأة",
-    },
+    { value: "الكل" },
+    ...(isSupervisor
+      ? []
+      : [
+          {
+            value: "بإنتظار موافقة المنشأة",
+          },
+          {
+            value: "تم الرفض من قبل المنشأة",
+          },
+        ]),
     {
       value: "بإنتظار موافقة المشرف الجامعي",
     },
@@ -26,9 +30,6 @@ const TableFilterButtons = ({ setStatusFilter }) => {
     },
     {
       value: "مقبول",
-    },
-    {
-      value: "تم الرفض من قبل المنشأة",
     },
     {
       value: "تم الرفض من قبل المشرف الجامعي",

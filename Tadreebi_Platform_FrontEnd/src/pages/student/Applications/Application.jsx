@@ -7,6 +7,7 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
+import TableFilterSelect from '../../../components/ui/TableFilterSelect/TableFilterSelect'
 
 const Application = () => {
   const applicationsData = useLoaderData();
@@ -69,10 +70,6 @@ const Application = () => {
     },
   ];
 
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
-
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -82,40 +79,8 @@ const Application = () => {
         {(loadedData) => (
           <div className="tableContainer">
             <h1 className="Header">طلبات التقديم</h1>
-            <div className="filterTable">
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("")}
-              >
-                الكل
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() =>
-                  handleStatusFilterChange("بإنتظار موافقة المنشأة")
-                }
-              >
-                بإنتظار موافقة المنشأة
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("بإنتظار تأكيد الطالب")}
-              >
-                بإنتظار تأكيد الطالب
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("مقبول")}
-              >
-                مقبول
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("مرفوض")}
-              >
-                مرفوض
-              </Button>
-            </div>
+            <TableFilterSelect setStatusFilter={setStatusFilter} />
+
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
