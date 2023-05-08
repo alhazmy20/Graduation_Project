@@ -5,10 +5,10 @@ import {
   StudentDetails,
   TableText,
 } from "../../../components/ui/Table/TableHelpers";
-import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
+import TableFilterSelect from "../../../components/ui/TableFilterSelect/TableFilterSelect";
 
 const SupervisorStudentsApplications = () => {
   const applicants_post = useLoaderData();
@@ -93,9 +93,6 @@ const SupervisorStudentsApplications = () => {
     },
   ];
 
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -106,34 +103,7 @@ const SupervisorStudentsApplications = () => {
         {(loadedData) => (
           <div className="tableContainer">
             <h1 className="Header">طلبات التقديم</h1>
-            <div className="filterTable">
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("")}
-              >
-                الكل
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() =>
-                  handleStatusFilterChange("بإنتظار موافقة المشرف الجامعي")
-                }
-              >
-                بإنتظار موافقة المشرف الجامعي
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("مقبول")}
-              >
-                مقبول
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("مرفوض")}
-              >
-                مرفوض
-              </Button>
-            </div>
+            <TableFilterSelect setStatusFilter={setStatusFilter} isSupervisor={true}/>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData?.length} سجل
