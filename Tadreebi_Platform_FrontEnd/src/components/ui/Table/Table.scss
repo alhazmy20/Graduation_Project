@@ -22,6 +22,16 @@
               @include breakpoint-down(small) {
                 padding: 0;
               }
+
+  .ant-table-column-sorters{
+   .ant-table-column-sorter{
+    .ant-table-column-sorter-inner{
+      color: white;
+    }
+   }
+                  }
+}
+          
             }
           }
         }
@@ -40,7 +50,7 @@
       }
     }
   }
-}
+
 
 .tableContainer {
   display: flex;

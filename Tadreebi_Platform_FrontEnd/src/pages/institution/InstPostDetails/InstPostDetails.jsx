@@ -24,15 +24,15 @@ const InstPostDetails = () => {
 
   const formattedResponse = (data) => {
     const applicantData = data.map((item) => ({
-      applicant_id: item.id,
-      applicant_status: item.status,
-      created_at: item.created_at,
-      ...item.student,
+      applicant_id: item?.id,
+      applicant_status: item?.status,
+      created_at: item?.created_at,
+      ...item?.student,
     }));
 
     const filteredDataSource = statusFilter
       ? applicantData?.filter(
-          (application) => application.applicant_status === statusFilter
+          (application) => application?.applicant_status === statusFilter
         )
       : applicantData;
 
@@ -58,9 +58,13 @@ const InstPostDetails = () => {
       dataIndex: "GPA",
       align: "center",
       render: (text, row) => {
-        return <span>{`${row.GPA}/${row.GPA_Type}`}</span>;
+        return <span>{`${row?.GPA}/${row?.GPA_Type}`}</span>;
       },
-    sorter: (a, b) => a?.GPA - b?.GPA,
+      sorter: (a, b) => {
+        const gpaA = a?.GPA_Type === 5 ?  a?.GPA : ((a?.GPA * 5)/4);
+        const gpaB = b?.GPA_Type === 5 ?  b?.GPA : ((b?.GPA * 5)/4);
+        return gpaA - gpaB;
+      },
     },
     {
       title: "التخصص",
@@ -85,7 +89,7 @@ const InstPostDetails = () => {
       render: (text, row) => (
         <StudentAcceptProcedure
           status={text}
-          applicant_id={row.applicant_id}
+          applicant_id={row?.applicant_id}
           acceptStatusId="2"
           rejectStatusId="5"
         />
@@ -103,7 +107,7 @@ const InstPostDetails = () => {
           <div className="postDetailsContainer">
             <div className="detailsContainer">
               <div className="detailsTable">
-                <PostDetailsTable data={loadedData.post} />
+                <PostDetailsTable data={loadedData?.post} />
               </div>
             </div>
             <div className="excelContainer">
@@ -113,7 +117,7 @@ const InstPostDetails = () => {
               <Button
                 className="excelBtn"
                 onClick={() =>
-                  exportExcelFile("post_applicants", id, loadedData.post.title)
+                  exportExcelFile("post_applicants", id, loadedData?.post?.title)
                 }
               >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />
@@ -125,7 +129,7 @@ const InstPostDetails = () => {
             <TableFilterButtons setStatusFilter={setStatusFilter} />
             <Table
               col={columns}
-              data={formattedResponse(loadedData.applicants.data.data)}
+              data={formattedResponse(loadedData?.applicants?.data?.data)}
               emptyText="لا يوجد اي متقدمين حاليا"
             />
           </div>
