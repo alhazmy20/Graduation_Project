@@ -57,7 +57,7 @@ import {
   allSupervisorsLoader,
   allStudentsLoader,
 } from "../util/loaders";
-import SupervisorStudentsApplications from "../pages/supervisor/SupervisorStudents/SupervisorStudentsApplications";
+import SupervisorStudentsApplications from "../pages/supervisor/SupervisorStudentsApplications/SupervisorStudentsApplications";
 
 //Institution Routes
 const institutionRoutes = (
