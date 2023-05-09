@@ -59,6 +59,7 @@ const InstPostDetails = () => {
       render: (text, row) => {
         return <span>{`${row.GPA}/${row.GPA_Type}`}</span>;
       },
+    sorter: (a, b) => a?.GPA - b?.GPA,
     },
     {
       title: "التخصص",
