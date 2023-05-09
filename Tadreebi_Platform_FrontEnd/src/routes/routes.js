@@ -8,7 +8,7 @@ import {
 
 import RootLayout from "../layouts/RootLayout";
 import SupervisorLayout from "../layouts/SupervisorLayout";
-import AdminLayout from '../layouts/AdminLayout';
+import AdminLayout from "../layouts/AdminLayout";
 
 import {
   Home,
@@ -39,6 +39,8 @@ import {
   SupervisorsTable,
   InstitutionInfo,
   Unauthorized,
+  SupervisorStudentsApplications,
+  SupervisorStudent,
 } from "../pages/index";
 
 import {
@@ -57,7 +59,6 @@ import {
   allSupervisorsLoader,
   allStudentsLoader,
 } from "../util/loaders";
-import SupervisorStudentsApplications from "../pages/supervisor/SupervisorStudentsApplications/SupervisorStudentsApplications";
 
 //Institution Routes
 const institutionRoutes = (
@@ -101,7 +102,8 @@ const studentRoutes = (
       />
       <Route
         path="applications/post/:id"
-        element={<TrainingOpportunity/>} loader={singlePostLoader}
+        element={<TrainingOpportunity />}
+        loader={singlePostLoader}
       />
     </Route>
   </Route>
@@ -112,10 +114,22 @@ const supervisorRoutes = (
   <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
     <Route path="supervisor" element={<SupervisorLayout />}>
       <Route index element={<p>supervisor homepage</p>} />
-      <Route path="manage-applications" element={<SupervisorStudentsApplications/>} loader={applicationsLoader} />
-      <Route path="manage-applications/post/:id" element={<TrainingOpportunity/>} loader={singlePostLoader} />
-      <Route path="all-students" element={<p>all-students</p>} />
-      <Route path="profile" element={<SupervisorProfile/>} loader={singleSupervisorLoader}/>
+      <Route
+        path="manage-applications"
+        element={<SupervisorStudentsApplications />}
+        loader={applicationsLoader}
+      />
+      <Route
+        path="manage-applications/post/:id"
+        element={<TrainingOpportunity />}
+        loader={singlePostLoader}
+      />
+      <Route path="all-students" element={<SupervisorStudent />} loader={allStudentsLoader}/>
+      <Route
+        path="profile"
+        element={<SupervisorProfile />}
+        loader={singleSupervisorLoader}
+      />
     </Route>
   </Route>
 );
@@ -191,7 +205,7 @@ const adminRoutes = (
       />
       <Route
         path="manage-supervisors/:id"
-        element={<SupervisorProfile isAdmin={true}/>}
+        element={<SupervisorProfile isAdmin={true} />}
         loader={singleSupervisorLoader}
       />
     </Route>

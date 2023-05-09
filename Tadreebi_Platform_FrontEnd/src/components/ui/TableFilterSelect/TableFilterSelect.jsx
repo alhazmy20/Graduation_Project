@@ -43,7 +43,7 @@ const TableFilterButtons = ({ setStatusFilter, isSupervisor }) => {
   ];
 
   return (
-    <div className="table-filter-buttons">
+    <div className="table-filter">
       <span>تصفية على حسب: </span>
       <Select
         options={options}

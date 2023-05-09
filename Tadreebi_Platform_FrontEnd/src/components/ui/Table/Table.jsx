@@ -12,7 +12,7 @@ const TableUI = ({col,data,handleChange,Size, emptyText}) => {
         pagination={{
           onChange: handleChange, 
           responsive: true,
-          itemRender: itemRender,
+          itemRender: itemRender, 
           pageSize: Size,
           position: ["bottomLeft"],
         }}

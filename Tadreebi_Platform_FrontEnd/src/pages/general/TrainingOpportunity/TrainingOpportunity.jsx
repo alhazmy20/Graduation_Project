@@ -19,6 +19,7 @@ const TrainingOpportunity = ({ withApply }) => {
   const error = useRouteError();
   const postData = useLoaderData();
   const auth = useAuth();
+  const role = auth.user?.role;
 
   const id = useParams();
 
@@ -26,12 +27,7 @@ const TrainingOpportunity = ({ withApply }) => {
     if (!auth.user) {
       return displayMessage("warning", "يجب تسجيل الدخول");
     }
-    if (auth.user?.role !== "Student") {
-      return displayMessage(
-        "warning",
-        "يمكن للطلاب فقط التقديم على الفرص التدريبية"
-      );
-    }
+
     const { id: post_id } = id;
     console.log(post_id);
     try {
@@ -79,7 +75,7 @@ const TrainingOpportunity = ({ withApply }) => {
             </div>
             <p dangerouslySetInnerHTML={{ __html: loadedData.content }}></p>
             <PostDetailsTable data={loadedData} />
-            {withApply && (
+            {withApply && role ==='Student' && (
               <Button
                 type="primary"
                 className="form-btn"

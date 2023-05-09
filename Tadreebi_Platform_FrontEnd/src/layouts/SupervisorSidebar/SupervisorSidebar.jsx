@@ -1,11 +1,6 @@
 import React from "react";
-import { NavLink} from "react-router-dom";
-import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  useProSidebar,
-} from "react-pro-sidebar";
+import { NavLink } from "react-router-dom";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -19,11 +14,10 @@ import { Button } from "antd";
 import { useAuth } from "../../auth/useContext";
 
 const SupervisorSidebar = () => {
-    const auth = useAuth();
+  const auth = useAuth();
 
-    const { toggleSidebar } =
-      useProSidebar();
-  
+  const { toggleSidebar } = useProSidebar();
+
   return (
     <>
       <aside className="SideBarContainer">
@@ -49,6 +43,20 @@ const SupervisorSidebar = () => {
                 </MenuItem>
               )}
             </NavLink>
+
+            <NavLink to={"/supervisor/all-students"} end>
+              {({ isActive }) => (
+                <MenuItem
+                  className={
+                    isActive ? "activeMenu MenuItem" : "MenuItem notActive"
+                  }
+                  icon={<FontAwesomeIcon icon={faPerson} />}
+                >
+                  الطلاب
+                </MenuItem>
+              )}
+            </NavLink>
+
             <NavLink to={"/supervisor/manage-applications"} end>
               {({ isActive }) => (
                 <MenuItem
@@ -61,19 +69,6 @@ const SupervisorSidebar = () => {
                 </MenuItem>
               )}
             </NavLink>
-            <NavLink to={"/supervisor/all-students"} end>
-              {({ isActive }) => (
-                <MenuItem
-                  className={
-                    isActive ? "activeMenu MenuItem" : "MenuItem notActive"
-                  }
-                  icon={<FontAwesomeIcon icon={faPerson} />}
-                >
-                  {" "}
-                  ادارة الطلاب{" "}
-                </MenuItem>
-              )}
-            </NavLink>
 
             <NavLink to={"/supervisor/profile"} end>
               {({ isActive }) => (
@@ -83,8 +78,7 @@ const SupervisorSidebar = () => {
                   }
                   icon={<FontAwesomeIcon icon={faInfoCircle} />}
                 >
-                  {" "}
-                  الملف الشخصي{" "}
+                  الملف الشخصي
                 </MenuItem>
               )}
             </NavLink>
@@ -94,8 +88,7 @@ const SupervisorSidebar = () => {
                   className={"MenuItem notActive"}
                   icon={<FontAwesomeIcon icon={faSignOut} />}
                 >
-                  {" "}
-                  تسجيل خروج{" "}
+                  تسجيل خروج
                 </MenuItem>
               }
             </NavLink>
@@ -114,7 +107,7 @@ const SupervisorSidebar = () => {
         </div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default SupervisorSidebar
+export default SupervisorSidebar;

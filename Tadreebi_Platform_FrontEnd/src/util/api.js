@@ -172,16 +172,20 @@ export const exportExcelFile = async (
   let fileName = "";
 
   switch (export_who) {
-    case "Post Applicants":
+    case "post_applicants":
       export_url = `api/posts/${post_id}/applicants/export`;
       fileName = post_title;
       break;
-    case "All Institution":
+    case "all_institutions":
       export_url = `api/institutions/export`;
       fileName = "بيانات المؤسسات";
       break;
-    case "All Student":
+    case "institution_students":
       export_url = `api/students/export`;
+      fileName = "بيانات الطلاب";
+      break;
+    case "supervisor_students":
+      export_url = `api/supervisors/students/export`;
       fileName = "بيانات الطلاب";
       break;
     default:

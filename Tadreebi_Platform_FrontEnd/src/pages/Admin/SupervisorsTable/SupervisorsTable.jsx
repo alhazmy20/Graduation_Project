@@ -76,7 +76,7 @@ const SupervisorsTable = () => {
             <div className="excelContainer">
               <Button
                 className="excelBtn"
-                onClick={() => exportExcelFile("All Student")}
+                onClick={() => exportExcelFile("institution_students")}
               >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />
                 <strong>Excel</strong>

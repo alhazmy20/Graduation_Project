@@ -88,7 +88,7 @@ const InstitutionsTable = () => {
             <div className="excelContainer">
               <Button
                 className="excelBtn"
-                onClick={() => exportExcelFile("All Institution")}
+                onClick={() => exportExcelFile("all_institutions")}
               >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />{" "}
                 <strong>Excel</strong>

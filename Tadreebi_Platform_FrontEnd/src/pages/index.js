@@ -35,7 +35,8 @@ import SupervisorsTable from "./Admin/SupervisorsTable/SupervisorsTable";
 
 //Imports from admin folder
 import SupervisorProfile from "./supervisor/SupervisorProfile/SupervisorProfile";
-
+import SupervisorStudentsApplications from "./supervisor/SupervisorStudentsApplications/SupervisorStudentsApplications";
+import SupervisorStudent from "./supervisor/SupervisorStudent/SupervisorStudent";
 //Export all pages
 export {
   Home,
@@ -66,4 +67,6 @@ export {
   InstitutionInfo,
   SupervisorsTable,
   Unauthorized,
+  SupervisorStudentsApplications,
+  SupervisorStudent,
 };

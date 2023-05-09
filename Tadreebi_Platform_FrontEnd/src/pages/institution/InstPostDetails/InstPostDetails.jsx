@@ -13,10 +13,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
-import TableFilterButtons from '../../../components/ui/TableFilterSelect/TableFilterSelect';
+import TableFilterButtons from "../../../components/ui/TableFilterSelect/TableFilterSelect";
 
 const InstPostDetails = () => {
-  const applicants_post = useLoaderData();
+  // const applicantsPost = useLoaderData();
+  const [applicantsPost, setApplicantPost] = useState(useLoaderData());
   const { id } = useParams();
 
   const [statusFilter, setStatusFilter] = useState(null);
@@ -95,7 +96,7 @@ const InstPostDetails = () => {
   return (
     <Suspense fallback={<Spinner />}>
       <Await
-        resolve={applicants_post?.applicantsPost}
+        resolve={applicantsPost?.applicantsPost}
         errorElement={<p>Error loading the data.</p>}
       >
         {(loadedData) => (
@@ -112,7 +113,7 @@ const InstPostDetails = () => {
               <Button
                 className="excelBtn"
                 onClick={() =>
-                  exportExcelFile("Post Applicants", id, loadedData.post.title)
+                  exportExcelFile("post_applicants", id, loadedData.post.title)
                 }
               >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />
@@ -121,7 +122,7 @@ const InstPostDetails = () => {
                 </span>
               </Button>
             </div>
-            <TableFilterButtons setStatusFilter={setStatusFilter}/>
+            <TableFilterButtons setStatusFilter={setStatusFilter} />
             <Table
               col={columns}
               data={formattedResponse(loadedData.applicants.data.data)}
