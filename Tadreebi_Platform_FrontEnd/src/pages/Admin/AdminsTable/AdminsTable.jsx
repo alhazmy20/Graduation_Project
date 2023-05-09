@@ -15,19 +15,10 @@ import { handlePaginationChange } from "../../../util/helpers";
 
 const AdminsTable = () => {
   const adminsData = useLoaderData();
-  const { fName } = adminsData;
-  console.log(fName);
 
-  const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  const filterData = (dataSource) => {
-    const filteredDataSource = statusFilter
-      ? dataSource?.filter((admin) => admin.status === statusFilter)
-      : dataSource;
-    return filteredDataSource;
-  };
 
   const columns = [
     {
@@ -77,10 +68,6 @@ const AdminsTable = () => {
     },
   ];
 
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-    console.log(status);
-  };
 
   return (
     <Suspense fallback={<Spinner />}>
@@ -98,33 +85,13 @@ const AdminsTable = () => {
                 </Link>
               </Button>
             </div>
-            <div className="filterTable">
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("")}
-              >
-                الكل
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("نشط")}
-              >
-                المشرفين النشطين
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("غير نشط")}
-              >
-                المشرفين الغير نشطين
-              </Button>
-            </div>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
             </p>
             <Table
               col={columns}
-              data={filterData(loadedData)}
+              data={loadedData}
               Size={pageSize}
               handleChange={(page, pageSize) =>
                 handlePaginationChange(
