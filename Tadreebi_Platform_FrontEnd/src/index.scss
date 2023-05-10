@@ -218,3 +218,39 @@ body {
       }
   }
 }
+
+.table-filter{
+  display: flex;
+  border-top: 1px solid $steelTeal;
+  border-bottom: 1px solid $steelTeal;
+  margin-bottom: 1rem;
+  background-color: $white;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+  @include breakpoint-down(small){
+    align-items: center;
+    margin: 0.75rem auto;
+    width: 95%;
+  }
+
+  .header {
+    margin-bottom: 1rem;
+  }
+
+  .rangeText {
+    color: #008374b2;
+    font-size: larger;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+}

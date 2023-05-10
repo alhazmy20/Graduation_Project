@@ -7,7 +7,7 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
-import TableFilterSelect from '../../../components/ui/TableFilterSelect/TableFilterSelect'
+import TableFilterSelect from "../../../components/ui/TableFilterSelect/TableFilterSelect";
 
 const Application = () => {
   const applicationsData = useLoaderData();
@@ -78,11 +78,11 @@ const Application = () => {
       >
         {(loadedData) => (
           <div className="tableContainer">
-            <h1 className="Header">طلبات التقديم</h1>
+            <h1 className="header">طلبات التقديم</h1>
             <TableFilterSelect setStatusFilter={setStatusFilter} />
 
             <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
+              عرض {currentRange[0]} إلى {currentRange[1]} من أصل
               {loadedData.length} سجل
             </p>
             <Table

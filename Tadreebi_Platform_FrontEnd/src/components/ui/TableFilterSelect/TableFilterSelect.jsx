@@ -43,13 +43,13 @@ const TableFilterButtons = ({ setStatusFilter, isSupervisor }) => {
   ];
 
   return (
-    <div className="table-filter">
-      <span>تصفية على حسب: </span>
+    <div className="table-filter-select">
       <Select
         options={options}
         className="filterSelect"
         defaultValue="الكل"
         onChange={(e) => handleStatusFilterChange(e)}
+        
       />
     </div>
   );

@@ -77,7 +77,7 @@ const InstPosts = () => {
       >
         {(loadedPosts) => (
           <div className="tableContainer">
-            <h1 className="Header">البرامج التدريبية</h1>
+            <h1 className="header">البرامج التدريبية</h1>
             <Link to="/institution/newPost">
               <Button className="add-btn">
                 إضافة برنامج تدريبي جديد

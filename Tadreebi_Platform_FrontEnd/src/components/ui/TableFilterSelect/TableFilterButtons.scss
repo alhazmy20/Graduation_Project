@@ -1,16 +1,7 @@
 @import "../../../index.scss";
 
-.table-filter {
-  display: flex;
-  border-top: 1px solid $steelTeal;
-  border-bottom: 1px solid $steelTeal;
-  margin-bottom: 1rem;
-  background-color: $white;
-  padding: 0.5rem;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  
+.table-filter-select {
+   
   span {
     font-weight: 500;
   }

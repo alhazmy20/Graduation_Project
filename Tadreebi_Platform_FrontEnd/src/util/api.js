@@ -152,7 +152,6 @@ export const getSingleStudent = async (id) => {
 export const getStudentApplications = async () => {
   try {
     const res = await axiosConfig().get(`api/applications`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;

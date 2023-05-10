@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import {
@@ -6,24 +6,40 @@ import {
   TableText,
 } from "../../../components/ui/Table/TableHelpers";
 import Table from "../../../components/ui/Table/Table";
-import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
+import { handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
 import TableFilterSelect from "../../../components/ui/TableFilterSelect/TableFilterSelect";
+import { Button, Input } from "antd";
+import "./SupervisorStudentsApplications.scss";
 
 const SupervisorStudentsApplications = () => {
   const applicants_post = useLoaderData();
 
-  const [status, setStatus] = useState(null);
-  const [applicantId, setApplicantId] = useState(null);
-
-  useEffect(() => {
-    setStatus(status);
-    setApplicantId(applicantId);
-  }, [status, applicantId]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchName, setSearchName] = useState("");
 
   const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
+
+  const handleFilterSearch = () => {
+    setIsSearch(true);
+
+    const filteredStudents = applicants_post.applications._data.filter(
+      (data) => {
+        const studentFullName = data.student.fullName ?? "";
+        const status = data.status;
+
+        const isNameMatch = studentFullName.includes(searchName);
+        const isStatusMatch = statusFilter ? status === statusFilter : true;
+
+        return isNameMatch && isStatusMatch;
+      }
+    );
+
+    setFilteredData(filteredStudents);
+  };
 
   const columns = [
     {
@@ -46,7 +62,7 @@ const SupervisorStudentsApplications = () => {
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`post/${row.id}`}>
+          <Link className="row-title" to={`post/${row.post_id}`}>
             {text}
           </Link>
         );
@@ -67,15 +83,7 @@ const SupervisorStudentsApplications = () => {
       dataIndex: "status",
       align: "center",
       render: (text, row) => {
-        setStatus(text);
-        return (
-          <TableText
-            status={status}
-            text={text}
-            id={row.applicant_id}
-            applicantId={applicantId}
-          />
-        );
+        return <TableText text={text} />;
       },
     },
     {
@@ -93,7 +101,6 @@ const SupervisorStudentsApplications = () => {
     },
   ];
 
-
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -102,15 +109,27 @@ const SupervisorStudentsApplications = () => {
       >
         {(loadedData) => (
           <div className="tableContainer">
-            <h1 className="Header">طلبات التقديم</h1>
-            <TableFilterSelect setStatusFilter={setStatusFilter} isSupervisor={true}/>
+            <h1 className="header">طلبات التقديم</h1>
+            <div className="table-filter">
+              <span>تصفية على حسب: </span>
+              <TableFilterSelect
+                setStatusFilter={setStatusFilter}
+                isSupervisor={true}
+              />
+              <Input
+                placeholder="البحث بإسم الطالب"
+                onChange={(e) => setSearchName(e.target.value)}
+              />
+              <Button onClick={handleFilterSearch}>Search</Button>
+            </div>
+
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData?.length} سجل
             </p>
             <Table
               col={columns}
-              data={dataFiltering(loadedData, statusFilter)}
+              data={isSearch ? filteredData : loadedData}
               filter={statusFilter}
               Size={pageSize}
               handleChange={(page, pageSize) =>
