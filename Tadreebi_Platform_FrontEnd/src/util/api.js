@@ -232,7 +232,30 @@ export const getAdminDashboardChart = async (year) => {
   }
 };
 
-export const useAdminDashboard = (endpoint, year) => {
+const getSupervisorCards = async () => {
+  try {
+    const res = await axiosConfig().get(`api/supervisors/cards`);
+    console.log(res.data.data);
+    return res.data.data;
+  } catch (err) {
+    const error = err.response.data;
+
+    throw { message: error.message, status: error.status };
+  }
+};
+
+export const getSupervisorChart = async (year) => {
+  try {
+    const res = await axiosConfig().get(`api/supervisors/chart?year=${year}`);
+    console.log(res.data.data);
+    return res.data.data;
+  } catch (err) {
+    const error = err.response.data;
+    throw { message: error.message, status: error.status };
+  }
+};
+
+export const useDashboard = (endpoint, role, year) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -242,9 +265,17 @@ export const useAdminDashboard = (endpoint, year) => {
       try {
         let data;
         if (endpoint === "cards") {
-          data = await getAdminDashboardCards();
+          if (role === "SuperAdmin") {
+            data = await getAdminDashboardCards();
+          } else if (role === "Supervisor") {
+            data = await getSupervisorCards();
+          }
         } else if (endpoint === "chart") {
-          data = await getAdminDashboardChart(year);
+          if (role === "SuperAdmin") {
+            data = await getAdminDashboardChart(year);
+          } else if (role === "Supervisor") {
+            data = await getSupervisorChart(year);
+          }
         }
         setData(data);
         setLoading(false);

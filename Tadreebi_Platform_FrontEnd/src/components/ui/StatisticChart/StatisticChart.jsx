@@ -3,13 +3,30 @@ import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import { Select, notification } from "antd";
 import "./StatisticChart.scss";
-import Spinner from "../../../../components/ui/Spinner/Spinner";
-import { useAdminDashboard } from "../../../../util/api";
-import { useYearState } from "../../../../util/helpers";
-
-const StatisticChart = ({ years, currentYear }) => {
-  const { data, loading, error } = useAdminDashboard("chart", years);
+import Spinner from "../Spinner/Spinner";
+import { useDashboard } from "../../../util/api";
+import { useYearState } from "../../../util/helpers";
+import { useAuth } from "../../../auth/useContext";
+const StatisticChart = ({ years, currentYear, lable }) => {
+  const auth = useAuth();
+  const isAdmin = auth?.user?.role;
+  const { data, loading, error } = useDashboard("chart", isAdmin, years);
   const { handleYearChange } = useYearState();
+  console.log(data);
+  const chartData =
+    isAdmin === "SuperAdmin"
+      ? data?.map(({ university, total_applications }) => ({
+          name: university,
+          value: total_applications,
+        }))
+      : [
+          { value: data?.applicationsApproved, name: "تم المواففة عليهم" },
+          { value: data?.applicationsRejected, name: "تم الرفض" },
+          {
+            value: data?.applicationsWaitingToBeApproved,
+            name: " انتظار الموافقة ",
+          },
+        ];
 
   if (loading) {
     return <Spinner />;
@@ -19,14 +36,9 @@ const StatisticChart = ({ years, currentYear }) => {
     return notification.error(error);
   }
 
-  const chartData = data.map(({ university, total_applications }) => ({
-    name: university,
-    value: total_applications,
-  }));
-
   const option = {
     title: {
-      text: "احصائيات بناء على الجامعات",
+      text: lable,
       subtext: "",
       left: "center",
     },

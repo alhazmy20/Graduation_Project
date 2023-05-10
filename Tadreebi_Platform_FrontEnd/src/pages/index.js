@@ -22,7 +22,7 @@ import Applications from "./student/Applications/Application";
 import StudentProfile from "./student/StudentProfile/StudentProfile";
 
 //Imports from admin folder
-import AdminHomePage from "./Admin/HomePage/ِAdminHomePage";
+import AdminHomePage from "./Admin/AdminHomePage/ِAdminHomePage";
 import AdminProfile from "./Admin/AdminProfile/AdminProfile";
 import StudentsTable from "./Admin/StudentsTable/StudentsTable";
 import InstitutionsTable from "./Admin/InstitutionsTable/InstitutionsTable";
@@ -37,6 +37,7 @@ import SupervisorsTable from "./Admin/SupervisorsTable/SupervisorsTable";
 import SupervisorProfile from "./supervisor/SupervisorProfile/SupervisorProfile";
 import SupervisorStudentsApplications from "./supervisor/SupervisorStudentsApplications/SupervisorStudentsApplications";
 import SupervisorStudent from "./supervisor/SupervisorStudent/SupervisorStudent";
+import SupervisorHomePage from "./supervisor/SupervisorHomePage/SupervisorHomePage";
 //Export all pages
 export {
   Home,
@@ -69,4 +70,5 @@ export {
   Unauthorized,
   SupervisorStudentsApplications,
   SupervisorStudent,
+  SupervisorHomePage,
 };

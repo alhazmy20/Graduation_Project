@@ -1,19 +1,18 @@
 import React from "react";
-import StatisticCard from "./components/StatisticCard";
+import StatisticCard from "../../../components/ui/StatisticCard/StatisticCard";
 import { Col, Row, notification } from "antd";
-import StatisticChart from "./components/StatisticChart";
-import StatisticTable from "./components/StatisticTable";
+import StatisticChart from "../../../components/ui/StatisticChart/StatisticChart";
+import StatisticTable from "../../../components/ui/StatisticTable/StatisticTable";
 
-import "./Home.scss";
+import "./ِAdminHomePage.scss";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 
-import { useAdminDashboard } from "../../../util/api";
+import { useDashboard } from "../../../util/api";
 import { useYearState } from "../../../util/helpers";
 
-const Home = () => {
+const SupervisorHomePage = () => {
   const { currentYear, years, selectedYear } = useYearState();
-
-  const { data, loading, error } = useAdminDashboard("cards");
+  const { data, loading, error } = useDashboard("cards", "SuperAdmin");
 
   if (loading) {
     return <Spinner />;
@@ -29,7 +28,6 @@ const Home = () => {
 
   return (
     <div className="AdminHomeContiner">
-
       <Col>
         <Row className="rowStyleStat" gutter={16}>
           <StatisticCard title="عدد المستخدمين" value={data?.total_users} />
@@ -73,7 +71,11 @@ const Home = () => {
       <Col>
         <Row gutter={20} className="AdmindateDisplay">
           <Col span={9}>
-            <StatisticChart years={years} currentYear={currentYear} />
+            <StatisticChart
+              lable={"احصائيات بناء على الجامعات"}
+              years={years}
+              currentYear={currentYear}
+            />
           </Col>
           <Col span={9}>
             <StatisticTable years={selectedYear} />
@@ -84,4 +86,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SupervisorHomePage;

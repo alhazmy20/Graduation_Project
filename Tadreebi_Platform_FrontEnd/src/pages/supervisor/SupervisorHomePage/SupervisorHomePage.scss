@@ -1,0 +1,17 @@
+@import "../../../index.scss";
+.SupervisorHomeContiner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  .AdmindateDisplay {
+    justify-content: center;
+
+
+  }
+
+  .rowStyleStat {
+    margin-top: 20px;
+    justify-content: center;
+  }
+}

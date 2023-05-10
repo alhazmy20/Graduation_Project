@@ -41,6 +41,7 @@ import {
   Unauthorized,
   SupervisorStudentsApplications,
   SupervisorStudent,
+  SupervisorHomePage,
 } from "../pages/index";
 
 import {
@@ -113,7 +114,7 @@ const studentRoutes = (
 const supervisorRoutes = (
   <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
     <Route path="supervisor" element={<SupervisorLayout />}>
-      <Route index element={<p>supervisor homepage</p>} />
+      <Route index element={<SupervisorHomePage />} />
       <Route
         path="manage-applications"
         element={<SupervisorStudentsApplications />}
@@ -124,7 +125,11 @@ const supervisorRoutes = (
         element={<TrainingOpportunity />}
         loader={singlePostLoader}
       />
-      <Route path="all-students" element={<SupervisorStudent />} loader={allStudentsLoader}/>
+      <Route
+        path="all-students"
+        element={<SupervisorStudent />}
+        loader={allStudentsLoader}
+      />
       <Route
         path="profile"
         element={<SupervisorProfile />}
