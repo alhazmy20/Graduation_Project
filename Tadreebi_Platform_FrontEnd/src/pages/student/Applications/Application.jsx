@@ -1,13 +1,12 @@
 import "./Application.scss";
 import { Suspense, useEffect, useState } from "react";
-import { Button } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import { TableText } from "../../../components/ui/Table/TableHelpers";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { dataFiltering, handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
-import TableFilterSelect from "../../../components/ui/TableFilterSelect/TableFilterSelect";
+import TableFilterSelect from "../../../components/ui/TableFilterSelect";
 
 const Application = () => {
   const applicationsData = useLoaderData();
@@ -77,30 +76,34 @@ const Application = () => {
         errorElement={<p>Error loading the data.</p>}
       >
         {(loadedData) => (
-          <div className="tableContainer">
-            <h1 className="header">طلبات التقديم</h1>
-            <TableFilterSelect setStatusFilter={setStatusFilter} />
-
-            <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل
-              {loadedData.length} سجل
-            </p>
-            <Table
-              col={columns}
-              data={dataFiltering(loadedData, statusFilter)}
-              filter={statusFilter}
-              Size={pageSize}
-              handleChange={(page, pageSize) =>
-                handlePaginationChange(
-                  page,
-                  pageSize,
-                  loadedData,
-                  setCurrentRange,
-                  setPageSize
-                )
-              }
-              emptyText="لا توجد بيانات"
-            />
+          <div className="studentApplications">
+            <div className="tableContainer">
+              <h1 className="header">طلبات التقديم</h1>
+              <div className="filter-container">
+                <span className="filter-text">تصفية على حسب</span>
+                <TableFilterSelect setStatusFilter={setStatusFilter} />
+              </div>
+              <p className="rangeText">
+                عرض {currentRange[0]} إلى {currentRange[1]} من أصل
+                {loadedData.length} سجل
+              </p>
+              <Table
+                col={columns}
+                data={dataFiltering(loadedData, statusFilter)}
+                filter={statusFilter}
+                Size={pageSize}
+                handleChange={(page, pageSize) =>
+                  handlePaginationChange(
+                    page,
+                    pageSize,
+                    loadedData,
+                    setCurrentRange,
+                    setPageSize
+                  )
+                }
+                emptyText="لا توجد بيانات"
+              />
+            </div>
           </div>
         )}
       </Await>

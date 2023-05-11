@@ -7,12 +7,11 @@ const UserInfo = () => {
   const auth = useAuth();
 
   let role = auth?.user?.role?.toLowerCase();
-  if(role === 'superadmin'){
-    role = 'admin'
+  if (role === "superadmin") {
+    role = "admin";
   }
   const items = [
-    auth.user?.role === "Student" &&
-    {
+    auth.user?.role === "Student" && {
       key: "1",
       label: <Link to="student/applications">طلباتي</Link>,
     },
@@ -40,6 +39,7 @@ const UserInfo = () => {
                 <img
                   className="userimg"
                   src={
+                    auth.user?.logo ||
                     "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"
                   }
                   alt=""

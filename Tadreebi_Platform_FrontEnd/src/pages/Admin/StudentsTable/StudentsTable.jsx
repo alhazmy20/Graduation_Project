@@ -1,14 +1,11 @@
 import "./StudentsTable.scss";
 import { Suspense, useState } from "react";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
-import {
-  AdminStudentTable,
-  Edit,
-} from "../../../components/ui/Table/TableHelpers";
+import { Edit } from "../../../components/ui/Table/TableHelpers";
 import { Await, useLoaderData } from "react-router-dom";
 import { exportExcelFile } from "../../../util/api";
 import DeleteModal from "../../../components/ui/DeleteModal/DeleteModal";
@@ -17,15 +14,18 @@ import { handlePaginationChange } from "../../../util/helpers";
 const StudentsTable = () => {
   const studentsData = useLoaderData();
 
-  const [statusFilter, setStatusFilter] = useState(null);
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [isSearch, setIsSearch] = useState(false);
 
-  const filterData = (dataSource) => {
-    const filteredDataSource = statusFilter
-      ? dataSource?.filter((student) => student.status === statusFilter)
-      : dataSource;
-    return filteredDataSource;
+  const handleStudentNameSearch = (e) => {
+    setIsSearch(true);
+    const searchName = e.target.value;
+    const filteredStudents = studentsData.students._data.filter((s) => {
+      return s.fullName.includes(searchName);
+    });
+    setFilteredData(filteredStudents);
   };
 
   const columns = [
@@ -68,10 +68,6 @@ const StudentsTable = () => {
     },
   ];
 
-  const handleStatusFilterChange = (status) => {
-    setStatusFilter(status);
-  };
-
   return (
     <Suspense fallback={<Spinner />}>
       <Await
@@ -89,25 +85,13 @@ const StudentsTable = () => {
                 <strong>Excel</strong>
               </Button>
             </div>
-            <div className="filterTable">
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("")}
-              >
-                الكل
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("نشط")}
-              >
-                الطلاب النشطين
-              </Button>
-              <Button
-                className="button-filter"
-                onClick={() => handleStatusFilterChange("غير نشط")}
-              >
-                الطلاب الغير نشطين
-              </Button>
+            <div className="filter-container">
+              <Input
+                className="nameInput"
+                placeholder="البحث بإسم الطالب"
+                onChange={handleStudentNameSearch}
+                style={{ margin: "0 10px", maxWidth: "500px" }}
+              />
             </div>
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
@@ -116,7 +100,7 @@ const StudentsTable = () => {
 
             <Table
               col={columns}
-              data={filterData(loadedData)}
+              data={isSearch ? filteredData : loadedData}
               Size={pageSize}
               handleChange={(page, pageSize) =>
                 handlePaginationChange(

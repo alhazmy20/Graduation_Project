@@ -1,5 +1,5 @@
-import "./InstPosts.scss";
 import { Suspense, useState } from "react";
+import "./InstPosts.scss";
 import { Button } from "antd";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import Table from "../../../components/ui/Table/Table";
@@ -79,9 +79,9 @@ const InstPosts = () => {
           <div className="tableContainer">
             <h1 className="header">البرامج التدريبية</h1>
             <Link to="/institution/newPost">
-              <Button className="add-btn">
-                إضافة برنامج تدريبي جديد
+              <Button className="addBtn">
                 <FontAwesomeIcon icon={faCirclePlus} />
+                إضافة برنامج تدريبي جديد
               </Button>
             </Link>
             <p className="rangeText">

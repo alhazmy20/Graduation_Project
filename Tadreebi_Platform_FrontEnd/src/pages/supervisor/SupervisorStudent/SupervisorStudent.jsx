@@ -9,16 +9,16 @@ import TableUI from "../../../components/ui/Table/Table";
 import { handlePaginationChange } from "../../../util/helpers";
 
 const SupervisorStudent = () => {
-  const studentData = useLoaderData();
+  const studentsData = useLoaderData();
   const [filteredData, setFilteredData] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
-  const handleNameSearch = (e) => {
+  const handleStudentNameSearch = (e) => {
     setIsSearch(true);
     const searchName = e.target.value;
-    const filteredStudents = studentData.students._data.filter((s) => {
+    const filteredStudents = studentsData.students._data.filter((s) => {
       return s.fullName.includes(searchName);
     });
     setFilteredData(filteredStudents);
@@ -51,7 +51,7 @@ const SupervisorStudent = () => {
     <div className="supervisor-student">
       <Suspense fallback={<Spinner />}>
         <Await
-          resolve={studentData?.students}
+          resolve={studentsData?.students}
           errorElement={<p>Error loading the data.</p>}
         >
           {(loadedData) => (
@@ -70,12 +70,12 @@ const SupervisorStudent = () => {
                 {loadedData.length} سجل
               </p>
 
-              <div className="table-filter">
+              <div className="filter-container">
                 <Input
                   className="nameInput"
                   placeholder="البحث بإسم الطالب"
-                  onChange={handleNameSearch}
-                  style={{margin:'10px'}}
+                  onChange={handleStudentNameSearch}
+                  style={{ margin: "0 10px", maxWidth: "500px" }}
                 />
               </div>
 

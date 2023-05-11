@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { useState } from "react";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import Table from "../../../components/ui/Table/Table";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,9 +12,21 @@ import { handlePaginationChange } from "../../../util/helpers";
 
 const NewsTable = () => {
   const newsData = useLoaderData();
+  console.log(newsData);
 
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [isSearch, setIsSearch] = useState(false);
+
+  const handleNewsSearch = (e) => {
+    setIsSearch(true);
+    const searchTitle = e.target.value;
+    const filteredStudents = newsData.news._data.filter((n) => {
+      return n.title.includes(searchTitle);
+    });
+    setFilteredData(filteredStudents);
+  };
 
   const columns = [
     {
@@ -68,13 +80,22 @@ const NewsTable = () => {
               </Button>
             </div>
 
+            <div className="filter-container">
+              <Input
+                className="nameInput"
+                placeholder="البحث بعنوان الخبر"
+                onChange={handleNewsSearch}
+                style={{ margin: "0 10px", maxWidth: "500px" }}
+              />
+            </div>
+
             <p className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
             </p>
             <Table
               col={columns}
-              data={loadedData}
+              data={isSearch ? filteredData : loadedData}
               Size={pageSize}
               handleChange={(page, pageSize) =>
                 handlePaginationChange(

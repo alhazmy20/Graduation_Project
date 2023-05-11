@@ -94,7 +94,7 @@ const InstitutionsTable = () => {
                 <strong>Excel</strong>
               </Button>
             </div>
-            <div className="filterTable">
+            <div className="filter-container">
               <Button
                 className="button-filter"
                 onClick={() => setStatusFilter("")}
