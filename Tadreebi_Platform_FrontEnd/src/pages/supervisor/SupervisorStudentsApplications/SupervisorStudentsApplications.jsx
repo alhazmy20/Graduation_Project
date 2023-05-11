@@ -9,7 +9,7 @@ import Table from "../../../components/ui/Table/Table";
 import { handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
 import "./SupervisorStudentsApplications.scss";
-import FilterSearch from "../../../components/ui/FilterSearch/FilterSearch";
+import FilterSearch from "../../../components/ui/FilterSearch";
 
 const SupervisorStudentsApplications = () => {
   const applicants_post = useLoaderData();

@@ -81,7 +81,7 @@ const Application = () => {
               <h1 className="header">طلبات التقديم</h1>
               <div className="filter-container">
                 <span className="filter-text">تصفية على حسب</span>
-                <TableFilterSelect setStatusFilter={setStatusFilter} />
+                <TableFilterSelect setStatusFilter={setStatusFilter} className='filter-select'/>
               </div>
               <p className="rangeText">
                 عرض {currentRange[0]} إلى {currentRange[1]} من أصل

@@ -1,7 +1,6 @@
 import { Button, Input } from "antd";
 import React from "react";
-import TableFilterSelect from "../TableFilterSelect";
-import "./FilterSearch.scss";
+import TableFilterSelect from "./TableFilterSelect";
 
 const FilterSearch = ({
   setStatusFilter,
@@ -10,7 +9,7 @@ const FilterSearch = ({
   isSupervisor,
 }) => {
   return (
-    <div className='filter-container'>
+    <div className="filter-container">
       <span className="filter-text">تصفية على حسب: </span>
 
       <Input
@@ -20,6 +19,7 @@ const FilterSearch = ({
       />
       <TableFilterSelect
         setStatusFilter={setStatusFilter}
+        isSupervisor={isSupervisor}
         className="filter-select"
       />
 

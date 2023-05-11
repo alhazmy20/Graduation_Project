@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
-import FilterSearch from "../../../components/ui/FilterSearch/FilterSearch";
+import FilterSearch from "../../../components/ui/FilterSearch";
 
 const InstPostDetails = () => {
   const applicantsPost = useLoaderData();
@@ -149,11 +149,11 @@ const InstPostDetails = () => {
                 </span>
               </Button>
             </div>
-              <FilterSearch
-                setSearchName={setSearchName}
-                setStatusFilter={setStatusFilter}
-                handleFilterSearch={handleFilterSearch}
-              />
+            <FilterSearch
+              setSearchName={setSearchName}
+              setStatusFilter={setStatusFilter}
+              handleFilterSearch={handleFilterSearch}
+            />
             <Table
               col={columns}
               data={
