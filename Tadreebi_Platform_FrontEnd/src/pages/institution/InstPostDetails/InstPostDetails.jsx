@@ -13,30 +13,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
-import TableFilterButtons from "../../../components/ui/TableFilterSelect/TableFilterSelect";
+import FilterSearch from "../../../components/ui/FilterSearch";
 
 const InstPostDetails = () => {
-  // const applicantsPost = useLoaderData();
-  const [applicantsPost, setApplicantPost] = useState(useLoaderData());
+  const applicantsPost = useLoaderData();
   const { id } = useParams();
 
   const [statusFilter, setStatusFilter] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchName, setSearchName] = useState("");
+
+  const handleFilterSearch = () => {
+    setIsSearch(true);
+
+    const filteredStudents =
+      applicantsPost.applicantsPost._data.applicants.data.data.filter(
+        (data) => {
+          const studentFullName = data.student.fullName ?? "";
+          const status = data.status;
+
+          const isNameMatch = studentFullName.includes(searchName);
+          const isStatusMatch = statusFilter ? status === statusFilter : true;
+
+          return isNameMatch && isStatusMatch;
+        }
+      );
+
+    const filterdData = formattedResponse(filteredStudents);
+
+    setFilteredData(filterdData);
+  };
+
+  console.log(filteredData);
 
   const formattedResponse = (data) => {
-    const applicantData = data.map((item) => ({
+    const applicantData = data?.map((item) => ({
       applicant_id: item?.id,
       applicant_status: item?.status,
       created_at: item?.created_at,
       ...item?.student,
     }));
 
-    const filteredDataSource = statusFilter
-      ? applicantData?.filter(
-          (application) => application?.applicant_status === statusFilter
-        )
-      : applicantData;
-
-    return filteredDataSource;
+    return applicantData;
   };
 
   const columns = [
@@ -61,8 +80,8 @@ const InstPostDetails = () => {
         return <span>{`${row?.GPA}/${row?.GPA_Type}`}</span>;
       },
       sorter: (a, b) => {
-        const gpaA = a?.GPA_Type === 5 ?  a?.GPA : ((a?.GPA * 5)/4);
-        const gpaB = b?.GPA_Type === 5 ?  b?.GPA : ((b?.GPA * 5)/4);
+        const gpaA = a?.GPA_Type === 5 ? a?.GPA : (a?.GPA * 5) / 4;
+        const gpaB = b?.GPA_Type === 5 ? b?.GPA : (b?.GPA * 5) / 4;
         return gpaA - gpaB;
       },
     },
@@ -117,7 +136,11 @@ const InstPostDetails = () => {
               <Button
                 className="excelBtn"
                 onClick={() =>
-                  exportExcelFile("post_applicants", id, loadedData?.post?.title)
+                  exportExcelFile(
+                    "post_applicants",
+                    id,
+                    loadedData?.post?.title
+                  )
                 }
               >
                 <FontAwesomeIcon className="icon" icon={faFileCsv} />
@@ -126,10 +149,18 @@ const InstPostDetails = () => {
                 </span>
               </Button>
             </div>
-            <TableFilterButtons setStatusFilter={setStatusFilter} />
+            <FilterSearch
+              setSearchName={setSearchName}
+              setStatusFilter={setStatusFilter}
+              handleFilterSearch={handleFilterSearch}
+            />
             <Table
               col={columns}
-              data={formattedResponse(loadedData?.applicants?.data?.data)}
+              data={
+                isSearch
+                  ? filteredData
+                  : formattedResponse(loadedData?.applicants?.data?.data)
+              }
               emptyText="لا يوجد اي متقدمين حاليا"
             />
           </div>

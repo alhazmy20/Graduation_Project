@@ -13,7 +13,7 @@ import InstitutionInfo from "./general/institutionInfo/InstitutionInfo";
 
 // Imports from institution folder
 import InstProfile from "./institution/InstProfile/InstProfile";
-import InstPosts from "./institution/InstApplications/InstPosts";
+import InstPosts from "./institution/InstitutionPosts/InstPosts";
 import InstPostDetails from "./institution/InstPostDetails/InstPostDetails";
 import InstPostForm from "./institution/instPostForm/InstPostForm";
 

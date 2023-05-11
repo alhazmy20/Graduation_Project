@@ -1,8 +1,7 @@
 import React from "react";
-import "./TableFilterButtons.scss";
 import { Select } from "antd";
 
-const TableFilterButtons = ({ setStatusFilter, isSupervisor }) => {
+const TableFilterButtons = ({ setStatusFilter, isSupervisor, ...others }) => {
   const handleStatusFilterChange = (status) => {
     if (status === "الكل") {
       status = "";
@@ -46,10 +45,9 @@ const TableFilterButtons = ({ setStatusFilter, isSupervisor }) => {
     <div className="table-filter-select">
       <Select
         options={options}
-        className="filterSelect"
         defaultValue="الكل"
         onChange={(e) => handleStatusFilterChange(e)}
-        
+        {...others}
       />
     </div>
   );

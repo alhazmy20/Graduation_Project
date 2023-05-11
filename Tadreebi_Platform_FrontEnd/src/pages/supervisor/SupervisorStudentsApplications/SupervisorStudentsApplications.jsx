@@ -8,9 +8,8 @@ import {
 import Table from "../../../components/ui/Table/Table";
 import { handlePaginationChange } from "../../../util/helpers";
 import StudentAcceptProcedure from "../../institution/InstPostDetails/components/StudentAcceptProcedure";
-import TableFilterSelect from "../../../components/ui/TableFilterSelect/TableFilterSelect";
-import { Button, Input } from "antd";
 import "./SupervisorStudentsApplications.scss";
+import FilterSearch from "../../../components/ui/FilterSearch";
 
 const SupervisorStudentsApplications = () => {
   const applicants_post = useLoaderData();
@@ -108,41 +107,37 @@ const SupervisorStudentsApplications = () => {
         errorElement={<p>Error loading</p>}
       >
         {(loadedData) => (
-          <div className="tableContainer">
-            <h1 className="header">طلبات التقديم</h1>
-            <div className="table-filter">
-              <span>تصفية على حسب: </span>
-              <TableFilterSelect
+          <div className="supervisor-student-app">
+            <div className="tableContainer">
+              <h1 className="header">طلبات التقديم</h1>
+              <FilterSearch
+                setSearchName={setSearchName}
                 setStatusFilter={setStatusFilter}
                 isSupervisor={true}
+                handleFilterSearch={handleFilterSearch}
               />
-              <Input
-                placeholder="البحث بإسم الطالب"
-                onChange={(e) => setSearchName(e.target.value)}
-              />
-              <Button onClick={handleFilterSearch}>Search</Button>
-            </div>
 
-            <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
-              {loadedData?.length} سجل
-            </p>
-            <Table
-              col={columns}
-              data={isSearch ? filteredData : loadedData}
-              filter={statusFilter}
-              Size={pageSize}
-              handleChange={(page, pageSize) =>
-                handlePaginationChange(
-                  page,
-                  pageSize,
-                  loadedData,
-                  setCurrentRange,
-                  setPageSize
-                )
-              }
-              emptyText="لا توجد بيانات"
-            />
+              <p className="rangeText">
+                عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
+                {loadedData?.length} سجل
+              </p>
+              <Table
+                col={columns}
+                data={isSearch ? filteredData : loadedData}
+                filter={statusFilter}
+                Size={pageSize}
+                handleChange={(page, pageSize) =>
+                  handlePaginationChange(
+                    page,
+                    pageSize,
+                    loadedData,
+                    setCurrentRange,
+                    setPageSize
+                  )
+                }
+                emptyText="لا توجد بيانات"
+              />
+            </div>
           </div>
         )}
       </Await>

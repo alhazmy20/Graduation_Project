@@ -84,7 +84,7 @@ const PostsTable = () => {
         {(loadedData) => (
           <div className="tableContainer">
             <div className="excelContainer"></div>
-            <div className="filterTable">
+            <div className="filter-container">
               <Button
                 className="button-filter"
                 onClick={() => handleStatusFilterChange("")}
