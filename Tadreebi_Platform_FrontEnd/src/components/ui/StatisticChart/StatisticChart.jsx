@@ -20,12 +20,10 @@ const StatisticChart = ({ years, currentYear, lable }) => {
         value: totalApplications,
       }))
       : [
-        { value: data?.applicationsApproved, name: "تم المواففة عليهم" },
         { value: data?.applicationsRejected, name: "تم الرفض" },
-        {
-          value: data?.applicationsWaitingToBeApproved,
-          name: " بإنتظار الموافقة ",
-        },
+        { value: data?.applicationsApproved, name: "تم المواففة عليهم" },
+        { value: data?.applicationsWaitingToBeApproved, name: " بإنتظار الموافقة ", },
+
       ];
 
   if (loading) {
@@ -39,29 +37,46 @@ const StatisticChart = ({ years, currentYear, lable }) => {
   const option = {
     title: {
       text: lable,
-      subtext: "",
       left: "center",
     },
     tooltip: {
-      trigger: "item",
+      trigger:"item"
     },
-    legend: {
-      orient: "horizontal",
-      bottom: "bottom",
+    xAxis: {
+      data: chartData.map((item) => item.name),
+      axisLabel: {
+        fontSize: 17,
+      },
     },
+    yAxis: [{
+      type: "value",
+      interval: 10
+    }],
     series: [
       {
-        name: "Access From",
-        type: "pie",
-        radius: "50%",
-        data: chartData,
+        type: "bar",
+        data: [
+          {
+            value: chartData[0].value,
+            itemStyle: { color: '#E06666' }
+          },
+          {
+            value: chartData[1].value,
+            itemStyle: { color: '#93C47D' }
+          },
+          {
+            value: chartData[2].value,
+            itemStyle: { color: '#F6B26B' }
+          }
+        ],
+        showBackground: true,
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
             shadowColor: "rgba(0, 0, 0, 0.5)",
           },
-        },
+        }
       },
     ],
   };
@@ -93,5 +108,4 @@ const StatisticChart = ({ years, currentYear, lable }) => {
     </div>
   );
 };
-
 export default StatisticChart;
