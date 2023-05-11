@@ -29,17 +29,22 @@ const StatisticTable = ({ years }) => {
     },
     {
       title: "الطلاب",
-      dataIndex: "total_students",
+      dataIndex: "totalStudents",
       align: "center",
     },
     {
       title: "عدد التقديمات",
-      dataIndex: "total_applications",
+      dataIndex: "totalApplications",
       align: "center",
     },
   ];
 
   const columnsSuperVisor = [
+    {
+      title: " بإنتظار الموافقة",
+      dataIndex: "applicationsWaitingToBeApproved",
+      align: "center",
+    },
     {
       title: "تم المواففة عليهم",
       dataIndex: "applicationsApproved",
@@ -48,11 +53,6 @@ const StatisticTable = ({ years }) => {
     {
       title: "تم الرفض",
       dataIndex: "applicationsRejected",
-      align: "center",
-    },
-    {
-      title: " انتظار الموافقة ",
-      dataIndex: "applicationsWaitingToBeApproved",
       align: "center",
     },
   ];

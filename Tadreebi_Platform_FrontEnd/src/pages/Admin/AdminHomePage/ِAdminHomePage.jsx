@@ -30,40 +30,40 @@ const SupervisorHomePage = () => {
     <div className="AdminHomeContiner">
       <Col>
         <Row className="rowStyleStat" gutter={16}>
-          <StatisticCard title="عدد المستخدمين" value={data?.total_users} />
+          <StatisticCard title="عدد المستخدمين" value={data?.totalUsers} />
           <StatisticCard
             title="عدد الطلاب الجدد"
-            value={data?.new_students.current_week_count}
+            value={data?.newStudents.currentWeekCount}
             lable={"طالب"}
-            indicators={data?.new_students.percentage_difference}
+            indicators={data?.newStudents.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
           <StatisticCard
-            title="عدد تقديم الطلاب"
-            value={data?.new_applications.current_week_count}
-            lable={"طلب"}
-            indicators={data?.new_applications.percentage_difference}
+            title="عدد المشرفيين الجامعيين الجدد"
+            value={data?.newSupervisors.currentWeekCount}
+            lable={"مشرف جامعي"}
+            indicators={data?.newSupervisors.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
         </Row>
         <Row gutter={16} className="rowStyleStat">
           <StatisticCard
             title="عدد المنشئات الجديدة"
-            value={data?.new_institutions.current_week_count}
+            value={data?.newInstitutions.currentWeekCount}
             lable={"منشأة"}
-            indicators={data?.new_institutions.percentage_difference}
+            indicators={data?.newInstitutions.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
           <StatisticCard
             title="عدد المنشئات بإنتظار التفعيل "
-            value={data?.unactive_institutions}
+            value={data?.unactiveInstitutions}
             lable={"منشأة"}
           />
           <StatisticCard
             title="عدد الفرص التدريبية الجديدة "
-            value={data?.new_posts.current_week_count}
+            value={data?.newPosts.currentWeekCount}
             lable={"فرصة تدريبية"}
-            indicators={data?.new_posts.percentage_difference}
+            indicators={data?.newPosts.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
         </Row>

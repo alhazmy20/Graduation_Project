@@ -15,18 +15,18 @@ const StatisticChart = ({ years, currentYear, lable }) => {
   console.log(data);
   const chartData =
     isAdmin === "SuperAdmin"
-      ? data?.map(({ university, total_applications }) => ({
-          name: university,
-          value: total_applications,
-        }))
+      ? data?.map(({ university, totalApplications }) => ({
+        name: university,
+        value: totalApplications,
+      }))
       : [
-          { value: data?.applicationsApproved, name: "تم المواففة عليهم" },
-          { value: data?.applicationsRejected, name: "تم الرفض" },
-          {
-            value: data?.applicationsWaitingToBeApproved,
-            name: " انتظار الموافقة ",
-          },
-        ];
+        { value: data?.applicationsApproved, name: "تم المواففة عليهم" },
+        { value: data?.applicationsRejected, name: "تم الرفض" },
+        {
+          value: data?.applicationsWaitingToBeApproved,
+          name: " بإنتظار الموافقة ",
+        },
+      ];
 
   if (loading) {
     return <Spinner />;
