@@ -34,9 +34,9 @@ const SupervisorHomePage = () => {
     },
   ];
   const cardsData = [
-    { value: data?.cards?.totalStudents, name: "تم المواففة عليهم" },
-    { value: data?.cards?.maleStudents, name: "تم الرفض" },
-    { value: data?.cards?.femaleStudents, name: " بإنتظار الموافقة " },
+    { value: data?.cards?.totalStudents, name: "عدد الطلاب و الطالبات" },
+    { value: data?.cards?.maleStudents, name: "عدد الطلاب" },
+    { value: data?.cards?.femaleStudents, name: " عدد الطالبات " },
   ];
 
   return (
