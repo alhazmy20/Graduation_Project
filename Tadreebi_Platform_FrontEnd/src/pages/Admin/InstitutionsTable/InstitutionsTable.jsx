@@ -20,12 +20,17 @@ const InstitutionsTable = () => {
   const [currentRange, setCurrentRange] = useState([1, pageSize]);
 
   const filterData = (dataSource) => {
-    const filteredDataSource = statusFilter
-      ? dataSource?.filter(
-          (institution) => institution.isActive === statusFilter
-        )
-      : dataSource;
-
+    let filteredDataSource = dataSource;
+    if (statusFilter !== null) {
+      filteredDataSource = dataSource.filter(
+        (institution) => {
+          if (statusFilter === "") {
+            return true; // return all records when statusFilter is empty
+          }
+          return institution.isActive === statusFilter;
+        }
+      );
+    }
     return filteredDataSource;
   };
 
