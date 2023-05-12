@@ -54,7 +54,7 @@ const SupervisorsTable = () => {
               endPoint_2={"manage-supervisors"}
             />
             <DeleteModal
-              name={record.department}
+              name={record.email}
               id={record.id}
               endpoint="supervisors"
               deleteType="مشرف الجامعة"

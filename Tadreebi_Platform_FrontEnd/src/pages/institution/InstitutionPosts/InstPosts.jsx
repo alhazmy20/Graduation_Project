@@ -85,7 +85,7 @@ const InstPosts = () => {
               </Button>
             </Link>
             <p className="rangeText">
-              عرض {currentRange[0]} إلى {currentRange[1]} من أصل
+            عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedPosts.length} سجل
             </p>
             <Table
