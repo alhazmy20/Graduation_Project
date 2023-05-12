@@ -1,73 +1,88 @@
 import React from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
-import { Select, notification } from "antd";
+import { Select } from "antd";
 import "./StatisticChart.scss";
-import Spinner from "../Spinner/Spinner";
-import { useDashboard } from "../../../util/api";
 import { useYearState } from "../../../util/helpers";
-import { useAuth } from "../../../auth/useContext";
-const StatisticChart = ({ years, currentYear, lable }) => {
-  const auth = useAuth();
-  const isAdmin = auth?.user?.role;
-  const { data, loading, error } = useDashboard("chart", isAdmin, years);
+
+const StatisticChart = ({ years, currentYear, lable, setData, type }) => {
   const { handleYearChange } = useYearState();
-  console.log(data);
-  const chartData =
-    isAdmin === "SuperAdmin"
-      ? data?.map(({ university, totalApplications }) => ({
-        name: university,
-        value: totalApplications,
-      }))
-      : [
-        { value: data?.applicationsRejected, name: "تم الرفض" },
-        { value: data?.applicationsApproved, name: "تم المواففة عليهم" },
-        { value: data?.applicationsWaitingToBeApproved, name: " بإنتظار الموافقة ", },
 
-      ];
+  const pie = {
+    title: {
+      text: lable,
+      subtext: "",
+      left: "center",
+      textStyle: {
+        fontSize: 24, // Set the font size to 24
+      },
+    },
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      orient: "horizontal",
+      bottom: "bottom",
+      textStyle: {
+        fontSize: 16, // Set the font size to 16
+      },
+    },
 
-  if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return notification.error(error);
-  }
-
-  const option = {
+    series: [
+      {
+        name: "Access From",
+        type: type,
+        radius: "50%",
+        data: setData,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  };
+  const bar = {
     title: {
       text: lable,
       left: "center",
+      textStyle: {
+        fontSize: 24, // Set the font size to 24
+      },
     },
     tooltip: {
-      trigger:"item"
+      trigger: "item",
     },
     xAxis: {
-      data: chartData.map((item) => item.name),
+      data: setData.map((item) => item.name),
       axisLabel: {
         fontSize: 17,
       },
     },
-    yAxis: [{
-      type: "value",
-      interval: 10
-    }],
+    yAxis: [
+      {
+        type: "value",
+        interval: 10,
+      },
+    ],
     series: [
       {
         type: "bar",
         data: [
           {
-            value: chartData[0].value,
-            itemStyle: { color: '#E06666' }
+            value: setData[0]?.value,
+            itemStyle: { color: "#E06666" },
           },
           {
-            value: chartData[1].value,
-            itemStyle: { color: '#93C47D' }
+            value: setData[1]?.value,
+            itemStyle: { color: "#93C47D" },
           },
           {
-            value: chartData[2].value,
-            itemStyle: { color: '#F6B26B' }
-          }
+            value: setData[2]?.value,
+            itemStyle: { color: "#F6B26B" },
+          },
         ],
         showBackground: true,
         emphasis: {
@@ -76,11 +91,10 @@ const StatisticChart = ({ years, currentYear, lable }) => {
             shadowOffsetX: 0,
             shadowColor: "rgba(0, 0, 0, 0.5)",
           },
-        }
+        },
       },
     ],
   };
-
   return (
     <div className="ChartConteinerfilter">
       <div>
@@ -99,7 +113,7 @@ const StatisticChart = ({ years, currentYear, lable }) => {
       </div>
 
       <ReactECharts
-        option={option}
+        option={type === "pie" ? pie : bar}
         echarts={echarts}
         notMerge={true}
         lazyUpdate={true}
@@ -108,4 +122,5 @@ const StatisticChart = ({ years, currentYear, lable }) => {
     </div>
   );
 };
+
 export default StatisticChart;

@@ -12,7 +12,7 @@ import { useYearState } from "../../../util/helpers";
 
 const SupervisorHomePage = () => {
   const { currentYear, years, selectedYear } = useYearState();
-  const { data, loading, error } = useDashboard("cards", "SuperAdmin");
+  const { data, loading, error } = useDashboard("SuperAdmin", years);
 
   if (loading) {
     return <Spinner />;
@@ -25,45 +25,52 @@ const SupervisorHomePage = () => {
   if (!data) {
     return <Spinner />;
   }
+  const chartData = data?.chart?.map(({ university, totalApplications }) => ({
+    name: university,
+    value: totalApplications,
+  }));
 
   return (
     <div className="AdminHomeContiner">
       <Col>
         <Row className="rowStyleStat" gutter={16}>
-          <StatisticCard title="عدد المستخدمين" value={data?.totalUsers} />
+          <StatisticCard
+            title="عدد المستخدمين"
+            value={data?.cards?.totalUsers}
+          />
           <StatisticCard
             title="عدد الطلاب الجدد"
-            value={data?.newStudents?.currentWeekCount}
+            value={data?.cards?.newStudents?.currentWeekCount}
             lable={"طالب"}
-            indicators={data?.newStudents?.percentageDifference}
+            indicators={data?.cards?.newStudents?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
           <StatisticCard
             title="عدد المشرفيين الجامعيين الجدد"
-            value={data?.newSupervisors?.currentWeekCount}
+            value={data?.cards?.newSupervisors?.currentWeekCount}
             lable={"مشرف جامعي"}
-            indicators={data?.newSupervisors?.percentageDifference}
+            indicators={data?.cards?.newSupervisors?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
         </Row>
         <Row gutter={16} className="rowStyleStat">
           <StatisticCard
             title="عدد المنشئات الجديدة"
-            value={data?.newInstitutions?.currentWeekCount}
+            value={data?.cards?.newInstitutions?.currentWeekCount}
             lable={"منشأة"}
-            indicators={data?.newInstitutions?.percentageDifference}
+            indicators={data?.cards?.newInstitutions?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
           <StatisticCard
             title="عدد المنشئات بإنتظار التفعيل "
-            value={data?.unactiveInstitutions}
+            value={data?.cards?.unactiveInstitutions}
             lable={"منشأة"}
           />
           <StatisticCard
             title="عدد الفرص التدريبية الجديدة "
-            value={data?.newPosts?.currentWeekCount}
+            value={data?.cards?.newPosts?.currentWeekCount}
             lable={"فرصة تدريبية"}
-            indicators={data?.newPosts?.percentageDifference}
+            indicators={data?.cards?.newPosts?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
         </Row>
@@ -75,6 +82,8 @@ const SupervisorHomePage = () => {
               lable={"احصائيات بناء على الجامعات"}
               years={years}
               currentYear={currentYear}
+              setData={chartData}
+              type={"pie"}
             />
           </Col>
           <Col span={9}>

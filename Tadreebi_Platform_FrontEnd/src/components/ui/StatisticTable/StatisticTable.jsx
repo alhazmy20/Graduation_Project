@@ -7,8 +7,8 @@ import { useAuth } from "../../../auth/useContext";
 const StatisticTable = ({ years }) => {
   const auth = useAuth();
   const isAdmin = auth.user?.role;
-  const { data, loading, error } = useDashboard("chart", isAdmin, years);
-  console.log(data);
+  const { data, loading, error } = useDashboard(isAdmin, years);
+
   if (loading) {
     return <Spinner />;
   }
@@ -39,31 +39,25 @@ const StatisticTable = ({ years }) => {
     },
   ];
 
-  const columnsSuperVisor = [
-    {
-      title: " بإنتظار الموافقة",
-      dataIndex: "applicationsWaitingToBeApproved",
-      align: "center",
-    },
-    {
-      title: "تم المواففة عليهم",
-      dataIndex: "applicationsApproved",
-      align: "center",
-    },
-    {
-      title: "تم الرفض",
-      dataIndex: "applicationsRejected",
-      align: "center",
-    },
-  ];
+  // const columnsSuperVisor = [
+  //   {
+  //     title: " بإنتظار الموافقة",
+  //     dataIndex: "applicationsWaitingToBeApproved",
+  //     align: "center",
+  //   },
+  //   {
+  //     title: "تم المواففة عليهم",
+  //     dataIndex: "applicationsApproved",
+  //     align: "center",
+  //   },
+  //   {
+  //     title: "تم الرفض",
+  //     dataIndex: "applicationsRejected",
+  //     align: "center",
+  //   },
+  // ];
 
-  return (
-    <Table
-      data={isAdmin === "Supervisor" ? [data] : data}
-      col={isAdmin === "Supervisor" ? columnsSuperVisor : columnAdmin}
-      Size={4}
-    />
-  );
+  return <Table data={data?.chart} col={columnAdmin} Size={4} />;
 };
 
 export default StatisticTable;

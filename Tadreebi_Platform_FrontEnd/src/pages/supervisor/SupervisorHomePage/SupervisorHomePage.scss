@@ -1,13 +1,14 @@
 @import "../../../index.scss";
 .SupervisorHomeContiner {
   width: 100%;
+
   display: flex;
+  justify-content: center;
+
   flex-direction: column;
   gap: 50px;
-  .AdmindateDisplay {
+  .SupervisordateDisplay {
     justify-content: center;
-
-
   }
 
   .rowStyleStat {

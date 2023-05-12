@@ -210,7 +210,7 @@ export const exportExcelFile = async (
 
 //---------------------------------------------------------------------------
 
-export const getAdminDashboardCards = async () => {
+ const getAdminDashboardCards = async () => {
   try {
     const res = await axiosConfig().get(`api/dashboard/cards`);
     console.log(res.data.data);
@@ -222,7 +222,7 @@ export const getAdminDashboardCards = async () => {
   }
 };
 
-export const getAdminDashboardChart = async (year) => {
+ const getAdminDashboardChart = async (year) => {
   try {
     const res = await axiosConfig().get(`api/dashboard/chart?year=${year}`);
     return res.data.data;
@@ -232,10 +232,10 @@ export const getAdminDashboardChart = async (year) => {
   }
 };
 
-const getSupervisorCards = async () => {
+ const getSupervisorCards = async () => {
   try {
     const res = await axiosConfig().get(`api/supervisors/cards`);
-    console.log(res.data.data);
+  
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -247,7 +247,7 @@ const getSupervisorCards = async () => {
 export const getSupervisorChart = async (year) => {
   try {
     const res = await axiosConfig().get(`api/supervisors/chart?year=${year}`);
-    console.log(res.data.data);
+   
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -255,7 +255,10 @@ export const getSupervisorChart = async (year) => {
   }
 };
 
-export const useDashboard = (endpoint, role, year) => {
+
+
+
+export const useDashboard = (role, year) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -263,21 +266,11 @@ export const useDashboard = (endpoint, role, year) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let data;
-        if (endpoint === "cards") {
-          if (role === "SuperAdmin") {
-            data = await getAdminDashboardCards();
-          } else if (role === "Supervisor") {
-            data = await getSupervisorCards();
-          }
-        } else if (endpoint === "chart") {
-          if (role === "SuperAdmin") {
-            data = await getAdminDashboardChart(year);
-          } else if (role === "Supervisor") {
-            data = await getSupervisorChart(year);
-          }
-        }
-        setData(data);
+        const [cards, chart] = await Promise.all([
+          role === "SuperAdmin" ? getAdminDashboardCards() : getSupervisorCards(),
+          role === "SuperAdmin" ? getAdminDashboardChart(year) : getSupervisorChart(year),
+        ]);
+        setData({ cards, chart });
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -285,7 +278,7 @@ export const useDashboard = (endpoint, role, year) => {
       }
     };
     fetchData();
-  }, [endpoint, year]);
+  }, [role, year]);
 
   return { data, loading, error };
 };
