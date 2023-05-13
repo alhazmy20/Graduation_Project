@@ -90,6 +90,6 @@ export const allNewsloader = () => {
 };
 
 export const singleNewsloader = ({ params }) => {
-  const postId = params.id;
-  return getSingleNews(postId);
+  const newsId = params.id;
+  return defer({news : getSingleNews(newsId)});
 };
