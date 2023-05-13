@@ -75,7 +75,7 @@ const TrainingOpportunity = ({ withApply }) => {
             </div>
             <p dangerouslySetInnerHTML={{ __html: loadedData.content }}></p>
             <PostDetailsTable data={loadedData} />
-            {withApply && role ==='Student' && (
+            {withApply && (role === "Student" || !role) && (
               <Button
                 type="primary"
                 className="form-btn"

@@ -7,7 +7,12 @@ import InstManagerFormInputs from "../../../components/form/InstManagerFormInput
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import ProfileImage from "../../../components/ui/ProfileImage/ProfileImage";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import { Await, useLoaderData, useParams } from "react-router-dom";
+import {
+  Await,
+  useLoaderData,
+  useParams,
+  useRevalidator,
+} from "react-router-dom";
 import axiosConfig from "../../../util/axiosConfig";
 import { useAuth } from "../../../auth/useContext";
 import SubmitButton from "../../../components/form/SubmitButton";
@@ -17,6 +22,7 @@ const InstProfile = ({ isAdmin }) => {
   const { id } = useParams();
   const auth = useAuth();
   const institutionData = useLoaderData();
+  const revalidator = useRevalidator();
 
   const [formData, setFormData] = useState(null);
   const [isFormChanged, setIsFormChanged] = useState(false);
@@ -42,6 +48,7 @@ const InstProfile = ({ isAdmin }) => {
       displayMessage("success", "تم تحديث البيانات بنجاح");
       setLoading(false);
       setIsFormChanged(false);
+      revalidator.revalidate(); //revalidate the data
     } catch (error) {
       setLoading(false);
       displayMessage("error", "فشل تحديث البيانات");

@@ -1,23 +1,21 @@
 @import "../../../index.scss";
 
-.addNewsContainer{
-    margin-top: 2rem;
+.addNewsContainer {
+  margin-top: 2rem;
 
-    .addNewsTitle{
-        margin-bottom: 1rem;
-        font-size: 24px;
-    }
+  .addNewsTitle {
+    margin-bottom: 1rem;
+    font-size: 24px;
+  }
 
-    .addNewsButton{
-        margin-top: 1rem;
-    }
-    .quill > .ql-container {
-        height: 200px;
-      }
-      .quill > .ql-container > .ql-editor {
-        font-size: 20px;
-        text-align: right;
-      }
-    
+  .addNewsButton {
+    margin-top: 1rem;
+  }
+  .quill > .ql-container {
+    height: 200px;
+  }
+  .quill > .ql-container > .ql-editor {
+    font-size: 20px;
+    text-align: right;
+  }
 }
-

@@ -22,14 +22,12 @@ const InstitutionsTable = () => {
   const filterData = (dataSource) => {
     let filteredDataSource = dataSource;
     if (statusFilter !== null) {
-      filteredDataSource = dataSource.filter(
-        (institution) => {
-          if (statusFilter === "") {
-            return true; // return all records when statusFilter is empty
-          }
-          return institution.isActive === statusFilter;
+      filteredDataSource = dataSource.filter((institution) => {
+        if (statusFilter === "") {
+          return true; // return all records when statusFilter is empty
         }
-      );
+        return institution.isActive === statusFilter;
+      });
     }
     return filteredDataSource;
   };
@@ -43,6 +41,11 @@ const InstitutionsTable = () => {
     {
       title: "الجامعة",
       dataIndex: "city",
+      align: "center",
+    },
+    {
+      title: "البريد الإلكتروني",
+      dataIndex: "email",
       align: "center",
     },
     {
@@ -119,10 +122,10 @@ const InstitutionsTable = () => {
                 المنشآت الغير نشطة
               </Button>
             </div>
-            <p className="rangeText">
+            <span className="rangeText">
               عرض {currentRange[0]} إلى {currentRange[1]} من أصل{" "}
               {loadedData.length} سجل
-            </p>
+            </span>
             <Table
               col={columns}
               data={filterData(loadedData)}

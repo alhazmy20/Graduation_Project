@@ -6,7 +6,7 @@ import { displayMessage } from "../../../../util/helpers";
 
 const PostDeleteModal = ({ modalOpen, setModalOpen, name, postId }) => {
   const [loading, setLoading] = useState(false);
-  let revalidator = useRevalidator();
+  const revalidator = useRevalidator();
 
   const handleDeletePost = async () => {
     try {

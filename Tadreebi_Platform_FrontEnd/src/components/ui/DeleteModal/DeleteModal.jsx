@@ -10,7 +10,7 @@ import { Button, Modal } from "antd";
 const DeleteModal = ({ name, id, endpoint, deleteType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  let revalidator = useRevalidator();
+  const revalidator = useRevalidator();
 
   const handleDelete = async () => {
     try {

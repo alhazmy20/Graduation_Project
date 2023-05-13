@@ -23,6 +23,10 @@ const AppMenu = ({ isInline = false }) => {
       key: "/training-opportunities",
     },
 
+    StudentMenu && {
+      label: "اخبار التدريب",
+      key: "/news",
+    },
     {
       label: "شركائنا",
       key: "/InstitutionInfo",
@@ -30,10 +34,6 @@ const AppMenu = ({ isInline = false }) => {
     InstitutionMenu && {
       label: "البرامج التدريبة ",
       key: "/institution/posts",
-    },
-    StudentMenu && {
-      label: "اخبار التدريب",
-      key: "/news",
     },
 
     {

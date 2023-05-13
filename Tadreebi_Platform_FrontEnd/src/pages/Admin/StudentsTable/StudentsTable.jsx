@@ -40,6 +40,11 @@ const StudentsTable = () => {
       align: "center",
     },
     {
+      title: "البريد الجامعي",
+      dataIndex: "email",
+      align: "center",
+    },
+    {
       title: "تاريخ الإنضمام",
       dataIndex: "created_at",
       align: "center",

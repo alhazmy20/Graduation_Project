@@ -18,8 +18,8 @@ const SupervisorsTable = () => {
 
   const columns = [
     {
-      title: "البريد الجامعي",
-      dataIndex: "email",
+      title: "الكلية",
+      dataIndex: "college",
       align: "center",
     },
     {
@@ -28,13 +28,13 @@ const SupervisorsTable = () => {
       align: "center",
     },
     {
-      title: "الكلية",
-      dataIndex: "college",
+      title: "الجامعة",
+      dataIndex: "university",
       align: "center",
     },
     {
-      title: "الجامعة",
-      dataIndex: "university",
+      title: "البريد الجامعي",
+      dataIndex: "email",
       align: "center",
     },
     {

@@ -5,7 +5,7 @@ import { displayMessage } from "../../../../util/helpers";
 import { useRevalidator } from "react-router-dom";
 
 const ActivateInstitAccount = ({ record: { id, isActive } }) => {
-  let revalidator = useRevalidator();
+  const revalidator = useRevalidator();
 
   // destructuring
   const [status, setStatus] = useState(isActive);
