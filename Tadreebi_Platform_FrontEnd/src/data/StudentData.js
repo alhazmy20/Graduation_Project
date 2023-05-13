@@ -3,6 +3,10 @@ export const UNIVERSITIES = [
     id: 1,
     name: "جامعة طيبة",
   },
+  {
+    id: 2,
+    name: "الجامعة الإسلامية",
+  },
 ];
 
 export const MAJORS = [
