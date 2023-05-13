@@ -14,7 +14,6 @@ const { Meta } = Card;
 
 const News = () => {
   const navigate = useNavigate();
-  const error = useRouteError();
   const newsData = useLoaderData();
   console.log(newsData);
 
@@ -74,7 +73,7 @@ const News = () => {
           </Card>
         </List.Item>
       )}
-    ></List>)}
+    />)}
     </Await>
   </Suspense>
   );
