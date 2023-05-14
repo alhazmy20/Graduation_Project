@@ -31,15 +31,15 @@ const SupervisorSidebar = () => {
             transitionDuration={750}
             renderExpandIcon={({ open }) => <span>{open ? "-" : "+"}</span>}
           >
-            <NavLink to={"/supervisor"} end>
+            <NavLink to={"/supervisor/manage-applications"} end>
               {({ isActive }) => (
                 <MenuItem
                   className={
                     isActive ? "activeMenu MenuItem" : "MenuItem notActive"
                   }
-                  icon={<FontAwesomeIcon icon={faHome} />}
+                  icon={<FontAwesomeIcon icon={faClipboard} />}
                 >
-                  الرئيسية
+                  ادارة الطلبات
                 </MenuItem>
               )}
             </NavLink>
@@ -53,19 +53,6 @@ const SupervisorSidebar = () => {
                   icon={<FontAwesomeIcon icon={faPerson} />}
                 >
                   الطلاب
-                </MenuItem>
-              )}
-            </NavLink>
-
-            <NavLink to={"/supervisor/manage-applications"} end>
-              {({ isActive }) => (
-                <MenuItem
-                  className={
-                    isActive ? "activeMenu MenuItem" : "MenuItem notActive"
-                  }
-                  icon={<FontAwesomeIcon icon={faClipboard} />}
-                >
-                  ادارة الطلبات
                 </MenuItem>
               )}
             </NavLink>
