@@ -1,4 +1,5 @@
 import { message } from "antd";
+import moment from 'moment';
 import { useState } from "react";
 
 export const displayMessage = (type, content) => {
@@ -42,4 +43,11 @@ export const dataFiltering = (data, statusFilter) => {
     : data;
 
   return filteredDataSource;
+};
+
+export const getFormattedDaysDifference = (date) => {
+  const currentDate = moment();
+  const endDate = moment(date);
+  const daysDiff = endDate.diff(currentDate, "days");
+  return `بعد ${daysDiff} يوم`;
 };

@@ -11,8 +11,10 @@ import {
   faCity,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
+import { getFormattedDaysDifference } from '../../../util/helpers';
 
-const PostDetailsTable = ({data}) => {
+const PostDetailsTable = ({ data }) => {
+  
   return (
     <Table responsive className="post-detail-table">
       <tbody>
@@ -31,8 +33,8 @@ const PostDetailsTable = ({data}) => {
         <tr>
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
-            <span className="label">تاريخ النشر:</span>
-            <span>{data?.created_at}</span> 
+            <span className="label">موعد النشر:</span>
+            <span>{data?.created_at}</span>
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faBriefcase} />
@@ -68,14 +70,16 @@ const PostDetailsTable = ({data}) => {
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
             <span className="label">تاريخ انتهاء التقديم:</span>
-            <span>{data?.p_endDate}</span>
+            <span>{getFormattedDaysDifference(data?.t_endDate)}</span>
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faGraduationCap} />
             <span className="label">التخصصات المطلوبة:</span>
-            <div className='majors'>
+            <div className="majors">
               {data.post_majors?.map((m) => (
-                <span key={m.major} className="major">{m.major}</span>
+                <span key={m.major} className="major">
+                  {m.major}
+                </span>
               ))}
             </div>
           </td>

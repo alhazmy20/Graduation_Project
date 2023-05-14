@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss";
 import { itemRender } from "../../../components/ui/Pagination";
-import { Await, defer, useLoaderData, useNavigate, useRouteError } from "react-router-dom";
+import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
 import NoData from "../../../components/ui/NoData/NoData";
 import { getAllNews } from "../../../util/api";
 import Spinner from '../../../components/ui/Spinner/Spinner';
@@ -70,6 +70,7 @@ const News = () => {
                 <FontAwesomeIcon icon={faArrowLeft} />
               </Button>
             </div>
+            <span className='publicationDate'>{news.created_at}</span>
           </Card>
         </List.Item>
       )}
