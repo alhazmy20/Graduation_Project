@@ -31,7 +31,7 @@ const SupervisorSidebar = () => {
             transitionDuration={750}
             renderExpandIcon={({ open }) => <span>{open ? "-" : "+"}</span>}
           >
-            <NavLink to={"/supervisor/manage-applications"} end>
+            <NavLink to={"/supervisor"} end>
               {({ isActive }) => (
                 <MenuItem
                   className={

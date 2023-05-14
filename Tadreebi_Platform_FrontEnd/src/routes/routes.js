@@ -114,9 +114,8 @@ const studentRoutes = (
 const supervisorRoutes = (
   <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
     <Route path="supervisor" element={<SupervisorLayout />}>
-      <Route index element={<SupervisorHomePage />} />
       <Route
-        path="manage-applications"
+      index
         element={<SupervisorStudentsApplications />}
         loader={applicationsLoader}
       />

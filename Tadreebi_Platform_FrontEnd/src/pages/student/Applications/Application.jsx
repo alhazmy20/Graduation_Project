@@ -51,7 +51,7 @@ const Application = () => {
       align: "center",
       render: (text, row) => {
         setStatus(text);
-        return <TableText text={status} />;
+        return <TableText text={text} />;
       },
     },
     {
