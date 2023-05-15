@@ -45,7 +45,7 @@ const ActivateInstitAccount = ({ record: { id, isActive } }) => {
   return (
     <div>
       <Button
-        className={status === 0 ? "inactiveBtn" : "activeBtn"}
+        className={isActive === 0 ? "inactiveBtn" : "activeBtn"}
         onClick={handleActivation}
         disabled={loading}
         loading={loading}
