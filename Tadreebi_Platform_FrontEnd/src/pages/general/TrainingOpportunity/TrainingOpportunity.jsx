@@ -13,6 +13,7 @@ import axiosConfig from "../../../util/axiosConfig";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import { useAuth } from "../../../auth/useContext";
 import { displayMessage } from "../../../util/helpers";
+import ReactQuill from "react-quill";
 
 const TrainingOpportunity = ({ withApply }) => {
   const [loading, setLoading] = useState(false);
@@ -76,7 +77,11 @@ const TrainingOpportunity = ({ withApply }) => {
                 </Link>
               </Space>
             </div>
-            <p dangerouslySetInnerHTML={{ __html: loadedData.content }}></p>
+            <ReactQuill
+              value={loadedData?.content}
+              readOnly={true}
+              theme={"bubble"}
+            />
             <PostDetailsTable data={loadedData} />
             {withApply && (role === "Student" || !role) && (
               <Button

@@ -5,14 +5,11 @@ import "react-quill/dist/quill.snow.css";
 const ReactTextArea = ({ name, initialValue, lable, ...others }) => {
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, false] }],
+      [{ header: [3, false] }],
       [{ align: [] }],
-      ["bold", "italic", "underline", "strike"],
+      ["bold", "italic", "underline"],
       [{ color: [] }, { background: [] }],
-      [{ script: "sub" }, { script: "super" }],
       [{ direction: "rtl" }],
-      ["link", "image", "video", "formula"],
-      ["clean"],
     ],
   };
 
@@ -22,17 +19,9 @@ const ReactTextArea = ({ name, initialValue, lable, ...others }) => {
     "bold",
     "italic",
     "underline",
-    "strike",
     "color",
     "background",
-    "bullet",
-    "script",
     "direction",
-    "blockquote",
-    "link",
-    "image",
-    "video",
-    "formula",
   ];
 
   return (
