@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import TableUI from "../../../components/ui/Table/Table";
 import { handlePaginationChange } from "../../../util/helpers";
+import { StudentDetails } from "../../../components/ui/Table/TableHelpers";
 
 const SupervisorStudent = () => {
   const studentsData = useLoaderData();
@@ -29,15 +30,13 @@ const SupervisorStudent = () => {
       title: "اسم الطالب",
       dataIndex: "fullName",
       align: "center",
+      render: (text, record) => {
+        return <StudentDetails name={text} data={record} isSupervisor={true} />;
+      },
     },
     {
       title: "البريد الجامعي",
       dataIndex: "email",
-      align: "center",
-    },
-    {
-      title: "رقم الجوال",
-      dataIndex: "phone",
       align: "center",
     },
     {

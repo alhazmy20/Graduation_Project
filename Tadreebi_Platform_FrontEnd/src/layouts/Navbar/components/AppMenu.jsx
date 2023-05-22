@@ -27,13 +27,13 @@ const AppMenu = ({ isInline = false }) => {
       label: "اخبار التدريب",
       key: "/news",
     },
-    {
-      label: "شركائنا",
-      key: "/InstitutionInfo",
-    },
     InstitutionMenu && {
       label: "البرامج التدريبة ",
       key: "/institution/posts",
+    },
+    {
+      label: "شركائنا",
+      key: "/institutions",
     },
 
     {

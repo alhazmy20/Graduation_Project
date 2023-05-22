@@ -33,6 +33,13 @@ const NewsTable = () => {
       title: "عنوان الخبر",
       dataIndex: "title",
       align: "center",
+      render: (text, row) => {
+        return (
+          <Link className="row-title" to={`news/${row.id}`}>
+            {text}
+          </Link>
+        );
+      },
     },
 
     {

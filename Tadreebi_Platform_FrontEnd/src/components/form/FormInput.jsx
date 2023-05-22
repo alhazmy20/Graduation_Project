@@ -19,12 +19,7 @@ const FormInput = (props) => {
   return (
     <>
       <label
-        style={{
-          color: "#808080",
-          display: "block",
-          marginBottom: "5px",
-          fontWeight: "500",
-        }}
+       className='formLabel'
       >
         {label}
       </label>

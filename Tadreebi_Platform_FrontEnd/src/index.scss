@@ -7,6 +7,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+
 }
 
 body {
@@ -19,7 +20,8 @@ body {
 .btnContainer {
   display: flex;
   gap: 10px;
-  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
   .greenBtn {
     background-color: #01ad7e;
 
@@ -289,4 +291,11 @@ body {
     margin-bottom: 1rem;
     font-weight: 500;
   }
+}
+
+.formLabel {
+  color: #808080;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
 }

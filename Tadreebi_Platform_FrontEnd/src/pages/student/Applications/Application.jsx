@@ -29,7 +29,7 @@ const Application = () => {
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`post/${row.id}`}>
+          <Link className="row-title" to={`post/${row.post_id}`}>
             {text}
           </Link>
         );
@@ -39,6 +39,13 @@ const Application = () => {
       title: "اسم المؤسسة",
       dataIndex: "instituion",
       align: "center",
+      render: (text, row) => {
+        return (
+          <Link className="row-title" to={`/institutions/${row.id}`}>
+            {text}
+          </Link>
+        );
+      },
     },
     {
       title: "تاريخ التقديم",

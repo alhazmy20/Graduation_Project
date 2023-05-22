@@ -10,7 +10,7 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import { useDashboard } from "../../../util/api";
 import { useYearState } from "../../../util/helpers";
 
-const SupervisorHomePage = () => {
+const AdminHomePage = () => {
   const { currentYear, years, selectedYear } = useYearState();
   const { data, loading, error } = useDashboard("SuperAdmin", years);
 
@@ -79,7 +79,7 @@ const SupervisorHomePage = () => {
         <Row gutter={20} className="AdmindateDisplay">
           <Col span={9}>
             <StatisticChart
-              lable={"احصائيات بناء على الجامعات"}
+              lable={"التقديمات بناء على الجامعات"}
               years={years}
               currentYear={currentYear}
               setData={chartData}
@@ -95,4 +95,4 @@ const SupervisorHomePage = () => {
   );
 };
 
-export default SupervisorHomePage;
+export default AdminHomePage;

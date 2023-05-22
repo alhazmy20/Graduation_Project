@@ -37,11 +37,11 @@ import {
   AddAdmin,
   AddNews,
   SupervisorsTable,
-  InstitutionInfo,
+  Institutions,
   Unauthorized,
   SupervisorStudentsApplications,
   SupervisorStudent,
-  SupervisorHomePage,
+  InstitutionInfo,
 } from "../pages/index";
 
 import {
@@ -65,7 +65,6 @@ import {
 const institutionRoutes = (
   <Route element={<RequireAuth allowedRoles={["Institution"]} />}>
     <Route path="/institution">
-      <Route index element={<h1>Institution home page</h1>} />
       <Route path="posts" element={<InstPosts />} loader={allPostsLoader} />
       <Route
         path="posts/:id"
@@ -115,7 +114,7 @@ const supervisorRoutes = (
   <Route element={<RequireAuth allowedRoles={["Supervisor"]} />}>
     <Route path="supervisor" element={<SupervisorLayout />}>
       <Route
-      index
+        index
         element={<SupervisorStudentsApplications />}
         loader={applicationsLoader}
       />
@@ -196,12 +195,17 @@ const adminRoutes = (
         element={<NewsTable />}
         loader={allNewsloader}
       />
-      <Route path="add-news" element={<AddNews />} />
       <Route
         path="manage-news/:id"
         element={<AddNews />}
         loader={singleNewsloader}
       />
+      <Route
+        path="manage-news/news/:id"
+        element={<NewsDetails />}
+        loader={singleNewsloader}
+      />
+      <Route path="add-news" element={<AddNews />} />
       <Route
         path="manage-supervisors"
         element={<SupervisorsTable />}
@@ -240,9 +244,14 @@ export const routes = createBrowserRouter(
           loader={singleNewsloader}
         />
         <Route
-          path="InstitutionInfo"
-          element={<InstitutionInfo />}
+          path="Institutions"
+          element={<Institutions />}
           loader={allInstitutionsLoader}
+        />
+        <Route
+          path="Institutions/:id"
+          element={<InstitutionInfo />}
+          loader={singleInstitutionLoader}
         />
         {studentRoutes}
 

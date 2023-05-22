@@ -1,52 +1,41 @@
+import { Image } from "antd";
 import React, { Suspense } from "react";
-import { List } from "antd";
-import InfoCard from "./components/InfoCard";
-import { itemRender } from "../../../components/ui/Pagination";
+import "./InstitutionInfo.scss";
+import InstitutionInfoCard from "../../../components/ui/InstitutionInfoCard/InstitutionInfoCard";
 import { Await, useLoaderData } from "react-router-dom";
-import Spinner from '../../../components/ui/Spinner/Spinner';
-const InstitutionInfo = () => {
+import Spinner from "../../../components/ui/Spinner/Spinner";
 
-  const institutionsData = useLoaderData();
+const InstitutionInfo = () => {
+  const institutionData = useLoaderData();
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <Suspense fallback={<Spinner />}>
-        <Await
-          resolve={institutionsData?.institutions}
-          errorElement={<p>Error loading blog posts.</p>}
-        >
-          {(loadedData) => (
-            <List
-              grid={{
-                gutter: 16,
-                xs: 1,
-                sm: 1,
-                md: 2,
-                lg: 2,
-                xl: 3,
-                xxl: 4,
-              }}
-              pagination={{
-                onChange: (page) => {
-                  console.log(page);
-                },
-                responsive: true,
-                position: "bottom",
-                itemRender: itemRender,
-                align: "center",
-                pageSize: 8,
-              }}
-              dataSource={loadedData}
-              renderItem={(item) => (
-                <List.Item>
-                  <InfoCard item={item} />
-                </List.Item>
-              )}
-            />
-          )}
-        </Await>
-      </Suspense>
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <Await
+        resolve={institutionData?.institution}
+        errorElement={<p>Error loading the data.</p>}
+      >
+        {(loadedData) => (
+          <div className="institutionInfo">
+            <h1>{loadedData.institutionName}</h1>
+            <div className="contianer">
+              <div className="detailsContainer">
+                <div className="imgContainer">
+                  {loadedData.logo?.logo_url && (
+                    <Image
+                      src={loadedData?.logo.logo_url}
+                      alt=""
+                      preview={false}
+                    />
+                  )}
+                </div>
+                <p className="brief">{loadedData?.institutionSummary}</p>
+              </div>
+              <InstitutionInfoCard data={loadedData} />
+            </div>
+          </div>
+        )}
+      </Await>
+    </Suspense>
   );
 };
 

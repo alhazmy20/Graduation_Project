@@ -34,7 +34,7 @@ const StudentModal = ({ detailsOpen, setDetailsOpen, data, isSupervisor}) => {
             </Space>
 
             <Space size={5} className="space">
-              <span className="label">الجوال:</span>
+              <span className="label">رقم الجوال:</span>
               <span className="text">{data?.phone}</span>
             </Space>
 

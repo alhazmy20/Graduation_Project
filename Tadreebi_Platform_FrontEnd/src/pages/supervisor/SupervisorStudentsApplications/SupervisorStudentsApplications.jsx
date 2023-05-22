@@ -61,7 +61,7 @@ const SupervisorStudentsApplications = () => {
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`post/${row.post_id}`}>
+          <Link className="row-title" to={`/training-opportunities/${row.post_id}`}>
             {text}
           </Link>
         );
@@ -71,6 +71,13 @@ const SupervisorStudentsApplications = () => {
       title: "اسم المؤسسة",
       dataIndex: "instituion",
       align: "center",
+      render: (text, row) => {
+        return (
+          <Link className="row-title" to={`/institutions/${row.id}`}>
+            {text}
+          </Link>
+        );
+      },
     },
     {
       title: "تاريخ التقديم",

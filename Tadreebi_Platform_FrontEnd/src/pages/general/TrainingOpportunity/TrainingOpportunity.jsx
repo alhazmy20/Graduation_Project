@@ -2,6 +2,7 @@ import { Button, Image, Space, notification } from "antd";
 import React, { Suspense, useState } from "react";
 import {
   Await,
+  Link,
   useLoaderData,
   useParams,
   useRouteError,
@@ -68,9 +69,11 @@ const TrainingOpportunity = ({ withApply }) => {
               />
               <Space size={5} direction="vertical" className="space">
                 <h1>{loadedData.title}</h1>
-                <span className="institution-name">
-                  {loadedData.institution.institutionName}
-                </span>
+                <Link to={`/institutions/${loadedData.institution.id}`}>
+                  <span className="institution-name">
+                    {loadedData.institution.institutionName}
+                  </span>
+                </Link>
               </Space>
             </div>
             <p dangerouslySetInnerHTML={{ __html: loadedData.content }}></p>

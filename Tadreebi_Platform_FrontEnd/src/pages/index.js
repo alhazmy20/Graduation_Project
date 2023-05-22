@@ -9,7 +9,8 @@ import TrainingOpportunity from "./general/TrainingOpportunity/TrainingOpportuni
 import VerifyAccount from "./general/VerifyAccount/VerifyAccount";
 import Signup from "./general/Signup/Signup";
 import Unauthorized from "./general/Unauthorized/Unauthorized";
-import InstitutionInfo from "./general/institutionInfo/InstitutionInfo";
+import Institutions from "./general/Institutions/Institutions";
+import InstitutionInfo from "./general/InstitutionInfo/InstitutionInfo";
 
 // Imports from institution folder
 import InstProfile from "./institution/InstProfile/InstProfile";
@@ -37,7 +38,6 @@ import SupervisorsTable from "./Admin/SupervisorsTable/SupervisorsTable";
 import SupervisorProfile from "./supervisor/SupervisorProfile/SupervisorProfile";
 import SupervisorStudentsApplications from "./supervisor/SupervisorStudentsApplications/SupervisorStudentsApplications";
 import SupervisorStudent from "./supervisor/SupervisorStudent/SupervisorStudent";
-import SupervisorHomePage from "./supervisor/SupervisorHomePage/SupervisorHomePage";
 //Export all pages
 export {
   Home,
@@ -65,10 +65,10 @@ export {
   AddAdmin,
   AddNews,
   AdminsTable,
-  InstitutionInfo,
   SupervisorsTable,
   Unauthorized,
   SupervisorStudentsApplications,
   SupervisorStudent,
-  SupervisorHomePage,
+  Institutions,
+  InstitutionInfo,
 };

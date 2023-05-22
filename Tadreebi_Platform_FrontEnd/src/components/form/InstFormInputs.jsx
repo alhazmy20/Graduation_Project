@@ -1,4 +1,4 @@
-import { Col, Row, Select } from "antd";
+import { Col, Form, Row, Select } from "antd";
 import React, { useState } from "react";
 import { SECTORS } from "../../data/TestData";
 import FormInput from "./FormInput";
@@ -10,6 +10,8 @@ import EmailInput from "./EmailInput";
 import PasswordInput from "./PasswordInput";
 import PasswordConfirInput from "./PasswordConfirInput";
 import PhoneInput from "./PhoneInput";
+import TextArea from "antd/es/input/TextArea";
+import FormItem from "antd/es/form/FormItem";
 
 const InstFormInputs = ({ withPassword, region }) => {
   const { majors } = useFetchMajorsAndCities();
@@ -68,7 +70,22 @@ const InstFormInputs = ({ withPassword, region }) => {
           </>
         )}
         <Col xs={24} sm={12}>
-          <PhoneInput label="رقم الهاتف" name="institutionPhone" />
+        <PhoneInput label="رقم الهاتف" name="institutionPhone" />
+        </Col>
+        <Col xs={24} sm={24}>
+        <label
+        className='formLabel'
+      >
+        نبذة عن المنشأة
+      </label>
+        <Form.Item name='institutionSummary'>
+            <TextArea
+              rows={3}
+              placeholder="اكتب نبذة عن المنشأة..."
+              maxLength={1000}
+              showCount
+            />
+          </Form.Item>
         </Col>
       </Row>
     </>
