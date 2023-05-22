@@ -50,7 +50,7 @@ const AddNews = () => {
         headers,
       });
       notification.success({
-        message: `تمت ${id ? "تحديث" : "اضافة"} الخبر  بنجاح`,
+        message: `تم ${id ? "تحديث" : "اضافة"} الخبر  بنجاح`,
       });
       setLoading(false);
       navigate("/admin/manage-news");
