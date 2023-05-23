@@ -10,7 +10,7 @@ import VerifyAccount from "./general/VerifyAccount/VerifyAccount";
 import Signup from "./general/Signup/Signup";
 import Unauthorized from "./general/Unauthorized/Unauthorized";
 import Institutions from "./general/Institutions/Institutions";
-import InstitutionInfo from "./general/InstitutionInfo/InstitutionInfo";
+import InstitutionInfo from "./general/institutionInfo/InstitutionInfo";
 
 // Imports from institution folder
 import InstProfile from "./institution/InstProfile/InstProfile";

@@ -119,9 +119,14 @@ const supervisorRoutes = (
         loader={applicationsLoader}
       />
       <Route
-        path="manage-applications/post/:id"
+        path="post/:id"
         element={<TrainingOpportunity />}
         loader={singlePostLoader}
+      />
+      <Route
+        path="institution-info/:id"
+        element={<InstitutionInfo />}
+        loader={singleInstitutionLoader}
       />
       <Route
         path="all-students"

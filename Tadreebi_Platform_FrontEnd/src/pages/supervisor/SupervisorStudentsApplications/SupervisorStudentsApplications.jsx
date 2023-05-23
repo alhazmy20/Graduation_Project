@@ -60,8 +60,8 @@ const SupervisorStudentsApplications = () => {
       dataIndex: "post",
       align: "center",
       render: (text, row) => {
-        return (
-          <Link className="row-title" to={`/training-opportunities/${row.post_id}`}>
+        return (       
+          <Link className="row-title" to={`post/${row.post_id}`}>
             {text}
           </Link>
         );
@@ -73,7 +73,7 @@ const SupervisorStudentsApplications = () => {
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`/institutions/${row.id}`}>
+          <Link className="row-title" to={`institution-info/${row.id}`}>
             {text}
           </Link>
         );
