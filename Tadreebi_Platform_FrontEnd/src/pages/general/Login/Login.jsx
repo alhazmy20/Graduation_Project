@@ -72,8 +72,6 @@ const Login = ({ isAdmin }) => {
               </span>
               <span className="goHome">
                 <Link to="/">الذهاب الى الصفحة الرئيسية</Link>
-                <Link to="/">الذهاب الى الصفحة الرئيسية</Link>
-                <Link to="/">الذهاب الى الصفحة الرئيسية</Link>
               </span>
             </Form>
           </FormCard>

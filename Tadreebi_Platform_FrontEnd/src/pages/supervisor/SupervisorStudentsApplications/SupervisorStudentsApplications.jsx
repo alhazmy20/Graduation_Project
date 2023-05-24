@@ -43,7 +43,7 @@ const SupervisorStudentsApplications = () => {
   const columns = [
     {
       title: "اسم الطالب",
-      dataIndex: ["student", "fullName"],
+      dataIndex: ["students", "fullName"],
       align: "center",
       render: (text, record) => {
         return (
@@ -57,7 +57,7 @@ const SupervisorStudentsApplications = () => {
     },
     {
       title: "الفرصة التدريبية",
-      dataIndex: "post",
+      dataIndex: "postTitle",
       align: "center",
       render: (text, row) => {
         return (       
@@ -69,11 +69,11 @@ const SupervisorStudentsApplications = () => {
     },
     {
       title: "اسم المؤسسة",
-      dataIndex: "instituion",
+      dataIndex: "institutionName",
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`institution-info/${row.id}`}>
+          <Link className="row-title" to={`institution-info/${row.institutionId}`}>
             {text}
           </Link>
         );
@@ -106,6 +106,8 @@ const SupervisorStudentsApplications = () => {
       ),
     },
   ];
+
+  console.log(applicants_post?.applications)
 
   return (
     <Suspense fallback={<Spinner />}>
