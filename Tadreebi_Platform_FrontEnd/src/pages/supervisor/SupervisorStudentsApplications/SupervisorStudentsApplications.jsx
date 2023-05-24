@@ -49,7 +49,7 @@ const SupervisorStudentsApplications = () => {
         return (
           <StudentDetails
             name={text}
-            data={record?.student}
+            data={record?.students}
             isSupervisor={true}
           />
         );
@@ -61,7 +61,7 @@ const SupervisorStudentsApplications = () => {
       align: "center",
       render: (text, row) => {
         return (       
-          <Link className="row-title" to={`post/${row.post_id}`}>
+          <Link className="row-title" to={`post/${row.postId}`}>
             {text}
           </Link>
         );
