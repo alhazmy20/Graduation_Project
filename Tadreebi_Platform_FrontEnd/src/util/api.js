@@ -22,6 +22,7 @@ export const getAllPosts = async (region = "", city = "", major = "") => {
 export const getSinglePost = async (id) => {
   try {
     const res = await axiosConfig().get(`api/posts/${id}`);
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     console.log(err);
@@ -210,7 +211,7 @@ export const exportExcelFile = async (
 
 //---------------------------------------------------------------------------
 
- const getAdminDashboardCards = async () => {
+const getAdminDashboardCards = async () => {
   try {
     const res = await axiosConfig().get(`api/dashboard/cards`);
     console.log(res.data.data);
@@ -222,7 +223,7 @@ export const exportExcelFile = async (
   }
 };
 
- const getAdminDashboardChart = async (year) => {
+const getAdminDashboardChart = async (year) => {
   try {
     const res = await axiosConfig().get(`api/dashboard/chart?year=${year}`);
     return res.data.data;
@@ -232,10 +233,10 @@ export const exportExcelFile = async (
   }
 };
 
- const getSupervisorCards = async () => {
+const getSupervisorCards = async () => {
   try {
     const res = await axiosConfig().get(`api/supervisors/cards`);
-  
+    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -247,16 +248,13 @@ export const exportExcelFile = async (
 export const getSupervisorChart = async (year) => {
   try {
     const res = await axiosConfig().get(`api/supervisors/chart?year=${year}`);
-   
+
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
     throw { message: error.message, status: error.status };
   }
 };
-
-
-
 
 export const useDashboard = (role, year) => {
   const [data, setData] = useState(null);
@@ -267,8 +265,12 @@ export const useDashboard = (role, year) => {
     const fetchData = async () => {
       try {
         const [cards, chart] = await Promise.all([
-          role === "SuperAdmin" ? getAdminDashboardCards() : getSupervisorCards(),
-          role === "SuperAdmin" ? getAdminDashboardChart(year) : getSupervisorChart(year),
+          role === "SuperAdmin"
+            ? getAdminDashboardCards()
+            : getSupervisorCards(),
+          role === "SuperAdmin"
+            ? getAdminDashboardChart(year)
+            : getSupervisorChart(year),
         ]);
         setData({ cards, chart });
         setLoading(false);

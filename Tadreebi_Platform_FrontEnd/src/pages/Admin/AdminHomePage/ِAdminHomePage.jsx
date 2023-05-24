@@ -35,15 +35,34 @@ const AdminHomePage = () => {
       <Col>
         <Row className="rowStyleStat" gutter={16}>
           <StatisticCard
-            title="عدد المستخدمين"
-            value={data?.cards?.totalUsers}
+            title="عدد الطلاب"
+            value={data?.cards?.totalStudents}
           />
+          <StatisticCard
+            title="عدد المنشئات  "
+            value={data?.cards?.totalInstitutions}
+            lable={"فرصة تدريبية"}
+          />
+
+          <StatisticCard
+            title="عدد المشرفين "
+            value={data?.cards?.totalInstitutions}
+            lable={"فرصة تدريبية"}
+          />
+        </Row>
+        <Row gutter={16} className="rowStyleStat">
           <StatisticCard
             title="عدد الطلاب الجدد"
             value={data?.cards?.newStudents?.currentWeekCount}
             lable={"طالب"}
             indicators={data?.cards?.newStudents?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
+          />
+
+          <StatisticCard
+            title="عدد المنشئات بإنتظار التفعيل "
+            value={data?.cards?.unactiveInstitutions}
+            lable={"منشأة"}
           />
           <StatisticCard
             title="عدد المشرفيين الجامعيين الجدد"
@@ -55,22 +74,25 @@ const AdminHomePage = () => {
         </Row>
         <Row gutter={16} className="rowStyleStat">
           <StatisticCard
+            title="عدد الفرص التدريبية الجديدة "
+            value={data?.cards?.newPosts?.currentWeekCount}
+            lable={"فرصة تدريبية"}
+            indicators={data?.cards?.newPosts?.percentageDifference}
+            indicatorLable="منذ الاسبوع الماضي"
+          />
+          <StatisticCard
             title="عدد المنشئات الجديدة"
             value={data?.cards?.newInstitutions?.currentWeekCount}
             lable={"منشأة"}
             indicators={data?.cards?.newInstitutions?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
+
           <StatisticCard
-            title="عدد المنشئات بإنتظار التفعيل "
-            value={data?.cards?.unactiveInstitutions}
-            lable={"منشأة"}
-          />
-          <StatisticCard
-            title="عدد الفرص التدريبية الجديدة "
-            value={data?.cards?.newPosts?.currentWeekCount}
-            lable={"فرصة تدريبية"}
-            indicators={data?.cards?.newPosts?.percentageDifference}
+            title="اخر الاخبار"
+            value={data?.cards?.newNews?.currentWeekCount}
+            lable={"طالب"}
+            indicators={data?.cards?.newNews?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
         </Row>
