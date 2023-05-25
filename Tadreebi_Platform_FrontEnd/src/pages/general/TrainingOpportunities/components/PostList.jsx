@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { List, notification } from "antd";
+import React, { useState } from "react";
+import { List } from "antd";
 import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
-import Spinner from "../../../../components/ui/Spinner/Spinner.jsx";
 import NoData from "../../../../components/ui/NoData/NoData.jsx";
-import { getPosts, useFetch } from "../../../../data/API.js";
-import axios from 'axios';
 
-const PostList = ({posts}) => {
+const PostList = ({ posts }) => {
   const [page, setPage] = useState(1);
 
   return (

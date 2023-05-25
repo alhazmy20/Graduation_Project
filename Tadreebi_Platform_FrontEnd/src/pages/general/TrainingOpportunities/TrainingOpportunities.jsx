@@ -43,8 +43,8 @@ const TrainingOpportunities = () => {
   };
 
   return (
-    <div className="training-opportunities">
-      <header className="filter-container">
+    <div className="trainingOpportunities">
+      <header className="filterContainer">
         <h4>تصفية على حسب:</h4>
         <Form
           form={form}

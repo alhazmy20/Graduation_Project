@@ -1,0 +1,24 @@
+@import "../../../index.scss";
+
+.InstitutionInfoTable {
+  width: 100%;
+  border-top: 2px solid $steelTeal;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  td {
+    width: 50%;
+    border: 1px solid #f7f7f7;
+    padding: 1rem;
+
+    .details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+
+      .label {
+        font-weight: 500;
+        color: $steelTeal;
+      }
+    }
+  }}

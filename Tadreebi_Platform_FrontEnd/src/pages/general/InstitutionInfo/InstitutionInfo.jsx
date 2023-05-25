@@ -1,9 +1,9 @@
 import { Image } from "antd";
 import React, { Suspense } from "react";
 import "./InstitutionInfo.scss";
-import InstitutionInfoCard from "../../../components/ui/InstitutionInfoCard/InstitutionInfoCard";
 import { Await, useLoaderData } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import InstitutionInfoTable from '../../../components/ui/InstitutionInfoTable/InstitutionInfoTable';
 
 const InstitutionInfo = () => {
   const institutionData = useLoaderData();
@@ -17,21 +17,13 @@ const InstitutionInfo = () => {
         {(loadedData) => (
           <div className="institutionInfo">
             <h1>{loadedData.institutionName}</h1>
-            <div className="contianer">
-              <div className="detailsContainer">
-                <div className="imgContainer">
-                  {loadedData.logo?.logo_url && (
-                    <Image
-                      src={loadedData?.logo.logo_url}
-                      alt=""
-                      preview={false}
-                    />
-                  )}
-                </div>
-                <p className="brief">{loadedData?.institutionSummary}</p>
-              </div>
-              <InstitutionInfoCard data={loadedData} />
+            <div className="imgContainer">
+              {loadedData.logo?.logo_url && (
+                <Image src={loadedData?.logo.logo_url} alt="" preview={false} />
+              )}
             </div>
+            <p className="brief">{loadedData?.institutionSummary}</p>
+            <InstitutionInfoTable data={loadedData} />
           </div>
         )}
       </Await>

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ data }) => {
   const navigate = useNavigate();
-  const MAX_DISPLAY = 5;
+  const MAX_DISPLAY = 4;
 
   return (
     <Card

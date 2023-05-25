@@ -10,14 +10,6 @@
     font-size: 25px;
   }
 
-  .contianer {
-    display: flex;
-    gap: 10px;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-
-    .detailsContainer {
-      flex: 1;
       .imgContainer {
         display: flex;
         align-items: center;
@@ -46,6 +38,4 @@
         // text-align: justify;
         font-weight: 400;
       }
-    }
-  }
 }
