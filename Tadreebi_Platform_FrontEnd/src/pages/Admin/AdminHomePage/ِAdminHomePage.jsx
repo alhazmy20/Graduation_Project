@@ -41,13 +41,11 @@ const AdminHomePage = () => {
           <StatisticCard
             title="عدد المنشئات  "
             value={data?.cards?.totalInstitutions}
-            lable={"فرصة تدريبية"}
           />
 
           <StatisticCard
             title="عدد المشرفين "
             value={data?.cards?.totalInstitutions}
-            lable={"فرصة تدريبية"}
           />
         </Row>
         <Row gutter={16} className="rowStyleStat">
@@ -67,8 +65,8 @@ const AdminHomePage = () => {
           <StatisticCard
             title="عدد المشرفيين الجامعيين الجدد"
             value={data?.cards?.newSupervisors?.currentWeekCount}
-            lable={"مشرف جامعي"}
             indicators={data?.cards?.newSupervisors?.percentageDifference}
+            lable={"مشرف"}
             indicatorLable="منذ الاسبوع الماضي"
           />
         </Row>
@@ -91,7 +89,6 @@ const AdminHomePage = () => {
           <StatisticCard
             title="اخر الاخبار"
             value={data?.cards?.newNews?.currentWeekCount}
-            lable={"طالب"}
             indicators={data?.cards?.newNews?.percentageDifference}
             indicatorLable="منذ الاسبوع الماضي"
           />
