@@ -51,8 +51,6 @@ const InstPostForm = () => {
     try {
       if (id) {
         // if ID exists, update the post
-
-        console.log(formPostData);
         await axiosConfig().put(`api/posts/${id}`, formPostData);
         notification.success({ message: "تم تحديث الفرصة بنجاح" });
         setIsFormChanged(false);

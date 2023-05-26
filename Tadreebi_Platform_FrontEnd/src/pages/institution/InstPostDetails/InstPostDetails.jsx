@@ -52,7 +52,7 @@ const InstPostDetails = () => {
       applicant_id: item?.id,
       applicant_status: item?.status,
       created_at: item?.created_at,
-      ...item?.student,
+      ...item?.students,
     }));
 
     return applicantData;

@@ -25,11 +25,11 @@ const Application = () => {
   const columns = [
     {
       title: "الفرصة التدريبية",
-      dataIndex: "post",
+      dataIndex: "postTitle",
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`post/${row.post_id}`}>
+          <Link className="row-title" to={`post/${row.postId}`}>
             {text}
           </Link>
         );
@@ -37,7 +37,7 @@ const Application = () => {
     },
     {
       title: "اسم المؤسسة",
-      dataIndex: "instituion",
+      dataIndex: "institutionName",
       align: "center",
       render: (text, row) => {
         return (
@@ -63,7 +63,6 @@ const Application = () => {
     },
     {
       title: "الإجراء",
-      dataIndex: "status",
       align: "center",
       render: (text, row) => (
         <StudentAcceptProcedure

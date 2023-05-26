@@ -70,7 +70,7 @@ const TrainingOpportunity = ({ withApply }) => {
               />
               <Space size={5} direction="vertical" className="space">
                 <h1>{loadedData.title}</h1>
-                <Link to={`/institutions/${loadedData.institution.id}`}>
+                <Link to={`/institutions/${loadedData.institution.institutionId}`}>
                   <span className="institution-name">
                     {loadedData.institution.institutionName}
                   </span>
