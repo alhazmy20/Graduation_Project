@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import InstFormInputs from "../../../components/form/InstFormInputs";
 import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
 import axiosConfig from "../../../util/axiosConfig";
+import secureLocalStorage from 'react-secure-storage';
 
 const InstSignup = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const InstSignup = () => {
       .get("/api/csrf-token")
       .then((response) => {
         const csrfToken = response.data.csrf_token;
-        localStorage.setItem("csrf_token", csrfToken);
+        secureLocalStorage.setItem("csrf_token", csrfToken);
       })
       .then(() => {
         axiosConfig()

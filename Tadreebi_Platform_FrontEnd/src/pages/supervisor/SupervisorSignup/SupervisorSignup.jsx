@@ -9,6 +9,7 @@ import PasswordInput from "../../../components/form/PasswordInput";
 import PasswordConfirInput from "../../../components/form/PasswordConfirInput";
 import SubmitButton from "../../../components/form/SubmitButton";
 import UniversitySelect from "../../../components/form/UniversitySelect";
+import secureLocalStorage from 'react-secure-storage';
 
 const SupervisorSignup = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const SupervisorSignup = () => {
       .get("/api/csrf-token")
       .then((response) => {
         const csrfToken = response.data.data.csrf_token;
-        localStorage.setItem("csrf_token", csrfToken);
+        secureLocalStorage.setItem("csrf_token", csrfToken);
       })
       .then(() => {
         axiosConfig()
@@ -54,11 +55,7 @@ const SupervisorSignup = () => {
     <div>
       <Form name="basic" className="form-wrapper" onFinish={onFinish}>
         <EmailInput label="البريد الجامعي" />
-        <FormSelect
-          label="الشطر"
-          name="section"
-          options={options}
-        />
+        <FormSelect label="الشطر" name="section" options={options} />
         <UniversitySelect label="الجامعة" />
         <PasswordInput label="كلمة السر" />
         <PasswordConfirInput label="تأكيد كلمة السر" />

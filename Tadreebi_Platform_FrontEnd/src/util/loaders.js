@@ -15,6 +15,7 @@ import {
   getSingleSupervisor,
   getSingleStudent,
 } from "./api";
+import secureLocalStorage from 'react-secure-storage';
 //   ===========================================================
 
 export const allStudentsLoader = () => {
@@ -22,7 +23,8 @@ export const allStudentsLoader = () => {
 };
 
 export const singleStudentLoader = ({ params }) => {
-  const studentId = params?.id || JSON.parse(localStorage.getItem("user")).id;
+  const studentId =
+    params?.id || JSON.parse(secureLocalStorage.getItem("user")).id;
   return defer({ student: getSingleStudent(studentId) });
 };
 
@@ -33,7 +35,8 @@ export const allAdminsLoader = () => {
 };
 
 export const singleAdminLoader = ({ params }) => {
-  const adminId = params?.id || JSON.parse(localStorage.getItem("user")).id;
+  const adminId =
+    params?.id || JSON.parse(secureLocalStorage.getItem("user")).id;
   return defer({ admin: getSingleAdmin(adminId) });
 };
 
@@ -44,7 +47,8 @@ export const allInstitutionsLoader = () => {
 };
 
 export const singleInstitutionLoader = ({ params }) => {
-  const instId = params?.id || JSON.parse(localStorage.getItem("user")).id;
+  const instId =
+    params?.id || JSON.parse(secureLocalStorage.getItem("user")).id;
   return defer({ institution: getSingleInstitution(instId) });
 };
 
@@ -56,7 +60,7 @@ export const allSupervisorsLoader = () => {
 
 export const singleSupervisorLoader = ({ params }) => {
   const supervisorId =
-    params?.id || JSON.parse(localStorage.getItem("user")).id;
+    params?.id || JSON.parse(secureLocalStorage.getItem("user")).id;
   return defer({ supervisor: getSingleSupervisor(supervisorId) });
 };
 
@@ -91,5 +95,5 @@ export const allNewsloader = () => {
 
 export const singleNewsloader = ({ params }) => {
   const newsId = params.id;
-  return defer({news : getSingleNews(newsId)});
+  return defer({ news: getSingleNews(newsId) });
 };

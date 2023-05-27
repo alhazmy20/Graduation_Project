@@ -4,8 +4,14 @@ import axiosConfig from "../../../../util/axiosConfig";
 import "./StudentAcceptProcedure.scss";
 import { useRevalidator } from "react-router-dom";
 import { useAuth } from "../../../../auth/useContext";
+import secureLocalStorage from 'react-secure-storage';
 
-const StudentAcceptProcedure = ({ status, applicant_id, acceptStatusId, rejectStatusId }) => {
+const StudentAcceptProcedure = ({
+  status,
+  applicant_id,
+  acceptStatusId,
+  rejectStatusId,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [statusId, setStatusId] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,7 +22,6 @@ const StudentAcceptProcedure = ({ status, applicant_id, acceptStatusId, rejectSt
 
   const ACCEPT_STATUS_ID = acceptStatusId;
   const REJECT_STATUS_ID = rejectStatusId;
-
 
   const showButton =
     (role === "Supervisor" && status === "بإنتظار موافقة المشرف الجامعي") ||
@@ -34,7 +39,7 @@ const StudentAcceptProcedure = ({ status, applicant_id, acceptStatusId, rejectSt
       const procedure = (id || statusId) === ACCEPT_STATUS_ID ? "قبول" : "رفض";
       notification.success({
         message: `تم ${procedure} الطلب.`,
-        description:'و تم تحديث حالة الطلب'
+        description: "و تم تحديث حالة الطلب",
       });
       revalidator.revalidate(); //revalidate the data
       setModalOpen(false); // close the modal after successful API call
@@ -47,15 +52,15 @@ const StudentAcceptProcedure = ({ status, applicant_id, acceptStatusId, rejectSt
     if (e.target.checked) {
       //Do not show the modal for 24 hours
       const hideModalUntil = Date.now() + 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-      localStorage.setItem("hideModalUntil", hideModalUntil);
+      secureLocalStorage.setItem("hideModalUntil", hideModalUntil);
     } else {
-      localStorage.removeItem("hideModalUntil");
+      secureLocalStorage.removeItem("hideModalUntil");
     }
   };
 
   const handleAcceptOrReject = (status_id) => {
     setStatusId(status_id);
-    if (Date.now() < parseInt(localStorage.getItem("hideModalUntil"))) {
+    if (Date.now() < parseInt(secureLocalStorage.getItem("hideModalUntil"))) {
       handleStatus(status_id);
     } else {
       setModalOpen(true);
@@ -100,11 +105,12 @@ const StudentAcceptProcedure = ({ status, applicant_id, acceptStatusId, rejectSt
         confirmLoading={loading} // Add confirmLoading prop to show loading state during API call
       >
         <div className="modalDetailsContainer">
-                <span className="modalDetails">
-                  <strong>
-                    هل انت متأكد من {statusId === ACCEPT_STATUS_ID ? "قبولك" : "رفضك"} لهذا الطلب؟
-                  </strong>
-                </span>
+          <span className="modalDetails">
+            <strong>
+              هل انت متأكد من {statusId === ACCEPT_STATUS_ID ? "قبولك" : "رفضك"}{" "}
+              لهذا الطلب؟
+            </strong>
+          </span>
           <Checkbox
             onChange={handleCheckboxChange}
             className="dont-show-checkbox"

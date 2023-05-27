@@ -9,6 +9,7 @@ import PasswordConfirInput from "../../../components/form/PasswordConfirInput";
 import SubmitButton from "../../../components/form/SubmitButton";
 import MajorsSelect from "../../../components/form/MajorsSelect";
 import UniversitySelect from "../../../components/form/UniversitySelect";
+import secureLocalStorage from 'react-secure-storage';
 
 const StudentSignup = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const StudentSignup = () => {
       .get("/api/csrf-token")
       .then((response) => {
         const csrfToken = response.data.data.csrf_token;
-        localStorage.setItem("csrf_token", csrfToken);
+        secureLocalStorage.setItem("csrf_token", csrfToken);
       })
       .then(() => {
         axiosConfig()

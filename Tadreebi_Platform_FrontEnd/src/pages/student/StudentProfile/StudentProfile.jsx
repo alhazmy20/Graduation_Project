@@ -150,6 +150,6 @@ export default StudentProfile;
 // };
 
 // export const studentLoader = () => {
-//   const student = JSON.parse(localStorage.getItem("user"));
+//   const student = JSON.parse(secureLocalStorage.getItem("user"));
 //   return defer({ student: getStudent(student?.id) });
 // };
