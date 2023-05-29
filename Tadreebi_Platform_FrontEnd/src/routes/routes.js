@@ -60,6 +60,7 @@ import {
   allSupervisorsLoader,
   allStudentsLoader,
 } from "../util/loaders";
+import Contact from "../pages/general/Contact/Contact";
 
 //Institution Routes
 const institutionRoutes = (
@@ -262,11 +263,11 @@ export const routes = createBrowserRouter(
 
         {institutionRoutes}
         <Route path="*" element={<NotFound />} />
+        <Route path="contact" element={<Contact />} />
       </Route>
 
       {adminRoutes}
       {supervisorRoutes}
-
       <Route path="unauthorized" element={<Unauthorized />} />
       <Route path="signup" element={<Signup />} />
       <Route path="verify-account" element={<VerifyAccount />} />

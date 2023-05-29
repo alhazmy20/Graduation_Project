@@ -43,7 +43,7 @@ const AppMenu = ({ isInline = false }) => {
 
     {
       label: "تواصل معنا",
-      key: "تواصل معنا",
+      key: "/contact",
     },
   ];
 
