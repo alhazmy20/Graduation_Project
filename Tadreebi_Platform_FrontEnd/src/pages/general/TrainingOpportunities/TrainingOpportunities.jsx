@@ -33,7 +33,7 @@ const TrainingOpportunities = () => {
     try {
       setLoading(true); //NOTE set loading to true before making the API call
       const posts = await getAllPosts(values.region, values.city, values.major);
-      setLoading(false)
+      setLoading(false);
       setPostsData(posts);
       setFiltered(true);
     } catch (err) {
@@ -45,7 +45,6 @@ const TrainingOpportunities = () => {
   return (
     <div className="trainingOpportunities">
       <header className="filterContainer">
-        <h4>تصفية على حسب:</h4>
         <Form
           form={form}
           onFinish={onFinish}
@@ -55,10 +54,17 @@ const TrainingOpportunities = () => {
             major: "كل التخصصات",
           }}
         >
+          <h4>تصفية على حسب:</h4>
           <RegionSelect onChange={handleRegionChange} className="form-item" />
           <CitySelect selectedRegion={selectedRegion} className="form-item" />
           <MajorsSelect className="form-item" name="major" />
-          <SubmitButton className="search-btn" loading={loading} disable={loading}>بحث</SubmitButton>
+          <SubmitButton
+            className="search-btn"
+            loading={loading}
+            disable={loading}
+          >
+            بحث
+          </SubmitButton>
         </Form>
       </header>
       <main>
