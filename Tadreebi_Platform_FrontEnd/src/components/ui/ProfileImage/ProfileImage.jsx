@@ -26,7 +26,6 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
     reader.onload = async () => {
       setImageSrc(reader.result);
       setDeleted(true);
-      console.log(file);
 
       // Create a new FormData object
       formData.append(
@@ -68,7 +67,6 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
         `api/${userType}/${id || auth.user.id}/uploadImage`,
         action
       );
-      console.log(res);
       setImageSrc(null);
       setDeleted(false);
       setIsModalVisible(false);

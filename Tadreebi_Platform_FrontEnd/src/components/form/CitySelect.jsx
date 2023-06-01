@@ -9,7 +9,7 @@ const CitySelect = (props) => {
     <FormSelect name={name || "city"} label={label} {...others}>
       {RegionData.find(
         (r) => r.region === (selectedRegion || region)
-      )?.cities.map((city) => (
+      )?.cities?.map((city) => (
         <Select.Option key={city.id} value={city.city}>
           {city.city}
         </Select.Option>

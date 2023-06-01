@@ -41,7 +41,7 @@ const TrainingOpportunity = ({ withApply }) => {
     } catch (error) {
       console.log(error);
       setLoading(false);
-      notification.error({ message: error.response.data.message });
+      displayMessage("warning", error.response.data.message);
     }
   };
 

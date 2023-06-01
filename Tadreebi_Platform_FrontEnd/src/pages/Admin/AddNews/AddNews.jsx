@@ -55,7 +55,6 @@ const AddNews = () => {
       setLoading(false);
       navigate("/admin/manage-news");
     } catch (error) {
-      console.log(error);
       notification.error({ message: "فشل تحديث البيانات" });
       setLoading(false);
     }

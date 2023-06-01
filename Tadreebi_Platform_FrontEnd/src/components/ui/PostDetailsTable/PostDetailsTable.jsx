@@ -11,10 +11,9 @@ import {
   faCity,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
-import { getFormattedDaysDifference } from '../../../util/helpers';
+import { getFormattedDaysDifference } from "../../../util/helpers";
 
 const PostDetailsTable = ({ data }) => {
-  
   return (
     <Table responsive className="post-detail-table">
       <tbody>
@@ -70,7 +69,7 @@ const PostDetailsTable = ({ data }) => {
           <td>
             <FontAwesomeIcon className="icon" icon={faCalendarDays} />
             <span className="label">تاريخ انتهاء التقديم:</span>
-            <span>{getFormattedDaysDifference(data?.t_endDate)}</span>
+            <span>{getFormattedDaysDifference(data?.p_endDate)}</span>
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faGraduationCap} />

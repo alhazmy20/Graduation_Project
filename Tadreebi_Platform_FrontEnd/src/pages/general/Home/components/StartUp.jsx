@@ -2,8 +2,11 @@ import React from "react";
 import "../components/StartUp.scss";
 import backgroundImage from "../../../../assets/images/homebk.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../../auth/useContext";
 
 const StartUp = () => {
+  const auth = useAuth();
+
   return (
     <div className="startUpContainer">
       <div className="startUpimg">
@@ -13,7 +16,9 @@ const StartUp = () => {
       <div className="startupContnent">
         <div>
           <p>طريقك للبحث عن مهنتك مع تدريبي... </p>
-          <Link to="/login">ابدأ هنا</Link>
+          <Link to={auth.user ? "/training-opportunities" : "/login"}>
+            ابدأ هنا
+          </Link>
         </div>
       </div>
     </div>
