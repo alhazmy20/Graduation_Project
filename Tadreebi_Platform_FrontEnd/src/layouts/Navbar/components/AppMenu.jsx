@@ -28,7 +28,7 @@ const AppMenu = ({ isInline = false }) => {
       key: "/news",
     },
     InstitutionMenu && {
-      label: "البرامج التدريبة ",
+      label: "البرامج التدريبية ",
       key: "/institution/posts",
     },
     {
