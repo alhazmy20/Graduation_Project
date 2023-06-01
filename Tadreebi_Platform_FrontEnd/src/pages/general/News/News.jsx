@@ -61,7 +61,7 @@ const News = () => {
                           navigate(`/news/${news.id}`);
                         }}
                       >
-                        أظهار التفاصيل
+                        <span className="buttonText">إظهار التفاصيل</span>
                         <FontAwesomeIcon icon={faArrowLeft} />
                       </Button>
                     </div>

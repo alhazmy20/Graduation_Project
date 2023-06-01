@@ -2,6 +2,7 @@
 
 .trainingOpportunities {
   margin-bottom: 1rem;
+
   @include breakpoint-down(small) {
     padding: 0 3rem;
   }
@@ -11,7 +12,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-top: 1.5rem;
     padding: 20px;
@@ -20,17 +21,19 @@
 
     form {
       display: flex;
+      justify-content: center;
+      width: 100%;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
 
-    
+
 
       .form-item {
         margin: 0;
-        width: 18vw;
+        width: 19vw;
 
-       
+
 
         label {
           font-weight: 500;
@@ -42,8 +45,13 @@
           width: 100%;
           gap: 0;
         }
+
         & {
           gap: 5px;
+        }
+
+        .search-btn {
+          margin-top: 1rem;
         }
       }
     }
@@ -52,7 +60,7 @@
       background-color: $Green;
       width: 100px;
       font-weight: 600;
-      margin: auto;
+      margin-right: 2rem;
     }
   }
 
