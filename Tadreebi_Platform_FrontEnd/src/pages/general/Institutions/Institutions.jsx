@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { List } from "antd";
 import InfoCard from "./components/InfoCard";
-import { itemRender } from "../../../components/ui/Pagination";
 import { Await, useLoaderData } from "react-router-dom";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import { paginationText } from '../../../util/helpers';
 const Institutions = () => {
   const institutionsData = useLoaderData();
 
@@ -31,7 +31,7 @@ const Institutions = () => {
                 },
                 responsive: true,
                 position: "bottom",
-                itemRender: itemRender,
+                itemRender: paginationText,
                 align: "center",
                 pageSize: 8,
               }}

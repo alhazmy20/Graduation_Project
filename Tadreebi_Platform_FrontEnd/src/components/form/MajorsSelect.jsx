@@ -1,5 +1,5 @@
 import React from "react";
-import { data as saudiClassificationData } from "../../data/SaudiClassification";
+import saudiClassificationData from "../../data/saudiClassification.json";
 import FormSelect from "./FormSelect";
 
 const MajorsSelect = (props) => {

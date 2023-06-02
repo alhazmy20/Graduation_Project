@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Space } from "antd";
+import { Card, Image } from "antd";
 import "./InfoCard.scss";
 import {  useNavigate } from "react-router-dom";
 

@@ -7,11 +7,11 @@ import {
   faMarsAndVenus,
   faBriefcase,
   faCalendarDays,
+  faClock,
   faEarth,
   faCity,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
-import { getFormattedDaysDifference } from "../../../util/helpers";
 
 const PostDetailsTable = ({ data }) => {
   return (
@@ -67,9 +67,9 @@ const PostDetailsTable = ({ data }) => {
         </tr>
         <tr>
           <td>
-            <FontAwesomeIcon className="icon" icon={faCalendarDays} />
-            <span className="label">تاريخ انتهاء التقديم:</span>
-            <span>{getFormattedDaysDifference(data?.p_endDate)}</span>
+            <FontAwesomeIcon className="icon" icon={faClock} />
+            <span className="label">موعد إنتهاء التقديم:</span>
+            <span>{data?.p_endTime}</span>
           </td>
           <td>
             <FontAwesomeIcon className="icon" icon={faGraduationCap} />

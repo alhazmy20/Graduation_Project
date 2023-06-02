@@ -24,16 +24,10 @@ const InstProfile = ({ isAdmin }) => {
   const institutionData = useLoaderData();
   const revalidator = useRevalidator();
 
-  const [formData, setFormData] = useState(null);
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onFormValuesChange = (changedValues, allValues) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      ...allValues,
-      managerPhone: parseFloat(changedValues.managerPhone),
-    }));
     setIsFormChanged(
       Object.keys(changedValues).some(
         (key) => allValues[key] !== institutionData[key]
@@ -80,7 +74,7 @@ const InstProfile = ({ isAdmin }) => {
                   onValuesChange={onFormValuesChange} // Call onFormValuesChange on form value change
                 >
                   <h1 className="green-underline">بيانات المنشأة</h1>
-                  <InstFormInputs region={loadedData.region} />
+                  <InstFormInputs region={loadedData.region} isProfile={true} />
                   <h1 className="green-underline">بيانات المسؤول</h1>
                   <InstManagerFormInputs />
 

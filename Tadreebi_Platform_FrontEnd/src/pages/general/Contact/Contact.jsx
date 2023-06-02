@@ -1,4 +1,4 @@
-import { Button, Card, Image, List } from 'antd'
+import {  Card, Image, List } from 'antd'
 import React from 'react'
 import LnkdInPic from '../../../assets/images/lnkdin.png'
 

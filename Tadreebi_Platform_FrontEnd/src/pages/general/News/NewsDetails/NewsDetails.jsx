@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Await, useLoaderData, useRouteError } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
 import { Image, Space } from "antd";
 import "./NewsDetails.scss";
 import Spinner from "../../../../components/ui/Spinner/Spinner";

@@ -1,7 +1,5 @@
 import { message } from "antd";
-import moment from "moment";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const displayMessage = (type, content) => {
   message[type](content);
@@ -46,9 +44,12 @@ export const dataFiltering = (data, statusFilter) => {
   return filteredDataSource;
 };
 
-export const getFormattedDaysDifference = (date) => {
-  const currentDate = moment();
-  const endDate = moment(date);
-  const daysDiff = endDate.diff(currentDate, "days");
-  return `بعد ${daysDiff} يوم`;
+export const paginationText = (_, type, originalElement) => {
+  if (type === "prev") {
+    return <span className='pagenationText'>السابق</span>;
+  }
+  if (type === "next") {
+    return <span className='pagenationText'>التالي</span>;
+  }
+  return originalElement;
 };

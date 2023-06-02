@@ -42,6 +42,7 @@ import {
   SupervisorStudentsApplications,
   SupervisorStudent,
   InstitutionInfo,
+  Contact
 } from "../pages/index";
 
 import {
@@ -60,7 +61,6 @@ import {
   allSupervisorsLoader,
   allStudentsLoader,
 } from "../util/loaders";
-import Contact from "../pages/general/Contact/Contact";
 
 //Institution Routes
 const institutionRoutes = (

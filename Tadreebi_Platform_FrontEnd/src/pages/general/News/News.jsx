@@ -3,11 +3,10 @@ import { Button, Card, Image, List } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./News.scss";
-import { itemRender } from "../../../components/ui/Pagination";
-import { Await, defer, useLoaderData, useNavigate } from "react-router-dom";
+import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import NoData from "../../../components/ui/NoData/NoData";
-import { getAllNews } from "../../../util/api";
 import Spinner from "../../../components/ui/Spinner/Spinner";
+import { paginationText } from '../../../util/helpers';
 
 const News = () => {
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ const News = () => {
               pagination={{
                 responsive: true,
                 position: "bottom",
-                itemRender: itemRender,
+                itemRender: paginationText,
                 align: "center",
                 pageSize: 7,
               }}

@@ -1,5 +1,5 @@
 import React from "react";
-import { UNIVERSITIES } from "../../data/StudentData";
+import  UNIVERSITIES  from "../../data/universities.json";
 import FormSelect from "./FormSelect";
 import { Select } from "antd";
 

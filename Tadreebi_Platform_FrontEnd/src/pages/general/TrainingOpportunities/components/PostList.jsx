@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { List } from "antd";
-import { itemRender } from "../../../../components/ui/Pagination.js";
 import PostCard from "../../../../components/ui/PostCard/PostCard.jsx";
 import NoData from "../../../../components/ui/NoData/NoData.jsx";
+import { paginationText } from '../../../../util/helpers.js';
 
 const PostList = ({ posts }) => {
-  const [page, setPage] = useState(1);
-
   return (
     <List
       className="post-list"
@@ -20,14 +18,11 @@ const PostList = ({ posts }) => {
         xxl: 4,
       }}
       pagination={{
-        onChange: (page) => {
-          setPage(page);
-        },
         responsive: true,
         position: "bottom",
         align: "center",
         pageSize: 8,
-        itemRender: itemRender,
+        itemRender: paginationText,
       }}
       locale={{ emptyText: <NoData text={"لا توجد فرص تدريب حاليا"} /> }}
       dataSource={posts}

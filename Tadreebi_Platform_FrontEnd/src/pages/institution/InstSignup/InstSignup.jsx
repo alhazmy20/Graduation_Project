@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 import InstFormInputs from "../../../components/form/InstFormInputs";
 import InstManagerFormInputs from "../../../components/form/InstManagerFormInputs";
 import axiosConfig from "../../../util/axiosConfig";
-import secureLocalStorage from 'react-secure-storage';
+import secureLocalStorage from "react-secure-storage";
+import SubmitButton from '../../../components/form/SubmitButton';
 
 const InstSignup = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [currentStep, setCurrentStep] = useState(0);
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     institutionName: "",
     institutionField: "",
@@ -49,6 +52,7 @@ const InstSignup = () => {
     axiosConfig()
       .get("/api/csrf-token")
       .then((response) => {
+        setLoading(true);
         const csrfToken = response.data.csrf_token;
         secureLocalStorage.setItem("csrf_token", csrfToken);
       })
@@ -59,12 +63,13 @@ const InstSignup = () => {
             navigate("/verify-account");
           })
           .catch((error) => {
+            console.log(error);
+            setLoading(false);
             const errors = error.response.data.errors;
             const errorMessages = Object.keys(errors).map((key) => {
               return errors[key][0];
             });
             notification.error(errorMessages.join(", "));
-            console.log(errors);
           });
       });
   };
@@ -118,9 +123,13 @@ const InstSignup = () => {
             </Button>
           )}
           {currentStep === steps.length - 1 && (
-            <Button type="primary" htmlType="submit" className="main-btn">
-              تسجيل
-            </Button>
+            <SubmitButton
+              className="main-btn"
+              loading={loading}
+              disabled={loading}
+            >
+            {loading ? "جاري التسجيل..." : "تسجيل"}
+            </SubmitButton>
           )}
           {currentStep > 0 && (
             <Button type="text" className="back-btn" onClick={handlePrevStep}>

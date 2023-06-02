@@ -1,7 +1,7 @@
 import React from 'react'
 import {Table} from "antd";
-import { itemRender } from "../../../components/ui/Pagination";
 import "./Table.scss"
+import { paginationText } from '../../../util/helpers';
 
 const TableUI = ({col,data,handleChange,Size, emptyText}) => {
   return (
@@ -12,7 +12,7 @@ const TableUI = ({col,data,handleChange,Size, emptyText}) => {
         pagination={{
           onChange: handleChange, 
           responsive: true,
-          itemRender: itemRender, 
+          itemRender: paginationText, 
           pageSize: Size,
           position: ["bottomLeft"],
         }}

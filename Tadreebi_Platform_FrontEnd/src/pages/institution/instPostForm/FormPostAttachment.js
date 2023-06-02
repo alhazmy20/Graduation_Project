@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { data } from "../../../data/SaudiClassification";
+import saudiClassificationData from "../../../data/saudiClassification.json";
 export const useFormPostData = () => {
   const [formPostData, setFormPostData] = useState({
     title: "",
@@ -51,7 +51,7 @@ export const radioOptionsGender = [
   { label: "الكل", value: 2 },
 ];
 
-export const options = data
+export const options = saudiClassificationData
   .map((m) =>
     m.majors.map((majorName) => ({
       major: majorName.title,

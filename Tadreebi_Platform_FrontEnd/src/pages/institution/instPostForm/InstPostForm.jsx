@@ -110,17 +110,12 @@ const InstPostForm = () => {
 
                     <Row className="RowDivElment">
                       <label className="label">المنطقة: </label>
-                      {/*<SelectRegion
-                        name="region"
-                        options={RegionData}
-                        initValue={loadedPost?.region}
-                        valueChnage={handleRegionChange}
-        />*/}
                       <RegionSelect
                         onChange={handleRegionChange}
                         className="formItemStyle"
                         placeholder="اختر المنطقة"
                         initialValue={loadedPost?.region}
+                        exceptAll={true}
                       />
                     </Row>
                     <Row className="RowDivElment">
@@ -164,17 +159,13 @@ const InstPostForm = () => {
 
                     <Row className="RowDivElment">
                       <label className="label">المدينة: </label>
-                      {/*<SelectCity
-                        data={RegionData}
-                        formDate={selectedRegion}
-                        initValue={loadedPost?.city}
-                      />*/}
                       <CitySelect
                         selectedRegion={selectedRegion}
                         className="formItemStyle"
                         placeholder="اختر المدينة"
                         initialValue={loadedPost?.city}
                         region={loadedPost?.region}
+                        exceptAll={true}
                       />
                     </Row>
 

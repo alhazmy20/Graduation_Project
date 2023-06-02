@@ -6,7 +6,6 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import {
-  AdminStudentTable,
   Edit,
 } from "../../../components/ui/Table/TableHelpers";
 import { Await, Link, useLoaderData } from "react-router-dom";

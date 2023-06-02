@@ -5,7 +5,7 @@ import {
   faCity,
   faVenusMars,
   faDollar,
-  faCalendar,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 import "./PostCard.scss";
 import { useNavigate } from "react-router-dom";
@@ -50,9 +50,9 @@ const PostCard = ({ data }) => {
             <span className="data">{data.reward}</span>
           </div>
           <div className="detail">
-            <FontAwesomeIcon className="icon" icon={faCalendar} />
-            <span className="label">تاريخ نهاية التقديم:</span>
-            <span className="data">{data.p_endDate}</span>
+            <FontAwesomeIcon className="icon" icon={faClock} />
+            <span className="label">موعد إنتهاء التقديم:</span>
+            <span className="data">{data.p_endTime}</span>
           </div>
         </div>
         <Button

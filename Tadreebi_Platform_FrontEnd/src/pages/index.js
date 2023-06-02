@@ -11,6 +11,7 @@ import Signup from "./general/Signup/Signup";
 import Unauthorized from "./general/Unauthorized/Unauthorized";
 import Institutions from "./general/Institutions/Institutions";
 import InstitutionInfo from "./general/InstitutionInfo/InstitutionInfo";
+import Contact from './general/Contact/Contact';
 
 // Imports from institution folder
 import InstProfile from "./institution/InstProfile/InstProfile";
@@ -71,4 +72,5 @@ export {
   SupervisorStudent,
   Institutions,
   InstitutionInfo,
+  Contact
 };

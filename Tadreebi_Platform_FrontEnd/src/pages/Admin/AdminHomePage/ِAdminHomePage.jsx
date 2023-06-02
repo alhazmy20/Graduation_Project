@@ -72,11 +72,8 @@ const AdminHomePage = () => {
         </Row>
         <Row gutter={16} className="rowStyleStat">
           <StatisticCard
-            title="عدد الفرص التدريبية الجديدة "
-            value={data?.cards?.newPosts?.currentWeekCount}
-            lable={"فرصة تدريبية"}
-            indicators={data?.cards?.newPosts?.percentageDifference}
-            indicatorLable="منذ الاسبوع الماضي"
+            title="عدد الفرص التدريبية"
+            value={data?.cards?.totalPosts}
           />
           <StatisticCard
             title="عدد المنشئات الجديدة"
@@ -87,10 +84,8 @@ const AdminHomePage = () => {
           />
 
           <StatisticCard
-            title="اخر الاخبار"
-            value={data?.cards?.newNews?.currentWeekCount}
-            indicators={data?.cards?.newNews?.percentageDifference}
-            indicatorLable="منذ الاسبوع الماضي"
+            title="عدد الاخبار"
+            value={data?.cards?.totalNews}
           />
         </Row>
       </Col>
