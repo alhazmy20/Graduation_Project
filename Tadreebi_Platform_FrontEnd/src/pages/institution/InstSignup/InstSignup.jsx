@@ -53,7 +53,7 @@ const InstSignup = () => {
       .get("/api/csrf-token")
       .then((response) => {
         setLoading(true);
-        const csrfToken = response.data.csrf_token;
+        const csrfToken = response.data.data.csrf_token;
         secureLocalStorage.setItem("csrf_token", csrfToken);
       })
       .then(() => {
@@ -66,10 +66,11 @@ const InstSignup = () => {
             console.log(error);
             setLoading(false);
             const errors = error.response.data.errors;
-            const errorMessages = Object.keys(errors).map((key) => {
-              return errors[key][0];
+
+            notification.error({
+              message: "خطأ في تسجيل الدخول",
+              description: Object.keys(errors).map((key) => errors[key][0]).join(","),
             });
-            notification.error(errorMessages.join(", "));
           });
       });
   };

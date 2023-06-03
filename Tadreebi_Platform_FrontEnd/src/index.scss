@@ -88,7 +88,7 @@ body {
 
 .form-btn {
   background-color: #51a59a;
-  width: 120px;
+  min-width: 120px !important;
   font-weight: 600;
 
   &:hover {
