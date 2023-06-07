@@ -21,7 +21,7 @@ const AddAdmin = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
-      notification.error({ message: error.data.response.message });
+      notification.error({ message: error?.data?.response?.message });
     }
   };
 
