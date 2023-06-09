@@ -8,7 +8,7 @@ const PhoneInput = (props) => {
     <FormInput
       label={label}
       name={name || "phone"}
-      inputType="number"
+      inputType="tel"
       rules={phoneRules}
       {...others}
     />

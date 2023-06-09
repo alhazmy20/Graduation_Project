@@ -27,6 +27,9 @@ const Home = () => {
         case "Supervisor":
           navigate("/supervisor");
           break;
+        case "Institution":
+          navigate("/institution/posts");
+          break;
         default:
           navigate("/");
       }

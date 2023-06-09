@@ -2,90 +2,104 @@
 @import "../../../index.scss";
 
 .postDetailsContainer {
-    margin-top: 2rem;
-    padding: 10px;
+  margin-top: 1rem;
+  padding: 10px;
 
-    @include breakpoint-down(small){
-        margin: 1rem auto 1rem auto
+  @include breakpoint-down(small) {
+    margin: 1rem auto 1rem auto;
+  }
+
+  .postTitle {
+    // margin-bottom: 1rem;
+    font-size: 27px;
+  }
+
+  .postContent {
+    p {
+      font-size: 18px;
+      font-weight: normal;
+      margin: 0;
+      color: #555;
+      text-align: justify;
+    }
+  }
+  .detailsContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    @include breakpoint-down(small) {
+      flex-direction: column;
     }
 
-    .detailsContainer {
-        display: flex;
-        flex-direction: row;
+    .detailsTable {
+      flex-grow: 1;
+    }
+
+    .contactContainer {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      padding: 1rem;
+      border-top: 2px solid $steelTeal;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      background-color: #fff;
+
+      .header {
+        color: $steelTeal;
+        text-align: center;
+      }
+
+      .supervisor {
+        margin-top: 1rem;
+      }
+
+      .supervisor,
+      .phone,
+      .mail {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  .excelContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    @include breakpoint-down(small) {
+      flex-direction: column;
+    }
+
+    .studentApplications {
+      padding-right: 0.5rem;
+      @include breakpoint-down(small) {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .excelBtn {
+      margin-right: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #008374;
+      color: #fff;
+
+      .excelSpan {
+        padding-right: 0.5rem;
+      }
+
+      @include breakpoint-down(small) {
+        margin: 0;
         width: 100%;
-        gap: 1rem;
-        margin-bottom: 1rem;
-
-        @include breakpoint-down(small) {
-            flex-direction: column;
-        }
-
-        .detailsTable{
-            flex-grow: 1;
-        }
-
-        .contactContainer {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            padding: 1rem;
-            border-top: 2px solid $steelTeal;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            background-color: #fff;
-
-            .header {
-                color: $steelTeal;
-                text-align: center;
-            }
-
-            .supervisor {
-                margin-top: 1rem;
-            }
-
-            .supervisor,
-            .phone,
-            .mail {
-                margin-bottom: 2rem;
-            }
-        }
-    }
-
-    .excelContainer{
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 1rem;
+        justify-content: center;
         align-items: center;
-
-        @include breakpoint-down(small){
-            flex-direction: column;
-        }
-
-        .studentApplications{
-            padding-right: 0.5rem;
-            @include breakpoint-down(small){
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        .excelBtn{
-            margin-right: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #008374;
-            color: #fff;
-
-            .excelSpan{
-                padding-right: 0.5rem;
-            }
-
-            @include breakpoint-down(small){
-                margin: 0;
-                width: 100%;
-                justify-content: center;
-                align-items: center;
-            }
-        }
+      }
     }
+  }
 }

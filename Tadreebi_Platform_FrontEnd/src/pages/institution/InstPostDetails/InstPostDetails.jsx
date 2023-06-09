@@ -14,6 +14,7 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
 import FilterSearch from "../../../components/ui/FilterSearch";
+import ReactQuill from "react-quill";
 
 const InstPostDetails = () => {
   const applicantsPost = useLoaderData();
@@ -124,6 +125,14 @@ const InstPostDetails = () => {
       >
         {(loadedData) => (
           <div className="postDetailsContainer">
+            <h1 className="postTitle">{loadedData?.post?.title}</h1>
+            <div className="postContent">
+              <ReactQuill
+                value={loadedData?.post?.content}
+                readOnly={true}
+                theme={"bubble"}
+              />
+            </div>
             <div className="detailsContainer">
               <div className="detailsTable">
                 <PostDetailsTable data={loadedData?.post} />
