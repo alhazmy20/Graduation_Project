@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from "react";
 import "./SupervisorProfile.scss";
 import FormCard from "../../../components/ui/FormCard/FormCard";
-import { Await,  useLoaderData, useParams } from "react-router-dom";
+import { Await, useLoaderData, useParams } from "react-router-dom";
 import { Col, Form, Row } from "antd";
 import { useAuth } from "../../../auth/useContext";
 import EmailInput from "../../../components/form/EmailInput";
@@ -10,11 +10,11 @@ import FormInput from "../../../components/form/FormInput";
 import Spinner from "../../../components/ui/Spinner/Spinner";
 import SubmitButton from "../../../components/form/SubmitButton";
 import FormSelect from "../../../components/form/FormSelect";
-import axiosConfig from '../../../util/axiosConfig'
-import { displayMessage } from '../../../util/helpers';
-import ResetPassword from '../../../components/form/PasswordReset/PasswordReset';
+import axiosConfig from "../../../util/axiosConfig";
+import { displayMessage } from "../../../util/helpers";
+import ResetPassword from "../../../components/form/PasswordReset/PasswordReset";
 
-const SupervisorProfile = ({isAdmin}) => {
+const SupervisorProfile = ({ isAdmin }) => {
   const supervisorData = useLoaderData();
 
   const { id } = useParams();
@@ -80,13 +80,17 @@ const SupervisorProfile = ({isAdmin}) => {
                     <EmailInput label="البريد الجامعي" />
                   </Col>
                   <Col xs={24} sm={12}>
-                    <UniversitySelect label="الجامعة" />
+                    <UniversitySelect label="الجامعة" disabled={true} />
                   </Col>
                   <Col xs={24} sm={12}>
-                    <FormInput name="college" label="الكلية" />
+                    <FormInput name="college" label="الكلية" disabled={true} />
                   </Col>
                   <Col xs={24} sm={12}>
-                    <FormInput name="department" label="القسم" />
+                    <FormInput
+                      name="department"
+                      label="القسم"
+                      disabled={true}
+                    />
                   </Col>
                   <Col xs={24} sm={12}>
                     <FormSelect
