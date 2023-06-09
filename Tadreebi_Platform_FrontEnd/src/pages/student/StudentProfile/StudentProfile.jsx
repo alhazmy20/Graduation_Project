@@ -111,6 +111,7 @@ const StudentProfile = ({ isAdmin }) => {
                   loadedData.studentFiles.personalPicture_url
                 }
                 userType="students"
+                id={loadedData?.id}
               />
             </div>
             <FormCard className="card">

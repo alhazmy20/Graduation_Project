@@ -64,7 +64,7 @@ const InstPostForm = () => {
       navigate("/institution/posts");
     } catch (error) {
       console.log(error);
-      notification.error({ message: "فشل تحديث البيانات" });
+      notification.error({ message: error?.response?.data?.message });
     }
   };
 

@@ -36,7 +36,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
       // Send the image to the API using Axios
       try {
         await axiosConfig().post(
-          `api/${userType}/${id || auth.user.id}/uploadImage?_method=PUT`,
+          `api/${userType}/${id || auth?.user?.id}/uploadImage?_method=PUT`,
           formData,
           {
             headers: {
@@ -46,6 +46,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
         );
         displayMessage("success", "تم تحديث الصورة الشخصية");
       } catch (error) {
+        console.log(id || auth?.user?.id);
         console.log(error);
         displayMessage("error", "لم يتم تحديث الصورة الشخصية");
       }
@@ -64,7 +65,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
         : { deletePersonalPicture: "1" };
     try {
       const res = await axiosConfig().put(
-        `api/${userType}/${id || auth.user.id}/uploadImage`,
+        `api/${userType}/${id || auth?.user?.id}/uploadImage`,
         action
       );
       setImageSrc(null);
