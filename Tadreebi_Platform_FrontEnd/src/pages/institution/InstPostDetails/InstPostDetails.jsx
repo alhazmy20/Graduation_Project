@@ -14,7 +14,6 @@ import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
 import { exportExcelFile } from "../../../util/api";
 import StudentAcceptProcedure from "./components/StudentAcceptProcedure";
 import FilterSearch from "../../../components/ui/FilterSearch";
-import ReactQuill from "react-quill";
 
 const InstPostDetails = () => {
   const applicantsPost = useLoaderData();
@@ -29,10 +28,10 @@ const InstPostDetails = () => {
     setIsSearch(true);
 
     const filteredStudents =
-      applicantsPost.applicantsPost._data.applicants.data.data.filter(
+      applicantsPost?.applicantsPost?._data.applicants?.data?.data?.filter(
         (data) => {
-          const studentFullName = data.student.fullName ?? "";
-          const status = data.status;
+          const studentFullName = data?.student?.fullName ?? "";
+          const status = data?.status;
 
           const isNameMatch = studentFullName.includes(searchName);
           const isStatusMatch = statusFilter ? status === statusFilter : true;
@@ -125,14 +124,6 @@ const InstPostDetails = () => {
       >
         {(loadedData) => (
           <div className="postDetailsContainer">
-            <h1 className="postTitle">{loadedData?.post?.title}</h1>
-            <div className="postContent">
-              <ReactQuill
-                value={loadedData?.post?.content}
-                readOnly={true}
-                theme={"bubble"}
-              />
-            </div>
             <div className="detailsContainer">
               <div className="detailsTable">
                 <PostDetailsTable data={loadedData?.post} />
