@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import { useState, useEffect } from "react";
 import axiosConfig from "./axiosConfig";
-import axios from 'axios';
+import axios from "axios";
 
 //---------------------------------------------------------------------------
 export const getAllPosts = async (region = "", city = "", major = "") => {
@@ -266,10 +266,10 @@ export const useDashboard = (role, year) => {
     const fetchData = async () => {
       try {
         const [cards, chart] = await Promise.all([
-          role === "SuperAdmin"
+          role === "SuperAdmin" || "Admin"
             ? getAdminDashboardCards()
             : getSupervisorCards(),
-          role === "SuperAdmin"
+          role === "SuperAdmin" || "Admin"
             ? getAdminDashboardChart(year)
             : getSupervisorChart(year),
         ]);
