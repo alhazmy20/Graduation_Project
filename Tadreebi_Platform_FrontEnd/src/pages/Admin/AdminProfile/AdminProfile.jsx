@@ -36,7 +36,7 @@ const AdminProfile = ({isAdmin}) => {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      displayMessage("error", "فشل تحديث البيانات");
+      displayMessage("error", error?.response?.data?.message);
     }
   };
 

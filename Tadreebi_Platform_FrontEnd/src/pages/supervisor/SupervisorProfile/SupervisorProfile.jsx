@@ -56,7 +56,7 @@ const SupervisorProfile = ({ isAdmin }) => {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      displayMessage("error", "فشل تحديث البيانات");
+      displayMessage("error", error?.response?.data?.message);
     }
   };
 
@@ -80,16 +80,16 @@ const SupervisorProfile = ({ isAdmin }) => {
                     <EmailInput label="البريد الجامعي" />
                   </Col>
                   <Col xs={24} sm={12}>
-                    <UniversitySelect label="الجامعة" disabled={true} />
+                    <UniversitySelect label="الجامعة" disabled={!isAdmin} />
                   </Col>
                   <Col xs={24} sm={12}>
-                    <FormInput name="college" label="الكلية" disabled={true} />
+                    <FormInput name="college" label="الكلية" disabled={!isAdmin} />
                   </Col>
                   <Col xs={24} sm={12}>
                     <FormInput
                       name="department"
                       label="القسم"
-                      disabled={true}
+                      disabled={!isAdmin}
                     />
                   </Col>
                   <Col xs={24} sm={12}>

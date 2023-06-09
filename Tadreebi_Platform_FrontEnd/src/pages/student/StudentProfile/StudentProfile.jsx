@@ -65,7 +65,7 @@ const StudentProfile = ({ isAdmin }) => {
       setIsFormChanged(false);
     } catch (error) {
       console.log(error);
-      displayMessage("error", "فشل تحديث البيانات");
+      displayMessage("error", error?.response?.data?.message);
     }
     formData = new FormData();
   };
