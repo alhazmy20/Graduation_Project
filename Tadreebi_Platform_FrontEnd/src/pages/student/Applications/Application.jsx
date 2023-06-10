@@ -41,8 +41,8 @@ const Application = () => {
       align: "center",
       render: (text, row) => {
         return (
-          <Link className="row-title" to={`/institutions/${row.id}`}>
-            {text}
+          <Link className="row-title" to={`/institutions/${row.institutionId}`}>
+            {row.institutionName}
           </Link>
         );
       },
