@@ -127,7 +127,7 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
             preview={{ mask: <FontAwesomeIcon icon={faEye} /> }}
             src={
               imageSrc ||
-              "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"
+              "https://www9.0zz0.com/2023/06/10/17/839680368.png"
             }
             alt=""
             width={75}
