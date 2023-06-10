@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StudentFiles extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $fillable = [
         'student_id',
@@ -26,9 +27,9 @@ class StudentFiles extends Model
     {
         return $this->belongsTo(Student::class);
     }
-    public function hasEmptyFiles(): bool
+    public function scopeHasEmptyFiles(): bool
     {
-        $requiredFields = ['transcript_url', 'internshipLetter_url'];
+        $requiredFields = ['transcript_url', 'internshipLetter_url','CV_url'];
         foreach ($requiredFields as $field) {
             if (empty($this->$field)) {
                 return true;

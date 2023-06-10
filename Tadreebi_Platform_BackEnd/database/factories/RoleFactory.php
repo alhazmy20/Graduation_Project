@@ -20,7 +20,7 @@ class RoleFactory extends Factory
            ['name' => 'Admin'],
            ['name' => 'Institution'],
            ['name' => 'Student'],
-           ['name' => 'Super-admin']
+           ['name' => 'Supervisor'],
         ];
     }
 }

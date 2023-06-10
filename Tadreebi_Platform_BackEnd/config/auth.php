@@ -16,6 +16,11 @@ return [
     'defaults' => [
         'guard' => 'sanctum',
         'passwords' => 'users',
+        //Email verification expire time
+        'verification' => [
+            'expire' => 1440,
+            // expire after 24h
+        ],
     ],
 
     /*
@@ -117,5 +122,6 @@ return [
     */
 
     'password_timeout' => 10800,
+
 
 ];

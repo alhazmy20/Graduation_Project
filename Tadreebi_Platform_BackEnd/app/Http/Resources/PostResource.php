@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\UserRole;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,14 +32,22 @@ class PostResource extends JsonResource
             't_startDate' => $this->t_startDate,
             't_endDate' => $this->t_endDate,
             'p_endDate' => $this->p_endDate,
+            'p_endTime' => $this->remainingTime(),
             'created_at' => $this->created_at->locale('ar')->diffForHumans(),
-            'postStatus' => $this->when(Auth::check() && Auth::user()->hasRole(['Admin', 'Institution']), function () {
-                return $this->p_endDate > now() ? 'نشط' : 'مغلق';
+            'postStatus' => $this->when(UserRole::isAdmin() || UserRole::isInstitution(), function () {
+                return $this->p_endDate > Carbon::now()->addDay()->format('Y-m-d') ? 'نشط' : 'مغلق';
             }),
             'postMajorsCount' => $this->whenLoaded('postMajors', function () {
                 return $this->postMajors()->count();
             }),
             'post_majors' => PostMajorsResource::collection($this->whenLoaded('postMajors')),
+            'institution' => $this->whenLoaded('institution', function () {
+                return [
+                    'institutionId' => $this->institution->id,
+                    'institutionName' => $this->institution->institutionName,
+                    'logo_url' => $this->institution->logo_url,
+                ];
+            })
         ];
     }
 }

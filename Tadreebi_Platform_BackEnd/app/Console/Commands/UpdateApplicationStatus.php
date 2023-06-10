@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Events\ApplicationStatusUpdated;
+use App\Helpers\ApplicationStatus;
 use App\Models\Application;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -14,7 +15,7 @@ class UpdateApplicationStatus extends Command
      *
      * @var string
      */
-    protected $signature = 'cancelApplications';
+    protected $signature = 'CancelApplications';
 
     /**
      * The console command description.
@@ -30,13 +31,13 @@ class UpdateApplicationStatus extends Command
      */
     public function handle()
     {
-        $applications = Application::where('status_id', 2)
+        $applications = Application::where('status_id', ApplicationStatus::WAITING_STUDENT_APPROVAL)
             ->where('updated_at', '<=', Carbon::now()->subHours(48))
             ->get();
 
         foreach ($applications as $application) {
-            $application->update(['status_id' => 5]);
-
+            $application->status_id = ApplicationStatus::CANCELED;
+            $application->save();
             event(
                 new ApplicationStatusUpdated(
                     $application->student->user->email,

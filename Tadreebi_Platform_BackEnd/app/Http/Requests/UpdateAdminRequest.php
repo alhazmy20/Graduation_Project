@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAdminRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UpdateAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +25,25 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules()
     {
+        // The ID of the admin whose record is being updated
+        $adminId = $this->route('admin')->id;
         return [
-            //
+            'fName' => 'required|string|max:255',
+            'lName' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($adminId),
+            ],
+            'phone' => [
+                'required',
+                'numeric',
+                'digits:10',
+                new PhoneRule,
+                Rule::unique('admins')->ignore($adminId),
+            ],
         ];
     }
 }

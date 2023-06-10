@@ -26,7 +26,6 @@ class UpdateNewsRequest extends FormRequest
         return [
             'title' => 'required|string',
             'content' => 'required|string',
-            'logo' => 'mimes:png,jpg,jpeg|max:5000'
         ];
     }
 }

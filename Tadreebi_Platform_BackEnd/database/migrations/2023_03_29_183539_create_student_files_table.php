@@ -28,6 +28,7 @@ return new class extends Migration
             $table->longText('personalPicture_url')->nullable();
             $table->foreign('student_id')->references('id')->on('students')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

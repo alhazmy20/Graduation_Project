@@ -15,9 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        // $schedule->command('cancelApplications')->hourly();
-        $schedule->command('cancelApplications')->everyMinute();
+        $schedule->command('CancelApplications')->everyMinute();
+        $schedule->command('AssignSupervisors')->everyMinute();
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
     }
 
     /**

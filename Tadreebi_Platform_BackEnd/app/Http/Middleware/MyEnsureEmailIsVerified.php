@@ -25,7 +25,7 @@ class MyEnsureEmailIsVerified
                 !$request->user()->hasVerifiedEmail())
         ) {
             return $request->expectsJson()
-                ? abort(403, 'لم يتم التحقق من عنوان بريدك الإلكتروني بعد. تم إرسال بريد تفعيل إلى عنوان بريدك الإلكتروني، الرجاء التحقق من صندوق البريد الوارد ومجلد الرسائل غير المرغوب فيها.') // replace with your message, or path to translation
+                ? abort(401, 'لم يتم التحقق من عنوان بريدك الإلكتروني بعد. تم إرسال بريد تفعيل إلى عنوان بريدك الإلكتروني، الرجاء التحقق من صندوق البريد الوارد ومجلد الرسائل غير المرغوب فيها.')
                 : Redirect::route('verification.notice');
         }
 

@@ -55,7 +55,7 @@ return [
             'throw' => false,
             // for development purpose
             // need to comment this line if the backend works on a server that has SSL certificate
-            'scheme' => 'http'
+            // 'scheme' => 'http'
         ],
 
     ],

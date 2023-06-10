@@ -33,7 +33,7 @@ class StorePostRequest extends FormRequest
             'city' => 'required|string',
             't_startDate' => 'required|date_format:Y-m-d',
             't_endDate' => 'required|date_format:Y-m-d',
-            'p_endDate' => 'required|date_format:Y-m-d',
+            'p_endDate' => 'required|date_format:Y-m-d|before:t_endDate',
             'majors' => 'required|array',
             'majors.*' => 'required|array|size:2'
         ];

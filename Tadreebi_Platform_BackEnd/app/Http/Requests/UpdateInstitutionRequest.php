@@ -2,14 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\InstitutionPhone;
 use App\Rules\PhoneRule;
-use App\Rules\UniqueEmailForInstitutionUpdate;
-use App\Rules\UniqueManagerEmailForInstitutionUpdate;
-use App\Rules\UniqueManagerPhoneForInstitutionUpdate;
-use App\Rules\UniqueInstituionPhoneForInstitutionUpdate;
-
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 
@@ -32,31 +27,33 @@ class UpdateInstitutionRequest extends FormRequest
      */
     public function rules()
     {
-      return [
+        // The ID of the institution whose record is being updated
+        $institutionId = $this->route('institution')->id;
+        return [
             'institutionName' => 'required|string|max:255',
             'institutionSector' => 'required|string|max:255',
             'institutionField' => 'required|string|max:255',
+            'institutionSummary' => 'string|max:20000',
             'institutionPhone' => [
                 'required',
                 'numeric',
                 'digits:10',
-                new UniqueInstituionPhoneForInstitutionUpdate($this->institution),
-                new PhoneRule
+                Rule::unique('institutions')->ignore($institutionId),
+                new InstitutionPhone
             ],
             'managerEmail' => [
                 'required',
                 'string',
                 'max:255',
-                new UniqueManagerEmailForInstitutionUpdate($this->institution),
+                Rule::unique('institutions')->ignore($institutionId),
             ],
             'managerPhone' => [
                 'required',
                 'numeric',
                 'digits:10',
-                new UniqueManagerPhoneForInstitutionUpdate($this->institution),
+                Rule::unique('institutions')->ignore($institutionId),
                 new PhoneRule
             ],
-            'isActive' => 'numeric',
             'managerPosition' => 'required|string|max:255',
             'fName' => 'required|string|max:255',
             'lName' => 'required|string|max:255',
@@ -66,9 +63,8 @@ class UpdateInstitutionRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                new UniqueEmailForInstitutionUpdate($this->institution),
+                Rule::unique('users')->ignore($institutionId),
             ],
-            'logo' => 'mimes:png,jpg,jpeg|max:5000'
         ];
     }
 }

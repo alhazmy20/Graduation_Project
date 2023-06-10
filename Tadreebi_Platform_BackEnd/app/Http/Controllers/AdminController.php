@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\UserRole;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Http\Resources\AdminResource;
@@ -9,7 +10,7 @@ use App\Models\Admin;
 use App\Services\UserService;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Cache;
 
 
 class AdminController extends Controller
@@ -25,18 +26,20 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return $this->success(AdminResource::collection(Admin::paginate(8))->resource);
+        return $this->success(AdminResource::collection(Admin::withoutTrashed()->get()));
+
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\StoreAdminRequest  $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreAdminRequest $request)
     {
@@ -50,11 +53,11 @@ class AdminController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Admin $admin)
     {
-        if (Auth::id() !== $admin->id) {
+        if (!UserRole::isSuperAdmin() && Auth::id() !== $admin->id) {
             return $this->error(null, 'ليس لديك صلاحية لمشاهدة بيانات هذا المشرف', 403);
         }
         return $this->success(new AdminResource($admin));
@@ -63,15 +66,15 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateAdminRequest  $request
      * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateAdminRequest $request, Admin $admin)
     {
         $validated = $request->validated();
         $this->userService->update($admin->id, $validated['email']);
-        $admin = $admin->update($validated);
+        $admin->update($validated);
         return $this->success(new AdminResource($admin), 'تم تعديل بيانات المشرف بنجاح');
     }
 
@@ -79,14 +82,10 @@ class AdminController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Admin $admin)
     {
-        if ($admin->id !== 1) {
-            return $this->error(null, 'ليس لديك صلاحية لحذف هذا المشرف', 403);
-        }
-        $this->userService->destroy($admin->id);
         $admin->delete();
         return $this->success(null, 'تم حذف المشرف بنجاح');
     }

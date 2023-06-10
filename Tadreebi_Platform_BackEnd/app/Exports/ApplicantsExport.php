@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
+use App\Helpers\Gender;
 use App\Models\Application;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -25,16 +25,19 @@ class ApplicantsExport implements
     use Exportable;
 
     private $postId;
+    private $userId;
 
-    public function __construct($postId)
+    public function __construct($postId,$userId)
     {
         $this->postId = $postId;
+        $this->userId = $userId;
+
     }
 
     public function query()
     {
         return Application::query()->whereHas('post', function ($query) {
-            $query->where('institution_id', 3);
+            $query->where('institution_id', $this->userId);
         })
             ->where('post_id', $this->postId)
             ->with(['student', 'student.studentFiles', 'student.user', 'status',]);
@@ -51,7 +54,7 @@ class ApplicantsExport implements
             $applicant->student->national_ID,
             $applicant->student->user->email,
             $applicant->student->phone,
-            $applicant->student->gender == 0 ? 'ذكر' : 'انثى',
+            $applicant->student->gender == Gender::MALE ? 'ذكر' : 'انثى',
             $applicant->student->university,
             $applicant->student->major,
             $applicant->student->GPA,

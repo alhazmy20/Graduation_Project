@@ -9,6 +9,11 @@ use Illuminate\Http\JsonResponse;
 
 class VerifyEmailController extends Controller
 {
+      /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function verify($id)
     {
         $user = User::findOrFail($id);
@@ -24,7 +29,11 @@ class VerifyEmailController extends Controller
             : redirect()->away(env('SPA_URL'));
 
     }
-
+  /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function resend()
     {
         request()->user()->sendEmailVerificationNotification();

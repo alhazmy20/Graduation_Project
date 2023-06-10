@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
         $userService = new UserService();
         $user = $userService->store('a@a.com', 'Az123456');
         $user->assignRole('Admin');
+        $user->update(['email_verified_at' => now()]);
         Admin::create([
             'id' => $user->id,
             'fName' => 'a',

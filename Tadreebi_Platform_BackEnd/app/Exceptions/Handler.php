@@ -47,9 +47,11 @@ class Handler extends ExceptionHandler
 
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
-            return response()->json([
-                'message' => 'لم يتم العثور على المورد المطلوب',
-            ], 403);
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'message' => 'لم يتم العثور على المورد المطلوب',
+                ], 403);
+            }
         });
         $this->renderable(function (\Spatie\Permission\Exceptions\UnauthorizedException $e, $request) {
             return response()->json([
@@ -60,10 +62,8 @@ class Handler extends ExceptionHandler
             if ($request->is('api/*')) {
                 return response()->json([
                     'message' => 'ليس لديك الصلاحية للوصول الى هذه الصفحة'
-                ], 401);
+                ], 403);
             }
         });
     }
-
-
 }

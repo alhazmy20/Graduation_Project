@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('content');
+            $table->longText('logo_filename')->nullable();
             $table->longText('logo_url')->nullable();
             $table->timestamps();
             $table->softDeletes();

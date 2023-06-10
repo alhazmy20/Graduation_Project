@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait UploadFiles
 {
-    public function upload(Request $request, $id)
+    public function uploadFiles(Request $request, $id)
     {
         $fields = [
             'transcript' => 'students/transcripts',
@@ -28,42 +28,30 @@ trait UploadFiles
                 $filename = uniqid() . '_' . $file->getClientOriginalName();
                 $url = Storage::disk('s3')->putFileAs("{$folder}", $file, $filename, 'public');
                 if ($field == 'logo') {
-                    $institution = Institution::findOrFail($id);
-                    if ($institution->logo_filename) {
-                        Storage::disk('s3')->delete($folder . '/' . $institution->logo_filename);
-                    }
-                    $institution->update([
-                        'logo_filename' => $filename,
-                        'logo_url' => Storage::disk('s3')->url($url),
-                    ]);
+                    $model = Institution::findOrFail($id);
                 } elseif ($field == 'newsLogo') {
-                    $news = News::findOrFail($id);
-                    if ($news->logo_filename) {
-                        Storage::disk('s3')->delete($folder . '/' . $news->logo_filename);
-                    }
-                    $news->update([
-                        'logo_filename' => $filename,
-                        'logo_url' => Storage::disk('s3')->url($url),
-                    ]);
+                    $model = News::findOrFail($id);
                 } else {
-                    $studentFiles = StudentFiles::where('student_id', $id)->firstOrFail();
-                    if ($request->has('isPersonalPictureDeleted') && $request->isPersonalPictureDeleted == 1) {
-                        Storage::disk('s3')->delete('students/personal_pictures/' . $studentFiles->personalPicture_filename);
-                        $studentFiles->update([
-                            'personalPicture_filename' => null,
-                            'personalPicture_url' => null
-                        ]);
-                    } else {
-                        if ($studentFiles->{$field . '_filename'}) {
-                            Storage::disk('s3')->delete($folder . '/' . $studentFiles->{$field . '_filename'});
-                        }
-                        $studentFiles->update([
-                            $field . '_filename' => $filename,
-                            $field . '_url' => Storage::disk('s3')->url($url),
-                        ]);
-                    }
+                    $model = StudentFiles::where('student_id', $id)->firstOrFail();
                 }
+                $this->updateFileInformation($model, $field, $folder, $filename, $url);
             }
         }
     }
+    private function updateFileInformation($model, $field, $folder, $filename, $url)
+    {
+        // replace the name of newsLogo field to logo to match the field in the db
+        if ($model instanceof News) {
+            $field='logo';
+        }
+        // delete the current uploaded file then updating the db with the uploaded one
+        if ($model->{$field . '_filename'}) {
+            Storage::disk('s3')->delete($folder . '/' . $model->{$field . '_filename'});
+        }
+        $model->update([
+            $field . '_filename' => $filename,
+            $field . '_url' => Storage::disk('s3')->url($url),
+        ]);
+    }
+
 }

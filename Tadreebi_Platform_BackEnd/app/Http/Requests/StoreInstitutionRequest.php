@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\InstitutionPhone;
 use App\Rules\PasswordRule;
 use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -33,6 +34,7 @@ class StoreInstitutionRequest extends FormRequest
                 'required',
                 'numeric',
                 'digits:10',
+                new InstitutionPhone,
                 'unique:institutions'
             ],
             'managerEmail' => 'required|string|email|max:255|unique:institutions',

@@ -6,24 +6,32 @@ use App\Models\Application;
 use App\Models\Institution;
 use App\Models\Post;
 use App\Models\Student;
-use App\Models\User;
+use App\Models\News;
+use App\Models\Supervisor;
 use App\Traits\HttpResponses;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     use HttpResponses;
 
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function cardsStatistics()
     {
         return $this->success([
-            'total_users' => User::withoutTrashed()->count(),
-            'new_students' => $this->getWeeklyStatistics(Student::class),
-            'new_applications' => $this->getWeeklyStatistics(Application::class),
-            'new_institutions' => $this->getWeeklyStatistics(Institution::class),
-            'unactive_institutions' => Institution::where('isActive', 0)->count(),
-            'new_posts' => $this->getWeeklyStatistics(Post::class),
+            'totalStudents' => Student::withoutTrashed()->count(),
+            'totalInstitutions' => Institution::withoutTrashed()->count(),
+            'totalSupervisors' => Supervisor::withoutTrashed()->count(),
+            'totalPosts' => Post::withoutTrashed()->count(),
+            'totalNews' => News::withoutTrashed()->count(),
+            'unactiveInstitutions' => Institution::where('isActive', 0)->count(),
+            'newStudents' => $this->getWeeklyStatistics(Student::class),
+            'newSupervisors' => $this->getWeeklyStatistics(Supervisor::class),
+            'newInstitutions' => $this->getWeeklyStatistics(Institution::class),
+
         ]);
     }
 
@@ -32,13 +40,13 @@ class DashboardController extends Controller
         $currentWeekStart = now()->startOfWeek();
         $currentWeekEnd = now()->endOfWeek();
 
-        $currentWeekStudentsCount = $model::whereBetween('created_at', [$currentWeekStart, $currentWeekEnd])
+        $currentWeekStudentsCount = $model::withoutTrashed()->whereBetween('created_at', [$currentWeekStart, $currentWeekEnd])
             ->count();
 
         $previousWeekStart = now()->subWeek()->startOfWeek();
         $previousWeekEnd = now()->subWeek()->endOfWeek();
 
-        $previousWeekStudentsCount = $model::whereBetween('created_at', [$previousWeekStart, $previousWeekEnd])
+        $previousWeekStudentsCount = $model::withoutTrashed()->whereBetween('created_at', [$previousWeekStart, $previousWeekEnd])
             ->count();
 
         if ($previousWeekStudentsCount > 0) {
@@ -47,16 +55,22 @@ class DashboardController extends Controller
             $percentageDifference = 0;
         }
         return [
-            'current_week_count' => $currentWeekStudentsCount,
-            'percentage_difference' => $percentageDifference . '%'
+            'currentWeekCount' => $currentWeekStudentsCount,
+            'percentageDifference' => $percentageDifference . '%'
         ];
     }
-    public function chartStatistics(Request $request)
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function chartStatistics()
     {
-        $requestedYear = $request->input('year');
+        $requestedYear = request()->input('year');
+
+        //both of these queries has n+1 problem, need to be solved later. Works fine for now
 
         // Total students in each university for all years
-        $studentsByUniversity = Student::select(DB::raw('count(*) as total_students, university, YEAR(created_at) as year'))
+        $studentsByUniversity = Student::withoutTrashed()->select(DB::raw('count(*) as total_students, university, YEAR(created_at) as year'))
             ->whereYear('created_at', '=', $requestedYear)
             ->groupBy('year', 'university')
             ->get();
@@ -77,16 +91,17 @@ class DashboardController extends Controller
             foreach ($students as $student) {
                 $item = [
                     'university' => $student->university,
-                    'total_students' => $student->total_students,
-                    'total_applications' => 0,
+                    'totalStudents' => $student->total_students,
+                    'totalApplications' => 0,
                 ];
                 $application = $applications->where('university', $student->university)->first();
                 if ($application) {
-                    $item['total_applications'] = $application->total_applications;
+                    $item['totalApplications'] = $application->total_applications;
                 }
                 $results->push($item);
             }
         }
         return $this->success($results);
     }
+
 }

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('fName');
             $table->string('lName');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();

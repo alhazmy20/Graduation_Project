@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 
 class Institution extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, CascadesDeletes;
 
     protected $fillable = [
         'id',
         'institutionName',
         'institutionSector',
+        'institutionSummary',
         'institutionField',
         'institutionPhone',
         'managerEmail',
@@ -27,6 +29,8 @@ class Institution extends Model
         'region',
         'city'
     ];
+    protected $cascadeDeletes = ['user', 'posts'];
+
     protected $dates = ['deleted_at'];
 
     public function user()

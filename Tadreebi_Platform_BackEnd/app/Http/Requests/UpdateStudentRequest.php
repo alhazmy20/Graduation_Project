@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Rules\PhoneRule;
-use App\Rules\UniqueStudentPhoneForStudentUpdate;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateStudentRequest extends FormRequest
 {
@@ -25,26 +25,41 @@ class UpdateStudentRequest extends FormRequest
      */
     public function rules()
     {
-
+        //Get the student who is making the request
+        $student = $this->route('student');
         return [
+            'fName' => 'required|string|max:255',
+            'sName' => 'required|string|max:255',
+            'tName' => 'required|string|max:255',
+            'lName' => 'required|string|max:255',
+            'gender' => 'required|numeric',
+            'national_ID' => 'required|string|max:10',
+            'university' => 'required|string|max:255',
+            'major' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($student->id),
+            ],
             'phone' => [
                 'required',
                 'numeric',
                 'digits:10',
-                new UniqueStudentPhoneForStudentUpdate($this->student),
+                Rule::unique('students')->ignore($student->id),
                 new PhoneRule
             ],
             'GPA' => [
                 'required',
                 'numeric',
-                'between:0,' . $this->route('student')->GPA_Type
+                'between:0,' . $student->GPA_Type
             ],
-            'personalPicture' => 'mimes:png,jpg,jpeg|max:5000',
+            'GPA_Type' => 'required|numeric',
             'transcript' => 'mimes:pdf|max:5000',
             'nationalID' => 'mimes:pdf|max:5000',
             'CV' => 'mimes:pdf|max:5000',
             'internshipLetter' => 'mimes:pdf|max:5000',
-            'isPersonalPictureDeleted' => 'string'
         ];
     }
 }

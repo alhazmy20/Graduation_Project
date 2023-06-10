@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 
 class Admin extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, CascadesDeletes;
 
     protected $fillable = [
         'id',
@@ -16,7 +17,7 @@ class Admin extends Model
         'lName',
         'phone',
     ];
-
+    protected $cascadeDeletes = ['user'];
     protected $dates = ['deleted_at'];
 
     public function user()
@@ -39,5 +40,10 @@ class Admin extends Model
     public function institution()
     {
         return $this->belongsToMany(institution::class, 'admin_institution')->withPivot('action');
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsToMany(Supervisor::class, 'admin_supervisor')->withPivot('action');
     }
 }

@@ -12,18 +12,15 @@ class UserService
         $user = User::create([
             'email' => $email,
             'password' => Hash::make($password),
+            'email_verified_at' => request()->is('api/admins') ? now() : null
+
         ]);
-        $user->sendEmailVerificationNotification();
+        request()->is('api/admins') ? null : $user->sendEmailVerificationNotification();
         return $user;
     }
     public function update($id, $email)
     {
-        User::where('id', $id)->update(['email' => $email]);
-    }
-
-    public function destroy($id)
-    {
-        $user = User::where('id', $id)->delete();
+        $user = User::where('id', $id)->update(['email' => $email]);
         return $user;
     }
 }

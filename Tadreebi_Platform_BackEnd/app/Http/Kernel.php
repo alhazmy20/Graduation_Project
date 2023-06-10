@@ -15,7 +15,7 @@ class Kernel extends HttpKernel
      */
 
     protected $middleware = [
-            // \App\Http\Middleware\TrustHosts::class,
+            \App\Http\Middleware\TrustHosts::class,
             \App\Http\Middleware\TrustProxies::class,
             \Illuminate\Http\Middleware\HandleCors::class,
             \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
@@ -44,8 +44,9 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:api',
+                \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+                \App\Http\Middleware\VerifyCsrfToken::class,
+                \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -72,6 +73,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // 'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verified' => \App\Http\Middleware\MyEnsureEmailIsVerified::class,
-
+        'SuperAdmin' => \App\Http\Middleware\SuperAdmin::class,
     ];
 }

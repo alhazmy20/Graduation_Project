@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\Gender;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StudentResource extends JsonResource
@@ -17,14 +18,16 @@ class StudentResource extends JsonResource
         return [
             'id' => $this->id,
             'fullName' => $this->fName . ' ' . $this->sName . ' ' . $this->tName . ' ' . $this->lName,
+            'email' => $this->user->email,
             'phone' => $this->phone,
-            'gender' => $this->gender == 0 ? 'ذكر' : 'أنثى',
-            'national_ID' => $this->national_ID,
+            'gender' => $this->gender == Gender::MALE ? 'ذكر' : 'أنثى',
+            'national_ID' =>  $this->national_ID,
             'university' => $this->university,
+            'college' => $this->college,
+            'department'=> $this->department,
             'major' => $this->major,
             'GPA' => $this->GPA,
             'GPA_Type' => $this->GPA_Type,
-            'status' => $this->deleted_at == null ? 'نشط' : 'غير نشط',
             'created_at' => $this->created_at->format('Y-m-d'),
             'studentFiles' => new StudentFilesResource($this->whenLoaded('studentFiles')),
         ];

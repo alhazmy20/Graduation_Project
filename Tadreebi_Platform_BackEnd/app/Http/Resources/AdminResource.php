@@ -15,11 +15,11 @@ class AdminResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'fName' => $this->fName,
             'lName' => $this->lName,
             'email' => $this->user->email,
             'phone' => $this->phone,
-            'status' => $this->deleted_at == null ? 'نشط' : 'غير نشط',
             'created_at' => $this->created_at->format('Y-m-d')
         ];
     }

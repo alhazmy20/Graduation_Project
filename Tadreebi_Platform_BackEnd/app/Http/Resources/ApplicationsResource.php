@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Helpers\UserRole;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
 
 class ApplicationsResource extends JsonResource
 {
@@ -19,12 +19,17 @@ class ApplicationsResource extends JsonResource
             'id' => $this->id,
             'status' => $this->status->name,
             'created_at' => $this->created_at->format('Y-m-d'),
-            'student' => new StudentResource($this->whenLoaded('student')),
         ];
-        if (Auth::check() && Auth::user()->hasRole('Student')) {
-            $post = new PostResource($this->whenLoaded('post'));
-            $response['post'] = $post->title;
-            $response['instituion'] = $post->institution->institutionName;
+        if (UserRole::isStudent() || UserRole::isSupervisor()) {
+            $response += [
+                'institutionId' => $this->post->institution->id,
+                'institutionName' => $this->post->institution->institutionName,
+                'postId' => $this->post->id,
+                'postTitle' => $this->post->title,
+            ];
+        }
+        if (UserRole::isInstitution() || UserRole::isSupervisor()) {
+            $response['students'] = new StudentResource($this->whenLoaded('student'));
         }
         return $response;
     }

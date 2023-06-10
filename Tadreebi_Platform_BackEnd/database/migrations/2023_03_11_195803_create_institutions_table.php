@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('institutionName');
             $table->string('institutionSector');
             $table->string('institutionField');
+            $table->longText('institutionSummary')->nullable();
             $table->string('institutionPhone')->unique();
             $table->string('managerEmail')->unique();
             $table->string('managerPhone')->unique();

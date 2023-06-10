@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('SCC');
             $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

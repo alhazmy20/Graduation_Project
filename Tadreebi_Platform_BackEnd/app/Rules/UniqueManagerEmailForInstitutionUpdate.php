@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Helpers\UserRole;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class UniqueManagerEmailForInstitutionUpdate implements Rule
      */
     public function passes($attribute, $value)
     {
-        $isAuthAdmin = Auth::user()->hasRole('Admin');
+        $isAuthAdmin = UserRole::isAdmin();
         $currentManagerEmail = $this->institution->managerEmail;
 
         // Check if the authenticated user is an admin and email being updated is the same as the current manager email
