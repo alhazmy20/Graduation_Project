@@ -78,7 +78,7 @@ const InstFormInputs = ({ withPassword, region, isProfile }) => {
               <TextArea
                 rows={3}
                 placeholder="اكتب نبذة عن المنشأة..."
-                maxLength={1000}
+                maxLength={2000}
                 showCount
               />
             </Form.Item>
