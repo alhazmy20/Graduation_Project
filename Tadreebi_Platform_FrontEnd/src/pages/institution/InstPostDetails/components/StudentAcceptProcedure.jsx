@@ -29,7 +29,6 @@ const StudentAcceptProcedure = ({
     (role === "Student" && status === "بإنتظار تأكيد الطالب");
 
   const handleStatus = async (id) => {
-    console.log(id, applicant_id);
     try {
       setLoading(true);
       await axiosConfig().put(`api/applications/${applicant_id}`, {

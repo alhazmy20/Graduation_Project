@@ -11,7 +11,6 @@ import { paginationText } from '../../../util/helpers';
 const News = () => {
   const navigate = useNavigate();
   const newsData = useLoaderData();
-  console.log(newsData);
 
   return (
     <Suspense fallback={<Spinner />}>

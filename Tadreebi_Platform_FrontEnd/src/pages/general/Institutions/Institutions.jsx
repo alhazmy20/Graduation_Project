@@ -26,9 +26,7 @@ const Institutions = () => {
                 xxl: 4,
               }}
               pagination={{
-                onChange: (page) => {
-                  console.log(page);
-                },
+               
                 responsive: true,
                 position: "bottom",
                 itemRender: paginationText,

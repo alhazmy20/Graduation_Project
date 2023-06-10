@@ -12,7 +12,6 @@ const AddAdmin = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
-    console.log(values);
     try {
       setLoading(true);
       await axiosConfig().post(`api/admins`, values);
@@ -20,7 +19,6 @@ const AddAdmin = () => {
       navigate("/admin/manage-admins");
     } catch (error) {
       setLoading(false);
-      console.log(error);
       notification.error({ message: error?.response?.data?.message });
     }
   };

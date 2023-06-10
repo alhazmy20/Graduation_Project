@@ -56,14 +56,10 @@ const InstPostForm = () => {
         setIsFormChanged(false);
       } else {
         await axiosConfig().post(`api/posts`, formPostData);
-        // notification.success({ message: "تمت إضافة الفرصة  بنجاح" });
-        // setIsFormChanged(false);
-        console.log(formPostData);
       }
       setLoading(false);
       navigate("/institution/posts");
     } catch (error) {
-      console.log(error);
       notification.error({ message: error?.response?.data?.message });
     }
   };

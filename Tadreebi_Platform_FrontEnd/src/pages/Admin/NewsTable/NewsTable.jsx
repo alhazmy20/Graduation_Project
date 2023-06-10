@@ -12,7 +12,6 @@ import { handlePaginationChange } from "../../../util/helpers";
 
 const NewsTable = () => {
   const newsData = useLoaderData();
-  console.log(newsData);
 
   const [pageSize, setPageSize] = useState(8);
   const [currentRange, setCurrentRange] = useState([1, pageSize]);

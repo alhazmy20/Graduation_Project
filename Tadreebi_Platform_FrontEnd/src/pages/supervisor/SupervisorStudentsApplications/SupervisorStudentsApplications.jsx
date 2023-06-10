@@ -107,7 +107,6 @@ const SupervisorStudentsApplications = () => {
     },
   ];
 
-  console.log(applicants_post?.applications)
 
   return (
     <Suspense fallback={<Spinner />}>

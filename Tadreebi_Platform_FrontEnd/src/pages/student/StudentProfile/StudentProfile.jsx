@@ -23,14 +23,12 @@ const StudentProfile = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
-    // console.log(values);
     let { fullName, gender, ...others } = values;
     if (gender === ("ذكر" || "أنثى")) {
       gender = gender === "ذكر" ? 0 : 1;
     }
     const name = extractFullName(fullName);
     values = { gender, ...name, ...others };
-    console.log(values);
 
     let formData = new FormData();
     for (const key in values) {
@@ -64,7 +62,6 @@ const StudentProfile = ({ isAdmin }) => {
       setLoading(false);
       setIsFormChanged(false);
     } catch (error) {
-      console.log(error);
       displayMessage("error", error?.response?.data?.message);
     }
     formData = new FormData();

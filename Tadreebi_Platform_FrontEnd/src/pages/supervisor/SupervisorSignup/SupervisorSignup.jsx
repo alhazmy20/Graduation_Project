@@ -30,7 +30,6 @@ const SupervisorSignup = () => {
   ];
 
   const onFinish = (values) => {
-    console.log(values);
     axiosConfig()
       .get("/api/csrf-token")
       .then((response) => {
@@ -44,7 +43,6 @@ const SupervisorSignup = () => {
             navigate("/verify-account");
           })
           .catch((error) => {
-            console.log(error);
             const errorMessages = error.response.data.message;
             notification.error({ message: errorMessages });
           });

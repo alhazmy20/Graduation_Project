@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./StudentSignup.scss";
 import { Form, notification } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -9,12 +9,14 @@ import PasswordConfirInput from "../../../components/form/PasswordConfirInput";
 import SubmitButton from "../../../components/form/SubmitButton";
 import MajorsSelect from "../../../components/form/MajorsSelect";
 import UniversitySelect from "../../../components/form/UniversitySelect";
-import secureLocalStorage from 'react-secure-storage';
+import secureLocalStorage from "react-secure-storage";
 
 const StudentSignup = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
+    setLoading(true);
     values.SCC = values.SCC.substring(0, 2); // Extract the first two characters of the SCC value
     axiosConfig()
       .get("/api/csrf-token")
@@ -29,6 +31,7 @@ const StudentSignup = () => {
             navigate("/verify-account");
           })
           .catch((error) => {
+            setLoading(false);
             const errorMessages = error.response.data.message;
             notification.error({ message: errorMessages });
           });
@@ -48,7 +51,9 @@ const StudentSignup = () => {
         <MajorsSelect label="التخصص" name="SCC" />
 
         <div className="btn-wrapper">
-          <SubmitButton>تسجيل</SubmitButton>
+          <SubmitButton disabled={loading} loading={loading}>
+            تسجيل
+          </SubmitButton>
         </div>
       </Form>
     </div>

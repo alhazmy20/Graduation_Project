@@ -46,8 +46,6 @@ const InstPostDetails = () => {
     setFilteredData(filterdData);
   };
 
-  console.log(filteredData);
-
   const formattedResponse = (data) => {
     const applicantData = data?.map((item) => ({
       applicant_id: item?.id,

@@ -46,8 +46,6 @@ const ProfileImage = ({ name, personalPicture_url, id, userType }) => {
         );
         displayMessage("success", "تم تحديث الصورة الشخصية");
       } catch (error) {
-        console.log(id || auth?.user?.id);
-        console.log(error);
         displayMessage("error", "لم يتم تحديث الصورة الشخصية");
       }
     };

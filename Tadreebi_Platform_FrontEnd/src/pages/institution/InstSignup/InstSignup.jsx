@@ -63,7 +63,6 @@ const InstSignup = () => {
             navigate("/verify-account");
           })
           .catch((error) => {
-            console.log(error);
             setLoading(false);
             const errors = error.response.data.errors;
 

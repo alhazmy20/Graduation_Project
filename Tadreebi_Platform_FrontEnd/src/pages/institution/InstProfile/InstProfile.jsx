@@ -44,7 +44,6 @@ const InstProfile = ({ isAdmin }) => {
       setIsFormChanged(false);
       revalidator.revalidate(); //revalidate the data
     } catch (error) {
-      console.log(error);
       setLoading(false);
       displayMessage("error", error?.response?.data?.message);
     }

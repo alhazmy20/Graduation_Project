@@ -23,10 +23,8 @@ export const getAllPosts = async (region = "", city = "", major = "") => {
 export const getSinglePost = async (id) => {
   try {
     const res = await axiosConfig().get(`api/posts/${id}`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
-    console.log(err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
@@ -44,7 +42,6 @@ export const getPostApplicants = async (postId) => {
     ]);
     return { post: postRes, applicants: applicantsRes };
   } catch (error) {
-    console.log(error);
     throw { message: "error.message", status: "400 " };
   }
 };
@@ -56,7 +53,6 @@ export const getAllNews = async () => {
     const res = await axiosConfig().get("api/news");
     return res.data.data;
   } catch (err) {
-    console.log(err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
@@ -68,7 +64,6 @@ export const getSingleNews = async (id) => {
     const res = await axiosConfig().get(`api/news/${id}`);
     return res.data.data;
   } catch (err) {
-    console.log(err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
@@ -82,7 +77,6 @@ export const getAllInstitutions = async () => {
     const res = await axiosConfig().get(`api/institutions`);
     return res.data.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -90,7 +84,6 @@ export const getAllInstitutions = async () => {
 export const getSingleInstitution = async (id) => {
   try {
     const res = await axiosConfig().get(`api/institutions/${id}`);
-    // console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -106,7 +99,6 @@ export const getAllAdmins = async () => {
     const res = await axiosConfig().get(`api/admins`);
     return res.data.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -114,10 +106,8 @@ export const getAllAdmins = async () => {
 export const getSingleAdmin = async (id) => {
   try {
     const res = await axiosConfig().get(`api/admins/${id}`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
-    console.log(err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };
@@ -129,7 +119,6 @@ export const getSingleAdmin = async (id) => {
 export const getAllStudents = async () => {
   try {
     const res = await axiosConfig().get(`api/students`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -206,7 +195,7 @@ export const exportExcelFile = async (
     link.click();
     link.remove();
   } catch (error) {
-    console.log(error);
+    console.log("Opps, we got an error", error);
   }
 };
 
@@ -215,7 +204,6 @@ export const exportExcelFile = async (
 const getAdminDashboardCards = async () => {
   try {
     const res = await axiosConfig().get(`api/dashboard/cards`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -237,7 +225,6 @@ const getAdminDashboardChart = async (year) => {
 const getSupervisorCards = async () => {
   try {
     const res = await axiosConfig().get(`api/supervisors/cards`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
     const error = err.response.data;
@@ -291,10 +278,9 @@ export const useDashboard = (role, year) => {
 export const getAllSupervisors = async () => {
   try {
     const res = await axiosConfig().get(`api/supervisors`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (error) {
-    console.log(error);
+    console.log("Opps, we got an error", error);
     throw error;
   }
 };
@@ -302,10 +288,9 @@ export const getAllSupervisors = async () => {
 export const getSingleSupervisor = async (id) => {
   try {
     const res = await axiosConfig().get(`api/supervisors/${id}`);
-    console.log(res.data.data);
     return res.data.data;
   } catch (err) {
-    console.log(err);
+    console.log("Opps, we got an error", err);
     const error = err.response.data;
 
     throw { message: error.message, status: error.status };

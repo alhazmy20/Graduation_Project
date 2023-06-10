@@ -70,14 +70,12 @@ export function StudentDetails({ name, data,isSupervisor }) {
           {name}
         </Button>
       }
-      {detailsOpen && (
         <StudentModal
           setDetailsOpen={setDetailsOpen}
           detailsOpen={detailsOpen}
           data={data}
           isSupervisor={isSupervisor}
         />
-      )}
     </span>
   );
 }

@@ -8,7 +8,6 @@ import ReactQuill from "react-quill";
 const NewsDetails = () => {
   const newsData = useLoaderData();
 
-  console.log(newsData);
 
   return (
     <Suspense fallback={<Spinner />}>

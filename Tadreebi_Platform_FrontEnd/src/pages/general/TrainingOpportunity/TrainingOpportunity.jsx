@@ -14,10 +14,13 @@ import Spinner from "../../../components/ui/Spinner/Spinner";
 import { useAuth } from "../../../auth/useContext";
 import { displayMessage } from "../../../util/helpers";
 import ReactQuill from "react-quill";
+import ApplyLogin from "../../../components/ui/ApplyLogin/ApplyLogin";
 
 const TrainingOpportunity = ({ withApply }) => {
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
   const error = useRouteError();
   const postData = useLoaderData();
   const auth = useAuth();
@@ -26,20 +29,20 @@ const TrainingOpportunity = ({ withApply }) => {
   const id = useParams();
 
   const handleSubmit = async () => {
-    if (!auth.user) {
-      return displayMessage("warning", "يجب تسجيل الدخول");
+    if (!auth?.user) {
+      setModalOpen(true);
+      return;
     }
 
     const { id: post_id } = id;
-    console.log(post_id);
     try {
       setLoading(true);
       await axiosConfig().post(`/api/applications?post_id=${post_id}`);
       setLoading(false);
       setDisable(true);
-      notification.success({ message: "تم التقديم بنجاح." });
+      displayMessage("success", "تم التقديم بنجاح");
+
     } catch (error) {
-      console.log(error);
       setLoading(false);
       displayMessage("warning", error.response.data.message);
     }
@@ -60,7 +63,7 @@ const TrainingOpportunity = ({ withApply }) => {
             <div className="container">
               <Image
                 src={
-                  loadedData.institution.logo_url ||
+                  loadedData?.institution?.logo_url ||
                   "http://s3.eu-central-1.amazonaws.com/graduation-project-test1/students/personal_pictures/0cPAv3DmiR6OJoWWBWod0ef3V5PssfWVAness7k6.png"
                 }
                 shape="circle"
@@ -70,7 +73,9 @@ const TrainingOpportunity = ({ withApply }) => {
               />
               <Space size={5} direction="vertical" className="space">
                 <h1>{loadedData.title}</h1>
-                <Link to={`/institutions/${loadedData.institution.institutionId}`}>
+                <Link
+                  to={`/institutions/${loadedData.institution.institutionId}`}
+                >
                   <span className="institution-name">
                     {loadedData.institution.institutionName}
                   </span>
@@ -94,6 +99,8 @@ const TrainingOpportunity = ({ withApply }) => {
                 تقديم
               </Button>
             )}
+
+              <ApplyLogin modalOpen={modalOpen} setModalOpen={setModalOpen} />
           </div>
         )}
       </Await>
