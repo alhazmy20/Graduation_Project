@@ -88,6 +88,7 @@ class PostController extends Controller
             $post->p_endDate > Carbon::now()->addDay()->format('Y-m-d') ||
             $post->institution_id == Auth::id() ||
             UserRole::isAdmin() ||
+            UserRole::isSupervisor() ||
                 // check if the post ended but the student has been applied to the post
             ($post->p_endDate <= Carbon::now()->addDay()->format('Y-m-d') && $studentApplied)
         ) {
